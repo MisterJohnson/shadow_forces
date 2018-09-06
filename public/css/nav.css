@@ -1,0 +1,58 @@
+header {
+    height: 90px;
+}
+
+.wrap {
+    width: 100%;
+    padding: 0px 15px;
+    background: rgba(255, 255, 255, 1) url('../images/pattern-img-1.png');
+    word-wrap: break-spaces;
+}
+
+.wrap div {
+    display: inline-block;
+}
+
+.edgt-left-wrapper, .edgt-right-wrapper {
+    width: 49%;
+    height: 90px;
+    padding: 0px 3px;
+    vertical-align: top;
+}
+
+.edgt-right-wrapper nav {
+    width: 100%;
+    height: 100%;
+}
+
+.edgt-left img {
+    max-width: 250px;
+    padding: 10px 0px;
+}
+
+.edgt-right {
+    height: 100%;
+    width: 100%;
+    margin-left: 15px;
+}
+
+.edgt-right ul {
+    list-style: none;
+    line-height: 5;
+    height: 30px;
+    text-align: center;
+}
+
+.edgt-right ul li {
+    display: inline-block;
+    width: 22%;
+    font-size: 0;
+    height: 30px;
+    line-height: 30px;
+}
+
+.edgt-right ul li a {
+    color: #f6f6f6;
+    font-family: "Open Sans", Sans-Serif;
+    font-size: 20px;
+}
