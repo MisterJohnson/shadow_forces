@@ -28,8 +28,8 @@ class User extends Authenticatable
     ];
 
     public const PERMISSION_LEVEL = [
-        'admin' => 1,
-        'pro_runner' => 2,
-        'runner' => 3
+        'admin',
+        'pro_runner',
+        'runner'
     ];
 }

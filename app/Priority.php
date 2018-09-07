@@ -9,7 +9,9 @@
 namespace App;
 
 
-class Priority
+use Illuminate\Database\Eloquent\Model;
+
+class Priority extends Model
 {
     /**
      * The attributes that are mass assignable.

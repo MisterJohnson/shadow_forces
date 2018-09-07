@@ -18,7 +18,11 @@ class DatabaseSeeder extends Seeder
             ]);
         } else {
             $this->call([
-                UsersSeeder::class
+                UsersSeeder::class,
+                ItemsSeeder::class,
+                WeaponsSeeder::class,
+                MagicSeeder::class,
+                SkillsSeeder::class
             ]);
         }
     }

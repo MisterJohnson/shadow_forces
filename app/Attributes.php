@@ -9,7 +9,9 @@
 namespace App;
 
 
-class Attributes
+use Illuminate\Database\Eloquent\Model;
+
+class Attributes extends Model
 {
     /**
      * The attributes that are mass assignable.
@@ -19,4 +21,6 @@ class Attributes
     protected $fillable = [
         'character_id', 'body', 'agility', 'reaction', 'strength', 'willpower', 'logic', 'intuition', 'charisma', 'edge', 'magic'
     ];
+
+    public const A = 'A', B = 'B', C = 'C', D = 'D', E = 'E';
 }

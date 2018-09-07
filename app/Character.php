@@ -9,7 +9,9 @@
 namespace App;
 
 
-class Character
+use Illuminate\Database\Eloquent\Model;
+
+class Character extends Model
 {
     /**
      * The attributes that are mass assignable.
@@ -18,6 +20,6 @@ class Character
      */
     protected $fillable = [
         'priority_id', 'magic_id', 'starting_attributes_id', 'final_attributes_id', 'essence', 'starting_karma', 'total_karma', 'qualities_id', 'gears_id', 'skills_id', 'augment_id',
-        'magic_id', 'armor_id', 'weapon_id', 'matrix_id', 'vehicules_id', 'socials_id'
+        'armor_id', 'weapon_id', 'matrix_id', 'vehicules_id', 'socials_id'
     ];
 }
