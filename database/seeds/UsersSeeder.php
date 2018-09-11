@@ -29,7 +29,7 @@ class UsersSeeder extends Seeder
             'name' => 'Nivellum',
             'email' => 'd34th.not3.relight@gmail.com',
             'password' => bcrypt('Jackpot50'),
-            'permission' => User::PERMISSION_LEVEL[0],
+            'permission' => User::PERMISSION_LEVEL[1],
         ]);
     }
 }

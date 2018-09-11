@@ -25,8 +25,8 @@ class MagicSeeder extends Seeder
             'number_of_skills' => 1,
             'skill_rating' => 4,
             'number_free_spell' => 0,
-            'label' => 'Adept',
-            'description' => 'Adept are kind of physical mages, they cannot project astrally and other stuff.',
+            'label' => 'label.adept.b',
+            'description' => 'description.adept.b',
             'is_resonance' => false,
         ]);
 
@@ -36,8 +36,8 @@ class MagicSeeder extends Seeder
             'number_of_skills' => 1,
             'skill_rating' => 2,
             'number_free_spell' => 0,
-            'label' => 'Adept',
-            'description' => 'Adept are kind of physical mages, they cannot project astrally and other stuff.',
+            'label' => 'label.adept.c',
+            'description' => 'description.adept.c',
             'is_resonance' => false,
         ]);
 
@@ -47,8 +47,8 @@ class MagicSeeder extends Seeder
             'number_of_skills' => 0,
             'skill_rating' => 0,
             'number_free_spell' => 0,
-            'label' => 'Adept',
-            'description' => 'Adept are kind of physical mages, they cannot project astrally and other stuff.',
+            'label' => 'label.adept.d',
+            'description' => 'description.adept.d',
             'is_resonance' => false,
         ]);
 
@@ -58,8 +58,8 @@ class MagicSeeder extends Seeder
             'number_of_skills' => 2,
             'skill_rating' => 5,
             'number_free_spell' => 10,
-            'label' => 'Magician',
-            'description' => 'Magician are expert in astral knowledge, they are the only one who can project. They can fling spell, summon spirit.',
+            'label' => 'label.magician.a',
+            'description' => 'description.magician.a',
             'is_resonance' => false,
         ]);
 
@@ -69,8 +69,8 @@ class MagicSeeder extends Seeder
             'number_of_skills' => 2,
             'skill_rating' => 4,
             'number_free_spell' => 7,
-            'label' => 'Magician',
-            'description' => 'Magician are expert in astral knowledge, they are the only one who can project. They can fling spell, summon spirit.',
+            'label' => 'label.magician.b',
+            'description' => 'description.magician.b',
             'is_resonance' => false,
         ]);
 
@@ -80,8 +80,8 @@ class MagicSeeder extends Seeder
             'number_of_skills' => 0,
             'skill_rating' => 0,
             'number_free_spell' => 5,
-            'label' => 'Magician',
-            'description' => 'Magician are expert in astral knowledge, they are the only one who can project. They can fling spell, summon spirit.',
+            'label' => 'label.magician.c',
+            'description' => 'description.magician.c',
             'is_resonance' => false,
         ]);
 
@@ -91,8 +91,8 @@ class MagicSeeder extends Seeder
             'number_of_skills' => 2,
             'skill_rating' => 5,
             'number_free_spell' => 10,
-            'label' => 'Mystic Adept',
-            'description' => 'The army swiss knife, he can do pretty much everything an adept & a mage can do, but they are karma expensive and they also can\'t project or see astrally.',
+            'label' => 'label.mys.a',
+            'description' => 'description.mys.a',
             'is_resonance' => false,
         ]);
 
@@ -102,8 +102,8 @@ class MagicSeeder extends Seeder
             'number_of_skills' => 2,
             'skill_rating' => 4,
             'number_free_spell' => 7,
-            'label' => 'Mystic Adept',
-            'description' => 'The army swiss knife, he can do pretty much everything an adept & a mage can do, but they are karma expensive and they also can\'t project or see astrally.',
+            'label' => 'label.mys.b',
+            'description' => 'description.mys.b',
             'is_resonance' => false,
         ]);
 
@@ -113,8 +113,8 @@ class MagicSeeder extends Seeder
             'number_of_skills' => 0,
             'skill_rating' => 0,
             'number_free_spell' => 5,
-            'label' => 'Mystic Adept',
-            'description' => 'The army swiss knife, he can do pretty much everything an adept & a mage can do, but they are karma expensive and they also can\'t project or see astrally.',
+            'label' => 'label.mys.c',
+            'description' => 'description.mys.c',
             'is_resonance' => false,
         ]);
 
@@ -124,8 +124,8 @@ class MagicSeeder extends Seeder
             'number_of_skills' => 3,
             'skill_rating' => 5,
             'number_free_spell' => 7,
-            'label' => 'Resonance',
-            'description' => 'Technomancers are metahumans who have expressed the ability to affect computers directly, without terminals or intermediate devices of their own, as an act of will. There are many parallels between a Technomancer\'s ability and magical ability expressed by the Awakened; much as Awakened mages summon spirits and cast spells, Technomancers compile Sprites and execute Complex Forms. Despite these similarities, a Technomancer\'s ability is not compatible with other forms of Awakening, if it is indeed related to magic in any way (at current unknown).',
+            'label' => 'label.tech.a',
+            'description' => 'description.tech.a',
             'is_resonance' => true,
         ]);
 
@@ -135,8 +135,8 @@ class MagicSeeder extends Seeder
             'number_of_skills' => 3,
             'skill_rating' => 4,
             'number_free_spell' => 5,
-            'label' => 'Resonance',
-            'description' => 'Technomancers are metahumans who have expressed the ability to affect computers directly, without terminals or intermediate devices of their own, as an act of will. There are many parallels between a Technomancer\'s ability and magical ability expressed by the Awakened; much as Awakened mages summon spirits and cast spells, Technomancers compile Sprites and execute Complex Forms. Despite these similarities, a Technomancer\'s ability is not compatible with other forms of Awakening, if it is indeed related to magic in any way (at current unknown).',
+            'label' => 'label.tech.b',
+            'description' => 'description.tech.b',
             'is_resonance' => true,
         ]);
 
@@ -146,8 +146,8 @@ class MagicSeeder extends Seeder
             'number_of_skills' => 3,
             'skill_rating' => 2,
             'number_free_spell' => 3,
-            'label' => 'Resonance',
-            'description' => 'Technomancers are metahumans who have expressed the ability to affect computers directly, without terminals or intermediate devices of their own, as an act of will. There are many parallels between a Technomancer\'s ability and magical ability expressed by the Awakened; much as Awakened mages summon spirits and cast spells, Technomancers compile Sprites and execute Complex Forms. Despite these similarities, a Technomancer\'s ability is not compatible with other forms of Awakening, if it is indeed related to magic in any way (at current unknown).',
+            'label' => 'label.tech.c',
+            'description' => 'description.tech.c',
             'is_resonance' => true,
         ]);
 
@@ -157,19 +157,8 @@ class MagicSeeder extends Seeder
             'number_of_skills' => 3,
             'skill_rating' => 4,
             'number_free_spell' => 8,
-            'label' => 'Aspected Magician',
-            'description' => 'Aspected magicians are a limited form of magician.
-Aspected magicians do not astrally project.
-Aspected magicians can astrally perceive.
-Aspected magicians must choose one, and only one, of the following three Skills/Skill Groups.
-Sorcery (Spellcasting and related skills)
-Conjuring (Summoning and related skills)
-Enchanting (Alchemy and related skills)
-Aspected magicians cannot perform any of the magical skills associated with the two groups they did not select.
-Aspected magicians can only learn Counterspelling if they take the skills to be a spellcaster.
-Aspected magicians can follow mentor spirits.
-At character creation, aspected magicians who cast spells, perform rituals, or create alchemical preparations may know a maximum number of formulae from each group equal to their Magic Rating x 2 (i.e., Magic Rating of 4 allows 8 spells, 8 rituals, 8 alchemical preparations).
-',
+            'label' => 'label.aspected.b',
+            'description' => 'description.aspected.b',
             'is_resonance' => false,
         ]);
 
@@ -179,19 +168,8 @@ At character creation, aspected magicians who cast spells, perform rituals, or c
             'number_of_skills' => 3,
             'skill_rating' => 2,
             'number_free_spell' => 6,
-            'label' => 'Aspected Magician',
-            'description' => 'Aspected magicians are a limited form of magician.
-Aspected magicians do not astrally project.
-Aspected magicians can astrally perceive.
-Aspected magicians must choose one, and only one, of the following three Skills/Skill Groups.
-Sorcery (Spellcasting and related skills)
-Conjuring (Summoning and related skills)
-Enchanting (Alchemy and related skills)
-Aspected magicians cannot perform any of the magical skills associated with the two groups they did not select.
-Aspected magicians can only learn Counterspelling if they take the skills to be a spellcaster.
-Aspected magicians can follow mentor spirits.
-At character creation, aspected magicians who cast spells, perform rituals, or create alchemical preparations may know a maximum number of formulae from each group equal to their Magic Rating x 2 (i.e., Magic Rating of 4 allows 8 spells, 8 rituals, 8 alchemical preparations).
-',
+            'label' => 'label.aspected.c',
+            'description' => 'description.aspected.c',
             'is_resonance' => false,
         ]);
 
@@ -201,19 +179,74 @@ At character creation, aspected magicians who cast spells, perform rituals, or c
             'number_of_skills' => 0,
             'skill_rating' => 0,
             'number_free_spell' => 4,
-            'label' => 'Aspected Magician',
-            'description' => 'Aspected magicians are a limited form of magician.
-Aspected magicians do not astrally project.
-Aspected magicians can astrally perceive.
-Aspected magicians must choose one, and only one, of the following three Skills/Skill Groups.
-Sorcery (Spellcasting and related skills)
-Conjuring (Summoning and related skills)
-Enchanting (Alchemy and related skills)
-Aspected magicians cannot perform any of the magical skills associated with the two groups they did not select.
-Aspected magicians can only learn Counterspelling if they take the skills to be a spellcaster.
-Aspected magicians can follow mentor spirits.
-At character creation, aspected magicians who cast spells, perform rituals, or create alchemical preparations may know a maximum number of formulae from each group equal to their Magic Rating x 2 (i.e., Magic Rating of 4 allows 8 spells, 8 rituals, 8 alchemical preparations).
-',
+            'label' => 'label.aspected.d',
+            'description' => 'description.aspected.d',
+            'is_resonance' => false,
+        ]);
+
+        $apprentice1 = Magic::create([
+            'magic_attribute' => 5,
+            'magic_attribute_grade' => Attributes::B,
+            'number_of_skills' => 3,
+            'skill_rating' => 4,
+            'number_free_spell' => 8,
+            'label' => 'label.apprentice.b',
+            'description' => 'description.apprentice.b',
+            'is_resonance' => false,
+        ]);
+
+        $apprentice2 = Magic::create([
+            'magic_attribute' => 3,
+            'magic_attribute_grade' => Attributes::C,
+            'number_of_skills' => 3,
+            'skill_rating' => 2,
+            'number_free_spell' => 6,
+            'label' => 'label.apprentice.c',
+            'description' => 'description.apprentice.c',
+            'is_resonance' => false,
+        ]);
+
+        $apprentice3 = Magic::create([
+            'magic_attribute' => 2,
+            'magic_attribute_grade' => Attributes::D,
+            'number_of_skills' => 0,
+            'skill_rating' => 0,
+            'number_free_spell' => 4,
+            'label' => 'label.apprentice.d',
+            'description' => 'description.apprentice.d',
+            'is_resonance' => false,
+        ]);
+
+        $enchanter = Magic::create([
+            'magic_attribute' => 5,
+            'magic_attribute_grade' => Attributes::C,
+            'number_of_skills' => 3,
+            'skill_rating' => 4,
+            'number_free_spell' => 10,
+            'label' => 'label.enchanter.c',
+            'description' => 'description.enchanter.c',
+            'is_resonance' => false,
+        ]);
+
+        $explorer = Magic::create([
+            'magic_attribute' => 5,
+            'magic_attribute_grade' => Attributes::C,
+            'number_of_skills' => 2,
+            'skill_rating' => 5,
+            'number_free_spell' => 0,
+            'label' => 'label.explorer.c',
+            'description' => 'description.explorer.c',
+            'is_resonance' => false,
+        ]);
+
+        $aware = Magic::create([
+            'magic_attribute' => 3,
+            'magic_attribute_grade' => Attributes::D,
+            'number_of_skills' => 1,
+            'skill_rating' => 4,
+            'number_free_spell' => 0,
+            'label' => 'label.aware.d',
+            'description' => 'description.aware.d',
             'is_resonance' => false,
         ]);
     }

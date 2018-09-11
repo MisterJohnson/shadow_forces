@@ -18,5 +18,7 @@
             </div>
         </div>
     </div>
-    <mosaique></mosaique>
+    <div>
+        <p>Title {{ $article->title }}</p>
+    </div>
 @stop

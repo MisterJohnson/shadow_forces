@@ -27,9 +27,9 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    public const PERMISSION_LEVEL = [
+    public const PERMISSION_LEVEL = array(
         'admin',
         'pro_runner',
         'runner'
-    ];
+    );
 }

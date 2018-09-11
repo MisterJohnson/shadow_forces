@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -11,6 +13,8 @@
 |
 */
 
-Route::get('/', function () {
-    return view('pages.home');
-});
+Route::get('/', 'HomeController@index');
+
+Route::get('/news/{id}', 'ArticleController@getArticle')->name('get.article');
+
+Route::get('/api/articles/{limit}', 'JsonController@getArticles')->name('get.articles');
