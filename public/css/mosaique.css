@@ -1,5 +1,31 @@
-.item .card article {
-  max-width: 375px;
+#mosaique {
+  position: relative;
+}
+
+.selectPost {
+  position: absolute;
+  right: 10px;
+  top: -40px;
+  color: #ffffff;
+}
+
+.item {
+  max-width: 460px;
+  height: 460px;
   display: inline-block;
+  vertical-align: top;
+}
+
+.item .card {
+  border: none;
+}
+
+.item .article-img {
+  height: 460px;
+}
+
+.item .article-img img {
+  -o-object-fit: cover;
+     object-fit: cover;
 }
 

@@ -1,8 +1,28 @@
+#mosaique {
+    position: relative;
+}
+
+.selectPost {
+    position:absolute;
+    right: 10px;
+    top:-40px;
+    color: #ffffff;
+}
+
 .item {
+    max-width: 460px;
+    height: 460px;
+    display: inline-block;
+    vertical-align: top;
+
     .card {
-        article {
-            max-width: 375px;
-            display: inline-block;
+        border: none;
+    }
+
+    .article-img {
+        height: 460px;
+        img{
+            object-fit: cover;
         }
     }
 }

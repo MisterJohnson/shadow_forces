@@ -11,5 +11,16 @@ let mix = require('laravel-mix');
  |
  */
 
+// Localization
+const WebpackShellPlugin = require('webpack-shell-plugin');
+mix.webpackConfig({
+    plugins:
+        [
+            new WebpackShellPlugin({onBuildStart:['php artisan lang:js --quiet --no-lib'], onBuildEnd:[]})
+        ]
+});
+
 mix.js('resources/assets/js/app.js', 'public/js')
    .sass('resources/assets/sass/app.scss', 'public/css');
+
+mix.sass('resources/assets/sass/mosaique.scss', 'public/css');
