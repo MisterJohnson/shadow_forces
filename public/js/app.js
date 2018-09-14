@@ -14157,7 +14157,7 @@ if (token) {
   var undefined;
 
   /** Used as the semantic version number. */
-  var VERSION = '4.17.10';
+  var VERSION = '4.17.11';
 
   /** Used as the size to enable large array optimizations. */
   var LARGE_ARRAY_SIZE = 200;
@@ -14421,7 +14421,7 @@ if (token) {
   var reHasUnicode = RegExp('[' + rsZWJ + rsAstralRange  + rsComboRange + rsVarRange + ']');
 
   /** Used to detect strings that need a more robust regexp to match words. */
-  var reHasUnicodeWord = /[a-z][A-Z]|[A-Z]{2,}[a-z]|[0-9][a-zA-Z]|[a-zA-Z][0-9]|[^a-zA-Z0-9 ]/;
+  var reHasUnicodeWord = /[a-z][A-Z]|[A-Z]{2}[a-z]|[0-9][a-zA-Z]|[a-zA-Z][0-9]|[^a-zA-Z0-9 ]/;
 
   /** Used to assign default `context` object properties. */
   var contextProps = [
@@ -15367,20 +15367,6 @@ if (token) {
       }
     }
     return result;
-  }
-
-  /**
-   * Gets the value at `key`, unless `key` is "__proto__".
-   *
-   * @private
-   * @param {Object} object The object to query.
-   * @param {string} key The key of the property to get.
-   * @returns {*} Returns the property value.
-   */
-  function safeGet(object, key) {
-    return key == '__proto__'
-      ? undefined
-      : object[key];
   }
 
   /**
@@ -17840,7 +17826,7 @@ if (token) {
           if (isArguments(objValue)) {
             newValue = toPlainObject(objValue);
           }
-          else if (!isObject(objValue) || (srcIndex && isFunction(objValue))) {
+          else if (!isObject(objValue) || isFunction(objValue)) {
             newValue = initCloneObject(srcValue);
           }
         }
@@ -20761,6 +20747,22 @@ if (token) {
         array[length] = isIndex(index, arrLength) ? oldArray[index] : undefined;
       }
       return array;
+    }
+
+    /**
+     * Gets the value at `key`, unless `key` is "__proto__".
+     *
+     * @private
+     * @param {Object} object The object to query.
+     * @param {string} key The key of the property to get.
+     * @returns {*} Returns the property value.
+     */
+    function safeGet(object, key) {
+      if (key == '__proto__') {
+        return;
+      }
+
+      return object[key];
     }
 
     /**
@@ -48038,7 +48040,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 /* 42 */
 /***/ (function(module, exports) {
 
-module.exports = { "en.articles": { "link": { "1": "\/article\/runnerhub", "2": "\/article\/how-to-be-a-decker", "3": "\/article\/how-to-be-a-street-sam", "4": "\/article\/shadowrun-returns" }, "title": { "1": "Read the Runnerhub blog, shadowrunner stories are great", "2": "How to be a great decker, Guide to the matrix", "3": "Kicking some ass, How to stick your katana in ganger's", "4": "Play the new shadowrun game" } }, "en.auth": { "failed": "These credentials do not match our records.", "throttle": "Too many login attempts. Please try again in :seconds seconds." }, "en.pagination": { "next": "Next &raquo;", "previous": "&laquo; Previous" }, "en.passwords": { "password": "Passwords must be at least six characters and match the confirmation.", "reset": "Your password has been reset!", "sent": "We have e-mailed your password reset link!", "token": "This password reset token is invalid.", "user": "We can't find a user with that e-mail address." }, "en.validation": { "accepted": "The :attribute must be accepted.", "active_url": "The :attribute is not a valid URL.", "after": "The :attribute must be a date after :date.", "after_or_equal": "The :attribute must be a date after or equal to :date.", "alpha": "The :attribute may only contain letters.", "alpha_dash": "The :attribute may only contain letters, numbers, dashes and underscores.", "alpha_num": "The :attribute may only contain letters and numbers.", "array": "The :attribute must be an array.", "attributes": [], "before": "The :attribute must be a date before :date.", "before_or_equal": "The :attribute must be a date before or equal to :date.", "between": { "array": "The :attribute must have between :min and :max items.", "file": "The :attribute must be between :min and :max kilobytes.", "numeric": "The :attribute must be between :min and :max.", "string": "The :attribute must be between :min and :max characters." }, "boolean": "The :attribute field must be true or false.", "confirmed": "The :attribute confirmation does not match.", "custom": { "attribute-name": { "rule-name": "custom-message" } }, "date": "The :attribute is not a valid date.", "date_format": "The :attribute does not match the format :format.", "different": "The :attribute and :other must be different.", "digits": "The :attribute must be :digits digits.", "digits_between": "The :attribute must be between :min and :max digits.", "dimensions": "The :attribute has invalid image dimensions.", "distinct": "The :attribute field has a duplicate value.", "email": "The :attribute must be a valid email address.", "exists": "The selected :attribute is invalid.", "file": "The :attribute must be a file.", "filled": "The :attribute field must have a value.", "gt": { "array": "The :attribute must have more than :value items.", "file": "The :attribute must be greater than :value kilobytes.", "numeric": "The :attribute must be greater than :value.", "string": "The :attribute must be greater than :value characters." }, "gte": { "array": "The :attribute must have :value items or more.", "file": "The :attribute must be greater than or equal :value kilobytes.", "numeric": "The :attribute must be greater than or equal :value.", "string": "The :attribute must be greater than or equal :value characters." }, "image": "The :attribute must be an image.", "in": "The selected :attribute is invalid.", "in_array": "The :attribute field does not exist in :other.", "integer": "The :attribute must be an integer.", "ip": "The :attribute must be a valid IP address.", "ipv4": "The :attribute must be a valid IPv4 address.", "ipv6": "The :attribute must be a valid IPv6 address.", "json": "The :attribute must be a valid JSON string.", "lt": { "array": "The :attribute must have less than :value items.", "file": "The :attribute must be less than :value kilobytes.", "numeric": "The :attribute must be less than :value.", "string": "The :attribute must be less than :value characters." }, "lte": { "array": "The :attribute must not have more than :value items.", "file": "The :attribute must be less than or equal :value kilobytes.", "numeric": "The :attribute must be less than or equal :value.", "string": "The :attribute must be less than or equal :value characters." }, "max": { "array": "The :attribute may not have more than :max items.", "file": "The :attribute may not be greater than :max kilobytes.", "numeric": "The :attribute may not be greater than :max.", "string": "The :attribute may not be greater than :max characters." }, "mimes": "The :attribute must be a file of type: :values.", "mimetypes": "The :attribute must be a file of type: :values.", "min": { "array": "The :attribute must have at least :min items.", "file": "The :attribute must be at least :min kilobytes.", "numeric": "The :attribute must be at least :min.", "string": "The :attribute must be at least :min characters." }, "not_in": "The selected :attribute is invalid.", "not_regex": "The :attribute format is invalid.", "numeric": "The :attribute must be a number.", "present": "The :attribute field must be present.", "regex": "The :attribute format is invalid.", "required": "The :attribute field is required.", "required_if": "The :attribute field is required when :other is :value.", "required_unless": "The :attribute field is required unless :other is in :values.", "required_with": "The :attribute field is required when :values is present.", "required_with_all": "The :attribute field is required when :values is present.", "required_without": "The :attribute field is required when :values is not present.", "required_without_all": "The :attribute field is required when none of :values are present.", "same": "The :attribute and :other must match.", "size": { "array": "The :attribute must contain :size items.", "file": "The :attribute must be :size kilobytes.", "numeric": "The :attribute must be :size.", "string": "The :attribute must be :size characters." }, "string": "The :attribute must be a string.", "timezone": "The :attribute must be a valid zone.", "unique": "The :attribute has already been taken.", "uploaded": "The :attribute failed to upload.", "url": "The :attribute format is invalid." }, "fr.articles": { "link": { "1": "\/article\/runnerhub", "2": "\/article\/how-to-be-a-decker", "3": "\/article\/how-to-be-a-street-sam", "4": "\/article\/shadowrun-returns" }, "title": { "1": "Lisez le blog the Runnerhub, Venez rire des histoires de Shadowrunners", "2": "Comment \xEAtre un bon decker, Guide de la Matrix", "3": "Bottez des deri\xE8res, Comment poignarder des ganger's avec votre katana", "4": "Jouer au nouveau jeu de shadowrun!" } } };
+module.exports = { "en.articles": { "link": { "1": "\/article\/runnerhub", "2": "\/article\/how-to-be-a-decker", "3": "\/article\/how-to-be-a-street-sam", "4": "\/article\/shadowrun-returns", "5": "\/article\/shadowrun-experience", "6": "\/article\/street-life", "7": "\/article\/looking-for-gm", "8": "\/article\/shadowrun-api" }, "title": { "1": "Read the Runnerhub blog, shadowrunner stories are great", "2": "How to be a great decker, Guide to the matrix", "3": "Kicking some ass, How to stick your katana in ganger's", "4": "Play the new shadowrun game", "5": "Live the shadowrunnner feel with the new game Cyberpunk", "6": "Experience the street life as a shadowrunner", "7": "Looking for new GM?", "8": "Try out the new shadowrun api, with all the books included" } }, "en.auth": { "failed": "These credentials do not match our records.", "throttle": "Too many login attempts. Please try again in :seconds seconds." }, "en.pagination": { "next": "Next &raquo;", "previous": "&laquo; Previous" }, "en.passwords": { "password": "Passwords must be at least six characters and match the confirmation.", "reset": "Your password has been reset!", "sent": "We have e-mailed your password reset link!", "token": "This password reset token is invalid.", "user": "We can't find a user with that e-mail address." }, "en.validation": { "accepted": "The :attribute must be accepted.", "active_url": "The :attribute is not a valid URL.", "after": "The :attribute must be a date after :date.", "after_or_equal": "The :attribute must be a date after or equal to :date.", "alpha": "The :attribute may only contain letters.", "alpha_dash": "The :attribute may only contain letters, numbers, dashes and underscores.", "alpha_num": "The :attribute may only contain letters and numbers.", "array": "The :attribute must be an array.", "attributes": [], "before": "The :attribute must be a date before :date.", "before_or_equal": "The :attribute must be a date before or equal to :date.", "between": { "array": "The :attribute must have between :min and :max items.", "file": "The :attribute must be between :min and :max kilobytes.", "numeric": "The :attribute must be between :min and :max.", "string": "The :attribute must be between :min and :max characters." }, "boolean": "The :attribute field must be true or false.", "confirmed": "The :attribute confirmation does not match.", "custom": { "attribute-name": { "rule-name": "custom-message" } }, "date": "The :attribute is not a valid date.", "date_format": "The :attribute does not match the format :format.", "different": "The :attribute and :other must be different.", "digits": "The :attribute must be :digits digits.", "digits_between": "The :attribute must be between :min and :max digits.", "dimensions": "The :attribute has invalid image dimensions.", "distinct": "The :attribute field has a duplicate value.", "email": "The :attribute must be a valid email address.", "exists": "The selected :attribute is invalid.", "file": "The :attribute must be a file.", "filled": "The :attribute field must have a value.", "gt": { "array": "The :attribute must have more than :value items.", "file": "The :attribute must be greater than :value kilobytes.", "numeric": "The :attribute must be greater than :value.", "string": "The :attribute must be greater than :value characters." }, "gte": { "array": "The :attribute must have :value items or more.", "file": "The :attribute must be greater than or equal :value kilobytes.", "numeric": "The :attribute must be greater than or equal :value.", "string": "The :attribute must be greater than or equal :value characters." }, "image": "The :attribute must be an image.", "in": "The selected :attribute is invalid.", "in_array": "The :attribute field does not exist in :other.", "integer": "The :attribute must be an integer.", "ip": "The :attribute must be a valid IP address.", "ipv4": "The :attribute must be a valid IPv4 address.", "ipv6": "The :attribute must be a valid IPv6 address.", "json": "The :attribute must be a valid JSON string.", "lt": { "array": "The :attribute must have less than :value items.", "file": "The :attribute must be less than :value kilobytes.", "numeric": "The :attribute must be less than :value.", "string": "The :attribute must be less than :value characters." }, "lte": { "array": "The :attribute must not have more than :value items.", "file": "The :attribute must be less than or equal :value kilobytes.", "numeric": "The :attribute must be less than or equal :value.", "string": "The :attribute must be less than or equal :value characters." }, "max": { "array": "The :attribute may not have more than :max items.", "file": "The :attribute may not be greater than :max kilobytes.", "numeric": "The :attribute may not be greater than :max.", "string": "The :attribute may not be greater than :max characters." }, "mimes": "The :attribute must be a file of type: :values.", "mimetypes": "The :attribute must be a file of type: :values.", "min": { "array": "The :attribute must have at least :min items.", "file": "The :attribute must be at least :min kilobytes.", "numeric": "The :attribute must be at least :min.", "string": "The :attribute must be at least :min characters." }, "not_in": "The selected :attribute is invalid.", "not_regex": "The :attribute format is invalid.", "numeric": "The :attribute must be a number.", "present": "The :attribute field must be present.", "regex": "The :attribute format is invalid.", "required": "The :attribute field is required.", "required_if": "The :attribute field is required when :other is :value.", "required_unless": "The :attribute field is required unless :other is in :values.", "required_with": "The :attribute field is required when :values is present.", "required_with_all": "The :attribute field is required when :values is present.", "required_without": "The :attribute field is required when :values is not present.", "required_without_all": "The :attribute field is required when none of :values are present.", "same": "The :attribute and :other must match.", "size": { "array": "The :attribute must contain :size items.", "file": "The :attribute must be :size kilobytes.", "numeric": "The :attribute must be :size.", "string": "The :attribute must be :size characters." }, "string": "The :attribute must be a string.", "timezone": "The :attribute must be a valid zone.", "unique": "The :attribute has already been taken.", "uploaded": "The :attribute failed to upload.", "url": "The :attribute format is invalid." }, "fr.articles": { "link": { "1": "\/article\/runnerhub", "2": "\/article\/how-to-be-a-decker", "3": "\/article\/how-to-be-a-street-sam", "4": "\/article\/shadowrun-returns", "5": "\/article\/shadowrun-experience", "6": "\/article\/street-life", "7": "\/article\/looking-for-gm", "8": "\/article\/shadowrun-api" }, "title": { "1": "Lisez le blog the Runnerhub, Venez rire des histoires de Shadowrunners", "2": "Comment \xEAtre un bon decker, Guide de la Matrix", "3": "Bottez des deri\xE8res, Comment poignarder des ganger's avec votre katana", "4": "Jouer au nouveau jeu de shadowrun!", "5": "Vivez l'exp\xE9rience shadowrun avec le nouveau jeu CyberPubk", "6": "Exp\xE9rimenter la vie de ganger avec shadowrun", "7": "Voulez-vous trouver un nouveau gm?", "8": "Essayer le nouvel api pour hadowrun, avec de toute nouvelle fonctionalit\xE9s" } } };
 
 /***/ }),
 /* 43 */
@@ -48257,25 +48259,38 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
         return {
-            articles: []
+            articles: [],
+            article_limit: "8",
+            loading: false
         };
     },
     mounted: function mounted() {
         console.log('mounted!');
-        this.getArticles(4);
+        this.getArticles();
     },
 
     methods: {
-        getArticles: function getArticles(limit) {
+        getArticles: function getArticles() {
             var _this = this;
 
+            this.loading = true;
+
             // get the articles
-            axios.get('/api/articles/4').then(function (response) {
+            axios.get('/api/articles/' + this.article_limit).then(function (response) {
+                _this.loading = false;
                 _this.articles = response.data;
+            }).catch(function (error) {
+                _this.loading = false;
+                console.log(error);
             });
         },
         background_path: function background_path(filename) {
@@ -48294,102 +48309,168 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", [
     _c("div", { attrs: { id: "mosaique" } }, [
-      _vm._m(0),
+      _c("div", { staticClass: "selectPost" }, [
+        _c("label", { attrs: { for: "limit_article" } }, [
+          _vm._v("# of Articles")
+        ]),
+        _vm._v(" "),
+        _c(
+          "select",
+          {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.article_limit,
+                expression: "article_limit"
+              }
+            ],
+            attrs: { name: "limit_article", id: "limit_article" },
+            on: {
+              change: [
+                function($event) {
+                  var $$selectedVal = Array.prototype.filter
+                    .call($event.target.options, function(o) {
+                      return o.selected
+                    })
+                    .map(function(o) {
+                      var val = "_value" in o ? o._value : o.value
+                      return val
+                    })
+                  _vm.article_limit = $event.target.multiple
+                    ? $$selectedVal
+                    : $$selectedVal[0]
+                },
+                function($event) {
+                  _vm.getArticles()
+                }
+              ]
+            }
+          },
+          [
+            _c("option", { attrs: { value: "4" } }, [_vm._v("4 articles")]),
+            _vm._v(" "),
+            _c("option", { attrs: { value: "8", selected: "" } }, [
+              _vm._v("8 articles")
+            ]),
+            _vm._v(" "),
+            _c("option", { attrs: { value: "16" } }, [_vm._v("16 articles")])
+          ]
+        )
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "spin" }, [
+        _c("i", {
+          directives: [
+            {
+              name: "show",
+              rawName: "v-show",
+              value: _vm.loading,
+              expression: "loading"
+            }
+          ],
+          staticClass: "fa fa-spinner fa-spin"
+        })
+      ]),
       _vm._v(" "),
       _c(
         "div",
         { staticClass: "items" },
         _vm._l(_vm.articles, function(article) {
-          return _c("div", { staticClass: "item" }, [
-            _c("div", { staticClass: "card" }, [
-              article.type === "normal"
-                ? _c("article", [
-                    _c(
-                      "div",
-                      { staticClass: "article-img", attrs: { id: article.id } },
-                      [
-                        _c(
-                          "a",
-                          {
-                            attrs: { href: article.link, title: article.title }
-                          },
-                          [
-                            _c("img", {
+          return _c(
+            "div",
+            {
+              class: {
+                item: article.dimension === "square",
+                rectangle: article.dimension === "horizontal_rectangle"
+              }
+            },
+            [
+              _c("div", { staticClass: "card" }, [
+                article.type === "normal"
+                  ? _c("article", [
+                      _c(
+                        "div",
+                        {
+                          staticClass: "article-data-title",
+                          attrs: { id: article.id }
+                        },
+                        [
+                          _c(
+                            "a",
+                            {
                               attrs: {
-                                src: _vm.background_path(
-                                  article.background_image
-                                ),
-                                alt: article.title,
-                                width: "100%",
-                                height: "100%"
+                                href: _vm._f("trans")(article.link),
+                                title: _vm._f("trans")(article.title)
                               }
-                            })
-                          ]
-                        )
-                      ]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      {
-                        staticClass: "article-data-title",
-                        attrs: { id: article.id }
-                      },
-                      [
-                        _c("div", { staticClass: "inner-title" }, [
-                          _c("div", { staticClass: "data-meta" }),
-                          _vm._v(" "),
-                          _c("h4", [
-                            _vm._v(
-                              "\n                                    " +
-                                _vm._s(article.title) +
-                                "\n                                "
-                            )
-                          ]),
-                          _vm._v(" "),
-                          _c("span", { staticClass: "read-more" }, [
-                            _c("a", { attrs: { href: article.link } }, [
-                              _vm._v("Read More")
-                            ])
-                          ])
-                        ])
-                      ]
-                    )
-                  ])
-                : article.type === "video"
-                  ? _c("article")
-                  : article.type === "file"
+                            },
+                            [
+                              _c("div", { staticClass: "outer-title" }, [
+                                _c("div", { staticClass: "inner-title" }, [
+                                  _c("div", { staticClass: "data-meta" }),
+                                  _vm._v(" "),
+                                  _c("h4", [
+                                    _vm._v(
+                                      "\n                                            " +
+                                        _vm._s(_vm._f("trans")(article.title)) +
+                                        "\n                                        "
+                                    )
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("span", { staticClass: "read-more" }, [
+                                    _c(
+                                      "a",
+                                      {
+                                        attrs: {
+                                          href: _vm._f("trans")(article.link)
+                                        }
+                                      },
+                                      [_vm._v("Read More")]
+                                    )
+                                  ])
+                                ])
+                              ])
+                            ]
+                          )
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        {
+                          staticClass: "article-img",
+                          attrs: { id: article.id }
+                        },
+                        [
+                          _c("img", {
+                            attrs: {
+                              src: _vm.background_path(
+                                article.background_image
+                              ),
+                              alt: _vm._f("trans")(article.title),
+                              width: "100%",
+                              height: "100%"
+                            }
+                          })
+                        ]
+                      )
+                    ])
+                  : article.type === "video"
                     ? _c("article")
-                    : article.type === "quote"
+                    : article.type === "file"
                       ? _c("article")
-                      : _vm._e()
-            ])
-          ])
+                      : article.type === "quote"
+                        ? _c("article")
+                        : _vm._e()
+              ])
+            ]
+          )
         })
       )
     ])
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "selectPost" }, [
-      _c("label", { attrs: { for: "limit_article" } }, [
-        _vm._v("# of Articles")
-      ]),
-      _vm._v(" "),
-      _c("select", { attrs: { name: "limit_article", id: "limit_article" } }, [
-        _c("option", { attrs: { value: "4" } }, [_vm._v("4 articles")]),
-        _vm._v(" "),
-        _c("option", { attrs: { value: "8" } }, [_vm._v("8 articles")]),
-        _vm._v(" "),
-        _c("option", { attrs: { value: "16" } }, [_vm._v("16 articles")])
-      ])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {

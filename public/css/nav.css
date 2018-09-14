@@ -1,5 +1,12 @@
 header {
     height: 90px;
+    margin: 0 auto;
+}
+
+.menu-fixed {
+    position: fixed;
+    width: 72%;
+    z-index: 50;
 }
 
 .wrap {
