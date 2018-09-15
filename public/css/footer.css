@@ -1,0 +1,37 @@
+footer {
+    min-height: 50px;
+}
+
+.footer_bottom {
+    background: rgba(255, 255, 255, 1) url(../images/pattern-img-1.png);
+    color: #ffffff;
+    height: 50px;
+}
+
+footer .holder-inner {
+    height: 50px;
+}
+
+footer .edgt-left {
+    width: 45%;
+    vertical-align: top;
+    display: inline-block;
+}
+
+footer .edgt-left div {
+    margin-top: 10px;
+    padding-left: 10px;
+}
+
+footer .edgt-right {
+    width: 54%;
+    display: inline-block;
+    vertical-align: top;
+    margin-left: 0 !important;
+}
+
+footer .edgt-right .social_icon {
+    float: right;
+    margin-right: 15px;
+    font-size: 1.5em;
+}
