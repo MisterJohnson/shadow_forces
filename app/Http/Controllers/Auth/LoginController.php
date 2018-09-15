@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Support\Facades\Redirect;
+use Cartalyst\Sentinel\Native\Facades\Sentinel;
 
 class LoginController extends Controller
 {
@@ -35,5 +37,21 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
+    }
+
+    /**
+     * Account sign in.
+     *
+     * @return mixed
+     */
+    public function getSignin()
+    {
+        // Is the user logged in?
+        if (Sentinel::check()) {
+            return redirect::route('dashboard');
+        }
+
+        // Show the page
+        return view('login');
     }
 }

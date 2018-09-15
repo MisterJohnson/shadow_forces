@@ -51,5 +51,45 @@ class ArticlesSeeder extends Seeder
             'background_image' => 'Shadowrun-Returns.jpg',
             'dimension' => 'square'
         ]);
+
+        $article5 = Article::create([
+            'type' => 'normal',
+            'title' => 'title.5',
+            'label' => 'label.5',
+            'link' => 'link.5',
+            'description' => 'description.5',
+            'background_image' => 'darkcity-1.jpg',
+            'dimension' => 'horizontal_rectangle'
+        ]);
+
+        $article6 = Article::create([
+            'type' => 'normal',
+            'title' => 'title.6',
+            'label' => 'label.6',
+            'link' => 'link.6',
+            'description' => 'description.6',
+            'background_image' => 'darkcity-2.jpg',
+            'dimension' => 'horizontal_rectangle'
+        ]);
+
+        $article7 = Article::create([
+            'type' => 'normal',
+            'title' => 'title.7',
+            'label' => 'label.7',
+            'link' => 'link.7',
+            'description' => 'description.7',
+            'background_image' => 'skyline_1.jpg',
+            'dimension' => 'square'
+        ]);
+
+        $article8 = Article::create([
+            'type' => 'normal',
+            'title' => 'title.8',
+            'label' => 'label.8',
+            'link' => 'link.8',
+            'description' => 'description.8',
+            'background_image' => 'shop-slider-image-2.jpg',
+            'dimension' => 'square'
+        ]);
     }
 }

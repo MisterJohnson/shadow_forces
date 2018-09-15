@@ -6,8 +6,9 @@
  * Time: 14:33
  */
 
-use Illuminate\Database\Seeder;
+use Faker\Factory;
 use App\User;
+use Illuminate\Database\Seeder;
 
 class UsersSeeder extends Seeder
 {
@@ -18,18 +19,32 @@ class UsersSeeder extends Seeder
      */
     public function run()
     {
-        $user = User::create([
-            'name' => 'mister.johnson',
-            'email' => 'simon.provencher.lepage@gmail.com',
-            'password' => bcrypt('admin'),
-            'permission' => User::PERMISSION_LEVEL[0],
+        DB::table('users')->truncate(); // Using truncate function so all info will be cleared when re-seeding.
+        DB::table('roles')->truncate();
+        DB::table('role_users')->truncate();
+        DB::table('activations')->truncate();
+
+        $admin = Sentinel::registerAndActivate(array(
+            'email'       => 'simon.provencher.lepage@gmail.com',
+            'password'    => "admin",
+            'first_name'  => 'Mister',
+            'last_name'   => 'Johnson',
+        ));
+
+        $adminRole = Sentinel::getRoleRepository()->createModel()->create([
+            'name' => 'Admin',
+            'slug' => 'admin',
+            'permissions' => array('admin' => 1),
         ]);
 
-        $user2 = User::create([
-            'name' => 'Nivellum',
-            'email' => 'd34th.not3.relight@gmail.com',
-            'password' => bcrypt('Jackpot50'),
-            'permission' => User::PERMISSION_LEVEL[1],
+        $userRole = Sentinel::getRoleRepository()->createModel()->create([
+            'name'  => 'User',
+            'slug'  => 'user',
         ]);
+
+
+        $admin->roles()->attach($adminRole);
+
+        $this->command->info('Admin User created with username admin@admin.com and password admin');
     }
 }

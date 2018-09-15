@@ -17,4 +17,15 @@ Route::get('/', 'HomeController@index');
 
 Route::get('/news/{id}', 'ArticleController@getArticle')->name('get.article');
 
+Route::get('/character', 'CharactersController@index')->name('get.character');
+
+Route::get('login', 'AuthController@getSignin')->name('login');
+
+
+/* JSON ROUTE */
 Route::get('/api/articles/{limit}', 'JsonController@getArticles')->name('get.articles');
+
+
+Route::group([ 'middleware' => 'admin'], function () {
+
+});
