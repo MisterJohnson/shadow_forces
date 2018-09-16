@@ -1,7 +1,7 @@
 <nav>
     <ul class="navigation">
         <li class="nav_item">
-            <a href="#">
+            <a href="/" @if(Request::is('/')) class="active" @endif>
                 <span class="item_outer">
                     <span class="item_inner">
                         <span class="item_text">
@@ -12,7 +12,7 @@
             </a>
         </li>
         <li class="nav_item">
-            <a href="#">
+            <a href="{{ route('character') }}" @if(Request::is('character')) class="active" @endif>
                 <span class="item_outer">
                     <span class="item_inner">
                         <span class="item_text">

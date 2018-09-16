@@ -13,13 +13,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', 'HomeController@index');
+Route::get('/', 'HomeController@index')->name('home');
 
 Route::get('/news/{id}', 'ArticleController@getArticle')->name('get.article');
 
 Route::get('/character', 'CharactersController@index')->name('get.character');
 
-Route::get('login', 'AuthController@getSignin')->name('login');
+Route::get('/login', 'AuthController@getSignin');
+Route::post('/login', 'AuthController@postSignin');
 
 
 /* JSON ROUTE */
@@ -27,5 +28,6 @@ Route::get('/api/articles/{limit}', 'JsonController@getArticles')->name('get.art
 
 
 Route::group([ 'middleware' => 'admin'], function () {
-
+    Route::get('/character', 'CharactersController@index')->name('character');
+    Route::get('dashboard', 'HomeController@index')->name('dashboard');
 });

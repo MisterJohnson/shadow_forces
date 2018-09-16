@@ -12,6 +12,6 @@ namespace App\Http\Controllers;
 class CharactersController extends Controller
 {
     public function index() {
-
+        return view('auth.characters.index');
     }
 }

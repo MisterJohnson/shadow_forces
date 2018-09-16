@@ -38,20 +38,4 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
     }
-
-    /**
-     * Account sign in.
-     *
-     * @return mixed
-     */
-    public function getSignin()
-    {
-        // Is the user logged in?
-        if (Sentinel::check()) {
-            return redirect::route('dashboard');
-        }
-
-        // Show the page
-        return view('login');
-    }
 }

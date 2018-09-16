@@ -63,3 +63,7 @@ header {
     font-family: "Open Sans", Sans-Serif;
     font-size: 20px;
 }
+
+a.active {
+    text-decoration: line-through;
+}

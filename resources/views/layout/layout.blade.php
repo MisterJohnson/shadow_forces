@@ -3,6 +3,9 @@
     @include('includes.head')
     <body>
         <div class="container-fluid">
+            <div class="container">
+                @include('includes.notifications')
+            </div>
             <div class="global_wrapper">
                 <div class="image_wrapper">
                     @include('includes.header')
