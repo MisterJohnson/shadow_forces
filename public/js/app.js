@@ -48470,13 +48470,13 @@ var render = function() {
     ])
   ])
 }
-var staticRenderFns = []
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
+var staticRenderFns = [];
+        render._withStripped = true;
+module.exports = { render: render, staticRenderFns: staticRenderFns };
 if (false) {
-  module.hot.accept()
+  module.hot.accept();
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-0c471982", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-0c471982", module.exports);
   }
 }
 
