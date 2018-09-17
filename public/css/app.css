@@ -10565,3 +10565,14 @@ a.text-dark:focus {
   margin: 100px auto 0;
 }
 
+@media screen and (max-width: 500px) {
+  .container-fluid.information .inner-row {
+    width: 100% !important;
+    margin-bottom: 25px;
+  }
+
+  .container-fluid .full-container .half-container {
+    width: 100% !important;
+  }
+}
+

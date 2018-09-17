@@ -1,18 +1,14 @@
 <header>
-    <div class="container" style="height: 90px">
-        <div class="menu-fixed">
-            <div class="wrap">
-                <div class="edgt-left-wrapper">
-                    <div class="edgt-left">
+    <div class="wrap-no-bg">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-3">
+                    <a class="site-branding" href="{{ route('home') }}">
                         <img src="{{ asset('images/logo.png') }}" alt="logo" />
-                    </div>
-                    <div class="clear"></div>
+                    </a><!-- .site-branding -->
                 </div>
-                <div class="edgt-right-wrapper">
-                    <div class="edgt-right">
-                        @include('includes.navigation')
-                    </div>
-                    <div class="clear"></div>
+                <div class="col-9">
+                    @include('includes.navigation')
                 </div>
             </div>
         </div>
