@@ -73,6 +73,6 @@
             </div>
         </div>
     @endif
-    <div id="app"></div>
     <div class="clear"></div>
+    <div id="app"></div>
 @stop

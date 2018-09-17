@@ -14021,8 +14021,8 @@ window.event = new Vue();
  * Alerts
  */
 
-Vue.use(__WEBPACK_IMPORTED_MODULE_0_vue_toasted___default.a);
 
+Vue.use(__WEBPACK_IMPORTED_MODULE_0_vue_toasted___default.a);
 /**
  * Localization.
  */
