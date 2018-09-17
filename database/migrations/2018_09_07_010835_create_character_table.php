@@ -15,6 +15,7 @@ class CreateCharacterTable extends Migration
     {
         Schema::create('character', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('user_id');
             $table->integer('magic_id');
             $table->integer('starting_attributes_id');
             $table->integer('final_attributes_id');

@@ -22,6 +22,8 @@ Route::get('/character', 'CharactersController@index')->name('get.character');
 Route::get('/login', 'AuthController@getSignin');
 Route::post('/login', 'AuthController@postSignin');
 
+Route::get('/logout', 'AuthController@logout')->name('logout');
+
 
 /* JSON ROUTE */
 Route::get('/api/articles/{limit}', 'JsonController@getArticles')->name('get.articles');
@@ -29,5 +31,6 @@ Route::get('/api/articles/{limit}', 'JsonController@getArticles')->name('get.art
 
 Route::group([ 'middleware' => 'admin'], function () {
     Route::get('/character', 'CharactersController@index')->name('character');
+    Route::get('/character/add', 'CharactersController@add')->name('character.add');
     Route::get('dashboard', 'HomeController@index')->name('dashboard');
 });

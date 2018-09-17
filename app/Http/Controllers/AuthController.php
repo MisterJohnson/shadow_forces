@@ -44,14 +44,14 @@ class AuthController extends Controller
             // Try to log the user in
             if (Sentinel::authenticate($request->only(['email', 'password']), $request->get('remember-me', false))) {
                 // Redirect to the dashboard page
-                return Redirect::route("dashboard")->with('success', trans('auth/message.signin.success'));
+                return Redirect::route("dashboard")->with('success', trans('auth/message.authenticate.success'));
             }
-            $this->messageBag->add('email', trans('auth/message.account_not_found'));
+            $this->messageBag->add('email', trans('auth/message.authenticate.account_not_found'));
         } catch (NotActivatedException $e) {
-            $this->messageBag->add('email', trans('auth/message.account_not_activated'));
+            $this->messageBag->add('email', trans('auth/message.authenticate.account_not_activated'));
         } catch (ThrottlingException $e) {
             $delay = $e->getDelay();
-            $this->messageBag->add('email', trans('auth/message.account_suspended', compact('delay')));
+            $this->messageBag->add('email', trans('auth/message.authenticate.account_suspended', compact('delay')));
         }
 
         // Ooops.. something went wrong
@@ -67,7 +67,6 @@ class AuthController extends Controller
     {
         // Is the user logged in?
         if (Sentinel::check()) {
-            dd('what the fuck i am login?');
             return redirect::route('dashboard');
         }
 
@@ -75,6 +74,11 @@ class AuthController extends Controller
 
         // Show the page
         return view('pages.login', ['articles' => $articles]);
+    }
+
+    public function logout() {
+        Sentinel::logout();
+        return redirect::route('home');
     }
 
     public function dashboard() {
