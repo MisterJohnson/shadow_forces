@@ -1,13 +1,16 @@
-.container-fluid {
-    background: #000;
+body {
+    background : #000000;
 }
 
 .global_wrapper {
-    background: url('../images/shadowrun-banner.jpg');
-}
+    /* The image used */
+    background: url('../images/shadowrun-banner.jpg') #000000 fixed center no-repeat;
 
-.image_wrapper {
-    background: rgba(0, 0, 0, 0.7);
+    /* Set a specific height */
+    height: 805px;
+
+    /* Create the parallax scrolling effect */
+    background-size: cover;
 }
 
 .banner_area {

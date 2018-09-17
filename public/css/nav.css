@@ -1,5 +1,13 @@
 header {
     height: 90px;
+    margin: 0 auto;
+    position: relative;
+}
+
+.menu-fixed {
+    position: fixed;
+    width: 72%;
+    z-index: 50;
 }
 
 .wrap {
@@ -9,13 +17,36 @@ header {
     word-wrap: break-spaces;
 }
 
-.wrap div {
+.wrap-no-bg {
+    width: 100%;
+    height: 100%;
+    padding: 0px 15px;
+    background: rgba(255, 255, 255, 0);
+    word-wrap: break-spaces;
+}
+
+.wrap div, .wrap-no-bg div {
     display: inline-block;
 }
 
-.edgt-left-wrapper, .edgt-right-wrapper {
+.wrap .edgt-left-wrapper, .wrap .edgt-right-wrapper {
     width: 49%;
     height: 90px;
+    padding: 0px 3px;
+    vertical-align: top;
+}
+
+.wrap-no-bg .edgt-left-wrapper {
+    float: left;
+    position: relative;
+    height: 100%;
+}
+
+.wrap-no-bg .edgt-right-wrapper {
+    float: right;
+    position: relative;
+    height: 100%;
+    min-width: 660px;
     padding: 0px 3px;
     vertical-align: top;
 }
@@ -39,8 +70,12 @@ header {
 .edgt-right ul {
     list-style: none;
     line-height: 5;
-    height: 30px;
+    height: 100%;
     text-align: center;
+}
+
+.wrap-no-bg .edgt-right ul {
+    text-align: left;
 }
 
 .edgt-right ul li {
@@ -51,8 +86,20 @@ header {
     line-height: 30px;
 }
 
+.wrap-no-bg .edgt-right ul li {
+    display: inline-block;
+    font-size: 0;
+    height: 30px;
+    line-height: 30px;
+    margin-right: 0;
+}
+
 .edgt-right ul li a {
     color: #f6f6f6;
     font-family: "Open Sans", Sans-Serif;
     font-size: 20px;
+}
+
+a.active {
+    text-decoration: line-through;
 }
