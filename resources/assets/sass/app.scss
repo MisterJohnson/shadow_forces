@@ -1,14 +1,113 @@
-
 // Fonts
 @import url('https://fonts.googleapis.com/css?family=Nunito');
-
 // Variables
 @import 'variables';
-
+// Futuristic look
+/*@import "futuristic_look";*/
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
 
 .navbar-laravel {
-  background-color: #fff;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+}
+
+.title_holder {
+    width: 100%;
+
+    .caption-wrapper {
+        padding: 14% 0 14% 0;
+        text-align: center;
+
+        h1 {
+            color: #ffffff;
+            font-size: 5em;
+        }
+    }
+}
+
+.container-fluid.information {
+    background: rgba(52, 52, 52, 1);
+    margin: 0 auto;
+    display: table;
+    width: 100%;
+    min-height: 400px;
+
+    .outer {
+        display: table-cell;
+        vertical-align: middle;
+
+        .wrapper {
+            margin-left: auto;
+            margin-right: auto;
+            vertical-align: top;
+
+            .inner-row {
+                color: #ffffff;
+                width: 49%;
+                vertical-align: top;
+                line-height: 1.9;
+
+                h2 {
+                    margin-bottom: 25px;
+                }
+
+                p, ul {
+                    width: 80%;
+                }
+            }
+        }
+
+        .left {
+            display: inline-block;
+        }
+
+        .right {
+            display: inline-block;
+
+            ul {
+                padding-left: 0;
+
+                li {
+                    list-style-type: none;
+                }
+            }
+
+        }
+    }
+}
+
+.container-fluid {
+
+    .full-container {
+        width: 100%;
+
+        .half-container {
+            vertical-align: top;
+            display: inline-block;
+            width: 49%;
+            margin: 0 auto;
+
+            .can_see {
+                margin: 25px 0;
+            }
+
+            .text.right {
+                color: #FFFFFF;
+                width: 70%;
+                margin: 100px auto 0;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .container-fluid.information .inner-row {
+        width: 100% !important;
+        margin-bottom: 25px;
+    }
+
+    .container-fluid .full-container .half-container {
+        width: 100% !important;
+    }
 }

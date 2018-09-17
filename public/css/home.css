@@ -13,10 +13,6 @@ body {
     background-size: cover;
 }
 
-.image_wrapper {
-    background: rgba(0, 0, 0, 0.7);
-}
-
 .banner_area {
     position: relative;
 }

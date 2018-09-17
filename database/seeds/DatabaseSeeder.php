@@ -22,8 +22,7 @@ class DatabaseSeeder extends Seeder
                 ItemsSeeder::class,
                 WeaponsSeeder::class,
                 MagicSeeder::class,
-                SkillsSeeder::class,
-                ArticlesSeeder::class
+                SkillsSeeder::class
             ]);
         }
     }

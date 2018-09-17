@@ -15,8 +15,8 @@ window.event = new Vue();
  * Alerts
  */
 import Toasted from 'vue-toasted';
-Vue.use(Toasted);
 
+Vue.use(Toasted);
 /**
  * Localization.
  */

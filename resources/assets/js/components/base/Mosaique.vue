@@ -9,8 +9,11 @@
                     <option value="16">16 articles</option>
                 </select>
             </div>
-            <div class="spin">
-                <i  v-show="loading" class="fa fa-spinner fa-spin"></i>
+            <div class="spin" v-if="loading">
+                <i v-show="loading" class="fa fa-spinner fa-spin"></i>
+            </div>
+            <div class="spin" v-else style="display: none;">
+                <i v-show="loading" class="fa fa-spinner fa-spin"></i>
             </div>
             <div class="items">
                 <div v-bind:class="{ 'item': article.dimension === 'square', 'rectangle': article.dimension === 'horizontal_rectangle' }" v-for="article in articles">
