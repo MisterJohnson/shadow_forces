@@ -14,6 +14,7 @@ use Cartalyst\Sentinel\Checkpoints\NotActivatedException;
 use Cartalyst\Sentinel\Checkpoints\ThrottlingException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\MessageBag;
 use Sentinel;
 
@@ -37,14 +38,13 @@ class AuthController extends Controller
      */
     public function postSignin(Request $request)
     {
-
         $user = User::where('email', $request->email)->get();
         $user = Sentinel::findById($user[0]->id);
         try {
             // Try to log the user in
             if (Sentinel::authenticate($request->only(['email', 'password']), $request->get('remember-me', false))) {
                 // Redirect to the dashboard page
-                return Redirect::route("dashboard")->with('success', trans('auth/message.authenticate.success'));
+                return redirect()->intended('dashboard')->with('success', trans('auth/message.authenticate.success'));
             }
             $this->messageBag->add('email', trans('auth/message.authenticate.account_not_found'));
         } catch (NotActivatedException $e) {

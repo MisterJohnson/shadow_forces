@@ -111,3 +111,10 @@
         width: 100% !important;
     }
 }
+
+@import "steps";
+@import "~vue-wysiwyg/dist/vueWysiwyg.css";
+
+.editr--content {
+    background-color: #ffffff !important;
+}

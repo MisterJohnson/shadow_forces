@@ -24,8 +24,10 @@
         "@progress/kendo-layout-vue-wrapper": "^2018.3.911",
         "@progress/kendo-theme-default": "^2.56.0",
         "@progress/kendo-ui": "^2018.3.911",
+        "bulma": "^0.7.1",
         "lang.js": "^1.1.12",
         "vue-toasted": "^1.1.24",
+        "vue-wysiwyg": "^1.7.2",
         "webpack-shell-plugin": "^0.5.0"
     }
 }

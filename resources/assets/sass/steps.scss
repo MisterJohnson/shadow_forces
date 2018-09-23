@@ -1,0 +1,142 @@
+$white: #ffffff;
+$black: #000000;
+
+.priority-form {
+    background: #121212;
+    .step_selector {
+        width: 100%;
+        .steps {
+            margin: 0 auto;
+            text-align: center;
+
+            .step {
+                width: 15%;
+                min-width: 205px;
+                display: inline-block;
+                color: #FFFFFF;
+                cursor: pointer;
+                border: 1px solid #ffffff;
+
+                .number {
+                    margin-right: 0;
+                    margin-top: 5px;
+                    background: rgba(0,0,0,0);
+                    border: 1px solid #f5f5f5;
+                }
+            }
+
+            .active {
+                background: #ff9900;
+            }
+        }
+    }
+
+    .wrapper {
+        .selector {
+            width: 100%;
+
+            .concept {
+                background: #f2f2f2;
+                border-radius: 5px;
+                border: 1px solid rgb(52, 144, 220);
+
+                hr {
+                    background: #ff9900;
+                }
+
+                h2 {
+                    color: $black;
+                    text-align: center;
+                    line-height: 65px;
+                }
+
+                fieldset {
+                    color: $black;
+                    width: 100%;
+                }
+
+                input, select {
+                    width: 47.5%;
+                    margin: 10px 10px;
+                    height: 40px;
+                    padding-left: 10px;
+
+                    ::-webkit-input-placeholder { color:#000; }
+                    ::-moz-placeholder { color:#000; } /* firefox 19+ */
+                    :-ms-input-placeholder { color:#000; } /* ie */
+                    input:-moz-placeholder { color:#000; }
+                }
+
+                .larger {
+                    padding-left: 30px;
+                    padding-right: 30px;
+                }
+
+                .right {
+                    float: right;
+                }
+
+                .left {
+                    float: left;
+                }
+
+                select {
+                    width: 88.5%;
+                }
+
+                label {
+                    margin-left: 10px;
+                }
+
+                .half {
+                    vertical-align: top;
+                    width: 53%;
+                    display: inline-block;
+
+                    fieldset {
+                        input {
+                            margin:10px 0 10px 10px;
+                        }
+                    }
+                }
+
+                .full {
+                    margin-bottom: 20px;
+
+                    label.description {
+                        vertical-align:top;
+                    }
+                    textarea {
+                        width: 100%;
+                        min-height: 50px;
+                    }
+
+                    fieldset {
+                        .portrait {
+                            margin: 0 auto;
+                            text-align: center;
+                        }
+                    }
+                }
+                @media screen and (max-width: 750px) {
+                    input, select {
+                        width: 94%;
+                    }
+                    .half {
+                        width: 100%;
+
+                        #gender {
+                            width: 88.5%;
+                        }
+
+                        fieldset {
+                            input {
+                                margin:10px 0 10px 10px;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

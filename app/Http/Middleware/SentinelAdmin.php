@@ -1,8 +1,10 @@
 <?php
 namespace App\Http\Middleware;
 
+use App\Http\Controllers\AuthController;
 use Closure;
 use Sentinel;
+use URL;
 
 class SentinelAdmin
 {

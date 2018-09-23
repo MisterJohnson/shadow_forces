@@ -22,6 +22,7 @@ Vue.use(Toasted);
  */
 import Lang from 'lang.js';
 import translations from './vue-translations.js';
+import wysiwyg from "vue-wysiwyg";
 
 let lang = new Lang();
 lang.setLocale(window.App.locale);
@@ -44,6 +45,8 @@ Vue.filter('trans', (... args) => {
     return lang.get(...args);
 });
 
+Vue.use(wysiwyg, {}); // config is optional. more below
+
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -52,6 +55,7 @@ Vue.filter('trans', (... args) => {
 
 Vue.component('example-component', require('./components/ExampleComponent.vue'));
 Vue.component('mosaique', require('./components/base/Mosaique.vue'));
+Vue.component('character-creation', require('./components/features/CharacterCreation'));
 
 const app = new Vue({
     el: '#app',

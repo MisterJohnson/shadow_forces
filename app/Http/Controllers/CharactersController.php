@@ -21,6 +21,8 @@ class CharactersController extends Controller
     }
 
     public function add() {
-        return response(200);
+        $user = Sentinel::getUser();
+        $character = new Character();
+        return view('auth.characters.add', [ 'user' => $user, 'character' => $character]);
     }
 }
