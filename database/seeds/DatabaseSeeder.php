@@ -1,5 +1,6 @@
 <?php
 
+use App\Metatype;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -22,7 +23,9 @@ class DatabaseSeeder extends Seeder
                 ItemsSeeder::class,
                 WeaponsSeeder::class,
                 MagicSeeder::class,
-                SkillsSeeder::class
+                SkillsSeeder::class,
+                MetatypesSeeder::class,
+                ArticlesSeeder::class,
             ]);
         }
     }

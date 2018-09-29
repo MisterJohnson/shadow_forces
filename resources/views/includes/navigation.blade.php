@@ -22,6 +22,10 @@
                 </span>
             </span>
             </a>
+            <ul>
+                <li><a href="{{ route('character.add') }}">New Character</a></li>
+                <li><a href="{{ route('character.update') }}">Update Character</a></li>
+            </ul>
         </li>
         <li class="nav_item">
             <a href="#">

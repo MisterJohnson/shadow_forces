@@ -35,7 +35,20 @@ $black: #000000;
         .selector {
             width: 100%;
 
-            .concept {
+            .larger {
+                padding-left: 30px;
+                padding-right: 30px;
+            }
+
+            .right {
+                float: right;
+            }
+
+            .left {
+                float: left;
+            }
+
+            .concept, .selection {
                 background: #f2f2f2;
                 border-radius: 5px;
                 border: 1px solid rgb(52, 144, 220);
@@ -67,25 +80,48 @@ $black: #000000;
                     input:-moz-placeholder { color:#000; }
                 }
 
-                .larger {
-                    padding-left: 30px;
-                    padding-right: 30px;
-                }
-
-                .right {
-                    float: right;
-                }
-
-                .left {
-                    float: left;
-                }
-
                 select {
                     width: 88.5%;
                 }
 
                 label {
                     margin-left: 10px;
+                }
+
+                .small-half {
+                    width: 30%;
+                    display: inline-block;
+                    margin-right:3%;
+                    vertical-align: top;
+
+                    .priority_selection {
+                        div {
+                            div {
+                                span {
+                                    padding: 5px 5px;
+                                    color: #0a0a0a;
+                                    background-color: #ffffff;
+                                    font-weight: bold;
+                                }
+
+                                div {
+                                    display: inline-block;
+                                    cursor: pointer;
+                                    padding: 5px 5px;
+                                    margin: 5px auto;
+                                    border-radius: 5px;
+                                    text-align: center;
+                                    width: 78%;
+                                }
+                            }
+                        }
+                    }
+                }
+
+                .bigger-half {
+                    width: 65%;
+                    display: inline-block;
+                    vertical-align: top;
                 }
 
                 .half {
@@ -100,8 +136,13 @@ $black: #000000;
                     }
                 }
 
+                .zone {
+                    margin: 0 10px;
+                }
+
                 .full {
                     margin-bottom: 20px;
+                    vertical-align: top;
 
                     label.description {
                         vertical-align:top;

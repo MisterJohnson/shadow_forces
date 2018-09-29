@@ -11,4 +11,8 @@ class JsonController extends Controller
         $articles = Article::all()->take($limit);
         return json_encode($articles);
     }
+
+    public function getMetatype() {
+
+    }
 }

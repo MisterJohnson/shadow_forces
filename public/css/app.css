@@ -11090,29 +11090,48 @@ a.text-dark:focus {
   width: 100%;
 }
 
-.priority-form .wrapper .selector .concept {
+.priority-form .wrapper .selector .larger {
+  padding-left: 30px;
+  padding-right: 30px;
+}
+
+.priority-form .wrapper .selector .right {
+  float: right;
+}
+
+.priority-form .wrapper .selector .left {
+  float: left;
+}
+
+.priority-form .wrapper .selector .concept,
+.priority-form .wrapper .selector .selection {
   background: #f2f2f2;
   border-radius: 5px;
   border: 1px solid #3490dc;
 }
 
-.priority-form .wrapper .selector .concept hr {
+.priority-form .wrapper .selector .concept hr,
+.priority-form .wrapper .selector .selection hr {
   background: #ff9900;
 }
 
-.priority-form .wrapper .selector .concept h2 {
+.priority-form .wrapper .selector .concept h2,
+.priority-form .wrapper .selector .selection h2 {
   color: #000000;
   text-align: center;
   line-height: 65px;
 }
 
-.priority-form .wrapper .selector .concept fieldset {
+.priority-form .wrapper .selector .concept fieldset,
+.priority-form .wrapper .selector .selection fieldset {
   color: #000000;
   width: 100%;
 }
 
 .priority-form .wrapper .selector .concept input,
-.priority-form .wrapper .selector .concept select {
+.priority-form .wrapper .selector .concept select,
+.priority-form .wrapper .selector .selection input,
+.priority-form .wrapper .selector .selection select {
   width: 47.5%;
   margin: 10px 10px;
   height: 40px;
@@ -11122,89 +11141,137 @@ a.text-dark:focus {
 }
 
 .priority-form .wrapper .selector .concept input ::-webkit-input-placeholder,
-.priority-form .wrapper .selector .concept select ::-webkit-input-placeholder {
+.priority-form .wrapper .selector .concept select ::-webkit-input-placeholder,
+.priority-form .wrapper .selector .selection input ::-webkit-input-placeholder,
+.priority-form .wrapper .selector .selection select ::-webkit-input-placeholder {
   color: #000;
 }
 
 .priority-form .wrapper .selector .concept input ::-moz-placeholder,
-.priority-form .wrapper .selector .concept select ::-moz-placeholder {
+.priority-form .wrapper .selector .concept select ::-moz-placeholder,
+.priority-form .wrapper .selector .selection input ::-moz-placeholder,
+.priority-form .wrapper .selector .selection select ::-moz-placeholder {
   color: #000;
 }
 
 .priority-form .wrapper .selector .concept input :-ms-input-placeholder,
-.priority-form .wrapper .selector .concept select :-ms-input-placeholder {
+.priority-form .wrapper .selector .concept select :-ms-input-placeholder,
+.priority-form .wrapper .selector .selection input :-ms-input-placeholder,
+.priority-form .wrapper .selector .selection select :-ms-input-placeholder {
   color: #000;
 }
 
 .priority-form .wrapper .selector .concept input input:-moz-placeholder,
-.priority-form .wrapper .selector .concept select input:-moz-placeholder {
+.priority-form .wrapper .selector .concept select input:-moz-placeholder,
+.priority-form .wrapper .selector .selection input input:-moz-placeholder,
+.priority-form .wrapper .selector .selection select input:-moz-placeholder {
   color: #000;
 }
 
-.priority-form .wrapper .selector .concept .larger {
-  padding-left: 30px;
-  padding-right: 30px;
-}
-
-.priority-form .wrapper .selector .concept .right {
-  float: right;
-}
-
-.priority-form .wrapper .selector .concept .left {
-  float: left;
-}
-
-.priority-form .wrapper .selector .concept select {
+.priority-form .wrapper .selector .concept select,
+.priority-form .wrapper .selector .selection select {
   width: 88.5%;
 }
 
-.priority-form .wrapper .selector .concept label {
+.priority-form .wrapper .selector .concept label,
+.priority-form .wrapper .selector .selection label {
   margin-left: 10px;
 }
 
-.priority-form .wrapper .selector .concept .half {
+.priority-form .wrapper .selector .concept .small-half,
+.priority-form .wrapper .selector .selection .small-half {
+  width: 30%;
+  display: inline-block;
+  margin-right: 3%;
+  vertical-align: top;
+}
+
+.priority-form .wrapper .selector .concept .small-half .priority_selection div div span,
+.priority-form .wrapper .selector .selection .small-half .priority_selection div div span {
+  padding: 5px 5px;
+  color: #0a0a0a;
+  background-color: #ffffff;
+  font-weight: bold;
+}
+
+.priority-form .wrapper .selector .concept .small-half .priority_selection div div div,
+.priority-form .wrapper .selector .selection .small-half .priority_selection div div div {
+  display: inline-block;
+  cursor: pointer;
+  padding: 5px 5px;
+  margin: 5px auto;
+  border-radius: 5px;
+  text-align: center;
+  width: 78%;
+}
+
+.priority-form .wrapper .selector .concept .bigger-half,
+.priority-form .wrapper .selector .selection .bigger-half {
+  width: 65%;
+  display: inline-block;
+  vertical-align: top;
+}
+
+.priority-form .wrapper .selector .concept .half,
+.priority-form .wrapper .selector .selection .half {
   vertical-align: top;
   width: 53%;
   display: inline-block;
 }
 
-.priority-form .wrapper .selector .concept .half fieldset input {
+.priority-form .wrapper .selector .concept .half fieldset input,
+.priority-form .wrapper .selector .selection .half fieldset input {
   margin: 10px 0 10px 10px;
 }
 
-.priority-form .wrapper .selector .concept .full {
-  margin-bottom: 20px;
+.priority-form .wrapper .selector .concept .zone,
+.priority-form .wrapper .selector .selection .zone {
+  margin: 0 10px;
 }
 
-.priority-form .wrapper .selector .concept .full label.description {
+.priority-form .wrapper .selector .concept .full,
+.priority-form .wrapper .selector .selection .full {
+  margin-bottom: 20px;
   vertical-align: top;
 }
 
-.priority-form .wrapper .selector .concept .full textarea {
+.priority-form .wrapper .selector .concept .full label.description,
+.priority-form .wrapper .selector .selection .full label.description {
+  vertical-align: top;
+}
+
+.priority-form .wrapper .selector .concept .full textarea,
+.priority-form .wrapper .selector .selection .full textarea {
   width: 100%;
   min-height: 50px;
 }
 
-.priority-form .wrapper .selector .concept .full fieldset .portrait {
+.priority-form .wrapper .selector .concept .full fieldset .portrait,
+.priority-form .wrapper .selector .selection .full fieldset .portrait {
   margin: 0 auto;
   text-align: center;
 }
 
 @media screen and (max-width: 750px) {
   .priority-form .wrapper .selector .concept input,
-  .priority-form .wrapper .selector .concept select {
+  .priority-form .wrapper .selector .concept select,
+  .priority-form .wrapper .selector .selection input,
+  .priority-form .wrapper .selector .selection select {
     width: 94%;
   }
 
-  .priority-form .wrapper .selector .concept .half {
+  .priority-form .wrapper .selector .concept .half,
+  .priority-form .wrapper .selector .selection .half {
     width: 100%;
   }
 
-  .priority-form .wrapper .selector .concept .half #gender {
+  .priority-form .wrapper .selector .concept .half #gender,
+  .priority-form .wrapper .selector .selection .half #gender {
     width: 88.5%;
   }
 
-  .priority-form .wrapper .selector .concept .half fieldset input {
+  .priority-form .wrapper .selector .concept .half fieldset input,
+  .priority-form .wrapper .selector .selection .half fieldset input {
     margin: 10px 0 10px 10px;
   }
 }

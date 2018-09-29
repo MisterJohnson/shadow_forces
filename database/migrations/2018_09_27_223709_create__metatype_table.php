@@ -13,12 +13,17 @@ class CreateMetatypeTable extends Migration
      */
     public function up()
     {
-        Schema::create('_metatype', function (Blueprint $table) {
+        Schema::create('metatypes', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('Metatype');
+            $table->string('metatype');
             $table->string('traits_label');
             $table->integer('traits_id');
-            $table->string('available');
+            $table->string('special_points');
+            $table->string('priority_avail');
+            $table->string('metatype_parent');
+            $table->string('metatype_category');
+            $table->integer('attributes_id');
+            $table->integer('karma_cost');
             $table->timestamps();
         });
     }

@@ -15,15 +15,17 @@ window.event = new Vue();
  * Alerts
  */
 import Toasted from 'vue-toasted';
-
-Vue.use(Toasted);
-/**
- * Localization.
- */
+import Vue from 'vue'
+import Vuex from 'vuex'
 import Lang from 'lang.js';
 import translations from './vue-translations.js';
 import wysiwyg from "vue-wysiwyg";
 
+Vue.use(Toasted);
+
+/**
+ * Localization.
+ */
 let lang = new Lang();
 lang.setLocale(window.App.locale);
 lang.setMessages(translations);
@@ -47,6 +49,8 @@ Vue.filter('trans', (... args) => {
 
 Vue.use(wysiwyg, {}); // config is optional. more below
 
+Vue.use(Vuex);
+
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -55,6 +59,7 @@ Vue.use(wysiwyg, {}); // config is optional. more below
 
 Vue.component('example-component', require('./components/ExampleComponent.vue'));
 Vue.component('mosaique', require('./components/base/Mosaique.vue'));
+Vue.component('btn_change', require('./components/base/button/ChangePageButton'));
 Vue.component('character-creation', require('./components/features/CharacterCreation'));
 
 const app = new Vue({
