@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Article;
+use App\Metatype;
 use Illuminate\Http\Request;
 
 class JsonController extends Controller
@@ -12,7 +13,8 @@ class JsonController extends Controller
         return json_encode($articles);
     }
 
-    public function getMetatype() {
-
+    public function getMetatypes() {
+        $metatype = Metatype::all('id', 'metatype', 'traits_label', 'traits_id', 'special_points', 'description', 'priority_avail', 'metatype_parent', 'metatype_category', 'karma_cost');
+        return json_encode($metatype);
     }
 }

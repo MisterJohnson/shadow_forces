@@ -50063,7 +50063,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             this.displayBtn();
         },
         displayBtn: function displayBtn() {
-            console.log('CurrentStep: ' + this.currentStep);
             if (this.currentStep > 1 && this.currentStep < 6) {
                 this.btns[0].show = true;
                 this.btns[1].show = true;
@@ -51241,6 +51240,20 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -51249,20 +51262,89 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
     components: { draggable: __WEBPACK_IMPORTED_MODULE_0_vuedraggable___default.a },
 
+    mounted: function mounted() {
+        this.getMetatypes();
+    },
     data: function data() {
         return {
-            selectors: [{ id: 0, ranking: 'A', type: 'Metatype' }, { id: 1, ranking: 'B', type: 'Attributes' }, { id: 2, ranking: 'C', type: 'Magic' }, { id: 3, ranking: 'D', type: 'Skills' }, { id: 4, ranking: 'E', type: 'Resources' }],
-            races: [{ id: 0, metatype: 'Human', special_attributes_point: 7, traits: '' }, { id: 1, metatype: 'Elf', special_attributes_point: 5, traits: 'Low-light vision' }],
-            default_ranking: ['A', 'B', 'C', 'D', 'E']
+            loading: false,
+            default_ranking: ['A', 'B', 'C', 'D', 'E'],
+            selectors: [{ type: 'Metatype', ranking: 'A', id: 0, data: '' }, { type: 'Attributes', ranking: 'B', id: 1, data: '' }, { type: 'Magic', ranking: 'C', id: 2, data: '' }, { type: 'Skills', ranking: 'D', id: 3, data: '' }, { type: 'Resources', ranking: 'E', id: 4, data: '' }],
+            metatypes: [],
+            metatype: '',
+            special_points: 0
         };
     },
 
+    computed: {
+        select_class: function select_class() {
+            return {
+                select: true,
+                'is-loading': this.loading,
+                'is-medium': true
+            };
+        },
+        change_special_points: function change_special_points() {
+            if (this.metatypes.length > 0) {
+                if (this.metatype !== undefined) {
+                    var current_ranking = this.getSelector('Metatype');
+                    var ranking = this.getRanking(current_ranking.ranking);
+                    return this.metatype.split(',')[ranking];
+                }
+            } else {
+                return 0;
+            }
+        }
+    },
     methods: {
         changeLocation: function changeLocation() {
             for (var i = 0; i < this.selectors.length; i++) {
                 this.selectors[i].ranking = this.default_ranking[i];
             }
-            console.log(this.selectors);
+        },
+        getMetatypes: function getMetatypes() {
+            var _this = this;
+
+            this.loading = true;
+            console.log('fetching metatypes data');
+
+            // get the articles
+            axios.get('/api/metatypes/').then(function (response) {
+                _this.loading = false;
+                _this.metatypes = response.data;
+                console.log(_this.metatypes);
+            }).catch(function (error) {
+                _this.loading = false;
+                console.log(error);
+            });
+        },
+        getSelector: function getSelector(type) {
+            for (var i = 0; i < this.selectors.length; i++) {
+                if (this.selectors[i].type === type) {
+                    return this.selectors[i];
+                }
+            }
+        },
+        getRanking: function getRanking(ranking) {
+            var index = 0;
+            switch (ranking) {
+                case 'A':
+                    index = 0;
+                    break;
+                case 'B':
+                    index = 1;
+                    break;
+                case 'C':
+                    index = 2;
+                    break;
+                case 'D':
+                    index = 3;
+                    break;
+                case 'E':
+                    index = 4;
+                    break;
+            }
+            return index;
         }
     }
 });
@@ -53297,59 +53379,115 @@ var render = function() {
         _vm._v(" "),
         _c("hr"),
         _vm._v(" "),
-        _c("div", [
-          _c("label", { attrs: { for: "races" } }, [
-            _vm._v("\n                    Choose your race :\n                ")
+        _c("div", { staticClass: "half" }, [
+          _c("label", { attrs: { for: "metatypes" } }, [
+            _vm._v(
+              "\n                    Choose your metatype :\n                "
+            )
           ]),
           _vm._v(" "),
-          _c(
-            "select",
-            {
+          _c("div", { staticClass: "control has-icons-left" }, [
+            _c("div", { class: _vm.select_class }, [
+              _c(
+                "select",
+                {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.metatype,
+                      expression: "metatype"
+                    }
+                  ],
+                  staticClass: "cancel_select",
+                  attrs: { id: "metatypes" },
+                  on: {
+                    change: function($event) {
+                      var $$selectedVal = Array.prototype.filter
+                        .call($event.target.options, function(o) {
+                          return o.selected
+                        })
+                        .map(function(o) {
+                          var val = "_value" in o ? o._value : o.value
+                          return val
+                        })
+                      _vm.metatype = $event.target.multiple
+                        ? $$selectedVal
+                        : $$selectedVal[0]
+                    }
+                  }
+                },
+                [
+                  _c("option", { attrs: { selected: "" } }, [
+                    _vm._v("What will you be?")
+                  ]),
+                  _vm._v(" "),
+                  _vm._l(_vm.metatypes, function(metatype) {
+                    return _c(
+                      "option",
+                      {
+                        key: metatype.id,
+                        domProps: { value: metatype.special_points }
+                      },
+                      [
+                        _vm._v(
+                          "\n                                " +
+                            _vm._s(metatype.metatype) +
+                            "\n                            "
+                        )
+                      ]
+                    )
+                  })
+                ],
+                2
+              )
+            ]),
+            _vm._v(" "),
+            _vm._m(0)
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "half" }, [
+          _c("label", { attrs: { for: "special_points" } }, [
+            _vm._v(
+              "\n                    Special Points:\n                    "
+            ),
+            _c("input", {
               directives: [
                 {
                   name: "model",
                   rawName: "v-model",
-                  value: _vm.races,
-                  expression: "races"
+                  value: _vm.change_special_points,
+                  expression: "change_special_points"
                 }
               ],
-              attrs: { id: "races" },
+              attrs: { type: "text", id: "special_points", disabled: "" },
+              domProps: { value: _vm.change_special_points },
               on: {
-                change: function($event) {
-                  var $$selectedVal = Array.prototype.filter
-                    .call($event.target.options, function(o) {
-                      return o.selected
-                    })
-                    .map(function(o) {
-                      var val = "_value" in o ? o._value : o.value
-                      return val
-                    })
-                  _vm.races = $event.target.multiple
-                    ? $$selectedVal
-                    : $$selectedVal[0]
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.change_special_points = $event.target.value
                 }
               }
-            },
-            _vm._l(_vm.races, function(race) {
-              return _c(
-                "option",
-                { key: race.id, domProps: { value: race.id } },
-                [
-                  _vm._v(
-                    "\n                        " +
-                      _vm._s(race.metatype) +
-                      "\n                    "
-                  )
-                ]
-              )
             })
-          )
+          ])
         ])
       ])
     ])
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("span", { staticClass: "icon is-medium is-left" }, [
+      _c("i", { staticClass: "fab fa-connectdevelop" })
+    ])
+  }
+]
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {

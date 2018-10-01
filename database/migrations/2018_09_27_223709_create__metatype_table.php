@@ -19,6 +19,7 @@ class CreateMetatypeTable extends Migration
             $table->string('traits_label');
             $table->integer('traits_id');
             $table->string('special_points');
+            $table->longText('description');
             $table->string('priority_avail');
             $table->string('metatype_parent');
             $table->string('metatype_category');
@@ -35,6 +36,6 @@ class CreateMetatypeTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('_metatype');
+        Schema::dropIfExists('metatypes');
     }
 }

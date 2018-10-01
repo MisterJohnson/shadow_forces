@@ -34,4 +34,7 @@ Route::group([ 'middleware' => 'admin'], function () {
     Route::get('/character/add', 'CharactersController@add')->name('character.add');
     Route::get('/character/update', 'CharactersController@add')->name('character.update');
     Route::get('dashboard', 'HomeController@index')->name('dashboard');
+
+    /* JSON ROUTE */
+    Route::get('/api/metatypes', 'JsonController@getMetatypes')->name('get.metatypes');
 });

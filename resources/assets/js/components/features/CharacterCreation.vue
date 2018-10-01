@@ -83,7 +83,6 @@
                 this.displayBtn();
             },
             displayBtn: function() {
-                console.log('CurrentStep: '+ this.currentStep);
                 if(this.currentStep > 1 && this.currentStep < 6) {
                     this.btns[0].show = true;
                     this.btns[1].show = true;

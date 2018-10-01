@@ -122,6 +122,17 @@ $black: #000000;
                     width: 65%;
                     display: inline-block;
                     vertical-align: top;
+
+                    .cancel_select {
+                            width: 100%;
+                            margin: 0;
+                            height:45px;
+                            padding-left: 2.25em;
+                    }
+
+                    .half {
+                        width: 49%;
+                    }
                 }
 
                 .half {

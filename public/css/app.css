@@ -11212,6 +11212,19 @@ a.text-dark:focus {
   vertical-align: top;
 }
 
+.priority-form .wrapper .selector .concept .bigger-half .cancel_select,
+.priority-form .wrapper .selector .selection .bigger-half .cancel_select {
+  width: 100%;
+  margin: 0;
+  height: 45px;
+  padding-left: 2.25em;
+}
+
+.priority-form .wrapper .selector .concept .bigger-half .half,
+.priority-form .wrapper .selector .selection .bigger-half .half {
+  width: 49%;
+}
+
 .priority-form .wrapper .selector .concept .half,
 .priority-form .wrapper .selector .selection .half {
   vertical-align: top;

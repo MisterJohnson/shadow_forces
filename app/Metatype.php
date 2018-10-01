@@ -18,6 +18,7 @@ class Metatype extends Model
         'metatype',
         'traits_label',
         'traits_id',
+        'description',
         'special_points',
         'priority_avail',
         'metatype_parent',
