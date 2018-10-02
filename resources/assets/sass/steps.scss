@@ -95,6 +95,10 @@ $black: #000000;
                     vertical-align: top;
 
                     .priority_selection {
+                        h3 {
+                            margin-left: 10px;
+                        }
+
                         div {
                             div {
                                 span {
@@ -130,8 +134,20 @@ $black: #000000;
                             padding-left: 2.25em;
                     }
 
+                    .cancel_select[disabled] {
+                        background-color: #ffffff !important;
+                    }
+
+                    .metatype_descriptor {
+                        margin-top: 15px;
+                    }
+
                     .half {
                         width: 49%;
+                    }
+
+                    .spacing {
+                        margin-top: 20px;
                     }
                 }
 

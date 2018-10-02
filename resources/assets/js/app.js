@@ -40,6 +40,9 @@ Vue.mixin({
 
             this.$toasted.show(message, Object.assign(defaultConfig, config));
         },
+        filter_lang(... args) {
+            return lang.get(...args);
+        }
     }
 });
 

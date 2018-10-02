@@ -37,4 +37,5 @@ Route::group([ 'middleware' => 'admin'], function () {
 
     /* JSON ROUTE */
     Route::get('/api/metatypes', 'JsonController@getMetatypes')->name('get.metatypes');
+    Route::get('/api/magics', 'JsonController@getMagic')->name('get.magics');
 });

@@ -70,7 +70,7 @@
 "use strict";
 
 
-var bind = __webpack_require__(6);
+var bind = __webpack_require__(8);
 var isBuffer = __webpack_require__(23);
 
 /*global toString:true*/
@@ -533,10 +533,10 @@ function getDefaultAdapter() {
   var adapter;
   if (typeof XMLHttpRequest !== 'undefined') {
     // For browsers use XHR adapter
-    adapter = __webpack_require__(8);
+    adapter = __webpack_require__(10);
   } else if (typeof process !== 'undefined') {
     // For node use HTTP adapter
-    adapter = __webpack_require__(8);
+    adapter = __webpack_require__(10);
   }
   return adapter;
 }
@@ -611,10 +611,320 @@ utils.forEach(['post', 'put', 'patch'], function forEachMethodWithData(method) {
 
 module.exports = defaults;
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(7)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(9)))
 
 /***/ }),
 /* 4 */
+/***/ (function(module, exports) {
+
+/*
+	MIT License http://www.opensource.org/licenses/mit-license.php
+	Author Tobias Koppers @sokra
+*/
+// css base code, injected by the css-loader
+module.exports = function(useSourceMap) {
+	var list = [];
+
+	// return the list of modules as css string
+	list.toString = function toString() {
+		return this.map(function (item) {
+			var content = cssWithMappingToString(item, useSourceMap);
+			if(item[2]) {
+				return "@media " + item[2] + "{" + content + "}";
+			} else {
+				return content;
+			}
+		}).join("");
+	};
+
+	// import a list of modules into the list
+	list.i = function(modules, mediaQuery) {
+		if(typeof modules === "string")
+			modules = [[null, modules, ""]];
+		var alreadyImportedModules = {};
+		for(var i = 0; i < this.length; i++) {
+			var id = this[i][0];
+			if(typeof id === "number")
+				alreadyImportedModules[id] = true;
+		}
+		for(i = 0; i < modules.length; i++) {
+			var item = modules[i];
+			// skip already imported module
+			// this implementation is not 100% perfect for weird media query combinations
+			//  when a module is imported multiple times with different media queries.
+			//  I hope this will never occur (Hey this way we have smaller bundles)
+			if(typeof item[0] !== "number" || !alreadyImportedModules[item[0]]) {
+				if(mediaQuery && !item[2]) {
+					item[2] = mediaQuery;
+				} else if(mediaQuery) {
+					item[2] = "(" + item[2] + ") and (" + mediaQuery + ")";
+				}
+				list.push(item);
+			}
+		}
+	};
+	return list;
+};
+
+function cssWithMappingToString(item, useSourceMap) {
+	var content = item[1] || '';
+	var cssMapping = item[3];
+	if (!cssMapping) {
+		return content;
+	}
+
+	if (useSourceMap && typeof btoa === 'function') {
+		var sourceMapping = toComment(cssMapping);
+		var sourceURLs = cssMapping.sources.map(function (source) {
+			return '/*# sourceURL=' + cssMapping.sourceRoot + source + ' */'
+		});
+
+		return [content].concat(sourceURLs).concat([sourceMapping]).join('\n');
+	}
+
+	return [content].join('\n');
+}
+
+// Adapted from convert-source-map (MIT)
+function toComment(sourceMap) {
+	// eslint-disable-next-line no-undef
+	var base64 = btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap))));
+	var data = 'sourceMappingURL=data:application/json;charset=utf-8;base64,' + base64;
+
+	return '/*# ' + data + ' */';
+}
+
+
+/***/ }),
+/* 5 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/*
+  MIT License http://www.opensource.org/licenses/mit-license.php
+  Author Tobias Koppers @sokra
+  Modified by Evan You @yyx990803
+*/
+
+var hasDocument = typeof document !== 'undefined'
+
+if (typeof DEBUG !== 'undefined' && DEBUG) {
+  if (!hasDocument) {
+    throw new Error(
+    'vue-style-loader cannot be used in a non-browser environment. ' +
+    "Use { target: 'node' } in your Webpack config to indicate a server-rendering environment."
+  ) }
+}
+
+var listToStyles = __webpack_require__(67)
+
+/*
+type StyleObject = {
+  id: number;
+  parts: Array<StyleObjectPart>
+}
+
+type StyleObjectPart = {
+  css: string;
+  media: string;
+  sourceMap: ?string
+}
+*/
+
+var stylesInDom = {/*
+  [id: number]: {
+    id: number,
+    refs: number,
+    parts: Array<(obj?: StyleObjectPart) => void>
+  }
+*/}
+
+var head = hasDocument && (document.head || document.getElementsByTagName('head')[0])
+var singletonElement = null
+var singletonCounter = 0
+var isProduction = false
+var noop = function () {}
+var options = null
+var ssrIdKey = 'data-vue-ssr-id'
+
+// Force single-tag solution on IE6-9, which has a hard limit on the # of <style>
+// tags it will allow on a page
+var isOldIE = typeof navigator !== 'undefined' && /msie [6-9]\b/.test(navigator.userAgent.toLowerCase())
+
+module.exports = function (parentId, list, _isProduction, _options) {
+  isProduction = _isProduction
+
+  options = _options || {}
+
+  var styles = listToStyles(parentId, list)
+  addStylesToDom(styles)
+
+  return function update (newList) {
+    var mayRemove = []
+    for (var i = 0; i < styles.length; i++) {
+      var item = styles[i]
+      var domStyle = stylesInDom[item.id]
+      domStyle.refs--
+      mayRemove.push(domStyle)
+    }
+    if (newList) {
+      styles = listToStyles(parentId, newList)
+      addStylesToDom(styles)
+    } else {
+      styles = []
+    }
+    for (var i = 0; i < mayRemove.length; i++) {
+      var domStyle = mayRemove[i]
+      if (domStyle.refs === 0) {
+        for (var j = 0; j < domStyle.parts.length; j++) {
+          domStyle.parts[j]()
+        }
+        delete stylesInDom[domStyle.id]
+      }
+    }
+  }
+}
+
+function addStylesToDom (styles /* Array<StyleObject> */) {
+  for (var i = 0; i < styles.length; i++) {
+    var item = styles[i]
+    var domStyle = stylesInDom[item.id]
+    if (domStyle) {
+      domStyle.refs++
+      for (var j = 0; j < domStyle.parts.length; j++) {
+        domStyle.parts[j](item.parts[j])
+      }
+      for (; j < item.parts.length; j++) {
+        domStyle.parts.push(addStyle(item.parts[j]))
+      }
+      if (domStyle.parts.length > item.parts.length) {
+        domStyle.parts.length = item.parts.length
+      }
+    } else {
+      var parts = []
+      for (var j = 0; j < item.parts.length; j++) {
+        parts.push(addStyle(item.parts[j]))
+      }
+      stylesInDom[item.id] = { id: item.id, refs: 1, parts: parts }
+    }
+  }
+}
+
+function createStyleElement () {
+  var styleElement = document.createElement('style')
+  styleElement.type = 'text/css'
+  head.appendChild(styleElement)
+  return styleElement
+}
+
+function addStyle (obj /* StyleObjectPart */) {
+  var update, remove
+  var styleElement = document.querySelector('style[' + ssrIdKey + '~="' + obj.id + '"]')
+
+  if (styleElement) {
+    if (isProduction) {
+      // has SSR styles and in production mode.
+      // simply do nothing.
+      return noop
+    } else {
+      // has SSR styles but in dev mode.
+      // for some reason Chrome can't handle source map in server-rendered
+      // style tags - source maps in <style> only works if the style tag is
+      // created and inserted dynamically. So we remove the server rendered
+      // styles and inject new ones.
+      styleElement.parentNode.removeChild(styleElement)
+    }
+  }
+
+  if (isOldIE) {
+    // use singleton mode for IE9.
+    var styleIndex = singletonCounter++
+    styleElement = singletonElement || (singletonElement = createStyleElement())
+    update = applyToSingletonTag.bind(null, styleElement, styleIndex, false)
+    remove = applyToSingletonTag.bind(null, styleElement, styleIndex, true)
+  } else {
+    // use multi-style-tag mode in all other cases
+    styleElement = createStyleElement()
+    update = applyToTag.bind(null, styleElement)
+    remove = function () {
+      styleElement.parentNode.removeChild(styleElement)
+    }
+  }
+
+  update(obj)
+
+  return function updateStyle (newObj /* StyleObjectPart */) {
+    if (newObj) {
+      if (newObj.css === obj.css &&
+          newObj.media === obj.media &&
+          newObj.sourceMap === obj.sourceMap) {
+        return
+      }
+      update(obj = newObj)
+    } else {
+      remove()
+    }
+  }
+}
+
+var replaceText = (function () {
+  var textStore = []
+
+  return function (index, replacement) {
+    textStore[index] = replacement
+    return textStore.filter(Boolean).join('\n')
+  }
+})()
+
+function applyToSingletonTag (styleElement, index, remove, obj) {
+  var css = remove ? '' : obj.css
+
+  if (styleElement.styleSheet) {
+    styleElement.styleSheet.cssText = replaceText(index, css)
+  } else {
+    var cssNode = document.createTextNode(css)
+    var childNodes = styleElement.childNodes
+    if (childNodes[index]) styleElement.removeChild(childNodes[index])
+    if (childNodes.length) {
+      styleElement.insertBefore(cssNode, childNodes[index])
+    } else {
+      styleElement.appendChild(cssNode)
+    }
+  }
+}
+
+function applyToTag (styleElement, obj) {
+  var css = obj.css
+  var media = obj.media
+  var sourceMap = obj.sourceMap
+
+  if (media) {
+    styleElement.setAttribute('media', media)
+  }
+  if (options.ssrId) {
+    styleElement.setAttribute(ssrIdKey, obj.id)
+  }
+
+  if (sourceMap) {
+    // https://developer.chrome.com/devtools/docs/javascript-debugging
+    // this makes source maps inside style tags work properly in Chrome
+    css += '\n/*# sourceURL=' + sourceMap.sources[0] + ' */'
+    // http://stackoverflow.com/a/26603875
+    css += '\n/*# sourceMappingURL=data:application/json;base64,' + btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap)))) + ' */'
+  }
+
+  if (styleElement.styleSheet) {
+    styleElement.styleSheet.cssText = css
+  } else {
+    while (styleElement.firstChild) {
+      styleElement.removeChild(styleElement.firstChild)
+    }
+    styleElement.appendChild(document.createTextNode(css))
+  }
+}
+
+
+/***/ }),
+/* 6 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -3155,7 +3465,7 @@ Popper.Defaults = Defaults;
 /* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(2)))
 
 /***/ }),
-/* 5 */
+/* 7 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -13526,7 +13836,7 @@ return jQuery;
 
 
 /***/ }),
-/* 6 */
+/* 8 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13544,7 +13854,7 @@ module.exports = function bind(fn, thisArg) {
 
 
 /***/ }),
-/* 7 */
+/* 9 */
 /***/ (function(module, exports) {
 
 // shim for using process in browser
@@ -13734,7 +14044,7 @@ process.umask = function() { return 0; };
 
 
 /***/ }),
-/* 8 */
+/* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13745,7 +14055,7 @@ var settle = __webpack_require__(26);
 var buildURL = __webpack_require__(28);
 var parseHeaders = __webpack_require__(29);
 var isURLSameOrigin = __webpack_require__(30);
-var createError = __webpack_require__(9);
+var createError = __webpack_require__(11);
 var btoa = (typeof window !== 'undefined' && window.btoa && window.btoa.bind(window)) || __webpack_require__(31);
 
 module.exports = function xhrAdapter(config) {
@@ -13921,7 +14231,7 @@ module.exports = function xhrAdapter(config) {
 
 
 /***/ }),
-/* 9 */
+/* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13946,7 +14256,7 @@ module.exports = function createError(message, config, code, request, response) 
 
 
 /***/ }),
-/* 10 */
+/* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13958,7 +14268,7 @@ module.exports = function isCancel(value) {
 
 
 /***/ }),
-/* 11 */
+/* 13 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13984,7 +14294,7 @@ module.exports = Cancel;
 
 
 /***/ }),
-/* 12 */
+/* 14 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -24950,322 +25260,12 @@ module.exports = Vue;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2), __webpack_require__(40).setImmediate))
 
 /***/ }),
-/* 13 */
-/***/ (function(module, exports) {
-
-/*
-	MIT License http://www.opensource.org/licenses/mit-license.php
-	Author Tobias Koppers @sokra
-*/
-// css base code, injected by the css-loader
-module.exports = function(useSourceMap) {
-	var list = [];
-
-	// return the list of modules as css string
-	list.toString = function toString() {
-		return this.map(function (item) {
-			var content = cssWithMappingToString(item, useSourceMap);
-			if(item[2]) {
-				return "@media " + item[2] + "{" + content + "}";
-			} else {
-				return content;
-			}
-		}).join("");
-	};
-
-	// import a list of modules into the list
-	list.i = function(modules, mediaQuery) {
-		if(typeof modules === "string")
-			modules = [[null, modules, ""]];
-		var alreadyImportedModules = {};
-		for(var i = 0; i < this.length; i++) {
-			var id = this[i][0];
-			if(typeof id === "number")
-				alreadyImportedModules[id] = true;
-		}
-		for(i = 0; i < modules.length; i++) {
-			var item = modules[i];
-			// skip already imported module
-			// this implementation is not 100% perfect for weird media query combinations
-			//  when a module is imported multiple times with different media queries.
-			//  I hope this will never occur (Hey this way we have smaller bundles)
-			if(typeof item[0] !== "number" || !alreadyImportedModules[item[0]]) {
-				if(mediaQuery && !item[2]) {
-					item[2] = mediaQuery;
-				} else if(mediaQuery) {
-					item[2] = "(" + item[2] + ") and (" + mediaQuery + ")";
-				}
-				list.push(item);
-			}
-		}
-	};
-	return list;
-};
-
-function cssWithMappingToString(item, useSourceMap) {
-	var content = item[1] || '';
-	var cssMapping = item[3];
-	if (!cssMapping) {
-		return content;
-	}
-
-	if (useSourceMap && typeof btoa === 'function') {
-		var sourceMapping = toComment(cssMapping);
-		var sourceURLs = cssMapping.sources.map(function (source) {
-			return '/*# sourceURL=' + cssMapping.sourceRoot + source + ' */'
-		});
-
-		return [content].concat(sourceURLs).concat([sourceMapping]).join('\n');
-	}
-
-	return [content].join('\n');
-}
-
-// Adapted from convert-source-map (MIT)
-function toComment(sourceMap) {
-	// eslint-disable-next-line no-undef
-	var base64 = btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap))));
-	var data = 'sourceMappingURL=data:application/json;charset=utf-8;base64,' + base64;
-
-	return '/*# ' + data + ' */';
-}
-
-
-/***/ }),
-/* 14 */
-/***/ (function(module, exports, __webpack_require__) {
-
-/*
-  MIT License http://www.opensource.org/licenses/mit-license.php
-  Author Tobias Koppers @sokra
-  Modified by Evan You @yyx990803
-*/
-
-var hasDocument = typeof document !== 'undefined'
-
-if (typeof DEBUG !== 'undefined' && DEBUG) {
-  if (!hasDocument) {
-    throw new Error(
-    'vue-style-loader cannot be used in a non-browser environment. ' +
-    "Use { target: 'node' } in your Webpack config to indicate a server-rendering environment."
-  ) }
-}
-
-var listToStyles = __webpack_require__(67)
-
-/*
-type StyleObject = {
-  id: number;
-  parts: Array<StyleObjectPart>
-}
-
-type StyleObjectPart = {
-  css: string;
-  media: string;
-  sourceMap: ?string
-}
-*/
-
-var stylesInDom = {/*
-  [id: number]: {
-    id: number,
-    refs: number,
-    parts: Array<(obj?: StyleObjectPart) => void>
-  }
-*/}
-
-var head = hasDocument && (document.head || document.getElementsByTagName('head')[0])
-var singletonElement = null
-var singletonCounter = 0
-var isProduction = false
-var noop = function () {}
-var options = null
-var ssrIdKey = 'data-vue-ssr-id'
-
-// Force single-tag solution on IE6-9, which has a hard limit on the # of <style>
-// tags it will allow on a page
-var isOldIE = typeof navigator !== 'undefined' && /msie [6-9]\b/.test(navigator.userAgent.toLowerCase())
-
-module.exports = function (parentId, list, _isProduction, _options) {
-  isProduction = _isProduction
-
-  options = _options || {}
-
-  var styles = listToStyles(parentId, list)
-  addStylesToDom(styles)
-
-  return function update (newList) {
-    var mayRemove = []
-    for (var i = 0; i < styles.length; i++) {
-      var item = styles[i]
-      var domStyle = stylesInDom[item.id]
-      domStyle.refs--
-      mayRemove.push(domStyle)
-    }
-    if (newList) {
-      styles = listToStyles(parentId, newList)
-      addStylesToDom(styles)
-    } else {
-      styles = []
-    }
-    for (var i = 0; i < mayRemove.length; i++) {
-      var domStyle = mayRemove[i]
-      if (domStyle.refs === 0) {
-        for (var j = 0; j < domStyle.parts.length; j++) {
-          domStyle.parts[j]()
-        }
-        delete stylesInDom[domStyle.id]
-      }
-    }
-  }
-}
-
-function addStylesToDom (styles /* Array<StyleObject> */) {
-  for (var i = 0; i < styles.length; i++) {
-    var item = styles[i]
-    var domStyle = stylesInDom[item.id]
-    if (domStyle) {
-      domStyle.refs++
-      for (var j = 0; j < domStyle.parts.length; j++) {
-        domStyle.parts[j](item.parts[j])
-      }
-      for (; j < item.parts.length; j++) {
-        domStyle.parts.push(addStyle(item.parts[j]))
-      }
-      if (domStyle.parts.length > item.parts.length) {
-        domStyle.parts.length = item.parts.length
-      }
-    } else {
-      var parts = []
-      for (var j = 0; j < item.parts.length; j++) {
-        parts.push(addStyle(item.parts[j]))
-      }
-      stylesInDom[item.id] = { id: item.id, refs: 1, parts: parts }
-    }
-  }
-}
-
-function createStyleElement () {
-  var styleElement = document.createElement('style')
-  styleElement.type = 'text/css'
-  head.appendChild(styleElement)
-  return styleElement
-}
-
-function addStyle (obj /* StyleObjectPart */) {
-  var update, remove
-  var styleElement = document.querySelector('style[' + ssrIdKey + '~="' + obj.id + '"]')
-
-  if (styleElement) {
-    if (isProduction) {
-      // has SSR styles and in production mode.
-      // simply do nothing.
-      return noop
-    } else {
-      // has SSR styles but in dev mode.
-      // for some reason Chrome can't handle source map in server-rendered
-      // style tags - source maps in <style> only works if the style tag is
-      // created and inserted dynamically. So we remove the server rendered
-      // styles and inject new ones.
-      styleElement.parentNode.removeChild(styleElement)
-    }
-  }
-
-  if (isOldIE) {
-    // use singleton mode for IE9.
-    var styleIndex = singletonCounter++
-    styleElement = singletonElement || (singletonElement = createStyleElement())
-    update = applyToSingletonTag.bind(null, styleElement, styleIndex, false)
-    remove = applyToSingletonTag.bind(null, styleElement, styleIndex, true)
-  } else {
-    // use multi-style-tag mode in all other cases
-    styleElement = createStyleElement()
-    update = applyToTag.bind(null, styleElement)
-    remove = function () {
-      styleElement.parentNode.removeChild(styleElement)
-    }
-  }
-
-  update(obj)
-
-  return function updateStyle (newObj /* StyleObjectPart */) {
-    if (newObj) {
-      if (newObj.css === obj.css &&
-          newObj.media === obj.media &&
-          newObj.sourceMap === obj.sourceMap) {
-        return
-      }
-      update(obj = newObj)
-    } else {
-      remove()
-    }
-  }
-}
-
-var replaceText = (function () {
-  var textStore = []
-
-  return function (index, replacement) {
-    textStore[index] = replacement
-    return textStore.filter(Boolean).join('\n')
-  }
-})()
-
-function applyToSingletonTag (styleElement, index, remove, obj) {
-  var css = remove ? '' : obj.css
-
-  if (styleElement.styleSheet) {
-    styleElement.styleSheet.cssText = replaceText(index, css)
-  } else {
-    var cssNode = document.createTextNode(css)
-    var childNodes = styleElement.childNodes
-    if (childNodes[index]) styleElement.removeChild(childNodes[index])
-    if (childNodes.length) {
-      styleElement.insertBefore(cssNode, childNodes[index])
-    } else {
-      styleElement.appendChild(cssNode)
-    }
-  }
-}
-
-function applyToTag (styleElement, obj) {
-  var css = obj.css
-  var media = obj.media
-  var sourceMap = obj.sourceMap
-
-  if (media) {
-    styleElement.setAttribute('media', media)
-  }
-  if (options.ssrId) {
-    styleElement.setAttribute(ssrIdKey, obj.id)
-  }
-
-  if (sourceMap) {
-    // https://developer.chrome.com/devtools/docs/javascript-debugging
-    // this makes source maps inside style tags work properly in Chrome
-    css += '\n/*# sourceURL=' + sourceMap.sources[0] + ' */'
-    // http://stackoverflow.com/a/26603875
-    css += '\n/*# sourceMappingURL=data:application/json;base64,' + btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap)))) + ' */'
-  }
-
-  if (styleElement.styleSheet) {
-    styleElement.styleSheet.cssText = css
-  } else {
-    while (styleElement.firstChild) {
-      styleElement.removeChild(styleElement.firstChild)
-    }
-    styleElement.appendChild(document.createTextNode(css))
-  }
-}
-
-
-/***/ }),
 /* 15 */
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(16);
-__webpack_require__(81);
-module.exports = __webpack_require__(82);
+__webpack_require__(92);
+module.exports = __webpack_require__(93);
 
 
 /***/ }),
@@ -25276,7 +25276,7 @@ module.exports = __webpack_require__(82);
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue_toasted__ = __webpack_require__(42);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue_toasted___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue_toasted__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue__ = __webpack_require__(14);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_vuex__ = __webpack_require__(43);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_lang_js__ = __webpack_require__(44);
@@ -25294,7 +25294,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 __webpack_require__(17);
 
-window.Vue = __webpack_require__(12);
+window.Vue = __webpack_require__(14);
 
 window.event = new __WEBPACK_IMPORTED_MODULE_1_vue___default.a();
 
@@ -25328,6 +25328,9 @@ __WEBPACK_IMPORTED_MODULE_1_vue___default.a.mixin({
             };
 
             this.$toasted.show(message, Object.assign(defaultConfig, config));
+        },
+        filter_lang: function filter_lang() {
+            return lang.get.apply(lang, arguments);
         }
     }
 });
@@ -25374,7 +25377,7 @@ var app = new __WEBPACK_IMPORTED_MODULE_1_vue___default.a({
 
 
 window._ = __webpack_require__(18);
-window.Popper = __webpack_require__(4).default;
+window.Popper = __webpack_require__(6).default;
 
 /**
  * We'll load jQuery and the Bootstrap jQuery plugin which provides support
@@ -25383,7 +25386,7 @@ window.Popper = __webpack_require__(4).default;
  */
 
 try {
-  window.$ = window.jQuery = __webpack_require__(5);
+  window.$ = window.jQuery = __webpack_require__(7);
 
   __webpack_require__(20);
 } catch (e) {}
@@ -42582,7 +42585,7 @@ module.exports = function(module) {
   * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
   */
 (function (global, factory) {
-   true ? factory(exports, __webpack_require__(5), __webpack_require__(4)) :
+   true ? factory(exports, __webpack_require__(7), __webpack_require__(6)) :
   typeof define === 'function' && define.amd ? define(['exports', 'jquery', 'popper.js'], factory) :
   (factory((global.bootstrap = {}),global.jQuery,global.Popper));
 }(this, (function (exports,$,Popper) { 'use strict';
@@ -46536,7 +46539,7 @@ module.exports = __webpack_require__(22);
 
 
 var utils = __webpack_require__(0);
-var bind = __webpack_require__(6);
+var bind = __webpack_require__(8);
 var Axios = __webpack_require__(24);
 var defaults = __webpack_require__(3);
 
@@ -46571,9 +46574,9 @@ axios.create = function create(instanceConfig) {
 };
 
 // Expose Cancel & CancelToken
-axios.Cancel = __webpack_require__(11);
+axios.Cancel = __webpack_require__(13);
 axios.CancelToken = __webpack_require__(38);
-axios.isCancel = __webpack_require__(10);
+axios.isCancel = __webpack_require__(12);
 
 // Expose all/spread
 axios.all = function all(promises) {
@@ -46726,7 +46729,7 @@ module.exports = function normalizeHeaderName(headers, normalizedName) {
 "use strict";
 
 
-var createError = __webpack_require__(9);
+var createError = __webpack_require__(11);
 
 /**
  * Resolve or reject a Promise based on response status.
@@ -47159,7 +47162,7 @@ module.exports = InterceptorManager;
 
 var utils = __webpack_require__(0);
 var transformData = __webpack_require__(35);
-var isCancel = __webpack_require__(10);
+var isCancel = __webpack_require__(12);
 var defaults = __webpack_require__(3);
 var isAbsoluteURL = __webpack_require__(36);
 var combineURLs = __webpack_require__(37);
@@ -47319,7 +47322,7 @@ module.exports = function combineURLs(baseURL, relativeURL) {
 "use strict";
 
 
-var Cancel = __webpack_require__(11);
+var Cancel = __webpack_require__(13);
 
 /**
  * A `CancelToken` is an object that can be used to request cancellation of an operation.
@@ -47671,7 +47674,7 @@ exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
     attachTo.clearImmediate = clearImmediate;
 }(typeof self === "undefined" ? typeof global === "undefined" ? this : global : self));
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2), __webpack_require__(7)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2), __webpack_require__(9)))
 
 /***/ }),
 /* 42 */
@@ -49309,7 +49312,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 /* 45 */
 /***/ (function(module, exports) {
 
-module.exports = { "en.articles": { "link": { "1": "\/article\/runnerhub", "2": "\/article\/how-to-be-a-decker", "3": "\/article\/how-to-be-a-street-sam", "4": "\/article\/shadowrun-returns", "5": "\/article\/shadowrun-experience", "6": "\/article\/street-life", "7": "\/article\/looking-for-gm", "8": "\/article\/shadowrun-api" }, "title": { "1": "Read the Runnerhub blog, shadowrunner stories are great", "2": "How to be a great decker, Guide to the matrix", "3": "Kicking some ass, How to stick your katana in ganger's", "4": "Play the new shadowrun game", "5": "Live the shadowrunnner feel with the new game Cyberpunk", "6": "Experience the street life as a shadowrunner", "7": "Looking for new GM?", "8": "Try out the new shadowrun api, with all the books included" } }, "en.auth": { "failed": "These credentials do not match our records.", "throttle": "Too many login attempts. Please try again in :seconds seconds." }, "en.auth.message": { "authenticate": { "account_not_activated": "The account hasn't been activated, please check your email again.", "account_not_found": "The account wasn't found, please try again!", "account_suspended": "The account was suspended, It can be cause from multiple reason. Delay = :delay", "success": "You have sucessfully loged in, Welcome to the Jackpoint!" } }, "en.login": { "form": { "label": { "email": "Email address:", "password": "Password:" } }, "title": { "login": "Login" } }, "en.pagination": { "next": "Next &raquo;", "previous": "&laquo; Previous" }, "en.passwords": { "password": "Passwords must be at least six characters and match the confirmation.", "reset": "Your password has been reset!", "sent": "We have e-mailed your password reset link!", "token": "This password reset token is invalid.", "user": "We can't find a user with that e-mail address." }, "en.validation": { "accepted": "The :attribute must be accepted.", "active_url": "The :attribute is not a valid URL.", "after": "The :attribute must be a date after :date.", "after_or_equal": "The :attribute must be a date after or equal to :date.", "alpha": "The :attribute may only contain letters.", "alpha_dash": "The :attribute may only contain letters, numbers, dashes and underscores.", "alpha_num": "The :attribute may only contain letters and numbers.", "array": "The :attribute must be an array.", "attributes": [], "before": "The :attribute must be a date before :date.", "before_or_equal": "The :attribute must be a date before or equal to :date.", "between": { "array": "The :attribute must have between :min and :max items.", "file": "The :attribute must be between :min and :max kilobytes.", "numeric": "The :attribute must be between :min and :max.", "string": "The :attribute must be between :min and :max characters." }, "boolean": "The :attribute field must be true or false.", "confirmed": "The :attribute confirmation does not match.", "custom": { "attribute-name": { "rule-name": "custom-message" } }, "date": "The :attribute is not a valid date.", "date_format": "The :attribute does not match the format :format.", "different": "The :attribute and :other must be different.", "digits": "The :attribute must be :digits digits.", "digits_between": "The :attribute must be between :min and :max digits.", "dimensions": "The :attribute has invalid image dimensions.", "distinct": "The :attribute field has a duplicate value.", "email": "The :attribute must be a valid email address.", "exists": "The selected :attribute is invalid.", "file": "The :attribute must be a file.", "filled": "The :attribute field must have a value.", "gt": { "array": "The :attribute must have more than :value items.", "file": "The :attribute must be greater than :value kilobytes.", "numeric": "The :attribute must be greater than :value.", "string": "The :attribute must be greater than :value characters." }, "gte": { "array": "The :attribute must have :value items or more.", "file": "The :attribute must be greater than or equal :value kilobytes.", "numeric": "The :attribute must be greater than or equal :value.", "string": "The :attribute must be greater than or equal :value characters." }, "image": "The :attribute must be an image.", "in": "The selected :attribute is invalid.", "in_array": "The :attribute field does not exist in :other.", "integer": "The :attribute must be an integer.", "ip": "The :attribute must be a valid IP address.", "ipv4": "The :attribute must be a valid IPv4 address.", "ipv6": "The :attribute must be a valid IPv6 address.", "json": "The :attribute must be a valid JSON string.", "lt": { "array": "The :attribute must have less than :value items.", "file": "The :attribute must be less than :value kilobytes.", "numeric": "The :attribute must be less than :value.", "string": "The :attribute must be less than :value characters." }, "lte": { "array": "The :attribute must not have more than :value items.", "file": "The :attribute must be less than or equal :value kilobytes.", "numeric": "The :attribute must be less than or equal :value.", "string": "The :attribute must be less than or equal :value characters." }, "max": { "array": "The :attribute may not have more than :max items.", "file": "The :attribute may not be greater than :max kilobytes.", "numeric": "The :attribute may not be greater than :max.", "string": "The :attribute may not be greater than :max characters." }, "mimes": "The :attribute must be a file of type: :values.", "mimetypes": "The :attribute must be a file of type: :values.", "min": { "array": "The :attribute must have at least :min items.", "file": "The :attribute must be at least :min kilobytes.", "numeric": "The :attribute must be at least :min.", "string": "The :attribute must be at least :min characters." }, "not_in": "The selected :attribute is invalid.", "not_regex": "The :attribute format is invalid.", "numeric": "The :attribute must be a number.", "present": "The :attribute field must be present.", "regex": "The :attribute format is invalid.", "required": "The :attribute field is required.", "required_if": "The :attribute field is required when :other is :value.", "required_unless": "The :attribute field is required unless :other is in :values.", "required_with": "The :attribute field is required when :values is present.", "required_with_all": "The :attribute field is required when :values is present.", "required_without": "The :attribute field is required when :values is not present.", "required_without_all": "The :attribute field is required when none of :values are present.", "same": "The :attribute and :other must match.", "size": { "array": "The :attribute must contain :size items.", "file": "The :attribute must be :size kilobytes.", "numeric": "The :attribute must be :size.", "string": "The :attribute must be :size characters." }, "string": "The :attribute must be a string.", "timezone": "The :attribute must be a valid zone.", "unique": "The :attribute has already been taken.", "uploaded": "The :attribute failed to upload.", "url": "The :attribute format is invalid." }, "fr.articles": { "link": { "1": "\/article\/runnerhub", "2": "\/article\/how-to-be-a-decker", "3": "\/article\/how-to-be-a-street-sam", "4": "\/article\/shadowrun-returns", "5": "\/article\/shadowrun-experience", "6": "\/article\/street-life", "7": "\/article\/looking-for-gm", "8": "\/article\/shadowrun-api" }, "title": { "1": "Lisez le blog the Runnerhub, Venez rire des histoires de Shadowrunners", "2": "Comment \xEAtre un bon decker, Guide de la Matrix", "3": "Bottez des deri\xE8res, Comment poignarder des ganger's avec votre katana", "4": "Jouer au nouveau jeu de shadowrun!", "5": "Vivez l'exp\xE9rience shadowrun avec le nouveau jeu CyberPubk", "6": "Exp\xE9rimenter la vie de ganger avec shadowrun", "7": "Voulez-vous trouver un nouveau gm?", "8": "Essayer le nouvel api pour hadowrun, avec de toute nouvelle fonctionalit\xE9s" } }, "fr.auth.message": { "authenticate": { "account_not_activated": "Le compte n'a pas \xE9t\xE9 activer, veuillez v\xE9rifier vos courriel pour l'activer.", "account_not_found": "Le compte n'a pas \xE9t\xE9 trouv\xE9, veuillez r\xE9essayer de nouveau!", "account_suspended": "Le compte \xE0 \xE9t\xE9 suspendue, cela peu \xEAtre caus\xE9 par plusieurs raisons. D\xE9lais = :delay", "success": "Vous vous \xEAtes connect\xE9 avec succ\xE8s, bienvenue sur le Jackpoint" } }, "fr.login": { "form": { "label": { "email": "Adresse Courriel:", "password": "Mot de Passe:" } }, "title": { "login": "Se connecter" } } };
+module.exports = { "en.articles": { "link": { "1": "\/article\/runnerhub", "2": "\/article\/how-to-be-a-decker", "3": "\/article\/how-to-be-a-street-sam", "4": "\/article\/shadowrun-returns", "5": "\/article\/shadowrun-experience", "6": "\/article\/street-life", "7": "\/article\/looking-for-gm", "8": "\/article\/shadowrun-api" }, "title": { "1": "Read the Runnerhub blog, shadowrunner stories are great", "2": "How to be a great decker, Guide to the matrix", "3": "Kicking some ass, How to stick your katana in ganger's", "4": "Play the new shadowrun game", "5": "Live the shadowrunnner feel with the new game Cyberpunk", "6": "Experience the street life as a shadowrunner", "7": "Looking for new GM?", "8": "Try out the new shadowrun api, with all the books included" } }, "en.auth": { "failed": "These credentials do not match our records.", "throttle": "Too many login attempts. Please try again in :seconds seconds." }, "en.auth.message": { "authenticate": { "account_not_activated": "The account hasn't been activated, please check your email again.", "account_not_found": "The account wasn't found, please try again!", "account_suspended": "The account was suspended, It can be cause from multiple reason. Delay = :delay", "success": "You have sucessfully loged in, Welcome to the Jackpoint!" } }, "en.login": { "form": { "label": { "email": "Email address:", "password": "Password:" } }, "title": { "login": "Login" } }, "en.magic": { "description": { "adept": { "b": "", "c": "", "d": "" }, "apprentice": { "b": "", "c": "", "d": "" }, "aspected": { "b": "", "c": "", "d": "" }, "aware": { "d": "" }, "enchanter": { "c": "" }, "explorer": { "c": "" }, "magician": { "a": "", "b": "", "c": "" }, "mys": { "a": "", "b": "", "c": "" }, "tech": { "a": "", "b": "", "c": "" } }, "label": { "adept": { "b": "Adept +", "c": "Adept", "d": "Adept -" }, "apprentice": { "b": "Apprentice +", "c": "Apprentice", "d": "Apprentice -" }, "aspected": { "b": "Aspected +", "c": "Aspected", "d": "Aspected -" }, "aware": { "d": "Aware" }, "enchanter": { "c": "Enchanter" }, "explorer": { "c": "Explorer" }, "magician": { "a": "Magician +", "b": "Magician", "c": "Magician -" }, "mys": { "a": "Mystic Adept +", "b": "Mystic Adept", "c": "Mystic Adept -" }, "tech": { "a": "Technomancer +", "b": "Technomancer", "c": "Technomancer -" } }, "magic_rating": "magic rating", "resonance_rating": "resonance rating", "skills_avail": "magical related skills", "spells_avail": "Free Spell", "undefined": "Currently loading" }, "en.pagination": { "next": "Next &raquo;", "previous": "&laquo; Previous" }, "en.passwords": { "password": "Passwords must be at least six characters and match the confirmation.", "reset": "Your password has been reset!", "sent": "We have e-mailed your password reset link!", "token": "This password reset token is invalid.", "user": "We can't find a user with that e-mail address." }, "en.validation": { "accepted": "The :attribute must be accepted.", "active_url": "The :attribute is not a valid URL.", "after": "The :attribute must be a date after :date.", "after_or_equal": "The :attribute must be a date after or equal to :date.", "alpha": "The :attribute may only contain letters.", "alpha_dash": "The :attribute may only contain letters, numbers, dashes and underscores.", "alpha_num": "The :attribute may only contain letters and numbers.", "array": "The :attribute must be an array.", "attributes": [], "before": "The :attribute must be a date before :date.", "before_or_equal": "The :attribute must be a date before or equal to :date.", "between": { "array": "The :attribute must have between :min and :max items.", "file": "The :attribute must be between :min and :max kilobytes.", "numeric": "The :attribute must be between :min and :max.", "string": "The :attribute must be between :min and :max characters." }, "boolean": "The :attribute field must be true or false.", "confirmed": "The :attribute confirmation does not match.", "custom": { "attribute-name": { "rule-name": "custom-message" } }, "date": "The :attribute is not a valid date.", "date_format": "The :attribute does not match the format :format.", "different": "The :attribute and :other must be different.", "digits": "The :attribute must be :digits digits.", "digits_between": "The :attribute must be between :min and :max digits.", "dimensions": "The :attribute has invalid image dimensions.", "distinct": "The :attribute field has a duplicate value.", "email": "The :attribute must be a valid email address.", "exists": "The selected :attribute is invalid.", "file": "The :attribute must be a file.", "filled": "The :attribute field must have a value.", "gt": { "array": "The :attribute must have more than :value items.", "file": "The :attribute must be greater than :value kilobytes.", "numeric": "The :attribute must be greater than :value.", "string": "The :attribute must be greater than :value characters." }, "gte": { "array": "The :attribute must have :value items or more.", "file": "The :attribute must be greater than or equal :value kilobytes.", "numeric": "The :attribute must be greater than or equal :value.", "string": "The :attribute must be greater than or equal :value characters." }, "image": "The :attribute must be an image.", "in": "The selected :attribute is invalid.", "in_array": "The :attribute field does not exist in :other.", "integer": "The :attribute must be an integer.", "ip": "The :attribute must be a valid IP address.", "ipv4": "The :attribute must be a valid IPv4 address.", "ipv6": "The :attribute must be a valid IPv6 address.", "json": "The :attribute must be a valid JSON string.", "lt": { "array": "The :attribute must have less than :value items.", "file": "The :attribute must be less than :value kilobytes.", "numeric": "The :attribute must be less than :value.", "string": "The :attribute must be less than :value characters." }, "lte": { "array": "The :attribute must not have more than :value items.", "file": "The :attribute must be less than or equal :value kilobytes.", "numeric": "The :attribute must be less than or equal :value.", "string": "The :attribute must be less than or equal :value characters." }, "max": { "array": "The :attribute may not have more than :max items.", "file": "The :attribute may not be greater than :max kilobytes.", "numeric": "The :attribute may not be greater than :max.", "string": "The :attribute may not be greater than :max characters." }, "mimes": "The :attribute must be a file of type: :values.", "mimetypes": "The :attribute must be a file of type: :values.", "min": { "array": "The :attribute must have at least :min items.", "file": "The :attribute must be at least :min kilobytes.", "numeric": "The :attribute must be at least :min.", "string": "The :attribute must be at least :min characters." }, "not_in": "The selected :attribute is invalid.", "not_regex": "The :attribute format is invalid.", "numeric": "The :attribute must be a number.", "present": "The :attribute field must be present.", "regex": "The :attribute format is invalid.", "required": "The :attribute field is required.", "required_if": "The :attribute field is required when :other is :value.", "required_unless": "The :attribute field is required unless :other is in :values.", "required_with": "The :attribute field is required when :values is present.", "required_with_all": "The :attribute field is required when :values is present.", "required_without": "The :attribute field is required when :values is not present.", "required_without_all": "The :attribute field is required when none of :values are present.", "same": "The :attribute and :other must match.", "size": { "array": "The :attribute must contain :size items.", "file": "The :attribute must be :size kilobytes.", "numeric": "The :attribute must be :size.", "string": "The :attribute must be :size characters." }, "string": "The :attribute must be a string.", "timezone": "The :attribute must be a valid zone.", "unique": "The :attribute has already been taken.", "uploaded": "The :attribute failed to upload.", "url": "The :attribute format is invalid." }, "fr.articles": { "link": { "1": "\/article\/runnerhub", "2": "\/article\/how-to-be-a-decker", "3": "\/article\/how-to-be-a-street-sam", "4": "\/article\/shadowrun-returns", "5": "\/article\/shadowrun-experience", "6": "\/article\/street-life", "7": "\/article\/looking-for-gm", "8": "\/article\/shadowrun-api" }, "title": { "1": "Lisez le blog the Runnerhub, Venez rire des histoires de Shadowrunners", "2": "Comment \xEAtre un bon decker, Guide de la Matrix", "3": "Bottez des deri\xE8res, Comment poignarder des ganger's avec votre katana", "4": "Jouer au nouveau jeu de shadowrun!", "5": "Vivez l'exp\xE9rience shadowrun avec le nouveau jeu CyberPubk", "6": "Exp\xE9rimenter la vie de ganger avec shadowrun", "7": "Voulez-vous trouver un nouveau gm?", "8": "Essayer le nouvel api pour hadowrun, avec de toute nouvelle fonctionalit\xE9s" } }, "fr.auth.message": { "authenticate": { "account_not_activated": "Le compte n'a pas \xE9t\xE9 activer, veuillez v\xE9rifier vos courriel pour l'activer.", "account_not_found": "Le compte n'a pas \xE9t\xE9 trouv\xE9, veuillez r\xE9essayer de nouveau!", "account_suspended": "Le compte \xE0 \xE9t\xE9 suspendue, cela peu \xEAtre caus\xE9 par plusieurs raisons. D\xE9lais = :delay", "success": "Vous vous \xEAtes connect\xE9 avec succ\xE8s, bienvenue sur le Jackpoint" } }, "fr.login": { "form": { "label": { "email": "Adresse Courriel:", "password": "Mot de Passe:" } }, "title": { "login": "Se connecter" } }, "fr.magic": { "description": { "adept": { "b": "", "c": "", "d": "" }, "apprentice": { "b": "", "c": "", "d": "" }, "aspected": { "b": "", "c": "", "d": "" }, "aware": { "d": "" }, "enchanter": { "c": "" }, "explorer": { "c": "" }, "magician": { "a": "", "b": "", "c": "" }, "mys": { "a": "", "b": "", "c": "" }, "tech": { "a": "", "b": "", "c": "" } }, "label": { "adept": { "b": "Adept +", "c": "Adept", "d": "Adept -" }, "apprentice": { "b": "Apprentice +", "c": "Apprentice", "d": "Apprentice -" }, "aspected": { "b": "Aspected +", "c": "Aspected", "d": "Aspected -" }, "aware": { "d": "Aware" }, "enchanter": { "c": "Enchanter" }, "explorer": { "c": "Explorer" }, "magician": { "a": "Magician +", "b": "Magician", "c": "Magician -" }, "mys": { "a": "Mystic Adept +", "b": "Mystic Adept", "c": "Mystic Adept -" }, "tech": { "a": "Technomancer +", "b": "Technomancer", "c": "Technomancer -" } }, "magic_rating": "magic rating", "resonance_rating": "resonance rating", "skills_avail": "magical related skills", "spells_avail": "Free Spell", "undefined": "En train de t\xE9l\xE9charger" } };
 
 /***/ }),
 /* 46 */
@@ -49930,7 +49933,7 @@ var normalizeComponent = __webpack_require__(1)
 /* script */
 var __vue_script__ = __webpack_require__(57)
 /* template */
-var __vue_template__ = __webpack_require__(80)
+var __vue_template__ = __webpack_require__(91)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -50401,7 +50404,7 @@ var content = __webpack_require__(66);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(14)("5ddd1af2", content, false, {});
+var update = __webpack_require__(5)("5ddd1af2", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -50420,7 +50423,7 @@ if(false) {
 /* 66 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(13)(false);
+exports = module.exports = __webpack_require__(4)(false);
 // imports
 
 
@@ -50617,7 +50620,7 @@ var content = __webpack_require__(71);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(14)("adf0f3de", content, false, {});
+var update = __webpack_require__(5)("adf0f3de", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -50636,7 +50639,7 @@ if(false) {
 /* 71 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(13)(false);
+exports = module.exports = __webpack_require__(4)(false);
 // imports
 
 
@@ -51159,7 +51162,7 @@ var normalizeComponent = __webpack_require__(1)
 /* script */
 var __vue_script__ = __webpack_require__(76)
 /* template */
-var __vue_template__ = __webpack_require__(79)
+var __vue_template__ = __webpack_require__(90)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -51205,6 +51208,12 @@ module.exports = Component.exports
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuedraggable__ = __webpack_require__(77);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuedraggable___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vuedraggable__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__modules_MetatypeSelection__ = __webpack_require__(79);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__modules_MetatypeSelection___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__modules_MetatypeSelection__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__modules_AttributeSelection__ = __webpack_require__(82);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__modules_AttributeSelection___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__modules_AttributeSelection__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__modules_MagicSelection__ = __webpack_require__(85);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__modules_MagicSelection___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__modules_MagicSelection__);
 //
 //
 //
@@ -51244,35 +51253,24 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+
+
+
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: { currentStep: Number },
 
-    components: { draggable: __WEBPACK_IMPORTED_MODULE_0_vuedraggable___default.a },
+    components: { draggable: __WEBPACK_IMPORTED_MODULE_0_vuedraggable___default.a, metatype: __WEBPACK_IMPORTED_MODULE_1__modules_MetatypeSelection___default.a, attribute: __WEBPACK_IMPORTED_MODULE_2__modules_AttributeSelection___default.a, magic: __WEBPACK_IMPORTED_MODULE_3__modules_MagicSelection___default.a },
 
-    mounted: function mounted() {
-        this.getMetatypes();
-    },
     data: function data() {
         return {
             loading: false,
             default_ranking: ['A', 'B', 'C', 'D', 'E'],
-            selectors: [{ type: 'Metatype', ranking: 'A', id: 0, data: '' }, { type: 'Attributes', ranking: 'B', id: 1, data: '' }, { type: 'Magic', ranking: 'C', id: 2, data: '' }, { type: 'Skills', ranking: 'D', id: 3, data: '' }, { type: 'Resources', ranking: 'E', id: 4, data: '' }],
-            metatypes: [],
-            metatype: '',
-            special_points: 0
+            default_resources: [450000, 275000, 140000, 50000, 6000],
+            selectors: [{ type: 'Metatype', ranking: 'A', id: 0, data: '', show: true }, { type: 'Attributes', ranking: 'B', id: 1, data: '', show: false }, { type: 'Magic', ranking: 'C', id: 2, data: '', show: false }, { type: 'Skills', ranking: 'D', id: 3, data: '', show: false }, { type: 'Resources', ranking: 'E', id: 4, data: '', show: false }],
+            errors: {}
         };
     },
 
@@ -51284,16 +51282,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 'is-medium': true
             };
         },
-        change_special_points: function change_special_points() {
-            if (this.metatypes.length > 0) {
-                if (this.metatype !== undefined) {
-                    var current_ranking = this.getSelector('Metatype');
-                    var ranking = this.getRanking(current_ranking.ranking);
-                    return this.metatype.split(',')[ranking];
-                }
-            } else {
-                return 0;
-            }
+        change_resources: function change_resources() {
+            var current_ranking = this.getSelector('Resources');
+            var ranking = this.getRanking(current_ranking.ranking);
+            return this.default_attributes[ranking];
         }
     },
     methods: {
@@ -51302,22 +51294,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 this.selectors[i].ranking = this.default_ranking[i];
             }
         },
-        getMetatypes: function getMetatypes() {
-            var _this = this;
-
-            this.loading = true;
-            console.log('fetching metatypes data');
-
-            // get the articles
-            axios.get('/api/metatypes/').then(function (response) {
-                _this.loading = false;
-                _this.metatypes = response.data;
-                console.log(_this.metatypes);
-            }).catch(function (error) {
-                _this.loading = false;
-                console.log(error);
-            });
-        },
         getSelector: function getSelector(type) {
             for (var i = 0; i < this.selectors.length; i++) {
                 if (this.selectors[i].type === type) {
@@ -51325,26 +51301,22 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 }
             }
         },
-        getRanking: function getRanking(ranking) {
-            var index = 0;
-            switch (ranking) {
-                case 'A':
-                    index = 0;
-                    break;
-                case 'B':
-                    index = 1;
-                    break;
-                case 'C':
-                    index = 2;
-                    break;
-                case 'D':
-                    index = 3;
-                    break;
-                case 'E':
-                    index = 4;
-                    break;
+        findZone: function findZone(id) {
+            for (var i = 0; i < this.selectors.length; i++) {
+                if (this.selectors[i].id === id) {
+                    return this.selectors[i].show;
+                }
             }
-            return index;
+        },
+        setActive: function setActive(current_id) {
+            var selector = {};
+            for (var i = 0; i < this.selectors.length; i++) {
+                this.selectors[i].show = false;
+                if (this.selectors[i].id === current_id) {
+                    selector = this.selectors[i];
+                }
+            }
+            selector.show = true;
         }
     }
 });
@@ -53316,11 +53288,1002 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;/**!
 /* 79 */
 /***/ (function(module, exports, __webpack_require__) {
 
+var disposed = false
+var normalizeComponent = __webpack_require__(1)
+/* script */
+var __vue_script__ = __webpack_require__(80)
+/* template */
+var __vue_template__ = __webpack_require__(81)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/features/creationStep/modules/MetatypeSelection.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-03e975ec", Component.options)
+  } else {
+    hotAPI.reload("data-v-03e975ec", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 80 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+
+    props: { selector: Object },
+
+    data: function data() {
+        return {
+            loading: false,
+            metatypes: [],
+            metatypeId: 99,
+            metatype: {}
+        };
+    },
+    created: function created() {
+        this.getMetatypes();
+    },
+
+
+    computed: {
+        select_class: function select_class() {
+            return {
+                select: true,
+                'is-loading': this.loading,
+                'is-medium': true
+            };
+        },
+        change_special_points: function change_special_points() {
+            if (this.metatypes.length > 0) {
+                if (this.metatypeId !== 99) {
+                    console.log(this.metatype);
+                    var current_ranking = this.selector;
+                    var ranking = this.getRanking(current_ranking.ranking);
+                    return this.metatype.special_points.split(',')[ranking];
+                }
+            } else {
+                return 0;
+            }
+        },
+        filter_available_metatype: function filter_available_metatype() {
+            if (this.metatypes.length > 0) {
+                var filtered_metatype = [];
+                for (var i = 0; i < this.metatypes.length; i++) {
+                    if (this.metatypes[i].priority_avail.includes(this.selector.ranking)) {
+                        filtered_metatype.push(this.metatypes[i]);
+                    }
+                }
+                return filtered_metatype;
+            }
+        }
+    },
+    methods: {
+        getMetatypes: function getMetatypes() {
+            var _this = this;
+
+            this.loading = true;
+            console.log('fetching metatypes data');
+
+            // get the articles
+            axios.get('/api/metatypes/').then(function (response) {
+                _this.loading = false;
+                _this.metatypes = response.data;
+                console.log(_this.metatypes);
+            }).catch(function (error) {
+                _this.loading = false;
+                console.log(error);
+            });
+        },
+        getRanking: function getRanking(ranking) {
+            var index = 0;
+            switch (ranking) {
+                case 'A':
+                    index = 0;
+                    break;
+                case 'B':
+                    index = 1;
+                    break;
+                case 'C':
+                    index = 2;
+                    break;
+                case 'D':
+                    index = 3;
+                    break;
+                case 'E':
+                    index = 4;
+                    break;
+            }
+            return index;
+        },
+        getMetatype: function getMetatype(metatype) {
+            if (this.metatypeId === metatype.id) {
+                return metatype;
+            }
+        },
+        setMetatype: function setMetatype() {
+            this.metatype = this.metatypes.find(this.getMetatype);
+        }
+    }
+});
+
+/***/ }),
+/* 81 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _c("h2", [_vm._v("Metatype")]),
+    _vm._v(" "),
+    _c("hr"),
+    _vm._v(" "),
+    _c("div", { staticClass: "half" }, [
+      _c("label", { attrs: { for: "metatypes" } }, [
+        _vm._v("\n            Choose your metatype :\n        ")
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "control has-icons-left" }, [
+        _c("div", { class: _vm.select_class }, [
+          _c(
+            "select",
+            {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.metatypeId,
+                  expression: "metatypeId"
+                }
+              ],
+              staticClass: "cancel_select",
+              attrs: { id: "metatypes" },
+              on: {
+                change: [
+                  function($event) {
+                    var $$selectedVal = Array.prototype.filter
+                      .call($event.target.options, function(o) {
+                        return o.selected
+                      })
+                      .map(function(o) {
+                        var val = "_value" in o ? o._value : o.value
+                        return val
+                      })
+                    _vm.metatypeId = $event.target.multiple
+                      ? $$selectedVal
+                      : $$selectedVal[0]
+                  },
+                  function($event) {
+                    _vm.setMetatype()
+                  }
+                ]
+              }
+            },
+            [
+              _c("option", { attrs: { selected: "" } }, [
+                _vm._v("What will you be?")
+              ]),
+              _vm._v(" "),
+              _vm._l(_vm.filter_available_metatype, function(metatype) {
+                return _c(
+                  "option",
+                  { key: metatype.id, domProps: { value: metatype.id } },
+                  [
+                    _vm._v(
+                      "\n                        " +
+                        _vm._s(metatype.metatype) +
+                        "\n                    "
+                    )
+                  ]
+                )
+              })
+            ],
+            2
+          )
+        ]),
+        _vm._v(" "),
+        _vm._m(0)
+      ])
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "half" }, [
+      _c("label", { attrs: { for: "special_points" } }, [
+        _vm._v("\n            Special Points:\n        ")
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "control" }, [
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.change_special_points,
+              expression: "change_special_points"
+            }
+          ],
+          staticClass: "input cancel_select",
+          attrs: { type: "text", id: "special_points", disabled: "" },
+          domProps: { value: _vm.change_special_points },
+          on: {
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.change_special_points = $event.target.value
+            }
+          }
+        })
+      ])
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "metatype_descriptor" }, [
+      _c("div", { staticClass: "description" }, [
+        _c("h3", [
+          _vm._v(
+            "\n                " +
+              _vm._s(_vm.metatype.metatype) +
+              "\n            "
+          )
+        ]),
+        _vm._v(" "),
+        _c("p", [
+          _vm._v(
+            "\n                " +
+              _vm._s(_vm.metatype.description) +
+              "\n            "
+          )
+        ])
+      ])
+    ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("span", { staticClass: "icon is-medium is-left" }, [
+      _c("i", { staticClass: "fab fa-connectdevelop" })
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-03e975ec", module.exports)
+  }
+}
+
+/***/ }),
+/* 82 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(1)
+/* script */
+var __vue_script__ = __webpack_require__(83)
+/* template */
+var __vue_template__ = __webpack_require__(84)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/features/creationStep/modules/AttributeSelection.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-5cb714fe", Component.options)
+  } else {
+    hotAPI.reload("data-v-5cb714fe", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 83 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    props: {
+        selector: Object
+    },
+
+    data: function data() {
+        return {
+            loading: false,
+            default_attributes: [24, 20, 16, 14, 12]
+        };
+    },
+
+    computed: {
+        select_class: function select_class() {
+            return {
+                select: true,
+                'is-loading': this.loading,
+                'is-medium': true
+            };
+        },
+        change_attributes_points: function change_attributes_points() {
+            var current_ranking = this.selector;
+            var ranking = this.getRanking(current_ranking.ranking);
+            return this.default_attributes[ranking];
+        }
+    },
+    methods: {
+        getRanking: function getRanking(ranking) {
+            var index = 0;
+            switch (ranking) {
+                case 'A':
+                    index = 0;
+                    break;
+                case 'B':
+                    index = 1;
+                    break;
+                case 'C':
+                    index = 2;
+                    break;
+                case 'D':
+                    index = 3;
+                    break;
+                case 'E':
+                    index = 4;
+                    break;
+            }
+            return index;
+        }
+    }
+});
+
+/***/ }),
+/* 84 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _c("h2", [_vm._v("Attributes")]),
+    _vm._v(" "),
+    _c("hr"),
+    _vm._v(" "),
+    _c("div", { staticClass: "half" }, [
+      _c("label", { attrs: { for: "attributes" } }, [
+        _vm._v("\n            Number of Attributes points:\n        ")
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "control" }, [
+        _c("input", {
+          staticClass: "input cancel_select",
+          attrs: { type: "text", id: "attributes", disabled: "" },
+          domProps: { value: _vm.change_attributes_points }
+        })
+      ])
+    ])
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-5cb714fe", module.exports)
+  }
+}
+
+/***/ }),
+/* 85 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(86)
+}
+var normalizeComponent = __webpack_require__(1)
+/* script */
+var __vue_script__ = __webpack_require__(88)
+/* template */
+var __vue_template__ = __webpack_require__(89)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = "data-v-a60922e0"
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/features/creationStep/modules/MagicSelection.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-a60922e0", Component.options)
+  } else {
+    hotAPI.reload("data-v-a60922e0", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 86 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(87);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(5)("db1a8896", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../../../../node_modules/css-loader/index.js!../../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-a60922e0\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./MagicSelection.vue", function() {
+     var newContent = require("!!../../../../../../../node_modules/css-loader/index.js!../../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-a60922e0\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./MagicSelection.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 87 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(4)(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 88 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    props: { selector: Object },
+
+    data: function data() {
+        return {
+            loading: false,
+            magic_types: [],
+            magicId: 99,
+            magic_type: {}
+        };
+    },
+    created: function created() {
+        this.getMagicTypes();
+    },
+
+    computed: {
+        select_class: function select_class() {
+            return {
+                select: true,
+                'is-loading': this.loading,
+                'is-medium': true
+            };
+        },
+        change_magic_attribute: function change_magic_attribute() {
+            if (this.magic_types.length > 0) {
+                if (this.magicId !== 99) {
+                    console.log(this.magic_type);
+                    var label = this.magic_type.label.includes('tech') ? this.filter_lang('magic.resonance_rating') : this.filter_lang('magic.magic_rating');
+                    return this.magic_type.magic_attribute + ' ' + label;
+                }
+            } else {
+                return 0;
+            }
+        },
+        filtering_magic_types: function filtering_magic_types() {
+            if (this.magic_types.length > 0) {
+                var filtered_magic_types = [];
+                var ranking = this.selector.ranking;
+                for (var i = 0; i < this.magic_types.length; i++) {
+                    if (ranking === this.magic_types[i].magic_attribute_grade) {
+                        filtered_magic_types.push(this.magic_types[i]);
+                    }
+                }
+                return filtered_magic_types;
+            }
+        },
+        filter_number_of_skills: function filter_number_of_skills() {
+            if (this.magicId !== 99) {
+                return this.magic_type.number_of_skills + ' ' + this.filter_lang('magic.skills_avail') + ' rating ' + this.magic_type.skill_rating;
+            }
+        },
+        filter_number_free_spell: function filter_number_free_spell() {
+            if (this.magicId !== 99) {
+                return this.magic_type.number_free_spell + ' ' + this.filter_lang('magic.spells_avail');
+            }
+        }
+    },
+    methods: {
+        getMagicTypes: function getMagicTypes() {
+            var _this = this;
+
+            this.loading = true;
+            console.log('fetching magics data');
+
+            // get the magic_types
+            axios.get('/api/magics/').then(function (response) {
+                _this.loading = false;
+                _this.magic_types = response.data;
+                console.log(_this.magic_types);
+            }).catch(function (error) {
+                _this.loading = false;
+                console.log(error);
+            });
+        },
+        getRanking: function getRanking(ranking) {
+            var index = 0;
+            switch (ranking) {
+                case 'A':
+                    index = 0;
+                    break;
+                case 'B':
+                    index = 1;
+                    break;
+                case 'C':
+                    index = 2;
+                    break;
+                case 'D':
+                    index = 3;
+                    break;
+                case 'E':
+                    index = 4;
+                    break;
+            }
+            return index;
+        },
+        getMagicType: function getMagicType(magic) {
+            if (this.magicId === magic.id) {
+                return magic;
+            }
+        },
+        setMagicType: function setMagicType() {
+            this.magic_type = this.magic_types.find(this.getMagicType);
+        }
+    }
+});
+
+/***/ }),
+/* 89 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _c("h2", [_vm._v("Magic")]),
+    _vm._v(" "),
+    _c("hr"),
+    _vm._v(" "),
+    _c("div", { staticClass: "half" }, [
+      _c("label", { attrs: { for: "magic" } }, [
+        _vm._v("\n            Select Magic or Resonance :\n        ")
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "control has-icons-left" }, [
+        _c("div", { class: _vm.select_class }, [
+          _c(
+            "select",
+            {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.magicId,
+                  expression: "magicId"
+                }
+              ],
+              staticClass: "cancel_select",
+              attrs: { id: "magic" },
+              on: {
+                change: [
+                  function($event) {
+                    var $$selectedVal = Array.prototype.filter
+                      .call($event.target.options, function(o) {
+                        return o.selected
+                      })
+                      .map(function(o) {
+                        var val = "_value" in o ? o._value : o.value
+                        return val
+                      })
+                    _vm.magicId = $event.target.multiple
+                      ? $$selectedVal
+                      : $$selectedVal[0]
+                  },
+                  function($event) {
+                    _vm.setMagicType()
+                  }
+                ]
+              }
+            },
+            [
+              _c("option", { attrs: { selected: "" } }, [
+                _vm._v("What will you be?")
+              ]),
+              _vm._v(" "),
+              _vm._l(_vm.filtering_magic_types, function(magicType) {
+                return _c(
+                  "option",
+                  { key: magicType.id, domProps: { value: magicType.id } },
+                  [
+                    _vm._v(
+                      "\n                        " +
+                        _vm._s(_vm._f("trans")("magic." + magicType.label)) +
+                        "\n                    "
+                    )
+                  ]
+                )
+              })
+            ],
+            2
+          )
+        ]),
+        _vm._v(" "),
+        _vm._m(0)
+      ])
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "half" }, [
+      _c("label", { attrs: { for: "magic_attr" } }, [
+        _vm._v("\n            Magic Attribute:\n        ")
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "control" }, [
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.change_magic_attribute,
+              expression: "change_magic_attribute"
+            }
+          ],
+          staticClass: "input cancel_select",
+          attrs: { type: "text", id: "magic_attr", disabled: "" },
+          domProps: { value: _vm.change_magic_attribute },
+          on: {
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.change_magic_attribute = $event.target.value
+            }
+          }
+        })
+      ])
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "half spacing" }, [
+      _c("label", { attrs: { for: "magic_avail_skills" } }, [
+        _vm._v("\n            Number of Available Skill:\n        ")
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "control" }, [
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.filter_number_of_skills,
+              expression: "filter_number_of_skills"
+            }
+          ],
+          staticClass: "input cancel_select",
+          attrs: { type: "text", id: "magic_avail_skills", disabled: "" },
+          domProps: { value: _vm.filter_number_of_skills },
+          on: {
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.filter_number_of_skills = $event.target.value
+            }
+          }
+        })
+      ])
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "half spacing" }, [
+      _c("label", { attrs: { for: "number_spells" } }, [
+        _vm._v("\n            Number of spells / complex forms\n        ")
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "control" }, [
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.filter_number_free_spell,
+              expression: "filter_number_free_spell"
+            }
+          ],
+          staticClass: "input cancel_select",
+          attrs: { type: "text", id: "number_spells", disabled: "" },
+          domProps: { value: _vm.filter_number_free_spell },
+          on: {
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.filter_number_free_spell = $event.target.value
+            }
+          }
+        })
+      ])
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "metatype_descriptor" }, [
+      _c("div", { staticClass: "description" }, [
+        _c("h3", [
+          _vm._v(
+            "\n                " +
+              _vm._s(_vm._f("trans")("magic." + _vm.magic_type.label)) +
+              "\n            "
+          )
+        ]),
+        _vm._v(" "),
+        _c("p", [
+          _vm._v(
+            "\n                " +
+              _vm._s(_vm._f("trans")("magic." + _vm.magic_type.description)) +
+              "\n            "
+          )
+        ])
+      ])
+    ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("span", { staticClass: "icon is-medium is-left" }, [
+      _c("i", { staticClass: "fab fa-connectdevelop" })
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-a60922e0", module.exports)
+  }
+}
+
+/***/ }),
+/* 90 */
+/***/ (function(module, exports, __webpack_require__) {
+
 var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "selection" }, [
+    _vm.errors.length
+      ? _c(
+          "div",
+          { staticClass: "errors" },
+          _vm._l(_vm.errors, function(error) {
+            return _c("p", { staticClass: "danger" }, [
+              _vm._v("\n            " + _vm._s(error.msg) + "\n        ")
+            ])
+          })
+        )
+      : _vm._e(),
+    _vm._v(" "),
     _c("h2", [_vm._v("\n        Select Your Priorities\n    ")]),
     _vm._v(" "),
     _c("div", { staticClass: "full" }, [
@@ -53330,6 +54293,8 @@ var render = function() {
             "fieldset",
             { staticClass: "priority_selection" },
             [
+              _c("h3", [_vm._v("Move the priorities")]),
+              _vm._v(" "),
               _c(
                 "draggable",
                 {
@@ -53361,7 +54326,11 @@ var render = function() {
                       "div",
                       {
                         staticClass: "btn-primary",
-                        on: { click: function($event) {} }
+                        on: {
+                          click: function($event) {
+                            _vm.setActive(element.id)
+                          }
+                        }
                       },
                       [_vm._v(_vm._s(element.type))]
                     )
@@ -53374,120 +54343,64 @@ var render = function() {
         ])
       ]),
       _vm._v(" "),
-      _c("div", { staticClass: "bigger-half" }, [
-        _c("h2", [_vm._v("Metatype")]),
-        _vm._v(" "),
-        _c("hr"),
-        _vm._v(" "),
-        _c("div", { staticClass: "half" }, [
-          _c("label", { attrs: { for: "metatypes" } }, [
-            _vm._v(
-              "\n                    Choose your metatype :\n                "
-            )
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "control has-icons-left" }, [
-            _c("div", { class: _vm.select_class }, [
-              _c(
-                "select",
-                {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.metatype,
-                      expression: "metatype"
-                    }
-                  ],
-                  staticClass: "cancel_select",
-                  attrs: { id: "metatypes" },
-                  on: {
-                    change: function($event) {
-                      var $$selectedVal = Array.prototype.filter
-                        .call($event.target.options, function(o) {
-                          return o.selected
-                        })
-                        .map(function(o) {
-                          var val = "_value" in o ? o._value : o.value
-                          return val
-                        })
-                      _vm.metatype = $event.target.multiple
-                        ? $$selectedVal
-                        : $$selectedVal[0]
-                    }
-                  }
-                },
-                [
-                  _c("option", { attrs: { selected: "" } }, [
-                    _vm._v("What will you be?")
-                  ]),
-                  _vm._v(" "),
-                  _vm._l(_vm.metatypes, function(metatype) {
-                    return _c(
-                      "option",
-                      {
-                        key: metatype.id,
-                        domProps: { value: metatype.special_points }
-                      },
-                      [
-                        _vm._v(
-                          "\n                                " +
-                            _vm._s(metatype.metatype) +
-                            "\n                            "
-                        )
-                      ]
-                    )
-                  })
-                ],
-                2
-              )
-            ]),
-            _vm._v(" "),
-            _vm._m(0)
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "half" }, [
-          _c("label", { attrs: { for: "special_points" } }, [
-            _vm._v(
-              "\n                    Special Points:\n                    "
-            ),
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.change_special_points,
-                  expression: "change_special_points"
-                }
-              ],
-              attrs: { type: "text", id: "special_points", disabled: "" },
-              domProps: { value: _vm.change_special_points },
-              on: {
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
-                  }
-                  _vm.change_special_points = $event.target.value
-                }
-              }
-            })
-          ])
-        ])
-      ])
+      _c(
+        "div",
+        {
+          directives: [
+            {
+              name: "show",
+              rawName: "v-show",
+              value: _vm.findZone(0),
+              expression: "findZone(0)"
+            }
+          ],
+          staticClass: "bigger-half"
+        },
+        [_c("metatype", { attrs: { selector: _vm.getSelector("Metatype") } })],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "div",
+        {
+          directives: [
+            {
+              name: "show",
+              rawName: "v-show",
+              value: _vm.findZone(1),
+              expression: "findZone(1)"
+            }
+          ],
+          staticClass: "bigger-half"
+        },
+        [
+          _c("attribute", {
+            attrs: { selector: _vm.getSelector("Attributes") }
+          })
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "div",
+        {
+          directives: [
+            {
+              name: "show",
+              rawName: "v-show",
+              value: _vm.findZone(2),
+              expression: "findZone(2)"
+            }
+          ],
+          staticClass: "bigger-half"
+        },
+        [_c("magic", { attrs: { selector: _vm.getSelector("Magic") } })],
+        1
+      )
     ])
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("span", { staticClass: "icon is-medium is-left" }, [
-      _c("i", { staticClass: "fab fa-connectdevelop" })
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
@@ -53498,7 +54411,7 @@ if (false) {
 }
 
 /***/ }),
-/* 80 */
+/* 91 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -53575,13 +54488,13 @@ if (false) {
 }
 
 /***/ }),
-/* 81 */
+/* 92 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
 
 /***/ }),
-/* 82 */
+/* 93 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin

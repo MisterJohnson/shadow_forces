@@ -11186,6 +11186,11 @@ a.text-dark:focus {
   vertical-align: top;
 }
 
+.priority-form .wrapper .selector .concept .small-half .priority_selection h3,
+.priority-form .wrapper .selector .selection .small-half .priority_selection h3 {
+  margin-left: 10px;
+}
+
 .priority-form .wrapper .selector .concept .small-half .priority_selection div div span,
 .priority-form .wrapper .selector .selection .small-half .priority_selection div div span {
   padding: 5px 5px;
@@ -11220,9 +11225,24 @@ a.text-dark:focus {
   padding-left: 2.25em;
 }
 
+.priority-form .wrapper .selector .concept .bigger-half .cancel_select[disabled],
+.priority-form .wrapper .selector .selection .bigger-half .cancel_select[disabled] {
+  background-color: #ffffff !important;
+}
+
+.priority-form .wrapper .selector .concept .bigger-half .metatype_descriptor,
+.priority-form .wrapper .selector .selection .bigger-half .metatype_descriptor {
+  margin-top: 15px;
+}
+
 .priority-form .wrapper .selector .concept .bigger-half .half,
 .priority-form .wrapper .selector .selection .bigger-half .half {
   width: 49%;
+}
+
+.priority-form .wrapper .selector .concept .bigger-half .spacing,
+.priority-form .wrapper .selector .selection .bigger-half .spacing {
+  margin-top: 20px;
 }
 
 .priority-form .wrapper .selector .concept .half,
