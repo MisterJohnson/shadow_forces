@@ -20,6 +20,7 @@ import Vuex from 'vuex'
 import Lang from 'lang.js';
 import translations from './vue-translations.js';
 import wysiwyg from "vue-wysiwyg";
+import store from './store';
 
 Vue.use(Toasted);
 
@@ -67,6 +68,7 @@ Vue.component('character-creation', require('./components/features/CharacterCrea
 
 const app = new Vue({
     el: '#app',
+    store: store,
 
     mounted(){
         // If we have some data to flash in the session (usually to pass

@@ -9,7 +9,6 @@
             <div class="control has-icons-left">
                 <div v-bind:class="select_class">
                     <select id="metatypes" class="cancel_select" v-model="metatypeId" @change="setMetatype()">
-                        <option selected>What will you be?</option>
                         <option v-for="metatype in filter_available_metatype" :key="metatype.id" :value="metatype.id">
                             {{ metatype.metatype }}
                         </option>
@@ -42,23 +41,22 @@
 </template>
 
 <script>
-    export default {
+    import { mapGetters } from 'vuex';
 
+    export default {
         props: { selector : Object },
 
         data() {
             return {
                 loading: false,
-                metatypes: [],
                 metatypeId: 99,
-                metatype: {},
             }
         },
-        created() {
-            this.getMetatypes();
-        },
-
         computed: {
+            ...mapGetters({
+                metatypes: 'metatype/types',
+                metatype: 'metatype/type',
+            }),
             select_class: function () {
                 return {
                     select: true,
@@ -91,22 +89,6 @@
             }
         },
         methods: {
-            getMetatypes: function() {
-                this.loading = true;
-                console.log('fetching metatypes data');
-
-                // get the articles
-                axios.get('/api/metatypes/')
-                    .then( response => {
-                        this.loading = false;
-                        this.metatypes = response.data;
-                        console.log(this.metatypes);
-                    })
-                    .catch(error => {
-                        this.loading = false;
-                        console.log(error);
-                    });
-            },
             getRanking: function(ranking) {
                 let index = 0;
                 switch (ranking) {
@@ -134,7 +116,7 @@
                 }
             },
             setMetatype: function() {
-                this.metatype = this.metatypes.find(this.getMetatype);
+                this.$store.commit('metatype/TYPE_UPDATED', this.metatypes.find(this.getMetatype));
             },
         }
     }

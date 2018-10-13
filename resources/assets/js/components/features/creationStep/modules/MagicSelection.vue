@@ -9,7 +9,6 @@
             <div class="control has-icons-left">
                 <div v-bind:class="select_class">
                     <select id="magic" class="cancel_select" v-model="magicId" @change="setMagicType()">
-                        <option selected>What will you be?</option>
                         <option v-for="magicType in filtering_magic_types" :key="magicType.id" :value="magicType.id">
                             {{ 'magic.' + magicType.label | trans }}
                         </option>
@@ -58,6 +57,7 @@
 </template>
 
 <script>
+    import { mapGetters } from 'vuex';
 
     export default {
         props: { selector : Object },
@@ -65,16 +65,14 @@
         data() {
             return {
                 loading: false,
-                magic_types: [],
                 magicId: 99,
                 magic_type: {},
             }
         },
-        created() {
-            this.getMagicTypes();
-
-        },
         computed: {
+            ...mapGetters({
+                magic_types: 'magic/magics',
+            }),
             select_class: function () {
                 return {
                     select: true,
@@ -117,22 +115,6 @@
             }
         },
         methods: {
-            getMagicTypes: function() {
-                this.loading = true;
-                console.log('fetching magics data');
-
-                // get the magic_types
-                axios.get('/api/magics/')
-                    .then( response => {
-                        this.loading = false;
-                        this.magic_types = response.data;
-                        console.log(this.magic_types);
-                    })
-                    .catch(error => {
-                        this.loading = false;
-                        console.log(error);
-                    });
-            },
             getRanking: function(ranking) {
                 let index = 0;
                 switch (ranking) {

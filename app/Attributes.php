@@ -19,7 +19,29 @@ class Attributes extends Model
      * @var array
      */
     protected $fillable = [
-        'character_id', 'body', 'agility', 'reaction', 'strength', 'willpower', 'logic', 'intuition', 'charisma', 'edge', 'magic'
+        'character_id',
+        'body_min',
+        'body_max',
+        'agility_min',
+        'agility_max',
+        'reaction_min',
+        'reaction_max',
+        'strength_min',
+        'strength_max',
+        'willpower_min',
+        'willpower_max',
+        'logic_min',
+        'logic_max',
+        'intuition_min',
+        'intuition_max',
+        'charisma_min',
+        'charisma_max',
+        'edge_min',
+        'edge_max',
+        'magic',
+        'essence',
+        'initiative',
+        'movement'
     ];
 
     public const A = 'A', B = 'B', C = 'C', D = 'D', E = 'E';

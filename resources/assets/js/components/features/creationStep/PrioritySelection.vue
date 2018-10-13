@@ -30,9 +30,9 @@
             <div class="bigger-half" v-show="findZone(2)">
                 <magic :selector="getSelector('Magic')"></magic>
             </div>
-            <!--<div class="bigger-half" v-if="findZone(2)">
-
-            </div>-->
+            <div class="bigger-half" v-show="findZone(4)">
+                <resources :selector="getSelector('Resources')"></resources>
+            </div>
         </div>
     </div>
 </template>
@@ -42,11 +42,13 @@
     import metatype from './modules/MetatypeSelection';
     import attribute from './modules/AttributeSelection';
     import magic from './modules/MagicSelection';
+    import skill from './modules/SkillComponent';
+    import resources from './modules/ResourcesSelection';
 
     export default {
         props: {currentStep: Number},
 
-        components: {draggable, metatype, attribute, magic},
+        components: {draggable, metatype, attribute, magic, skill, resources},
 
         data() {
             return {
@@ -66,20 +68,6 @@
                 ],
                 errors: {}
             }
-        },
-        computed : {
-            select_class: function () {
-                return {
-                    select: true,
-                    'is-loading': this.loading,
-                    'is-medium': true
-                }
-            },
-            change_resources: function() {
-                let current_ranking = this.getSelector('Resources');
-                let ranking = this.getRanking(current_ranking.ranking);
-                return this.default_attributes[ranking];
-            },
         },
         methods: {
             changeLocation: function() {

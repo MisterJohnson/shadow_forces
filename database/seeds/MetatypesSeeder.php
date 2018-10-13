@@ -1,6 +1,5 @@
 <?php
 
-use App\Article;
 use App\Metatype;
 use Illuminate\Database\Seeder;
 
@@ -24,7 +23,7 @@ class MetatypesSeeder extends Seeder
             'priority_avail' => 'A,B,C,D,E',
             'metatype_parent' => Metatype::PARENT_METATYPE['none'],
             'metatype_category' => Metatype::METATYPE_CATEGORY['metatype'],
-            'attributes_id' => 0,
+            'attributes_id' => $i,
             'karma_cost' => 0,
         ]);
 
@@ -37,7 +36,7 @@ class MetatypesSeeder extends Seeder
             'priority_avail' => 'A,B,C,D',
             'metatype_parent' => Metatype::PARENT_METATYPE['none'],
             'metatype_category' => Metatype::METATYPE_CATEGORY['metatype'],
-            'attributes_id' => 0,
+            'attributes_id' => $i,
             'karma_cost' => 0,
         ]);
 
@@ -50,7 +49,7 @@ class MetatypesSeeder extends Seeder
             'priority_avail' => 'A,B,C',
             'metatype_parent' => Metatype::PARENT_METATYPE['none'],
             'metatype_category' => Metatype::METATYPE_CATEGORY['metatype'],
-            'attributes_id' => 0,
+            'attributes_id' => $i,
             'karma_cost' => 0,
         ]);
 
@@ -63,7 +62,7 @@ class MetatypesSeeder extends Seeder
             'priority_avail' => 'A,B,C',
             'metatype_parent' => Metatype::PARENT_METATYPE['none'],
             'metatype_category' => Metatype::METATYPE_CATEGORY['metatype'],
-            'attributes_id' => 0,
+            'attributes_id' => $i,
             'karma_cost' => 0,
         ]);
 
@@ -76,7 +75,7 @@ class MetatypesSeeder extends Seeder
             'priority_avail' => 'A,B',
             'metatype_parent' => Metatype::PARENT_METATYPE['none'],
             'metatype_category' => Metatype::METATYPE_CATEGORY['metatype'],
-            'attributes_id' => 0,
+            'attributes_id' => $i,
             'karma_cost' => 0,
         ]);
 
@@ -89,7 +88,7 @@ class MetatypesSeeder extends Seeder
             'priority_avail' => 'A,B,C,D,E',
             'metatype_parent' => Metatype::PARENT_METATYPE['human'],
             'metatype_category' => Metatype::METATYPE_CATEGORY['metavariants'],
-            'attributes_id' => 0,
+            'attributes_id' => $i,
             'karma_cost' => 0,
         ]);
 
@@ -102,7 +101,7 @@ class MetatypesSeeder extends Seeder
             'priority_avail' => 'A,B,C,D',
             'metatype_parent' => Metatype::PARENT_METATYPE['elf'],
             'metatype_category' => Metatype::METATYPE_CATEGORY['metavariants'],
-            'attributes_id' => 0,
+            'attributes_id' => $i,
             'karma_cost' => 0,
         ]);
 
@@ -115,7 +114,7 @@ class MetatypesSeeder extends Seeder
             'priority_avail' => 'A,B,C,D',
             'metatype_parent' => Metatype::PARENT_METATYPE['elf'],
             'metatype_category' => Metatype::METATYPE_CATEGORY['metavariants'],
-            'attributes_id' => 0,
+            'attributes_id' => $i,
             'karma_cost' => 0,
         ]);
 
@@ -128,7 +127,7 @@ class MetatypesSeeder extends Seeder
             'priority_avail' => 'A,B,C,D',
             'metatype_parent' => Metatype::PARENT_METATYPE['elf'],
             'metatype_category' => Metatype::METATYPE_CATEGORY['metavariants'],
-            'attributes_id' => 0,
+            'attributes_id' => $i,
             'karma_cost' => 12,
         ]);
 
@@ -141,7 +140,7 @@ class MetatypesSeeder extends Seeder
             'priority_avail' => 'A,B,C,D',
             'metatype_parent' => Metatype::PARENT_METATYPE['elf'],
             'metatype_category' => Metatype::METATYPE_CATEGORY['metavariants'],
-            'attributes_id' => 0,
+            'attributes_id' => $i,
             'karma_cost' => 0,
         ]);
 
@@ -154,7 +153,7 @@ class MetatypesSeeder extends Seeder
             'priority_avail' => 'A,B,C',
             'metatype_parent' => Metatype::PARENT_METATYPE['dwarf'],
             'metatype_category' => Metatype::METATYPE_CATEGORY['metavariants'],
-            'attributes_id' => 0,
+            'attributes_id' => $i,
             'karma_cost' => 7,
         ]);
 
@@ -167,7 +166,7 @@ class MetatypesSeeder extends Seeder
             'description' => 'description.traits.hanuman',
             'metatype_parent' => Metatype::PARENT_METATYPE['dwarf'],
             'metatype_category' => Metatype::METATYPE_CATEGORY['metavariants'],
-            'attributes_id' => 0,
+            'attributes_id' => $i,
             'karma_cost' => 5,
         ]);
 
@@ -180,7 +179,7 @@ class MetatypesSeeder extends Seeder
             'description' => 'description.traits.koborokuru',
             'metatype_parent' => Metatype::PARENT_METATYPE['dwarf'],
             'metatype_category' => Metatype::METATYPE_CATEGORY['metavariants'],
-            'attributes_id' => 0,
+            'attributes_id' => $i,
             'karma_cost' => 0,
         ]);
 
@@ -193,7 +192,7 @@ class MetatypesSeeder extends Seeder
             'description' => 'description.traits.menehune',
             'metatype_parent' => Metatype::PARENT_METATYPE['dwarf'],
             'metatype_category' => Metatype::METATYPE_CATEGORY['metavariants'],
-            'attributes_id' => 0,
+            'attributes_id' => $i,
             'karma_cost' => 2,
         ]);
 
@@ -206,7 +205,7 @@ class MetatypesSeeder extends Seeder
             'description' => 'description.traits.hobgoblin',
             'metatype_parent' => Metatype::PARENT_METATYPE['ork'],
             'metatype_category' => Metatype::METATYPE_CATEGORY['metavariants'],
-            'attributes_id' => 0,
+            'attributes_id' => $i,
             'karma_cost' => 5,
         ]);
 
@@ -219,7 +218,7 @@ class MetatypesSeeder extends Seeder
             'description' => 'description.traits.ogre',
             'metatype_parent' => Metatype::PARENT_METATYPE['ork'],
             'metatype_category' => Metatype::METATYPE_CATEGORY['metavariants'],
-            'attributes_id' => 0,
+            'attributes_id' => $i,
             'karma_cost' => 8,
         ]);
 
@@ -232,7 +231,7 @@ class MetatypesSeeder extends Seeder
             'description' => 'description.traits.oni',
             'metatype_parent' => Metatype::PARENT_METATYPE['ork'],
             'metatype_category' => Metatype::METATYPE_CATEGORY['metavariants'],
-            'attributes_id' => 0,
+            'attributes_id' => $i,
             'karma_cost' => 4,
         ]);
 
@@ -245,7 +244,7 @@ class MetatypesSeeder extends Seeder
             'description' => 'description.traits.satyr',
             'metatype_parent' => Metatype::PARENT_METATYPE['ork'],
             'metatype_category' => Metatype::METATYPE_CATEGORY['metavariants'],
-            'attributes_id' => 0,
+            'attributes_id' => $i,
             'karma_cost' => 10,
         ]);
 
@@ -258,7 +257,7 @@ class MetatypesSeeder extends Seeder
             'description' => 'description.traits.cyclops',
             'metatype_parent' => Metatype::PARENT_METATYPE['troll'],
             'metatype_category' => Metatype::METATYPE_CATEGORY['metavariants'],
-            'attributes_id' => 0,
+            'attributes_id' => $i,
             'karma_cost' => 2,
         ]);
 
@@ -271,7 +270,7 @@ class MetatypesSeeder extends Seeder
             'description' => 'description.traits.fomorian',
             'metatype_parent' => Metatype::PARENT_METATYPE['troll'],
             'metatype_category' => Metatype::METATYPE_CATEGORY['metavariants'],
-            'attributes_id' => 0,
+            'attributes_id' => $i,
             'karma_cost' => 12,
         ]);
 
@@ -284,7 +283,7 @@ class MetatypesSeeder extends Seeder
             'description' => 'description.traits.giant',
             'metatype_parent' => Metatype::PARENT_METATYPE['troll'],
             'metatype_category' => Metatype::METATYPE_CATEGORY['metavariants'],
-            'attributes_id' => 0,
+            'attributes_id' => $i,
             'karma_cost' => 2,
         ]);
 
@@ -297,7 +296,7 @@ class MetatypesSeeder extends Seeder
             'description' => 'description.traits.minotaur',
             'metatype_parent' => Metatype::PARENT_METATYPE['troll'],
             'metatype_category' => Metatype::METATYPE_CATEGORY['metavariants'],
-            'attributes_id' => 0,
+            'attributes_id' => $i,
             'karma_cost' => 2,
         ]);
 
@@ -312,7 +311,7 @@ class MetatypesSeeder extends Seeder
             'description' => 'description.traits.centaur',
             'metatype_parent' => Metatype::PARENT_METATYPE['none'],
             'metatype_category' => Metatype::METATYPE_CATEGORY['metasapient_races'],
-            'attributes_id' => 0,
+            'attributes_id' => $i,
             'karma_cost' => 25,
         ]);
 
@@ -325,7 +324,7 @@ class MetatypesSeeder extends Seeder
             'description' => 'description.traits.naga',
             'metatype_parent' => Metatype::PARENT_METATYPE['none'],
             'metatype_category' => Metatype::METATYPE_CATEGORY['metasapient_races'],
-            'attributes_id' => 0,
+            'attributes_id' => $i,
             'karma_cost' => 25,
         ]);
 
@@ -338,7 +337,7 @@ class MetatypesSeeder extends Seeder
             'description' => 'description.traits.pixie',
             'metatype_parent' => Metatype::PARENT_METATYPE['none'],
             'metatype_category' => Metatype::METATYPE_CATEGORY['metasapient_races'],
-            'attributes_id' => 0,
+            'attributes_id' => $i,
             'karma_cost' => 15,
         ]);
 
@@ -351,7 +350,7 @@ class MetatypesSeeder extends Seeder
             'description' => 'description.traits.sasquatch',
             'metatype_parent' => Metatype::PARENT_METATYPE['none'],
             'metatype_category' => Metatype::METATYPE_CATEGORY['metasapient_races'],
-            'attributes_id' => 0,
+            'attributes_id' => $i,
             'karma_cost' => 20,
         ]);
 
@@ -366,7 +365,7 @@ class MetatypesSeeder extends Seeder
             'description' => 'description.traits.bovine_shapeshifter',
             'metatype_parent' => Metatype::PARENT_METATYPE['none'],
             'metatype_category' => Metatype::METATYPE_CATEGORY['shapeshifter'],
-            'attributes_id' => 0,
+            'attributes_id' => $i,
             'karma_cost' => 5,
         ]);
 
@@ -379,7 +378,7 @@ class MetatypesSeeder extends Seeder
             'description' => 'description.traits.canine_shapeshifter',
             'metatype_parent' => Metatype::PARENT_METATYPE['none'],
             'metatype_category' => Metatype::METATYPE_CATEGORY['shapeshifter'],
-            'attributes_id' => 0,
+            'attributes_id' => $i,
             'karma_cost' => 10,
         ]);
 
@@ -392,7 +391,7 @@ class MetatypesSeeder extends Seeder
             'description' => 'description.traits.equine_shapeshifter',
             'metatype_parent' => Metatype::PARENT_METATYPE['none'],
             'metatype_category' => Metatype::METATYPE_CATEGORY['shapeshifter'],
-            'attributes_id' => 0,
+            'attributes_id' => $i,
             'karma_cost' => 15,
         ]);
 
@@ -405,7 +404,7 @@ class MetatypesSeeder extends Seeder
             'description' => 'description.traits.falconine_shapeshifter',
             'metatype_parent' => Metatype::PARENT_METATYPE['none'],
             'metatype_category' => Metatype::METATYPE_CATEGORY['shapeshifter'],
-            'attributes_id' => 0,
+            'attributes_id' => $i,
             'karma_cost' => 10,
         ]);
 
@@ -418,7 +417,7 @@ class MetatypesSeeder extends Seeder
             'description' => 'description.traits.leonine_shapeshifter',
             'metatype_parent' => Metatype::PARENT_METATYPE['none'],
             'metatype_category' => Metatype::METATYPE_CATEGORY['shapeshifter'],
-            'attributes_id' => 0,
+            'attributes_id' => $i,
             'karma_cost' => 20,
         ]);
 
@@ -431,7 +430,7 @@ class MetatypesSeeder extends Seeder
             'description' => 'description.traits.lupine_shapeshifter',
             'metatype_parent' => Metatype::PARENT_METATYPE['none'],
             'metatype_category' => Metatype::METATYPE_CATEGORY['shapeshifter'],
-            'attributes_id' => 0,
+            'attributes_id' => $i,
             'karma_cost' => 15,
         ]);
 
@@ -444,7 +443,7 @@ class MetatypesSeeder extends Seeder
             'description' => 'description.traits.pantherine_shapeshifter',
             'metatype_parent' => Metatype::PARENT_METATYPE['none'],
             'metatype_category' => Metatype::METATYPE_CATEGORY['shapeshifter'],
-            'attributes_id' => 0,
+            'attributes_id' => $i,
             'karma_cost' => 25,
         ]);
 
@@ -457,7 +456,7 @@ class MetatypesSeeder extends Seeder
             'description' => 'description.traits.tigrine_shapeshifter',
             'metatype_parent' => Metatype::PARENT_METATYPE['none'],
             'metatype_category' => Metatype::METATYPE_CATEGORY['shapeshifter'],
-            'attributes_id' => 0,
+            'attributes_id' => $i,
             'karma_cost' => 25,
         ]);
 
@@ -470,7 +469,7 @@ class MetatypesSeeder extends Seeder
             'description' => 'description.traits.ursine_shapeshifter',
             'metatype_parent' => Metatype::PARENT_METATYPE['none'],
             'metatype_category' => Metatype::METATYPE_CATEGORY['shapeshifter'],
-            'attributes_id' => 0,
+            'attributes_id' => $i,
             'karma_cost' => 20,
         ]);
 
@@ -483,7 +482,7 @@ class MetatypesSeeder extends Seeder
             'description' => 'description.traits.vulpine_shapeshifter',
             'metatype_parent' => Metatype::PARENT_METATYPE['none'],
             'metatype_category' => Metatype::METATYPE_CATEGORY['shapeshifter'],
-            'attributes_id' => 0,
+            'attributes_id' => $i,
             'karma_cost' => 5,
         ]);
 
@@ -498,7 +497,7 @@ class MetatypesSeeder extends Seeder
             'description' => 'description.traits.metasapient_ai',
             'metatype_parent' => Metatype::PARENT_METATYPE['none'],
             'metatype_category' => Metatype::METATYPE_CATEGORY['ai_races'],
-            'attributes_id' => 0,
+            'attributes_id' => $i,
             'karma_cost' => 0,
         ]);
     }
