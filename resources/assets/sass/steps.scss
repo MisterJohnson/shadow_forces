@@ -32,6 +32,7 @@ $black: #000000;
     }
 
     .wrapper {
+
         .selector {
             width: 100%;
 
@@ -190,7 +191,7 @@ $black: #000000;
                     input, select {
                         width: 94%;
                     }
-                    .half {
+                    .half, .small-half, .bigger-half {
                         width: 100%;
 
                         #gender {

@@ -1,5 +1,6 @@
 import getters from './getters';
 import mutations from './mutations';
+import actions from './actions';
 
 let state = {
     types: [
@@ -13,7 +14,7 @@ let state = {
                 "priority_avail": "A,B,C,D,E",
                 "metatype_parent": "None",
                 "metatype_category": "metatype.title.metatype",
-                "attributes_id": 0,
+                "attributes_id": 1,
                 "karma_cost": 0,
                 "created_at": "2018-10-01 01:33:25",
                 "updated_at": "2018-10-01 01:33:25"
@@ -28,7 +29,7 @@ let state = {
                 "priority_avail": "A,B,C,D",
                 "metatype_parent": "None",
                 "metatype_category": "metatype.title.metatype",
-                "attributes_id": 0,
+                "attributes_id": 2,
                 "karma_cost": 0,
                 "created_at": "2018-10-01 01:33:26",
                 "updated_at": "2018-10-01 01:33:26"
@@ -43,7 +44,7 @@ let state = {
                 "priority_avail": "A,B,C",
                 "metatype_parent": "None",
                 "metatype_category": "metatype.title.metatype",
-                "attributes_id": 0,
+                "attributes_id": 3,
                 "karma_cost": 0,
                 "created_at": "2018-10-01 01:33:26",
                 "updated_at": "2018-10-01 01:33:26"
@@ -58,7 +59,7 @@ let state = {
                 "priority_avail": "A,B,C",
                 "metatype_parent": "None",
                 "metatype_category": "metatype.title.metatype",
-                "attributes_id": 0,
+                "attributes_id": 4,
                 "karma_cost": 0,
                 "created_at": "2018-10-01 01:33:26",
                 "updated_at": "2018-10-01 01:33:26"
@@ -73,7 +74,7 @@ let state = {
                 "priority_avail": "A,B",
                 "metatype_parent": "None",
                 "metatype_category": "metatype.title.metatype",
-                "attributes_id": 0,
+                "attributes_id": 5,
                 "karma_cost": 0,
                 "created_at": "2018-10-01 01:33:26",
                 "updated_at": "2018-10-01 01:33:26"
@@ -88,7 +89,7 @@ let state = {
                 "priority_avail": "A,B,C,D,E",
                 "metatype_parent": "metatype.human.title",
                 "metatype_category": "metatype.title.metavariants",
-                "attributes_id": 0,
+                "attributes_id": 6,
                 "karma_cost": 0,
                 "created_at": "2018-10-01 01:33:26",
                 "updated_at": "2018-10-01 01:33:26"
@@ -103,7 +104,7 @@ let state = {
                 "priority_avail": "A,B,C,D",
                 "metatype_parent": "metatype.elf.title",
                 "metatype_category": "metatype.title.metavariants",
-                "attributes_id": 0,
+                "attributes_id": 7,
                 "karma_cost": 0,
                 "created_at": "2018-10-01 01:33:26",
                 "updated_at": "2018-10-01 01:33:26"
@@ -118,7 +119,7 @@ let state = {
                 "priority_avail": "A,B,C,D",
                 "metatype_parent": "metatype.elf.title",
                 "metatype_category": "metatype.title.metavariants",
-                "attributes_id": 0,
+                "attributes_id": 8,
                 "karma_cost": 0,
                 "created_at": "2018-10-01 01:33:26",
                 "updated_at": "2018-10-01 01:33:26"
@@ -133,7 +134,7 @@ let state = {
                 "priority_avail": "A,B,C,D",
                 "metatype_parent": "metatype.elf.title",
                 "metatype_category": "metatype.title.metavariants",
-                "attributes_id": 0,
+                "attributes_id": 9,
                 "karma_cost": 12,
                 "created_at": "2018-10-01 01:33:26",
                 "updated_at": "2018-10-01 01:33:26"
@@ -148,7 +149,7 @@ let state = {
                 "priority_avail": "A,B,C,D",
                 "metatype_parent": "metatype.elf.title",
                 "metatype_category": "metatype.title.metavariants",
-                "attributes_id": 0,
+                "attributes_id": 10,
                 "karma_cost": 0,
                 "created_at": "2018-10-01 01:33:26",
                 "updated_at": "2018-10-01 01:33:26"
@@ -163,7 +164,7 @@ let state = {
                 "priority_avail": "A,B,C",
                 "metatype_parent": "metatype.dwarf.title",
                 "metatype_category": "metatype.title.metavariants",
-                "attributes_id": 0,
+                "attributes_id": 11,
                 "karma_cost": 7,
                 "created_at": "2018-10-01 01:33:26",
                 "updated_at": "2018-10-01 01:33:26"
@@ -178,7 +179,7 @@ let state = {
                 "priority_avail": "A,B,C",
                 "metatype_parent": "metatype.dwarf.title",
                 "metatype_category": "metatype.title.metavariants",
-                "attributes_id": 0,
+                "attributes_id": 12,
                 "karma_cost": 5,
                 "created_at": "2018-10-01 01:33:26",
                 "updated_at": "2018-10-01 01:33:26"
@@ -193,7 +194,7 @@ let state = {
                 "priority_avail": "A,B,C",
                 "metatype_parent": "metatype.dwarf.title",
                 "metatype_category": "metatype.title.metavariants",
-                "attributes_id": 0,
+                "attributes_id": 13,
                 "karma_cost": 0,
                 "created_at": "2018-10-01 01:33:26",
                 "updated_at": "2018-10-01 01:33:26"
@@ -208,7 +209,7 @@ let state = {
                 "priority_avail": "A,B,C",
                 "metatype_parent": "metatype.dwarf.title",
                 "metatype_category": "metatype.title.metavariants",
-                "attributes_id": 0,
+                "attributes_id": 14,
                 "karma_cost": 2,
                 "created_at": "2018-10-01 01:33:26",
                 "updated_at": "2018-10-01 01:33:26"
@@ -223,7 +224,7 @@ let state = {
                 "priority_avail": "A,B,C",
                 "metatype_parent": "metatype.ork.title",
                 "metatype_category": "metatype.title.metavariants",
-                "attributes_id": 0,
+                "attributes_id": 15,
                 "karma_cost": 5,
                 "created_at": "2018-10-01 01:33:26",
                 "updated_at": "2018-10-01 01:33:26"
@@ -238,7 +239,7 @@ let state = {
                 "priority_avail": "A,B,C",
                 "metatype_parent": "metatype.ork.title",
                 "metatype_category": "metatype.title.metavariants",
-                "attributes_id": 0,
+                "attributes_id": 16,
                 "karma_cost": 8,
                 "created_at": "2018-10-01 01:33:26",
                 "updated_at": "2018-10-01 01:33:26"
@@ -253,7 +254,7 @@ let state = {
                 "priority_avail": "A,B,C",
                 "metatype_parent": "metatype.ork.title",
                 "metatype_category": "metatype.title.metavariants",
-                "attributes_id": 0,
+                "attributes_id": 17,
                 "karma_cost": 4,
                 "created_at": "2018-10-01 01:33:26",
                 "updated_at": "2018-10-01 01:33:26"
@@ -268,7 +269,7 @@ let state = {
                 "priority_avail": "A,B,C",
                 "metatype_parent": "metatype.ork.title",
                 "metatype_category": "metatype.title.metavariants",
-                "attributes_id": 0,
+                "attributes_id": 18,
                 "karma_cost": 10,
                 "created_at": "2018-10-01 01:33:26",
                 "updated_at": "2018-10-01 01:33:26"
@@ -283,7 +284,7 @@ let state = {
                 "priority_avail": "A,B",
                 "metatype_parent": "metatype.troll.title",
                 "metatype_category": "metatype.title.metavariants",
-                "attributes_id": 0,
+                "attributes_id": 19,
                 "karma_cost": 2,
                 "created_at": "2018-10-01 01:33:26",
                 "updated_at": "2018-10-01 01:33:26"
@@ -298,7 +299,7 @@ let state = {
                 "priority_avail": "A,B",
                 "metatype_parent": "metatype.troll.title",
                 "metatype_category": "metatype.title.metavariants",
-                "attributes_id": 0,
+                "attributes_id": 20,
                 "karma_cost": 12,
                 "created_at": "2018-10-01 01:33:26",
                 "updated_at": "2018-10-01 01:33:26"
@@ -313,7 +314,7 @@ let state = {
                 "priority_avail": "A,B",
                 "metatype_parent": "metatype.troll.title",
                 "metatype_category": "metatype.title.metavariants",
-                "attributes_id": 0,
+                "attributes_id": 21,
                 "karma_cost": 2,
                 "created_at": "2018-10-01 01:33:26",
                 "updated_at": "2018-10-01 01:33:26"
@@ -328,7 +329,7 @@ let state = {
                 "priority_avail": "A,B",
                 "metatype_parent": "metatype.troll.title",
                 "metatype_category": "metatype.title.metavariants",
-                "attributes_id": 0,
+                "attributes_id": 22,
                 "karma_cost": 2,
                 "created_at": "2018-10-01 01:33:26",
                 "updated_at": "2018-10-01 01:33:26"
@@ -343,7 +344,7 @@ let state = {
                 "priority_avail": "A,B,C",
                 "metatype_parent": "None",
                 "metatype_category": "metatype.title.metasapient_races",
-                "attributes_id": 0,
+                "attributes_id": 23,
                 "karma_cost": 25,
                 "created_at": "2018-10-01 01:33:26",
                 "updated_at": "2018-10-01 01:33:26"
@@ -358,7 +359,7 @@ let state = {
                 "priority_avail": "A,B,C",
                 "metatype_parent": "None",
                 "metatype_category": "metatype.title.metasapient_races",
-                "attributes_id": 0,
+                "attributes_id": 24,
                 "karma_cost": 25,
                 "created_at": "2018-10-01 01:33:26",
                 "updated_at": "2018-10-01 01:33:26"
@@ -373,7 +374,7 @@ let state = {
                 "priority_avail": "A,B,C",
                 "metatype_parent": "None",
                 "metatype_category": "metatype.title.metasapient_races",
-                "attributes_id": 0,
+                "attributes_id": 25,
                 "karma_cost": 15,
                 "created_at": "2018-10-01 01:33:26",
                 "updated_at": "2018-10-01 01:33:26"
@@ -388,7 +389,7 @@ let state = {
                 "priority_avail": "A,B,C",
                 "metatype_parent": "None",
                 "metatype_category": "metatype.title.metasapient_races",
-                "attributes_id": 0,
+                "attributes_id": 26,
                 "karma_cost": 20,
                 "created_at": "2018-10-01 01:33:26",
                 "updated_at": "2018-10-01 01:33:26"
@@ -403,7 +404,7 @@ let state = {
                 "priority_avail": "A,B,C",
                 "metatype_parent": "None",
                 "metatype_category": "metatype.title.shapeshifter",
-                "attributes_id": 0,
+                "attributes_id": 27,
                 "karma_cost": 5,
                 "created_at": "2018-10-01 01:33:26",
                 "updated_at": "2018-10-01 01:33:26"
@@ -418,7 +419,7 @@ let state = {
                 "priority_avail": "A,B,C",
                 "metatype_parent": "None",
                 "metatype_category": "metatype.title.shapeshifter",
-                "attributes_id": 0,
+                "attributes_id": 28,
                 "karma_cost": 10,
                 "created_at": "2018-10-01 01:33:26",
                 "updated_at": "2018-10-01 01:33:26"
@@ -433,7 +434,7 @@ let state = {
                 "priority_avail": "A,B,C",
                 "metatype_parent": "None",
                 "metatype_category": "metatype.title.shapeshifter",
-                "attributes_id": 0,
+                "attributes_id": 29,
                 "karma_cost": 15,
                 "created_at": "2018-10-01 01:33:26",
                 "updated_at": "2018-10-01 01:33:26"
@@ -448,7 +449,7 @@ let state = {
                 "priority_avail": "A,B,C",
                 "metatype_parent": "None",
                 "metatype_category": "metatype.title.shapeshifter",
-                "attributes_id": 0,
+                "attributes_id": 30,
                 "karma_cost": 10,
                 "created_at": "2018-10-01 01:33:26",
                 "updated_at": "2018-10-01 01:33:26"
@@ -463,7 +464,7 @@ let state = {
                 "priority_avail": "A,B,C",
                 "metatype_parent": "None",
                 "metatype_category": "metatype.title.shapeshifter",
-                "attributes_id": 0,
+                "attributes_id": 31,
                 "karma_cost": 20,
                 "created_at": "2018-10-01 01:33:26",
                 "updated_at": "2018-10-01 01:33:26"
@@ -478,7 +479,7 @@ let state = {
                 "priority_avail": "A,B,C",
                 "metatype_parent": "None",
                 "metatype_category": "metatype.title.shapeshifter",
-                "attributes_id": 0,
+                "attributes_id": 32,
                 "karma_cost": 15,
                 "created_at": "2018-10-01 01:33:26",
                 "updated_at": "2018-10-01 01:33:26"
@@ -493,7 +494,7 @@ let state = {
                 "priority_avail": "A,B,C",
                 "metatype_parent": "None",
                 "metatype_category": "metatype.title.shapeshifter",
-                "attributes_id": 0,
+                "attributes_id": 33,
                 "karma_cost": 25,
                 "created_at": "2018-10-01 01:33:27",
                 "updated_at": "2018-10-01 01:33:27"
@@ -508,7 +509,7 @@ let state = {
                 "priority_avail": "A,B,C",
                 "metatype_parent": "None",
                 "metatype_category": "metatype.title.shapeshifter",
-                "attributes_id": 0,
+                "attributes_id": 34,
                 "karma_cost": 25,
                 "created_at": "2018-10-01 01:33:27",
                 "updated_at": "2018-10-01 01:33:27"
@@ -523,7 +524,7 @@ let state = {
                 "priority_avail": "A,B,C",
                 "metatype_parent": "None",
                 "metatype_category": "metatype.title.shapeshifter",
-                "attributes_id": 0,
+                "attributes_id": 35,
                 "karma_cost": 20,
                 "created_at": "2018-10-01 01:33:27",
                 "updated_at": "2018-10-01 01:33:27"
@@ -538,7 +539,7 @@ let state = {
                 "priority_avail": "A,B,C",
                 "metatype_parent": "None",
                 "metatype_category": "metatype.title.shapeshifter",
-                "attributes_id": 0,
+                "attributes_id": 36,
                 "karma_cost": 5,
                 "created_at": "2018-10-01 01:33:27",
                 "updated_at": "2018-10-01 01:33:27"
@@ -553,14 +554,15 @@ let state = {
                 "priority_avail": "A,B,C",
                 "metatype_parent": "None",
                 "metatype_category": "metatype.title.ai_races",
-                "attributes_id": 0,
+                "attributes_id": 37,
                 "karma_cost": 0,
                 "created_at": "2018-10-01 01:33:27",
                 "updated_at": "2018-10-01 01:33:27"
             }
         ],
-    type : {
-        "id": 0,
+    filtered_types: [],
+    type: {
+        "id": 99,
         "metatype": "Human",
         "traits_label": "metatype.traits.none",
         "traits_id": 0,
@@ -569,17 +571,18 @@ let state = {
         "priority_avail": "A,B,C,D,E",
         "metatype_parent": "None",
         "metatype_category": "metatype.title.metatype",
-        "attributes_id": 0,
+        "attributes_id": 99,
         "karma_cost": 0,
         "created_at": "2018-10-01 01:33:25",
         "updated_at": "2018-10-01 01:33:25"
-    }
+    },
+    special_points: 0
 };
 
 export default {
     namespaced: true,
     state,
-    //actions,
+    actions,
     getters,
     mutations,
 };

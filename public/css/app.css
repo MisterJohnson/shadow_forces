@@ -11294,17 +11294,29 @@ a.text-dark:focus {
   }
 
   .priority-form .wrapper .selector .concept .half,
-  .priority-form .wrapper .selector .selection .half {
+  .priority-form .wrapper .selector .concept .small-half,
+  .priority-form .wrapper .selector .concept .bigger-half,
+  .priority-form .wrapper .selector .selection .half,
+  .priority-form .wrapper .selector .selection .small-half,
+  .priority-form .wrapper .selector .selection .bigger-half {
     width: 100%;
   }
 
   .priority-form .wrapper .selector .concept .half #gender,
-  .priority-form .wrapper .selector .selection .half #gender {
+  .priority-form .wrapper .selector .concept .small-half #gender,
+  .priority-form .wrapper .selector .concept .bigger-half #gender,
+  .priority-form .wrapper .selector .selection .half #gender,
+  .priority-form .wrapper .selector .selection .small-half #gender,
+  .priority-form .wrapper .selector .selection .bigger-half #gender {
     width: 88.5%;
   }
 
   .priority-form .wrapper .selector .concept .half fieldset input,
-  .priority-form .wrapper .selector .selection .half fieldset input {
+  .priority-form .wrapper .selector .concept .small-half fieldset input,
+  .priority-form .wrapper .selector .concept .bigger-half fieldset input,
+  .priority-form .wrapper .selector .selection .half fieldset input,
+  .priority-form .wrapper .selector .selection .small-half fieldset input,
+  .priority-form .wrapper .selector .selection .bigger-half fieldset input {
     margin: 10px 0 10px 10px;
   }
 }

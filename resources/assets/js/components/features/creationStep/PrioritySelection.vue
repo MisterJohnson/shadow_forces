@@ -44,6 +44,7 @@
     import magic from './modules/MagicSelection';
     import skill from './modules/SkillComponent';
     import resources from './modules/ResourcesSelection';
+    import { mapGetters, mapState } from 'vuex';
 
     export default {
         props: {currentStep: Number},
@@ -53,9 +54,6 @@
         data() {
             return {
                 loading: false,
-                default_ranking: [
-                    'A', 'B', 'C', 'D', 'E'
-                ],
                 default_resources: [
                     450000, 275000, 140000, 50000, 6000
                 ],
@@ -66,13 +64,21 @@
                     { type: 'Skills', ranking: 'D', id: 3, data: '', show: false },
                     { type: 'Resources', ranking: 'E', id: 4, data: '', show: false },
                 ],
-                errors: {}
+                errors: {},
             }
+        },
+        computed: {
+            ...mapGetters({
+                default_ranking: 'priority/default_ranking'
+            }),
         },
         methods: {
             changeLocation: function() {
-                for(let i = 0; i<this.selectors.length; i++) {
+                for(let i = 0; i < this.selectors.length; i++) {
                     this.selectors[i].ranking = this.default_ranking[i];
+                    if(this.selectors[i].type === 'Metatype') {
+                        this.$store.dispatch("metatype/updateData", this.selectors[i]);
+                    }
                 }
             },
             getSelector: function(type) {

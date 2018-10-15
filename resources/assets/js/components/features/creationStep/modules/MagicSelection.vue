@@ -9,6 +9,7 @@
             <div class="control has-icons-left">
                 <div v-bind:class="select_class">
                     <select id="magic" class="cancel_select" v-model="magicId" @change="setMagicType()">
+                        <option value="99" selected>what type of magic you want?</option>
                         <option v-for="magicType in filtering_magic_types" :key="magicType.id" :value="magicType.id">
                             {{ 'magic.' + magicType.label | trans }}
                         </option>

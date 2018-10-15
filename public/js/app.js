@@ -484,33 +484,6 @@ module.exports = {
 
 /***/ }),
 /* 2 */
-/***/ (function(module, exports) {
-
-var g;
-
-// This works in non-strict mode
-g = (function() {
-	return this;
-})();
-
-try {
-	// This works if eval is allowed (see CSP)
-	g = g || Function("return this")() || (1,eval)("this");
-} catch(e) {
-	// This works if the window reference is available
-	if(typeof window === "object")
-		g = window;
-}
-
-// g can still be undefined, but nothing to do about it...
-// We return undefined, instead of nothing here, so it's
-// easier to handle this case. if(!global) { ...}
-
-module.exports = g;
-
-
-/***/ }),
-/* 3 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1455,7 +1428,7 @@ var index_esm = {
 
 
 /***/ }),
-/* 4 */
+/* 3 */
 /***/ (function(module, exports) {
 
 /*
@@ -1537,7 +1510,7 @@ function toComment(sourceMap) {
 
 
 /***/ }),
-/* 5 */
+/* 4 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /*
@@ -1556,7 +1529,7 @@ if (typeof DEBUG !== 'undefined' && DEBUG) {
   ) }
 }
 
-var listToStyles = __webpack_require__(73)
+var listToStyles = __webpack_require__(82)
 
 /*
 type StyleObject = {
@@ -1762,6 +1735,33 @@ function applyToTag (styleElement, obj) {
     styleElement.appendChild(document.createTextNode(css))
   }
 }
+
+
+/***/ }),
+/* 5 */
+/***/ (function(module, exports) {
+
+var g;
+
+// This works in non-strict mode
+g = (function() {
+	return this;
+})();
+
+try {
+	// This works if eval is allowed (see CSP)
+	g = g || Function("return this")() || (1,eval)("this");
+} catch(e) {
+	// This works if the window reference is available
+	if(typeof window === "object")
+		g = window;
+}
+
+// g can still be undefined, but nothing to do about it...
+// We return undefined, instead of nothing here, so it's
+// easier to handle this case. if(!global) { ...}
+
+module.exports = g;
 
 
 /***/ }),
@@ -12832,7 +12832,7 @@ Vue.compile = compileToFunctions;
 
 module.exports = Vue;
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2), __webpack_require__(41).setImmediate))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(5), __webpack_require__(41).setImmediate))
 
 /***/ }),
 /* 8 */
@@ -15373,7 +15373,7 @@ Popper.Defaults = Defaults;
 /* harmony default export */ __webpack_exports__["default"] = (Popper);
 //# sourceMappingURL=popper.js.map
 
-/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(2)))
+/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(5)))
 
 /***/ }),
 /* 9 */
@@ -26209,8 +26209,8 @@ module.exports = Cancel;
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(17);
-__webpack_require__(106);
-module.exports = __webpack_require__(107);
+__webpack_require__(119);
+module.exports = __webpack_require__(120);
 
 
 /***/ }),
@@ -26223,7 +26223,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue_toasted___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue_toasted__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue__ = __webpack_require__(7);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_vuex__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_vuex__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_lang_js__ = __webpack_require__(44);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_lang_js___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_lang_js__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__vue_translations_js__ = __webpack_require__(45);
@@ -26296,10 +26296,10 @@ __WEBPACK_IMPORTED_MODULE_1_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_2_vuex
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-__WEBPACK_IMPORTED_MODULE_1_vue___default.a.component('example-component', __webpack_require__(53));
-__WEBPACK_IMPORTED_MODULE_1_vue___default.a.component('mosaique', __webpack_require__(56));
-__WEBPACK_IMPORTED_MODULE_1_vue___default.a.component('btn_change', __webpack_require__(59));
-__WEBPACK_IMPORTED_MODULE_1_vue___default.a.component('character-creation', __webpack_require__(62));
+__WEBPACK_IMPORTED_MODULE_1_vue___default.a.component('example-component', __webpack_require__(62));
+__WEBPACK_IMPORTED_MODULE_1_vue___default.a.component('mosaique', __webpack_require__(65));
+__WEBPACK_IMPORTED_MODULE_1_vue___default.a.component('btn_change', __webpack_require__(68));
+__WEBPACK_IMPORTED_MODULE_1_vue___default.a.component('character-creation', __webpack_require__(71));
 
 var app = new __WEBPACK_IMPORTED_MODULE_1_vue___default.a({
     el: '#app',
@@ -43493,7 +43493,7 @@ if (token) {
   }
 }.call(this));
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2), __webpack_require__(20)(module)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(5), __webpack_require__(20)(module)))
 
 /***/ }),
 /* 20 */
@@ -48429,7 +48429,7 @@ exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
                          (typeof global !== "undefined" && global.clearImmediate) ||
                          (this && this.clearImmediate);
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(5)))
 
 /***/ }),
 /* 42 */
@@ -48622,7 +48622,7 @@ exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
     attachTo.clearImmediate = clearImmediate;
 }(typeof self === "undefined" ? typeof global === "undefined" ? this : global : self));
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2), __webpack_require__(11)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(5), __webpack_require__(11)))
 
 /***/ }),
 /* 43 */
@@ -49330,9 +49330,13 @@ module.exports = { "en.articles": { "link": { "1": "\/article\/runnerhub", "2": 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue__ = __webpack_require__(7);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vuex__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vuex__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__modules_magic__ = __webpack_require__(48);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__modules_metatype__ = __webpack_require__(50);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__modules_priority__ = __webpack_require__(54);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__modules_attributes__ = __webpack_require__(58);
+
+
 
 
 
@@ -49343,7 +49347,9 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vuex
 /* harmony default export */ __webpack_exports__["a"] = (new __WEBPACK_IMPORTED_MODULE_1_vuex__["a" /* default */].Store({
     modules: {
         magic: __WEBPACK_IMPORTED_MODULE_2__modules_magic__["a" /* default */],
-        metatype: __WEBPACK_IMPORTED_MODULE_3__modules_metatype__["a" /* default */]
+        metatype: __WEBPACK_IMPORTED_MODULE_3__modules_metatype__["a" /* default */],
+        priority: __WEBPACK_IMPORTED_MODULE_4__modules_priority__["a" /* default */],
+        attributes: __WEBPACK_IMPORTED_MODULE_5__modules_attributes__["a" /* default */]
     }
 }));
 
@@ -49639,6 +49645,8 @@ var magics = function magics(state) {
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__getters__ = __webpack_require__(51);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__mutations__ = __webpack_require__(52);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__actions__ = __webpack_require__(53);
+
 
 
 
@@ -49653,7 +49661,7 @@ var state = {
         "priority_avail": "A,B,C,D,E",
         "metatype_parent": "None",
         "metatype_category": "metatype.title.metatype",
-        "attributes_id": 0,
+        "attributes_id": 1,
         "karma_cost": 0,
         "created_at": "2018-10-01 01:33:25",
         "updated_at": "2018-10-01 01:33:25"
@@ -49667,7 +49675,7 @@ var state = {
         "priority_avail": "A,B,C,D",
         "metatype_parent": "None",
         "metatype_category": "metatype.title.metatype",
-        "attributes_id": 0,
+        "attributes_id": 2,
         "karma_cost": 0,
         "created_at": "2018-10-01 01:33:26",
         "updated_at": "2018-10-01 01:33:26"
@@ -49681,7 +49689,7 @@ var state = {
         "priority_avail": "A,B,C",
         "metatype_parent": "None",
         "metatype_category": "metatype.title.metatype",
-        "attributes_id": 0,
+        "attributes_id": 3,
         "karma_cost": 0,
         "created_at": "2018-10-01 01:33:26",
         "updated_at": "2018-10-01 01:33:26"
@@ -49695,7 +49703,7 @@ var state = {
         "priority_avail": "A,B,C",
         "metatype_parent": "None",
         "metatype_category": "metatype.title.metatype",
-        "attributes_id": 0,
+        "attributes_id": 4,
         "karma_cost": 0,
         "created_at": "2018-10-01 01:33:26",
         "updated_at": "2018-10-01 01:33:26"
@@ -49709,7 +49717,7 @@ var state = {
         "priority_avail": "A,B",
         "metatype_parent": "None",
         "metatype_category": "metatype.title.metatype",
-        "attributes_id": 0,
+        "attributes_id": 5,
         "karma_cost": 0,
         "created_at": "2018-10-01 01:33:26",
         "updated_at": "2018-10-01 01:33:26"
@@ -49723,7 +49731,7 @@ var state = {
         "priority_avail": "A,B,C,D,E",
         "metatype_parent": "metatype.human.title",
         "metatype_category": "metatype.title.metavariants",
-        "attributes_id": 0,
+        "attributes_id": 6,
         "karma_cost": 0,
         "created_at": "2018-10-01 01:33:26",
         "updated_at": "2018-10-01 01:33:26"
@@ -49737,7 +49745,7 @@ var state = {
         "priority_avail": "A,B,C,D",
         "metatype_parent": "metatype.elf.title",
         "metatype_category": "metatype.title.metavariants",
-        "attributes_id": 0,
+        "attributes_id": 7,
         "karma_cost": 0,
         "created_at": "2018-10-01 01:33:26",
         "updated_at": "2018-10-01 01:33:26"
@@ -49751,7 +49759,7 @@ var state = {
         "priority_avail": "A,B,C,D",
         "metatype_parent": "metatype.elf.title",
         "metatype_category": "metatype.title.metavariants",
-        "attributes_id": 0,
+        "attributes_id": 8,
         "karma_cost": 0,
         "created_at": "2018-10-01 01:33:26",
         "updated_at": "2018-10-01 01:33:26"
@@ -49765,7 +49773,7 @@ var state = {
         "priority_avail": "A,B,C,D",
         "metatype_parent": "metatype.elf.title",
         "metatype_category": "metatype.title.metavariants",
-        "attributes_id": 0,
+        "attributes_id": 9,
         "karma_cost": 12,
         "created_at": "2018-10-01 01:33:26",
         "updated_at": "2018-10-01 01:33:26"
@@ -49779,7 +49787,7 @@ var state = {
         "priority_avail": "A,B,C,D",
         "metatype_parent": "metatype.elf.title",
         "metatype_category": "metatype.title.metavariants",
-        "attributes_id": 0,
+        "attributes_id": 10,
         "karma_cost": 0,
         "created_at": "2018-10-01 01:33:26",
         "updated_at": "2018-10-01 01:33:26"
@@ -49793,7 +49801,7 @@ var state = {
         "priority_avail": "A,B,C",
         "metatype_parent": "metatype.dwarf.title",
         "metatype_category": "metatype.title.metavariants",
-        "attributes_id": 0,
+        "attributes_id": 11,
         "karma_cost": 7,
         "created_at": "2018-10-01 01:33:26",
         "updated_at": "2018-10-01 01:33:26"
@@ -49807,7 +49815,7 @@ var state = {
         "priority_avail": "A,B,C",
         "metatype_parent": "metatype.dwarf.title",
         "metatype_category": "metatype.title.metavariants",
-        "attributes_id": 0,
+        "attributes_id": 12,
         "karma_cost": 5,
         "created_at": "2018-10-01 01:33:26",
         "updated_at": "2018-10-01 01:33:26"
@@ -49821,7 +49829,7 @@ var state = {
         "priority_avail": "A,B,C",
         "metatype_parent": "metatype.dwarf.title",
         "metatype_category": "metatype.title.metavariants",
-        "attributes_id": 0,
+        "attributes_id": 13,
         "karma_cost": 0,
         "created_at": "2018-10-01 01:33:26",
         "updated_at": "2018-10-01 01:33:26"
@@ -49835,7 +49843,7 @@ var state = {
         "priority_avail": "A,B,C",
         "metatype_parent": "metatype.dwarf.title",
         "metatype_category": "metatype.title.metavariants",
-        "attributes_id": 0,
+        "attributes_id": 14,
         "karma_cost": 2,
         "created_at": "2018-10-01 01:33:26",
         "updated_at": "2018-10-01 01:33:26"
@@ -49849,7 +49857,7 @@ var state = {
         "priority_avail": "A,B,C",
         "metatype_parent": "metatype.ork.title",
         "metatype_category": "metatype.title.metavariants",
-        "attributes_id": 0,
+        "attributes_id": 15,
         "karma_cost": 5,
         "created_at": "2018-10-01 01:33:26",
         "updated_at": "2018-10-01 01:33:26"
@@ -49863,7 +49871,7 @@ var state = {
         "priority_avail": "A,B,C",
         "metatype_parent": "metatype.ork.title",
         "metatype_category": "metatype.title.metavariants",
-        "attributes_id": 0,
+        "attributes_id": 16,
         "karma_cost": 8,
         "created_at": "2018-10-01 01:33:26",
         "updated_at": "2018-10-01 01:33:26"
@@ -49877,7 +49885,7 @@ var state = {
         "priority_avail": "A,B,C",
         "metatype_parent": "metatype.ork.title",
         "metatype_category": "metatype.title.metavariants",
-        "attributes_id": 0,
+        "attributes_id": 17,
         "karma_cost": 4,
         "created_at": "2018-10-01 01:33:26",
         "updated_at": "2018-10-01 01:33:26"
@@ -49891,7 +49899,7 @@ var state = {
         "priority_avail": "A,B,C",
         "metatype_parent": "metatype.ork.title",
         "metatype_category": "metatype.title.metavariants",
-        "attributes_id": 0,
+        "attributes_id": 18,
         "karma_cost": 10,
         "created_at": "2018-10-01 01:33:26",
         "updated_at": "2018-10-01 01:33:26"
@@ -49905,7 +49913,7 @@ var state = {
         "priority_avail": "A,B",
         "metatype_parent": "metatype.troll.title",
         "metatype_category": "metatype.title.metavariants",
-        "attributes_id": 0,
+        "attributes_id": 19,
         "karma_cost": 2,
         "created_at": "2018-10-01 01:33:26",
         "updated_at": "2018-10-01 01:33:26"
@@ -49919,7 +49927,7 @@ var state = {
         "priority_avail": "A,B",
         "metatype_parent": "metatype.troll.title",
         "metatype_category": "metatype.title.metavariants",
-        "attributes_id": 0,
+        "attributes_id": 20,
         "karma_cost": 12,
         "created_at": "2018-10-01 01:33:26",
         "updated_at": "2018-10-01 01:33:26"
@@ -49933,7 +49941,7 @@ var state = {
         "priority_avail": "A,B",
         "metatype_parent": "metatype.troll.title",
         "metatype_category": "metatype.title.metavariants",
-        "attributes_id": 0,
+        "attributes_id": 21,
         "karma_cost": 2,
         "created_at": "2018-10-01 01:33:26",
         "updated_at": "2018-10-01 01:33:26"
@@ -49947,7 +49955,7 @@ var state = {
         "priority_avail": "A,B",
         "metatype_parent": "metatype.troll.title",
         "metatype_category": "metatype.title.metavariants",
-        "attributes_id": 0,
+        "attributes_id": 22,
         "karma_cost": 2,
         "created_at": "2018-10-01 01:33:26",
         "updated_at": "2018-10-01 01:33:26"
@@ -49961,7 +49969,7 @@ var state = {
         "priority_avail": "A,B,C",
         "metatype_parent": "None",
         "metatype_category": "metatype.title.metasapient_races",
-        "attributes_id": 0,
+        "attributes_id": 23,
         "karma_cost": 25,
         "created_at": "2018-10-01 01:33:26",
         "updated_at": "2018-10-01 01:33:26"
@@ -49975,7 +49983,7 @@ var state = {
         "priority_avail": "A,B,C",
         "metatype_parent": "None",
         "metatype_category": "metatype.title.metasapient_races",
-        "attributes_id": 0,
+        "attributes_id": 24,
         "karma_cost": 25,
         "created_at": "2018-10-01 01:33:26",
         "updated_at": "2018-10-01 01:33:26"
@@ -49989,7 +49997,7 @@ var state = {
         "priority_avail": "A,B,C",
         "metatype_parent": "None",
         "metatype_category": "metatype.title.metasapient_races",
-        "attributes_id": 0,
+        "attributes_id": 25,
         "karma_cost": 15,
         "created_at": "2018-10-01 01:33:26",
         "updated_at": "2018-10-01 01:33:26"
@@ -50003,7 +50011,7 @@ var state = {
         "priority_avail": "A,B,C",
         "metatype_parent": "None",
         "metatype_category": "metatype.title.metasapient_races",
-        "attributes_id": 0,
+        "attributes_id": 26,
         "karma_cost": 20,
         "created_at": "2018-10-01 01:33:26",
         "updated_at": "2018-10-01 01:33:26"
@@ -50017,7 +50025,7 @@ var state = {
         "priority_avail": "A,B,C",
         "metatype_parent": "None",
         "metatype_category": "metatype.title.shapeshifter",
-        "attributes_id": 0,
+        "attributes_id": 27,
         "karma_cost": 5,
         "created_at": "2018-10-01 01:33:26",
         "updated_at": "2018-10-01 01:33:26"
@@ -50031,7 +50039,7 @@ var state = {
         "priority_avail": "A,B,C",
         "metatype_parent": "None",
         "metatype_category": "metatype.title.shapeshifter",
-        "attributes_id": 0,
+        "attributes_id": 28,
         "karma_cost": 10,
         "created_at": "2018-10-01 01:33:26",
         "updated_at": "2018-10-01 01:33:26"
@@ -50045,7 +50053,7 @@ var state = {
         "priority_avail": "A,B,C",
         "metatype_parent": "None",
         "metatype_category": "metatype.title.shapeshifter",
-        "attributes_id": 0,
+        "attributes_id": 29,
         "karma_cost": 15,
         "created_at": "2018-10-01 01:33:26",
         "updated_at": "2018-10-01 01:33:26"
@@ -50059,7 +50067,7 @@ var state = {
         "priority_avail": "A,B,C",
         "metatype_parent": "None",
         "metatype_category": "metatype.title.shapeshifter",
-        "attributes_id": 0,
+        "attributes_id": 30,
         "karma_cost": 10,
         "created_at": "2018-10-01 01:33:26",
         "updated_at": "2018-10-01 01:33:26"
@@ -50073,7 +50081,7 @@ var state = {
         "priority_avail": "A,B,C",
         "metatype_parent": "None",
         "metatype_category": "metatype.title.shapeshifter",
-        "attributes_id": 0,
+        "attributes_id": 31,
         "karma_cost": 20,
         "created_at": "2018-10-01 01:33:26",
         "updated_at": "2018-10-01 01:33:26"
@@ -50087,7 +50095,7 @@ var state = {
         "priority_avail": "A,B,C",
         "metatype_parent": "None",
         "metatype_category": "metatype.title.shapeshifter",
-        "attributes_id": 0,
+        "attributes_id": 32,
         "karma_cost": 15,
         "created_at": "2018-10-01 01:33:26",
         "updated_at": "2018-10-01 01:33:26"
@@ -50101,7 +50109,7 @@ var state = {
         "priority_avail": "A,B,C",
         "metatype_parent": "None",
         "metatype_category": "metatype.title.shapeshifter",
-        "attributes_id": 0,
+        "attributes_id": 33,
         "karma_cost": 25,
         "created_at": "2018-10-01 01:33:27",
         "updated_at": "2018-10-01 01:33:27"
@@ -50115,7 +50123,7 @@ var state = {
         "priority_avail": "A,B,C",
         "metatype_parent": "None",
         "metatype_category": "metatype.title.shapeshifter",
-        "attributes_id": 0,
+        "attributes_id": 34,
         "karma_cost": 25,
         "created_at": "2018-10-01 01:33:27",
         "updated_at": "2018-10-01 01:33:27"
@@ -50129,7 +50137,7 @@ var state = {
         "priority_avail": "A,B,C",
         "metatype_parent": "None",
         "metatype_category": "metatype.title.shapeshifter",
-        "attributes_id": 0,
+        "attributes_id": 35,
         "karma_cost": 20,
         "created_at": "2018-10-01 01:33:27",
         "updated_at": "2018-10-01 01:33:27"
@@ -50143,7 +50151,7 @@ var state = {
         "priority_avail": "A,B,C",
         "metatype_parent": "None",
         "metatype_category": "metatype.title.shapeshifter",
-        "attributes_id": 0,
+        "attributes_id": 36,
         "karma_cost": 5,
         "created_at": "2018-10-01 01:33:27",
         "updated_at": "2018-10-01 01:33:27"
@@ -50157,13 +50165,14 @@ var state = {
         "priority_avail": "A,B,C",
         "metatype_parent": "None",
         "metatype_category": "metatype.title.ai_races",
-        "attributes_id": 0,
+        "attributes_id": 37,
         "karma_cost": 0,
         "created_at": "2018-10-01 01:33:27",
         "updated_at": "2018-10-01 01:33:27"
     }],
+    filtered_types: [],
     type: {
-        "id": 0,
+        "id": 99,
         "metatype": "Human",
         "traits_label": "metatype.traits.none",
         "traits_id": 0,
@@ -50172,17 +50181,18 @@ var state = {
         "priority_avail": "A,B,C,D,E",
         "metatype_parent": "None",
         "metatype_category": "metatype.title.metatype",
-        "attributes_id": 0,
+        "attributes_id": 99,
         "karma_cost": 0,
         "created_at": "2018-10-01 01:33:25",
         "updated_at": "2018-10-01 01:33:25"
-    }
+    },
+    special_points: 0
 };
 
 /* harmony default export */ __webpack_exports__["a"] = ({
     namespaced: true,
     state: state,
-    //actions,
+    actions: __WEBPACK_IMPORTED_MODULE_2__actions__["a" /* default */],
     getters: __WEBPACK_IMPORTED_MODULE_0__getters__["a" /* default */],
     mutations: __WEBPACK_IMPORTED_MODULE_1__mutations__["a" /* default */]
 });
@@ -50198,10 +50208,18 @@ var types = function types(state) {
 var type = function type(state) {
     return state.type;
 };
+var special_points = function special_points(state) {
+    return state.special_points;
+};
+var filtered_types = function filtered_types(state) {
+    return state.filtered_types;
+};
 
 /* harmony default export */ __webpack_exports__["a"] = ({
     types: types,
-    type: type
+    type: type,
+    special_points: special_points,
+    filtered_types: filtered_types
 });
 
 /***/ }),
@@ -50213,20 +50231,1244 @@ var TYPE_UPDATED = function TYPE_UPDATED(state, type) {
     state.type = type;
 };
 
+var FILTER_METATYPE = function FILTER_METATYPE(state, ranking) {
+    if (state.types.length > 0) {
+        var filtered_metatype = [];
+        for (var i = 0; i < state.types.length; i++) {
+            if (state.types[i].priority_avail.includes(ranking)) {
+                filtered_metatype.push(state.types[i]);
+            }
+        }
+        state.filtered_types = filtered_metatype;
+    }
+};
+
+var UPDATE_DATA = function UPDATE_DATA(state, selector) {
+    if (state.types.length > 0) {
+        if (state.type.id !== 99) {
+            var ranking = getRanking(state, selector.ranking);
+            state.special_points = state.type.special_points.split(',')[ranking];
+        } else {
+            state.special_points = 0;
+        }
+    } else {
+        state.special_points = 0;
+    }
+};
+
+var getRanking = function getRanking(state, ranking) {
+    var index = 0;
+    switch (ranking) {
+        case 'A':
+            index = 0;
+            break;
+        case 'B':
+            index = 1;
+            break;
+        case 'C':
+            index = 2;
+            break;
+        case 'D':
+            index = 3;
+            break;
+        case 'E':
+            index = 4;
+            break;
+    }
+    return index;
+};
+
 /* harmony default export */ __webpack_exports__["a"] = ({
-    TYPE_UPDATED: TYPE_UPDATED
+    TYPE_UPDATED: TYPE_UPDATED,
+    UPDATE_DATA: UPDATE_DATA,
+    FILTER_METATYPE: FILTER_METATYPE
 });
 
 /***/ }),
 /* 53 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+var actions = {
+    updateData: function updateData(_ref, payload) {
+        var commit = _ref.commit;
+
+        commit('UPDATE_DATA', payload);
+        commit('FILTER_METATYPE', payload.ranking);
+    }
+};
+
+/* harmony default export */ __webpack_exports__["a"] = (actions);
+
+/***/ }),
+/* 54 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__getters__ = __webpack_require__(55);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__mutations__ = __webpack_require__(56);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__actions__ = __webpack_require__(57);
+
+
+
+
+var state = {
+    default_ranking: ['A', 'B', 'C', 'D', 'E']
+};
+
+/* harmony default export */ __webpack_exports__["a"] = ({
+    namespaced: true,
+    state: state,
+    actions: __WEBPACK_IMPORTED_MODULE_2__actions__["a" /* default */],
+    getters: __WEBPACK_IMPORTED_MODULE_0__getters__["a" /* default */],
+    mutations: __WEBPACK_IMPORTED_MODULE_1__mutations__["a" /* default */]
+});
+
+/***/ }),
+/* 55 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+var selectors = function selectors(state) {
+    return state.selectors;
+};
+var default_ranking = function default_ranking(state) {
+    return state.default_ranking;
+};
+
+/* harmony default export */ __webpack_exports__["a"] = ({
+    selectors: selectors,
+    default_ranking: default_ranking
+});
+
+/***/ }),
+/* 56 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+var UPDATE_PRIORITIES = function UPDATE_PRIORITIES(state, selectors) {};
+
+/* harmony default export */ __webpack_exports__["a"] = ({
+    UPDATE_PRIORITIES: UPDATE_PRIORITIES
+});
+
+/***/ }),
+/* 57 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+var actions = {
+    updatePriorities: function updatePriorities(context, payload) {
+        context.commit("metatype/UPDATE_DATA", payload);
+    }
+};
+
+/* harmony default export */ __webpack_exports__["a"] = (actions);
+
+/***/ }),
+/* 58 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__getters__ = __webpack_require__(59);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__mutations__ = __webpack_require__(60);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__actions__ = __webpack_require__(61);
+
+
+
+
+var state = {
+    metatypes_attributes: [{
+        "id": 1,
+        "character_id": 0,
+        "body_min": 1,
+        "body_max": 6,
+        "agility_min": 1,
+        "agility_max": 6,
+        "reaction_min": 1,
+        "reaction_max": 6,
+        "strength_min": 1,
+        "strength_max": 6,
+        "willpower_min": 1,
+        "willpower_max": 6,
+        "logic_min": 1,
+        "logic_max": 6,
+        "intuition_min": 1,
+        "intuition_max": 6,
+        "charisma_min": 1,
+        "charisma_max": 6,
+        "edge_min": 2,
+        "edge_max": 7,
+        "magic": 0,
+        "essence": 6,
+        "initiative": "1d6",
+        "movement": "x2/x4/+2",
+        "created_at": "2018-10-14 05:45:02",
+        "updated_at": "2018-10-14 05:45:02"
+    }, {
+        "id": 2,
+        "character_id": 1,
+        "body_min": 1,
+        "body_max": 6,
+        "agility_min": 2,
+        "agility_max": 7,
+        "reaction_min": 1,
+        "reaction_max": 6,
+        "strength_min": 1,
+        "strength_max": 6,
+        "willpower_min": 1,
+        "willpower_max": 6,
+        "logic_min": 1,
+        "logic_max": 6,
+        "intuition_min": 1,
+        "intuition_max": 6,
+        "charisma_min": 3,
+        "charisma_max": 8,
+        "edge_min": 1,
+        "edge_max": 6,
+        "magic": 0,
+        "essence": 6,
+        "initiative": "1d6",
+        "movement": "x2/x4/+2",
+        "created_at": "2018-10-14 05:45:02",
+        "updated_at": "2018-10-14 05:45:02"
+    }, {
+        "id": 3,
+        "character_id": 2,
+        "body_min": 3,
+        "body_max": 8,
+        "agility_min": 1,
+        "agility_max": 6,
+        "reaction_min": 1,
+        "reaction_max": 5,
+        "strength_min": 3,
+        "strength_max": 8,
+        "willpower_min": 2,
+        "willpower_max": 7,
+        "logic_min": 1,
+        "logic_max": 6,
+        "intuition_min": 1,
+        "intuition_max": 6,
+        "charisma_min": 1,
+        "charisma_max": 6,
+        "edge_min": 1,
+        "edge_max": 6,
+        "magic": 0,
+        "essence": 6,
+        "initiative": "1d6",
+        "movement": "x2/x4/+1",
+        "created_at": "2018-10-14 05:45:02",
+        "updated_at": "2018-10-14 05:45:02"
+    }, {
+        "id": 4,
+        "character_id": 3,
+        "body_min": 4,
+        "body_max": 9,
+        "agility_min": 1,
+        "agility_max": 6,
+        "reaction_min": 1,
+        "reaction_max": 6,
+        "strength_min": 3,
+        "strength_max": 8,
+        "willpower_min": 1,
+        "willpower_max": 6,
+        "logic_min": 1,
+        "logic_max": 5,
+        "intuition_min": 1,
+        "intuition_max": 6,
+        "charisma_min": 1,
+        "charisma_max": 5,
+        "edge_min": 1,
+        "edge_max": 6,
+        "magic": 0,
+        "essence": 6,
+        "initiative": "1d6",
+        "movement": "x2/x4/+2",
+        "created_at": "2018-10-14 05:45:02",
+        "updated_at": "2018-10-14 05:45:02"
+    }, {
+        "id": 5,
+        "character_id": 4,
+        "body_min": 5,
+        "body_max": 10,
+        "agility_min": 1,
+        "agility_max": 5,
+        "reaction_min": 1,
+        "reaction_max": 6,
+        "strength_min": 5,
+        "strength_max": 10,
+        "willpower_min": 1,
+        "willpower_max": 6,
+        "logic_min": 1,
+        "logic_max": 5,
+        "intuition_min": 1,
+        "intuition_max": 5,
+        "charisma_min": 1,
+        "charisma_max": 4,
+        "edge_min": 1,
+        "edge_max": 6,
+        "magic": 0,
+        "essence": 6,
+        "initiative": "1d6",
+        "movement": "x2/x4/+2",
+        "created_at": "2018-10-14 05:45:03",
+        "updated_at": "2018-10-14 05:45:03"
+    }, {
+        "id": 6,
+        "character_id": 5,
+        "body_min": 1,
+        "body_max": 6,
+        "agility_min": 1,
+        "agility_max": 6,
+        "reaction_min": 1,
+        "reaction_max": 6,
+        "strength_min": 1,
+        "strength_max": 6,
+        "willpower_min": 1,
+        "willpower_max": 6,
+        "logic_min": 1,
+        "logic_max": 6,
+        "intuition_min": 1,
+        "intuition_max": 6,
+        "charisma_min": 1,
+        "charisma_max": 6,
+        "edge_min": 2,
+        "edge_max": 7,
+        "magic": 0,
+        "essence": 6,
+        "initiative": "1d6",
+        "movement": "x2/x4/+2",
+        "created_at": "2018-10-14 05:45:03",
+        "updated_at": "2018-10-14 05:45:03"
+    }, {
+        "id": 7,
+        "character_id": 6,
+        "body_min": 1,
+        "body_max": 6,
+        "agility_min": 2,
+        "agility_max": 7,
+        "reaction_min": 1,
+        "reaction_max": 6,
+        "strength_min": 1,
+        "strength_max": 5,
+        "willpower_min": 1,
+        "willpower_max": 6,
+        "logic_min": 1,
+        "logic_max": 6,
+        "intuition_min": 1,
+        "intuition_max": 6,
+        "charisma_min": 3,
+        "charisma_max": 8,
+        "edge_min": 1,
+        "edge_max": 6,
+        "magic": 0,
+        "essence": 6,
+        "initiative": "1d6",
+        "movement": "x2/x4/+2",
+        "created_at": "2018-10-14 05:45:03",
+        "updated_at": "2018-10-14 05:45:03"
+    }, {
+        "id": 8,
+        "character_id": 7,
+        "body_min": 1,
+        "body_max": 5,
+        "agility_min": 3,
+        "agility_max": 8,
+        "reaction_min": 1,
+        "reaction_max": 6,
+        "strength_min": 1,
+        "strength_max": 6,
+        "willpower_min": 1,
+        "willpower_max": 6,
+        "logic_min": 1,
+        "logic_max": 6,
+        "intuition_min": 1,
+        "intuition_max": 6,
+        "charisma_min": 2,
+        "charisma_max": 7,
+        "edge_min": 1,
+        "edge_max": 6,
+        "magic": 0,
+        "essence": 6,
+        "initiative": "1d6",
+        "movement": "x2/x4/+1",
+        "created_at": "2018-10-14 05:45:03",
+        "updated_at": "2018-10-14 05:45:03"
+    }, {
+        "id": 9,
+        "character_id": 8,
+        "body_min": 1,
+        "body_max": 6,
+        "agility_min": 2,
+        "agility_max": 7,
+        "reaction_min": 1,
+        "reaction_max": 6,
+        "strength_min": 1,
+        "strength_max": 6,
+        "willpower_min": 1,
+        "willpower_max": 6,
+        "logic_min": 1,
+        "logic_max": 5,
+        "intuition_min": 2,
+        "intuition_max": 7,
+        "charisma_min": 1,
+        "charisma_max": 6,
+        "edge_min": 1,
+        "edge_max": 6,
+        "magic": 0,
+        "essence": 6,
+        "initiative": "1d6",
+        "movement": "x2/x4/+2",
+        "created_at": "2018-10-14 05:45:03",
+        "updated_at": "2018-10-14 05:45:03"
+    }, {
+        "id": 10,
+        "character_id": 9,
+        "body_min": 1,
+        "body_max": 6,
+        "agility_min": 2,
+        "agility_max": 7,
+        "reaction_min": 1,
+        "reaction_max": 6,
+        "strength_min": 1,
+        "strength_max": 6,
+        "willpower_min": 1,
+        "willpower_max": 6,
+        "logic_min": 1,
+        "logic_max": 5,
+        "intuition_min": 1,
+        "intuition_max": 6,
+        "charisma_min": 2,
+        "charisma_max": 7,
+        "edge_min": 1,
+        "edge_max": 6,
+        "magic": 0,
+        "essence": 6,
+        "initiative": "1d6",
+        "movement": "x2/x4/+2",
+        "created_at": "2018-10-14 05:45:03",
+        "updated_at": "2018-10-14 05:45:03"
+    }, {
+        "id": 11,
+        "character_id": 10,
+        "body_min": 1,
+        "body_max": 4,
+        "agility_min": 2,
+        "agility_max": 7,
+        "reaction_min": 1,
+        "reaction_max": 6,
+        "strength_min": 1,
+        "strength_max": 4,
+        "willpower_min": 1,
+        "willpower_max": 7,
+        "logic_min": 2,
+        "logic_max": 7,
+        "intuition_min": 1,
+        "intuition_max": 6,
+        "charisma_min": 1,
+        "charisma_max": 6,
+        "edge_min": 1,
+        "edge_max": 6,
+        "magic": 0,
+        "essence": 6,
+        "initiative": "1d6",
+        "movement": "x2/x4/+2",
+        "created_at": "2018-10-14 05:45:03",
+        "updated_at": "2018-10-14 05:45:03"
+    }, {
+        "id": 12,
+        "character_id": 11,
+        "body_min": 1,
+        "body_max": 6,
+        "agility_min": 2,
+        "agility_max": 7,
+        "reaction_min": 1,
+        "reaction_max": 6,
+        "strength_min": 2,
+        "strength_max": 7,
+        "willpower_min": 1,
+        "willpower_max": 6,
+        "logic_min": 1,
+        "logic_max": 5,
+        "intuition_min": 2,
+        "intuition_max": 7,
+        "charisma_min": 1,
+        "charisma_max": 5,
+        "edge_min": 1,
+        "edge_max": 6,
+        "magic": 0,
+        "essence": 6,
+        "initiative": "1d6",
+        "movement": "x2/x4/+1",
+        "created_at": "2018-10-14 05:45:03",
+        "updated_at": "2018-10-14 05:45:03"
+    }, {
+        "id": 13,
+        "character_id": 12,
+        "body_min": 2,
+        "body_max": 7,
+        "agility_min": 1,
+        "agility_max": 6,
+        "reaction_min": 1,
+        "reaction_max": 6,
+        "strength_min": 2,
+        "strength_max": 7,
+        "willpower_min": 2,
+        "willpower_max": 7,
+        "logic_min": 1,
+        "logic_max": 6,
+        "intuition_min": 1,
+        "intuition_max": 6,
+        "charisma_min": 1,
+        "charisma_max": 6,
+        "edge_min": 1,
+        "edge_max": 6,
+        "magic": 0,
+        "essence": 6,
+        "initiative": "1d6",
+        "movement": "x2/x4/+2",
+        "created_at": "2018-10-14 05:45:03",
+        "updated_at": "2018-10-14 05:45:03"
+    }, {
+        "id": 14,
+        "character_id": 13,
+        "body_min": 2,
+        "body_max": 7,
+        "agility_min": 2,
+        "agility_max": 7,
+        "reaction_min": 1,
+        "reaction_max": 5,
+        "strength_min": 2,
+        "strength_max": 7,
+        "willpower_min": 1,
+        "willpower_max": 6,
+        "logic_min": 1,
+        "logic_max": 5,
+        "intuition_min": 1,
+        "intuition_max": 6,
+        "charisma_min": 2,
+        "charisma_max": 7,
+        "edge_min": 1,
+        "edge_max": 6,
+        "magic": 0,
+        "essence": 6,
+        "initiative": "1d6",
+        "movement": "x2/x4/+2",
+        "created_at": "2018-10-14 05:45:03",
+        "updated_at": "2018-10-14 05:45:03"
+    }, {
+        "id": 15,
+        "character_id": 14,
+        "body_min": 3,
+        "body_max": 8,
+        "agility_min": 1,
+        "agility_max": 6,
+        "reaction_min": 1,
+        "reaction_max": 6,
+        "strength_min": 2,
+        "strength_max": 7,
+        "willpower_min": 1,
+        "willpower_max": 6,
+        "logic_min": 1,
+        "logic_max": 5,
+        "intuition_min": 1,
+        "intuition_max": 6,
+        "charisma_min": 1,
+        "charisma_max": 5,
+        "edge_min": 1,
+        "edge_max": 6,
+        "magic": 0,
+        "essence": 6,
+        "initiative": "1d6",
+        "movement": "x2/x4/+2",
+        "created_at": "2018-10-14 05:45:03",
+        "updated_at": "2018-10-14 05:45:03"
+    }, {
+        "id": 16,
+        "character_id": 15,
+        "body_min": 4,
+        "body_max": 9,
+        "agility_min": 1,
+        "agility_max": 6,
+        "reaction_min": 1,
+        "reaction_max": 5,
+        "strength_min": 3,
+        "strength_max": 8,
+        "willpower_min": 2,
+        "willpower_max": 7,
+        "logic_min": 1,
+        "logic_max": 5,
+        "intuition_min": 1,
+        "intuition_max": 6,
+        "charisma_min": 1,
+        "charisma_max": 4,
+        "edge_min": 1,
+        "edge_max": 6,
+        "magic": 0,
+        "essence": 6,
+        "initiative": "1d6",
+        "movement": "x2/x4/+2",
+        "created_at": "2018-10-14 05:45:03",
+        "updated_at": "2018-10-14 05:45:03"
+    }, {
+        "id": 17,
+        "character_id": 16,
+        "body_min": 3,
+        "body_max": 8,
+        "agility_min": 2,
+        "agility_max": 7,
+        "reaction_min": 1,
+        "reaction_max": 6,
+        "strength_min": 2,
+        "strength_max": 7,
+        "willpower_min": 1,
+        "willpower_max": 6,
+        "logic_min": 1,
+        "logic_max": 5,
+        "intuition_min": 1,
+        "intuition_max": 6,
+        "charisma_min": 2,
+        "charisma_max": 7,
+        "edge_min": 1,
+        "edge_max": 6,
+        "magic": 0,
+        "essence": 6,
+        "initiative": "1d6",
+        "movement": "x2/x4/+2",
+        "created_at": "2018-10-14 05:45:03",
+        "updated_at": "2018-10-14 05:45:03"
+    }, {
+        "id": 18,
+        "character_id": 17,
+        "body_min": 2,
+        "body_max": 7,
+        "agility_min": 1,
+        "agility_max": 6,
+        "reaction_min": 2,
+        "reaction_max": 7,
+        "strength_min": 2,
+        "strength_max": 7,
+        "willpower_min": 1,
+        "willpower_max": 6,
+        "logic_min": 1,
+        "logic_max": 6,
+        "intuition_min": 1,
+        "intuition_max": 6,
+        "charisma_min": 1,
+        "charisma_max": 5,
+        "edge_min": 1,
+        "edge_max": 6,
+        "magic": 0,
+        "essence": 6,
+        "initiative": "1d6",
+        "movement": "x2/x4/+2",
+        "created_at": "2018-10-14 05:45:03",
+        "updated_at": "2018-10-14 05:45:03"
+    }, {
+        "id": 19,
+        "character_id": 18,
+        "body_min": 5,
+        "body_max": 10,
+        "agility_min": 1,
+        "agility_max": 5,
+        "reaction_min": 1,
+        "reaction_max": 6,
+        "strength_min": 6,
+        "strength_max": 11,
+        "willpower_min": 1,
+        "willpower_max": 6,
+        "logic_min": 1,
+        "logic_max": 4,
+        "intuition_min": 1,
+        "intuition_max": 5,
+        "charisma_min": 1,
+        "charisma_max": 4,
+        "edge_min": 1,
+        "edge_max": 6,
+        "magic": 0,
+        "essence": 6,
+        "initiative": "1d6",
+        "movement": "x2/x4/+1",
+        "created_at": "2018-10-14 05:45:03",
+        "updated_at": "2018-10-14 05:45:03"
+    }, {
+        "id": 20,
+        "character_id": 19,
+        "body_min": 4,
+        "body_max": 9,
+        "agility_min": 1,
+        "agility_max": 5,
+        "reaction_min": 1,
+        "reaction_max": 6,
+        "strength_min": 5,
+        "strength_max": 10,
+        "willpower_min": 1,
+        "willpower_max": 5,
+        "logic_min": 1,
+        "logic_max": 4,
+        "intuition_min": 1,
+        "intuition_max": 4,
+        "charisma_min": 1,
+        "charisma_max": 5,
+        "edge_min": 1,
+        "edge_max": 6,
+        "magic": 0,
+        "essence": 6,
+        "initiative": "1d6",
+        "movement": "x2/x4/+1",
+        "created_at": "2018-10-14 05:45:03",
+        "updated_at": "2018-10-14 05:45:03"
+    }, {
+        "id": 21,
+        "character_id": 20,
+        "body_min": 5,
+        "body_max": 10,
+        "agility_min": 1,
+        "agility_max": 5,
+        "reaction_min": 1,
+        "reaction_max": 5,
+        "strength_min": 5,
+        "strength_max": 10,
+        "willpower_min": 1,
+        "willpower_max": 6,
+        "logic_min": 1,
+        "logic_max": 5,
+        "intuition_min": 1,
+        "intuition_max": 5,
+        "charisma_min": 1,
+        "charisma_max": 5,
+        "edge_min": 1,
+        "edge_max": 6,
+        "magic": 0,
+        "essence": 6,
+        "initiative": "1d6",
+        "movement": "x2/x4/+1",
+        "created_at": "2018-10-14 05:45:03",
+        "updated_at": "2018-10-14 05:45:03"
+    }, {
+        "id": 22,
+        "character_id": 21,
+        "body_min": 6,
+        "body_max": 11,
+        "agility_min": 1,
+        "agility_max": 5,
+        "reaction_min": 1,
+        "reaction_max": 6,
+        "strength_min": 5,
+        "strength_max": 10,
+        "willpower_min": 1,
+        "willpower_max": 6,
+        "logic_min": 1,
+        "logic_max": 5,
+        "intuition_min": 1,
+        "intuition_max": 6,
+        "charisma_min": 1,
+        "charisma_max": 4,
+        "edge_min": 1,
+        "edge_max": 6,
+        "magic": 0,
+        "essence": 6,
+        "initiative": "1d6",
+        "movement": "x2/x4/+1",
+        "created_at": "2018-10-14 05:45:03",
+        "updated_at": "2018-10-14 05:45:03"
+    }, {
+        "id": 23,
+        "character_id": 22,
+        "body_min": 3,
+        "body_max": 8,
+        "agility_min": 1,
+        "agility_max": 6,
+        "reaction_min": 1,
+        "reaction_max": 6,
+        "strength_min": 3,
+        "strength_max": 8,
+        "willpower_min": 1,
+        "willpower_max": 6,
+        "logic_min": 1,
+        "logic_max": 6,
+        "intuition_min": 1,
+        "intuition_max": 5,
+        "charisma_min": 1,
+        "charisma_max": 5,
+        "edge_min": 1,
+        "edge_max": 5,
+        "magic": 1,
+        "essence": 6,
+        "initiative": "1d6",
+        "movement": "x1/x4/+4",
+        "created_at": "2018-10-14 05:45:03",
+        "updated_at": "2018-10-14 05:45:03"
+    }, {
+        "id": 24,
+        "character_id": 23,
+        "body_min": 3,
+        "body_max": 8,
+        "agility_min": 1,
+        "agility_max": 4,
+        "reaction_min": 2,
+        "reaction_max": 7,
+        "strength_min": 4,
+        "strength_max": 9,
+        "willpower_min": 2,
+        "willpower_max": 7,
+        "logic_min": 1,
+        "logic_max": 6,
+        "intuition_min": 1,
+        "intuition_max": 6,
+        "charisma_min": 2,
+        "charisma_max": 7,
+        "edge_min": 1,
+        "edge_max": 5,
+        "magic": 1,
+        "essence": 6,
+        "initiative": "1d6",
+        "movement": "x2/x4/+2",
+        "created_at": "2018-10-14 05:45:03",
+        "updated_at": "2018-10-14 05:45:03"
+    }, {
+        "id": 25,
+        "character_id": 24,
+        "body_min": 1,
+        "body_max": 2,
+        "agility_min": 3,
+        "agility_max": 8,
+        "reaction_min": 3,
+        "reaction_max": 8,
+        "strength_min": 1,
+        "strength_max": 2,
+        "willpower_min": 3,
+        "willpower_max": 8,
+        "logic_min": 2,
+        "logic_max": 7,
+        "intuition_min": 2,
+        "intuition_max": 7,
+        "charisma_min": 3,
+        "charisma_max": 8,
+        "edge_min": 2,
+        "edge_max": 7,
+        "magic": 1,
+        "essence": 6,
+        "initiative": "1d6",
+        "movement": "x1/x2/+1,x2/x6/+2",
+        "created_at": "2018-10-14 05:45:03",
+        "updated_at": "2018-10-14 05:45:03"
+    }, {
+        "id": 26,
+        "character_id": 25,
+        "body_min": 6,
+        "body_max": 11,
+        "agility_min": 1,
+        "agility_max": 6,
+        "reaction_min": 1,
+        "reaction_max": 6,
+        "strength_min": 5,
+        "strength_max": 10,
+        "willpower_min": 1,
+        "willpower_max": 6,
+        "logic_min": 1,
+        "logic_max": 6,
+        "intuition_min": 1,
+        "intuition_max": 6,
+        "charisma_min": 1,
+        "charisma_max": 6,
+        "edge_min": 1,
+        "edge_max": 6,
+        "magic": 1,
+        "essence": 6,
+        "initiative": "1d6",
+        "movement": "x2/x4/+2",
+        "created_at": "2018-10-14 05:45:03",
+        "updated_at": "2018-10-14 05:45:03"
+    }, {
+        "id": 27,
+        "character_id": 26,
+        "body_min": 3,
+        "body_max": 8,
+        "agility_min": 1,
+        "agility_max": 4,
+        "reaction_min": 1,
+        "reaction_max": 4,
+        "strength_min": 4,
+        "strength_max": 9,
+        "willpower_min": 1,
+        "willpower_max": 6,
+        "logic_min": 1,
+        "logic_max": 5,
+        "intuition_min": 1,
+        "intuition_max": 6,
+        "charisma_min": 1,
+        "charisma_max": 6,
+        "edge_min": 1,
+        "edge_max": 4,
+        "magic": 1,
+        "essence": 6,
+        "initiative": "1d6",
+        "movement": "x1/x4/+1",
+        "created_at": "2018-10-14 05:45:04",
+        "updated_at": "2018-10-14 05:45:04"
+    }, {
+        "id": 28,
+        "character_id": 27,
+        "body_min": 1,
+        "body_max": 5,
+        "agility_min": 1,
+        "agility_max": 6,
+        "reaction_min": 2,
+        "reaction_max": 7,
+        "strength_min": 1,
+        "strength_max": 5,
+        "willpower_min": 2,
+        "willpower_max": 7,
+        "logic_min": 1,
+        "logic_max": 5,
+        "intuition_min": 1,
+        "intuition_max": 5,
+        "charisma_min": 2,
+        "charisma_max": 7,
+        "edge_min": 1,
+        "edge_max": 4,
+        "magic": 1,
+        "essence": 6,
+        "initiative": "1d6",
+        "movement": "x2/x6/+3",
+        "created_at": "2018-10-14 05:45:04",
+        "updated_at": "2018-10-14 05:45:04"
+    }, {
+        "id": 29,
+        "character_id": 28,
+        "body_min": 4,
+        "body_max": 9,
+        "agility_min": 1,
+        "agility_max": 4,
+        "reaction_min": 1,
+        "reaction_max": 6,
+        "strength_min": 5,
+        "strength_max": 10,
+        "willpower_min": 1,
+        "willpower_max": 6,
+        "logic_min": 1,
+        "logic_max": 6,
+        "intuition_min": 1,
+        "intuition_max": 6,
+        "charisma_min": 1,
+        "charisma_max": 6,
+        "edge_min": 1,
+        "edge_max": 4,
+        "magic": 1,
+        "essence": 6,
+        "initiative": "1d6",
+        "movement": "x1/x4/+4",
+        "created_at": "2018-10-14 05:45:04",
+        "updated_at": "2018-10-14 05:45:04"
+    }, {
+        "id": 30,
+        "character_id": 29,
+        "body_min": 1,
+        "body_max": 4,
+        "agility_min": 2,
+        "agility_max": 7,
+        "reaction_min": 3,
+        "reaction_max": 8,
+        "strength_min": 1,
+        "strength_max": 4,
+        "willpower_min": 1,
+        "willpower_max": 6,
+        "logic_min": 1,
+        "logic_max": 5,
+        "intuition_min": 2,
+        "intuition_max": 7,
+        "charisma_min": 2,
+        "charisma_max": 7,
+        "edge_min": 1,
+        "edge_max": 4,
+        "magic": 1,
+        "essence": 6,
+        "initiative": "2d6",
+        "movement": "x1/x2/+0.5,x2/x6/+2",
+        "created_at": "2018-10-14 05:45:04",
+        "updated_at": "2018-10-14 05:45:04"
+    }, {
+        "id": 31,
+        "character_id": 30,
+        "body_min": 1,
+        "body_max": 6,
+        "agility_min": 2,
+        "agility_max": 7,
+        "reaction_min": 1,
+        "reaction_max": 6,
+        "strength_min": 1,
+        "strength_max": 6,
+        "willpower_min": 1,
+        "willpower_max": 5,
+        "logic_min": 1,
+        "logic_max": 4,
+        "intuition_min": 2,
+        "intuition_max": 7,
+        "charisma_min": 2,
+        "charisma_max": 7,
+        "edge_min": 1,
+        "edge_max": 4,
+        "magic": 1,
+        "essence": 6,
+        "initiative": "2d6",
+        "movement": "x2/x5/+2",
+        "created_at": "2018-10-14 05:45:04",
+        "updated_at": "2018-10-14 05:45:04"
+    }, {
+        "id": 32,
+        "character_id": 31,
+        "body_min": 1,
+        "body_max": 6,
+        "agility_min": 2,
+        "agility_max": 7,
+        "reaction_min": 1,
+        "reaction_max": 6,
+        "strength_min": 1,
+        "strength_max": 6,
+        "willpower_min": 1,
+        "willpower_max": 6,
+        "logic_min": 1,
+        "logic_max": 5,
+        "intuition_min": 2,
+        "intuition_max": 7,
+        "charisma_min": 2,
+        "charisma_max": 7,
+        "edge_min": 1,
+        "edge_max": 4,
+        "magic": 1,
+        "essence": 6,
+        "initiative": "2d6",
+        "movement": "x1/x5/+3",
+        "created_at": "2018-10-14 05:45:04",
+        "updated_at": "2018-10-14 05:45:04"
+    }, {
+        "id": 33,
+        "character_id": 32,
+        "body_min": 2,
+        "body_max": 7,
+        "agility_min": 2,
+        "agility_max": 7,
+        "reaction_min": 2,
+        "reaction_max": 7,
+        "strength_min": 1,
+        "strength_max": 6,
+        "willpower_min": 1,
+        "willpower_max": 6,
+        "logic_min": 1,
+        "logic_max": 5,
+        "intuition_min": 3,
+        "intuition_max": 8,
+        "charisma_min": 3,
+        "charisma_max": 8,
+        "edge_min": 1,
+        "edge_max": 4,
+        "magic": 1,
+        "essence": 6,
+        "initiative": "2d6",
+        "movement": "x1/x5/+2",
+        "created_at": "2018-10-14 05:45:04",
+        "updated_at": "2018-10-14 05:45:04"
+    }, {
+        "id": 34,
+        "character_id": 33,
+        "body_min": 3,
+        "body_max": 8,
+        "agility_min": 2,
+        "agility_max": 7,
+        "reaction_min": 2,
+        "reaction_max": 7,
+        "strength_min": 3,
+        "strength_max": 8,
+        "willpower_min": 1,
+        "willpower_max": 5,
+        "logic_min": 1,
+        "logic_max": 4,
+        "intuition_min": 3,
+        "intuition_max": 8,
+        "charisma_min": 2,
+        "charisma_max": 7,
+        "edge_min": 1,
+        "edge_max": 4,
+        "magic": 1,
+        "essence": 6,
+        "initiative": "2d6",
+        "movement": "x1/x5/+2",
+        "created_at": "2018-10-14 05:45:04",
+        "updated_at": "2018-10-14 05:45:04"
+    }, {
+        "id": 35,
+        "character_id": 34,
+        "body_min": 6,
+        "body_max": 11,
+        "agility_min": 1,
+        "agility_max": 5,
+        "reaction_min": 1,
+        "reaction_max": 5,
+        "strength_min": 7,
+        "strength_max": 12,
+        "willpower_min": 1,
+        "willpower_max": 5,
+        "logic_min": 1,
+        "logic_max": 5,
+        "intuition_min": 1,
+        "intuition_max": 6,
+        "charisma_min": 1,
+        "charisma_max": 6,
+        "edge_min": 1,
+        "edge_max": 4,
+        "magic": 1,
+        "essence": 6,
+        "initiative": "1d6",
+        "movement": "x1/x3/+2",
+        "created_at": "2018-10-14 05:45:04",
+        "updated_at": "2018-10-14 05:45:04"
+    }, {
+        "id": 36,
+        "character_id": 35,
+        "body_min": 1,
+        "body_max": 4,
+        "agility_min": 2,
+        "agility_max": 7,
+        "reaction_min": 1,
+        "reaction_max": 6,
+        "strength_min": 1,
+        "strength_max": 4,
+        "willpower_min": 1,
+        "willpower_max": 6,
+        "logic_min": 1,
+        "logic_max": 5,
+        "intuition_min": 2,
+        "intuition_max": 7,
+        "charisma_min": 2,
+        "charisma_max": 7,
+        "edge_min": 1,
+        "edge_max": 4,
+        "magic": 1,
+        "essence": 6,
+        "initiative": "2d6",
+        "movement": "x1/x3/+2",
+        "created_at": "2018-10-14 05:45:04",
+        "updated_at": "2018-10-14 05:45:04"
+    }, {
+        "id": 37,
+        "character_id": 36,
+        "body_min": 1,
+        "body_max": 4,
+        "agility_min": 2,
+        "agility_max": 7,
+        "reaction_min": 1,
+        "reaction_max": 5,
+        "strength_min": 1,
+        "strength_max": 4,
+        "willpower_min": 1,
+        "willpower_max": 6,
+        "logic_min": 2,
+        "logic_max": 7,
+        "intuition_min": 1,
+        "intuition_max": 5,
+        "charisma_min": 1,
+        "charisma_max": 6,
+        "edge_min": 1,
+        "edge_max": 6,
+        "magic": 1,
+        "essence": 6,
+        "initiative": "1d6",
+        "movement": "x1",
+        "created_at": "2018-10-14 05:45:04",
+        "updated_at": "2018-10-14 05:45:04"
+    }],
+    metatype_attributes: {
+        "id": 1,
+        "character_id": 0,
+        "body_min": 1,
+        "body_max": 6,
+        "agility_min": 1,
+        "agility_max": 6,
+        "reaction_min": 1,
+        "reaction_max": 6,
+        "strength_min": 1,
+        "strength_max": 6,
+        "willpower_min": 1,
+        "willpower_max": 6,
+        "logic_min": 1,
+        "logic_max": 6,
+        "intuition_min": 1,
+        "intuition_max": 6,
+        "charisma_min": 1,
+        "charisma_max": 6,
+        "edge_min": 2,
+        "edge_max": 7,
+        "magic": 0,
+        "essence": 6,
+        "initiative": "1d6",
+        "movement": "x2/x4/+2",
+        "created_at": "2018-10-14 05:45:02",
+        "updated_at": "2018-10-14 05:45:02"
+    }
+};
+
+/* harmony default export */ __webpack_exports__["a"] = ({
+    namespaced: true,
+    state: state,
+    actions: __WEBPACK_IMPORTED_MODULE_2__actions__["a" /* default */],
+    getters: __WEBPACK_IMPORTED_MODULE_0__getters__["a" /* default */],
+    mutations: __WEBPACK_IMPORTED_MODULE_1__mutations__["a" /* default */]
+});
+
+/***/ }),
+/* 59 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+var metatypes_attributes = function metatypes_attributes(state) {
+    return state.metatypes_attributes;
+};
+var metatype_attributes = function metatype_attributes(state) {
+    return state.metatype_attributes;
+};
+
+/* harmony default export */ __webpack_exports__["a"] = ({
+    metatypes_attributes: metatypes_attributes,
+    metatype_attributes: metatype_attributes
+});
+
+/***/ }),
+/* 60 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+var SET_CURRENT_METATYPE_ATTRIBUTES = function SET_CURRENT_METATYPE_ATTRIBUTES(state, id) {
+    for (var i = 0; i < state.metatypes_attributes.length; i++) {
+        if (state.metatypes_attributes[i].id === id) {
+            state.metatype_attributes = state.metatypes_attributes[i];
+        }
+    }
+};
+
+/* harmony default export */ __webpack_exports__["a"] = ({
+    SET_CURRENT_METATYPE_ATTRIBUTES: SET_CURRENT_METATYPE_ATTRIBUTES
+});
+
+/***/ }),
+/* 61 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+var actions = {};
+
+/* harmony default export */ __webpack_exports__["a"] = (actions);
+
+/***/ }),
+/* 62 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(0)
 /* script */
-var __vue_script__ = __webpack_require__(54)
+var __vue_script__ = __webpack_require__(63)
 /* template */
-var __vue_template__ = __webpack_require__(55)
+var __vue_template__ = __webpack_require__(64)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -50265,7 +51507,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 54 */
+/* 63 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -50294,7 +51536,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 55 */
+/* 64 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -50337,15 +51579,15 @@ if (false) {
 }
 
 /***/ }),
-/* 56 */
+/* 65 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(0)
 /* script */
-var __vue_script__ = __webpack_require__(57)
+var __vue_script__ = __webpack_require__(66)
 /* template */
-var __vue_template__ = __webpack_require__(58)
+var __vue_template__ = __webpack_require__(67)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -50384,7 +51626,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 57 */
+/* 66 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -50478,7 +51720,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 58 */
+/* 67 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -50673,15 +51915,15 @@ if (false) {
 }
 
 /***/ }),
-/* 59 */
+/* 68 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(0)
 /* script */
-var __vue_script__ = __webpack_require__(60)
+var __vue_script__ = __webpack_require__(69)
 /* template */
-var __vue_template__ = __webpack_require__(61)
+var __vue_template__ = __webpack_require__(70)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -50720,7 +51962,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 60 */
+/* 69 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -50756,7 +51998,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 61 */
+/* 70 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -50822,15 +52064,15 @@ if (false) {
 }
 
 /***/ }),
-/* 62 */
+/* 71 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(0)
 /* script */
-var __vue_script__ = __webpack_require__(63)
+var __vue_script__ = __webpack_require__(72)
 /* template */
-var __vue_template__ = __webpack_require__(105)
+var __vue_template__ = __webpack_require__(118)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -50869,16 +52111,16 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 63 */
+/* 72 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__base_Steps__ = __webpack_require__(64);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__base_Steps__ = __webpack_require__(73);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__base_Steps___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__base_Steps__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__creationStep_ConceptStep__ = __webpack_require__(70);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__creationStep_ConceptStep__ = __webpack_require__(79);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__creationStep_ConceptStep___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__creationStep_ConceptStep__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__creationStep_PrioritySelection__ = __webpack_require__(81);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__creationStep_PrioritySelection__ = __webpack_require__(90);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__creationStep_PrioritySelection___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__creationStep_PrioritySelection__);
 //
 //
@@ -50981,15 +52223,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 64 */
+/* 73 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(0)
 /* script */
-var __vue_script__ = __webpack_require__(65)
+var __vue_script__ = __webpack_require__(74)
 /* template */
-var __vue_template__ = __webpack_require__(69)
+var __vue_template__ = __webpack_require__(78)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -51028,12 +52270,12 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 65 */
+/* 74 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Step__ = __webpack_require__(66);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Step__ = __webpack_require__(75);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Step___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__Step__);
 //
 //
@@ -51078,15 +52320,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 66 */
+/* 75 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(0)
 /* script */
-var __vue_script__ = __webpack_require__(67)
+var __vue_script__ = __webpack_require__(76)
 /* template */
-var __vue_template__ = __webpack_require__(68)
+var __vue_template__ = __webpack_require__(77)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -51125,7 +52367,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 67 */
+/* 76 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -51164,7 +52406,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 68 */
+/* 77 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -51206,7 +52448,7 @@ if (false) {
 }
 
 /***/ }),
-/* 69 */
+/* 78 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -51240,19 +52482,19 @@ if (false) {
 }
 
 /***/ }),
-/* 70 */
+/* 79 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(71)
+  __webpack_require__(80)
 }
 var normalizeComponent = __webpack_require__(0)
 /* script */
-var __vue_script__ = __webpack_require__(74)
+var __vue_script__ = __webpack_require__(83)
 /* template */
-var __vue_template__ = __webpack_require__(80)
+var __vue_template__ = __webpack_require__(89)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -51291,17 +52533,17 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 71 */
+/* 80 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(72);
+var content = __webpack_require__(81);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(5)("5ddd1af2", content, false, {});
+var update = __webpack_require__(4)("5ddd1af2", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -51317,10 +52559,10 @@ if(false) {
 }
 
 /***/ }),
-/* 72 */
+/* 81 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(4)(false);
+exports = module.exports = __webpack_require__(3)(false);
 // imports
 
 
@@ -51331,7 +52573,7 @@ exports.push([module.i, "\n.closing-up {\n    margin-bottom: 0;\n    margin-top:
 
 
 /***/ }),
-/* 73 */
+/* 82 */
 /***/ (function(module, exports) {
 
 /**
@@ -51364,12 +52606,12 @@ module.exports = function listToStyles (parentId, list) {
 
 
 /***/ }),
-/* 74 */
+/* 83 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__base_FilePreview__ = __webpack_require__(75);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__base_FilePreview__ = __webpack_require__(84);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__base_FilePreview___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__base_FilePreview__);
 //
 //
@@ -51456,19 +52698,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 75 */
+/* 84 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(76)
+  __webpack_require__(85)
 }
 var normalizeComponent = __webpack_require__(0)
 /* script */
-var __vue_script__ = __webpack_require__(78)
+var __vue_script__ = __webpack_require__(87)
 /* template */
-var __vue_template__ = __webpack_require__(79)
+var __vue_template__ = __webpack_require__(88)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -51507,17 +52749,17 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 76 */
+/* 85 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(77);
+var content = __webpack_require__(86);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(5)("adf0f3de", content, false, {});
+var update = __webpack_require__(4)("adf0f3de", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -51533,10 +52775,10 @@ if(false) {
 }
 
 /***/ }),
-/* 77 */
+/* 86 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(4)(false);
+exports = module.exports = __webpack_require__(3)(false);
 // imports
 
 
@@ -51547,7 +52789,7 @@ exports.push([module.i, "\n.portrait {\n    width: 40%;\n    display: inline-blo
 
 
 /***/ }),
-/* 78 */
+/* 87 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -51666,7 +52908,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 79 */
+/* 88 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -51744,7 +52986,7 @@ if (false) {
 }
 
 /***/ }),
-/* 80 */
+/* 89 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -52051,15 +53293,15 @@ if (false) {
 }
 
 /***/ }),
-/* 81 */
+/* 90 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(0)
 /* script */
-var __vue_script__ = __webpack_require__(82)
+var __vue_script__ = __webpack_require__(91)
 /* template */
-var __vue_template__ = __webpack_require__(104)
+var __vue_template__ = __webpack_require__(117)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -52098,23 +53340,26 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 82 */
+/* 91 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuedraggable__ = __webpack_require__(83);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuedraggable__ = __webpack_require__(92);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuedraggable___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vuedraggable__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__modules_MetatypeSelection__ = __webpack_require__(85);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__modules_MetatypeSelection__ = __webpack_require__(94);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__modules_MetatypeSelection___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__modules_MetatypeSelection__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__modules_AttributeSelection__ = __webpack_require__(88);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__modules_AttributeSelection__ = __webpack_require__(99);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__modules_AttributeSelection___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__modules_AttributeSelection__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__modules_MagicSelection__ = __webpack_require__(91);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__modules_MagicSelection__ = __webpack_require__(104);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__modules_MagicSelection___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__modules_MagicSelection__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__modules_SkillComponent__ = __webpack_require__(96);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__modules_SkillComponent__ = __webpack_require__(109);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__modules_SkillComponent___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__modules_SkillComponent__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__modules_ResourcesSelection__ = __webpack_require__(101);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__modules_ResourcesSelection__ = __webpack_require__(114);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__modules_ResourcesSelection___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5__modules_ResourcesSelection__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_vuex__ = __webpack_require__(2);
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 //
 //
 //
@@ -52154,6 +53399,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+
 
 
 
@@ -52170,17 +53416,22 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     data: function data() {
         return {
             loading: false,
-            default_ranking: ['A', 'B', 'C', 'D', 'E'],
             default_resources: [450000, 275000, 140000, 50000, 6000],
             selectors: [{ type: 'Metatype', ranking: 'A', id: 0, data: '', show: true }, { type: 'Attributes', ranking: 'B', id: 1, data: '', show: false }, { type: 'Magic', ranking: 'C', id: 2, data: '', show: false }, { type: 'Skills', ranking: 'D', id: 3, data: '', show: false }, { type: 'Resources', ranking: 'E', id: 4, data: '', show: false }],
             errors: {}
         };
     },
 
+    computed: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_6_vuex__["b" /* mapGetters */])({
+        default_ranking: 'priority/default_ranking'
+    })),
     methods: {
         changeLocation: function changeLocation() {
             for (var i = 0; i < this.selectors.length; i++) {
                 this.selectors[i].ranking = this.default_ranking[i];
+                if (this.selectors[i].type === 'Metatype') {
+                    this.$store.dispatch("metatype/updateData", this.selectors[i]);
+                }
             }
         },
         getSelector: function getSelector(type) {
@@ -52211,7 +53462,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 83 */
+/* 92 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -52611,7 +53862,7 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
   }
 
   if (true) {
-    var Sortable = __webpack_require__(84);
+    var Sortable = __webpack_require__(93);
     module.exports = buildDraggable(Sortable);
   } else if (typeof define == "function" && define.amd) {
     define(['sortablejs'], function (Sortable) {
@@ -52624,7 +53875,7 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
 })();
 
 /***/ }),
-/* 84 */
+/* 93 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;/**!
@@ -54174,19 +55425,23 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;/**!
 
 
 /***/ }),
-/* 85 */
+/* 94 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(95)
+}
 var normalizeComponent = __webpack_require__(0)
 /* script */
-var __vue_script__ = __webpack_require__(86)
+var __vue_script__ = __webpack_require__(97)
 /* template */
-var __vue_template__ = __webpack_require__(87)
+var __vue_template__ = __webpack_require__(98)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
-var __vue_styles__ = null
+var __vue_styles__ = injectStyle
 /* scopeId */
 var __vue_scopeId__ = null
 /* moduleIdentifier (server only) */
@@ -54221,14 +55476,127 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 86 */
+/* 95 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(96);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(4)("a583c6d4", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../../../../node_modules/css-loader/index.js!../../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-03e975ec\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./MetatypeSelection.vue", function() {
+     var newContent = require("!!../../../../../../../node_modules/css-loader/index.js!../../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-03e975ec\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./MetatypeSelection.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 96 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(3)(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n.attr_array {\n        margin-top: 25px;\n}\n.attr_array table {\n        text-align: center;\n}\n.attr_array tr, .attr_array td, .attr_array thead th{\n        text-align: center !important;\n}\n.attr_array td div:first-child, .attr_array td div:last-child{\n        vertical-align: middle;\n        height: 10px;\n}\n\n    /* Variables\n================================== */\n    /* Tables\n    ================================== */\n.Rtable {\n        display: -webkit-box;\n        display: -ms-flexbox;\n        display: flex;\n        -ms-flex-wrap: wrap;\n            flex-wrap: wrap;\n        margin: 0 0 3em 0;\n        padding: 0;\n}\n.Rtable-cell {\n        -webkit-box-sizing: border-box;\n                box-sizing: border-box;\n        -webkit-box-flex: 1;\n            -ms-flex-positive: 1;\n                flex-grow: 1;\n        width: 100%;\n        padding: 0.8em 1.2em;\n        overflow: hidden;\n        list-style: none;\n        border: solid 3px white;\n        background: rgba(112, 128, 144, 0.2);\n}\n    /* Table column sizing\n    ================================== */\n.Rtable--2cols > .Rtable-cell {\n        width: 50%;\n}\n.Rtable--3cols > .Rtable-cell {\n        width: 33.33%;\n}\n.Rtable--4cols > .Rtable-cell {\n        width: 25%;\n}\n.Rtable--5cols > .Rtable-cell {\n        width: 20%;\n}\n.Rtable--6cols > .Rtable-cell {\n        width: 16.6%;\n}\n\n    /* Apply styles\n    ================================== */\n.Rtable {\n        position: relative;\n        top: 3px;\n        left: 3px;\n}\n.Rtable-cell {\n        margin: -3px 0 0 -3px;\n        background-color: white;\n        border-color: #e2e6e9;\n}\n    /* Cell styles\n    ================================== */\n.Rtable-cell--dark {\n        background-color: slategrey;\n        border-color: #5a6673;\n        color: white;\n}\n.Rtable-cell--dark > h1,\n    .Rtable-cell--dark > h2,\n    .Rtable-cell--dark > h3,\n    .Rtable-cell--dark > h4,\n    .Rtable-cell--dark > h5,\n    .Rtable-cell--dark > h6 {\n        color: white;\n}\n.Rtable-cell--medium {\n        background-color: #b8c0c8;\n        border-color: #a9b3bc;\n}\n.Rtable-cell--light {\n        background-color: white;\n        border-color: #e2e6e9;\n}\n.Rtable-cell--highlight {\n        background-color: lightgreen;\n        border-color: #64e764;\n}\n.Rtable-cell--alert {\n        background-color: darkorange;\n        border-color: #cc7000;\n        color: white;\n}\n.Rtable-cell--alert > h1,\n    .Rtable-cell--alert > h2,\n    .Rtable-cell--alert > h3,\n    .Rtable-cell--alert > h4,\n    .Rtable-cell--alert > h5,\n    .Rtable-cell--alert > h6 {\n        color: white;\n}\n.Rtable-cell--head {\n        background-color: slategrey;\n        border-color: #5a6673;\n        color: white;\n}\n.Rtable-cell--head > h1,\n    .Rtable-cell--head > h2,\n    .Rtable-cell--head > h3,\n    .Rtable-cell--head > h4,\n    .Rtable-cell--head > h5,\n    .Rtable-cell--head > h6 {\n        color: white;\n}\n.Rtable-cell--foot {\n        background-color: #b8c0c8;\n        border-color: #a9b3bc;\n}\n    /* Responsive\n    ==================================== */\n.Rtable-cell h4 {\n        width: 30%;\n        height: 100%;\n        display: inline-block;\n        vertical-align: top;\n}\n.Rtable-cell div{\n        width: 65%;\n        display: inline-block;\n}\n@media all and (max-width: 900px) {\n.Rtable-cell h4 {\n            width: 100%;\n            height: 15%;\n            display: block;\n            vertical-align: top;\n}\n}\n@media all and (max-width: 500px) {\n.Rtable--collapse {\n            display: block;\n}\n.Rtable--collapse > .Rtable-cell {\n            width: 100% !important;\n}\n.Rtable--collapse > .Rtable-cell--foot {\n            margin-bottom: 1em;\n}\n}\n.no-flexbox .Rtable {\n        display: block;\n}\n.no-flexbox .Rtable > .Rtable-cell {\n        width: 100%;\n}\n.no-flexbox .Rtable > .Rtable-cell--foot {\n        margin-bottom: 1em;\n}\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 97 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuex__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuex__ = __webpack_require__(2);
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -54286,7 +55654,10 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
     computed: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_0_vuex__["b" /* mapGetters */])({
         metatypes: 'metatype/types',
-        metatype: 'metatype/type'
+        filtered_types: 'metatype/filtered_types',
+        metatype: 'metatype/type',
+        special_points: 'metatype/special_points',
+        metatype_attributes: 'attributes/metatype_attributes'
     }), {
         select_class: function select_class() {
             return {
@@ -54294,53 +55665,13 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
                 'is-loading': this.loading,
                 'is-medium': true
             };
-        },
-        change_special_points: function change_special_points() {
-            if (this.metatypes.length > 0) {
-                if (this.metatypeId !== 99) {
-                    console.log(this.metatype);
-                    var current_ranking = this.selector;
-                    var ranking = this.getRanking(current_ranking.ranking);
-                    return this.metatype.special_points.split(',')[ranking];
-                }
-            } else {
-                return 0;
-            }
-        },
-        filter_available_metatype: function filter_available_metatype() {
-            if (this.metatypes.length > 0) {
-                var filtered_metatype = [];
-                for (var i = 0; i < this.metatypes.length; i++) {
-                    if (this.metatypes[i].priority_avail.includes(this.selector.ranking)) {
-                        filtered_metatype.push(this.metatypes[i]);
-                    }
-                }
-                return filtered_metatype;
-            }
         }
     }),
+    mounted: function mounted() {
+        this.$store.commit('metatype/FILTER_METATYPE', this.selector.ranking);
+    },
+
     methods: {
-        getRanking: function getRanking(ranking) {
-            var index = 0;
-            switch (ranking) {
-                case 'A':
-                    index = 0;
-                    break;
-                case 'B':
-                    index = 1;
-                    break;
-                case 'C':
-                    index = 2;
-                    break;
-                case 'D':
-                    index = 3;
-                    break;
-                case 'E':
-                    index = 4;
-                    break;
-            }
-            return index;
-        },
         getMetatype: function getMetatype(metatype) {
             if (this.metatypeId === metatype.id) {
                 return metatype;
@@ -54348,12 +55679,14 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         },
         setMetatype: function setMetatype() {
             this.$store.commit('metatype/TYPE_UPDATED', this.metatypes.find(this.getMetatype));
+            this.$store.commit('attributes/SET_CURRENT_METATYPE_ATTRIBUTES', this.metatype.attributes_id);
+            this.$store.commit("metatype/UPDATE_DATA", this.selector);
         }
     }
 });
 
 /***/ }),
-/* 87 */
+/* 98 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -54406,19 +55739,26 @@ var render = function() {
                 ]
               }
             },
-            _vm._l(_vm.filter_available_metatype, function(metatype) {
-              return _c(
-                "option",
-                { key: metatype.id, domProps: { value: metatype.id } },
-                [
-                  _vm._v(
-                    "\n                        " +
-                      _vm._s(metatype.metatype) +
-                      "\n                    "
-                  )
-                ]
-              )
-            })
+            [
+              _c("option", { attrs: { value: "99", selected: "" } }, [
+                _vm._v("What do you wanna be?")
+              ]),
+              _vm._v(" "),
+              _vm._l(_vm.filtered_types, function(metatype) {
+                return _c(
+                  "option",
+                  { key: metatype.id, domProps: { value: metatype.id } },
+                  [
+                    _vm._v(
+                      "\n                        " +
+                        _vm._s(metatype.metatype) +
+                        "\n                    "
+                    )
+                  ]
+                )
+              })
+            ],
+            2
           )
         ]),
         _vm._v(" "),
@@ -54437,19 +55777,19 @@ var render = function() {
             {
               name: "model",
               rawName: "v-model",
-              value: _vm.change_special_points,
-              expression: "change_special_points"
+              value: _vm.special_points,
+              expression: "special_points"
             }
           ],
           staticClass: "input cancel_select",
           attrs: { type: "text", id: "special_points", disabled: "" },
-          domProps: { value: _vm.change_special_points },
+          domProps: { value: _vm.special_points },
           on: {
             input: function($event) {
               if ($event.target.composing) {
                 return
               }
-              _vm.change_special_points = $event.target.value
+              _vm.special_points = $event.target.value
             }
           }
         })
@@ -54457,24 +55797,244 @@ var render = function() {
     ]),
     _vm._v(" "),
     _c("div", { staticClass: "metatype_descriptor" }, [
-      _c("div", { staticClass: "description" }, [
-        _c("h3", [
-          _vm._v(
-            "\n                " +
-              _vm._s(_vm.metatype.metatype) +
-              "\n            "
-          )
-        ]),
-        _vm._v(" "),
-        _c("p", [
-          _vm._v(
-            "\n                " +
-              _vm._s(_vm.metatype.description) +
-              "\n            "
-          )
+      _c(
+        "div",
+        {
+          directives: [
+            {
+              name: "show",
+              rawName: "v-show",
+              value: _vm.metatype.id !== 99,
+              expression: "metatype.id !== 99"
+            }
+          ],
+          staticClass: "description"
+        },
+        [
+          _c("h3", [
+            _vm._v(
+              "\n                " +
+                _vm._s(_vm.metatype.metatype) +
+                "\n            "
+            )
+          ]),
+          _vm._v(" "),
+          _c("p", [
+            _vm._v(
+              "\n                " +
+                _vm._s(_vm.metatype.description) +
+                "\n            "
+            )
+          ])
+        ]
+      )
+    ]),
+    _vm._v(" "),
+    _c("hr"),
+    _vm._v(" "),
+    _vm.metatype.id !== 99
+      ? _c("div", { staticClass: "attr_array" }, [
+          _c("h3", [_vm._v("Attributes")]),
+          _vm._v(" "),
+          _c("div", { staticClass: "Rtable Rtable--2cols Rtable--collapse" }, [
+            _c(
+              "div",
+              {
+                staticClass: "Rtable-cell Rtable-cell--head",
+                staticStyle: { order: "0" }
+              },
+              [
+                _c("h4", [_vm._v("BODY")]),
+                _vm._v(" "),
+                _c("div", [
+                  _c("div", [
+                    _vm._v("MIN : " + _vm._s(_vm.metatype_attributes.body_min))
+                  ]),
+                  _vm._v(" "),
+                  _c("hr"),
+                  _vm._v(" "),
+                  _c("div", [
+                    _vm._v("MAX : " + _vm._s(_vm.metatype_attributes.body_max))
+                  ])
+                ])
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "Rtable-cell", staticStyle: { order: "1" } },
+              [
+                _c("h4", [_vm._v("AGILITY")]),
+                _vm._v(" "),
+                _c("div", [
+                  _c("div", [
+                    _vm._v(
+                      "MIN : " + _vm._s(_vm.metatype_attributes.agility_min)
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("hr"),
+                  _vm._v(" "),
+                  _c("div", [
+                    _vm._v(
+                      "MAX : " + _vm._s(_vm.metatype_attributes.agility_max)
+                    )
+                  ])
+                ])
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "Rtable-cell", staticStyle: { order: "2" } },
+              [
+                _c("h4", [_vm._v("STRENGTH")]),
+                _vm._v(" "),
+                _c("div", [
+                  _c("div", [
+                    _vm._v(
+                      "MIN : " + _vm._s(_vm.metatype_attributes.strength_min)
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("hr"),
+                  _vm._v(" "),
+                  _c("div", [
+                    _vm._v(
+                      "MAX : " + _vm._s(_vm.metatype_attributes.strength_max)
+                    )
+                  ])
+                ])
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass: "Rtable-cell Rtable-cell--foot",
+                staticStyle: { order: "3" }
+              },
+              [
+                _c("h4", [_vm._v("REACTION")]),
+                _vm._v(" "),
+                _c("div", [
+                  _c("div", [
+                    _vm._v(
+                      "MIN : " + _vm._s(_vm.metatype_attributes.reaction_min)
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("hr"),
+                  _vm._v(" "),
+                  _c("div", [
+                    _vm._v(
+                      "MAX : " + _vm._s(_vm.metatype_attributes.reaction_max)
+                    )
+                  ])
+                ])
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass: "Rtable-cell Rtable-cell--head",
+                staticStyle: { order: "0" }
+              },
+              [
+                _c("h4", [_vm._v("WILLPOWER")]),
+                _vm._v(" "),
+                _c("div", [
+                  _c("div", [
+                    _vm._v(
+                      "MIN : " + _vm._s(_vm.metatype_attributes.willpower_min)
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("hr"),
+                  _vm._v(" "),
+                  _c("div", [
+                    _vm._v(
+                      "MAX : " + _vm._s(_vm.metatype_attributes.willpower_max)
+                    )
+                  ])
+                ])
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "Rtable-cell", staticStyle: { order: "1" } },
+              [
+                _c("h4", [_vm._v("LOGIC")]),
+                _vm._v(" "),
+                _c("div", [
+                  _c("div", [
+                    _vm._v("MIN : " + _vm._s(_vm.metatype_attributes.logic_min))
+                  ]),
+                  _vm._v(" "),
+                  _c("hr"),
+                  _vm._v(" "),
+                  _c("div", [
+                    _vm._v("MAX : " + _vm._s(_vm.metatype_attributes.logic_max))
+                  ])
+                ])
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "Rtable-cell", staticStyle: { order: "2" } },
+              [
+                _c("h4", [_vm._v("INTUITION")]),
+                _vm._v(" "),
+                _c("div", [
+                  _c("div", [
+                    _vm._v(
+                      "MIN : " + _vm._s(_vm.metatype_attributes.intuition_min)
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("hr"),
+                  _vm._v(" "),
+                  _c("div", [
+                    _vm._v(
+                      "MAX : " + _vm._s(_vm.metatype_attributes.intuition_max)
+                    )
+                  ])
+                ])
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass: "Rtable-cell Rtable-cell--foot",
+                staticStyle: { order: "3" }
+              },
+              [
+                _c("h4", [_vm._v("CHARISMA")]),
+                _vm._v(" "),
+                _c("div", [
+                  _c("div", [
+                    _vm._v(
+                      "MIN : " + _vm._s(_vm.metatype_attributes.charisma_min)
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("hr"),
+                  _vm._v(" "),
+                  _c("div", [
+                    _vm._v(
+                      "MAX : " + _vm._s(_vm.metatype_attributes.charisma_max)
+                    )
+                  ])
+                ])
+              ]
+            )
+          ])
         ])
-      ])
-    ])
+      : _vm._e()
   ])
 }
 var staticRenderFns = [
@@ -54497,19 +56057,23 @@ if (false) {
 }
 
 /***/ }),
-/* 88 */
+/* 99 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(100)
+}
 var normalizeComponent = __webpack_require__(0)
 /* script */
-var __vue_script__ = __webpack_require__(89)
+var __vue_script__ = __webpack_require__(102)
 /* template */
-var __vue_template__ = __webpack_require__(90)
+var __vue_template__ = __webpack_require__(103)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
-var __vue_styles__ = null
+var __vue_styles__ = injectStyle
 /* scopeId */
 var __vue_scopeId__ = null
 /* moduleIdentifier (server only) */
@@ -54544,11 +56108,54 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 89 */
+/* 100 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(101);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(4)("4195d1e8", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../../../../node_modules/css-loader/index.js!../../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-5cb714fe\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./AttributeSelection.vue", function() {
+     var newContent = require("!!../../../../../../../node_modules/css-loader/index.js!../../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-5cb714fe\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./AttributeSelection.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 101 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(3)(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n.attr_calculator {\n    text-align: center;\n    padding: 5px;\n    border: 1px dotted #ccc;\n    margin: 2%;\n}\n.qty {\n    width: 40px;\n    height: 25px;\n    text-align: center;\n}\nbutton.qtyplus { width:25px; height:25px; margin: 5px;\n}\nbutton.qtyminus { width:25px; height:25px; margin: 5px;\n}\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 102 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuex__ = __webpack_require__(2);
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 //
 //
 //
@@ -54564,6 +56171,124 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: {
@@ -54577,7 +56302,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         };
     },
 
-    computed: {
+    computed: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_0_vuex__["b" /* mapGetters */])({
+        metatypes: 'metatype/types',
+        filtered_types: 'metatype/filtered_types',
+        metatype: 'metatype/type',
+        special_points: 'metatype/special_points',
+        metatype_attributes: 'attributes/metatype_attributes'
+    }), {
         select_class: function select_class() {
             return {
                 select: true,
@@ -54590,7 +56321,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             var ranking = this.getRanking(current_ranking.ranking);
             return this.default_attributes[ranking];
         }
-    },
+    }),
     methods: {
         getRanking: function getRanking(ranking) {
             var index = 0;
@@ -54617,7 +56348,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 90 */
+/* 103 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -54640,11 +56371,542 @@ var render = function() {
           attrs: { type: "text", id: "attributes", disabled: "" },
           domProps: { value: _vm.change_attributes_points }
         })
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "attr_array" }, [
+        _c("table", [
+          _vm._m(0),
+          _vm._v(" "),
+          _c("tbody", [
+            _c("tr", [
+              _c("td", [
+                _c("div", { staticClass: "attr_calculator" }, [
+                  _vm._m(1),
+                  _vm._v(" "),
+                  _c("div", [
+                    _c("label", { attrs: { for: "body" } }),
+                    _c("input", {
+                      staticClass: "qty",
+                      attrs: { type: "text", name: "body", id: "body" },
+                      domProps: { value: _vm.metatype_attributes.body_min }
+                    })
+                  ]),
+                  _vm._v(" "),
+                  _vm._m(2)
+                ]),
+                _vm._v(" "),
+                _c(
+                  "em",
+                  {
+                    attrs: {
+                      "data-title": "Current metatype minimum and maximum limit"
+                    }
+                  },
+                  [
+                    _vm._v(
+                      "\n                            " +
+                        _vm._s(_vm.metatype_attributes.body_min) +
+                        " / " +
+                        _vm._s(_vm.metatype_attributes.body_max) +
+                        "\n                        "
+                    )
+                  ]
+                )
+              ]),
+              _vm._v(" "),
+              _c("td", [
+                _c("div", { staticClass: "attr_calculator" }, [
+                  _vm._m(3),
+                  _vm._v(" "),
+                  _c("div", [
+                    _c("label", { attrs: { for: "agility" } }),
+                    _c("input", {
+                      staticClass: "qty",
+                      attrs: { type: "text", name: "agility", id: "agility" },
+                      domProps: { value: _vm.metatype_attributes.agility_min }
+                    })
+                  ]),
+                  _vm._v(" "),
+                  _vm._m(4)
+                ]),
+                _vm._v(" "),
+                _c(
+                  "em",
+                  {
+                    attrs: {
+                      "data-title": "Current metatype minimum and maximum limit"
+                    }
+                  },
+                  [
+                    _vm._v(
+                      "\n                            " +
+                        _vm._s(_vm.metatype_attributes.agility_min) +
+                        " / " +
+                        _vm._s(_vm.metatype_attributes.agility_max) +
+                        "\n                        "
+                    )
+                  ]
+                )
+              ]),
+              _vm._v(" "),
+              _c("td", [
+                _c("div", { staticClass: "attr_calculator" }, [
+                  _vm._m(5),
+                  _vm._v(" "),
+                  _c("div", [
+                    _c("label", { attrs: { for: "strength" } }),
+                    _c("input", {
+                      staticClass: "qty",
+                      attrs: { type: "text", name: "strength", id: "strength" },
+                      domProps: { value: _vm.metatype_attributes.strength_min }
+                    })
+                  ]),
+                  _vm._v(" "),
+                  _vm._m(6)
+                ]),
+                _vm._v(" "),
+                _c(
+                  "em",
+                  {
+                    attrs: {
+                      "data-title": "Current metatype minimum and maximum limit"
+                    }
+                  },
+                  [
+                    _vm._v(
+                      "\n                            " +
+                        _vm._s(_vm.metatype_attributes.strength_min) +
+                        " / " +
+                        _vm._s(_vm.metatype_attributes.strength_max) +
+                        "\n                        "
+                    )
+                  ]
+                )
+              ]),
+              _vm._v(" "),
+              _c("td", [
+                _c("div", { staticClass: "attr_calculator" }, [
+                  _vm._m(7),
+                  _vm._v(" "),
+                  _c("div", [
+                    _c("label", { attrs: { for: "reaction" } }),
+                    _c("input", {
+                      staticClass: "qty",
+                      attrs: { type: "text", name: "reaction", id: "reaction" },
+                      domProps: { value: _vm.metatype_attributes.reaction_min }
+                    })
+                  ]),
+                  _vm._v(" "),
+                  _vm._m(8)
+                ]),
+                _vm._v(" "),
+                _c(
+                  "em",
+                  {
+                    attrs: {
+                      "data-title": "Current metatype minimum and maximum limit"
+                    }
+                  },
+                  [
+                    _vm._v(
+                      "\n                            " +
+                        _vm._s(_vm.metatype_attributes.reaction_min) +
+                        " / " +
+                        _vm._s(_vm.metatype_attributes.reaction_max) +
+                        "\n                        "
+                    )
+                  ]
+                )
+              ]),
+              _vm._v(" "),
+              _c("td", [
+                _c("div", { staticClass: "attr_calculator" }, [
+                  _vm._m(9),
+                  _vm._v(" "),
+                  _c("div", [
+                    _c("label", { attrs: { for: "willpower" } }),
+                    _c("input", {
+                      staticClass: "qty",
+                      attrs: {
+                        type: "text",
+                        name: "willpower",
+                        id: "willpower"
+                      },
+                      domProps: { value: _vm.metatype_attributes.willpower_min }
+                    })
+                  ]),
+                  _vm._v(" "),
+                  _vm._m(10)
+                ]),
+                _vm._v(" "),
+                _c(
+                  "em",
+                  {
+                    attrs: {
+                      "data-title": "Current metatype minimum and maximum limit"
+                    }
+                  },
+                  [
+                    _vm._v(
+                      "\n                            " +
+                        _vm._s(_vm.metatype_attributes.willpower_min) +
+                        " / " +
+                        _vm._s(_vm.metatype_attributes.willpower_max) +
+                        "\n                        "
+                    )
+                  ]
+                )
+              ]),
+              _vm._v(" "),
+              _c("td", [
+                _c("div", { staticClass: "attr_calculator" }, [
+                  _vm._m(11),
+                  _vm._v(" "),
+                  _c("div", [
+                    _c("label", { attrs: { for: "logic" } }),
+                    _c("input", {
+                      staticClass: "qty",
+                      attrs: { type: "text", name: "logic", id: "logic" },
+                      domProps: { value: _vm.metatype_attributes.logic_min }
+                    })
+                  ]),
+                  _vm._v(" "),
+                  _vm._m(12)
+                ]),
+                _vm._v(" "),
+                _c(
+                  "em",
+                  {
+                    attrs: {
+                      "data-title": "Current metatype minimum and maximum limit"
+                    }
+                  },
+                  [
+                    _vm._v(
+                      "\n                            " +
+                        _vm._s(_vm.metatype_attributes.logic_min) +
+                        " / " +
+                        _vm._s(_vm.metatype_attributes.logic_max) +
+                        "\n                        "
+                    )
+                  ]
+                )
+              ]),
+              _vm._v(" "),
+              _c("td", [
+                _c("div", { staticClass: "attr_calculator" }, [
+                  _vm._m(13),
+                  _vm._v(" "),
+                  _c("div", [
+                    _c("label", { attrs: { for: "intuition" } }),
+                    _c("input", {
+                      staticClass: "qty",
+                      attrs: {
+                        type: "text",
+                        name: "intuition",
+                        id: "intuition"
+                      },
+                      domProps: { value: _vm.metatype_attributes.intuition_min }
+                    })
+                  ]),
+                  _vm._v(" "),
+                  _vm._m(14)
+                ]),
+                _vm._v(" "),
+                _c(
+                  "em",
+                  {
+                    attrs: {
+                      "data-title": "Current metatype minimum and maximum limit"
+                    }
+                  },
+                  [
+                    _vm._v(
+                      "\n                            " +
+                        _vm._s(_vm.metatype_attributes.intuition_min) +
+                        " / " +
+                        _vm._s(_vm.metatype_attributes.intuition_max) +
+                        "\n                        "
+                    )
+                  ]
+                )
+              ]),
+              _vm._v(" "),
+              _c("td", [
+                _c("div", { staticClass: "attr_calculator" }, [
+                  _vm._m(15),
+                  _vm._v(" "),
+                  _c("div", [
+                    _c("label", { attrs: { for: "charisma" } }),
+                    _c("input", {
+                      staticClass: "qty",
+                      attrs: { type: "text", name: "charisma", id: "charisma" },
+                      domProps: { value: _vm.metatype_attributes.charisma_min }
+                    })
+                  ]),
+                  _vm._v(" "),
+                  _vm._m(16)
+                ]),
+                _vm._v(" "),
+                _c(
+                  "em",
+                  {
+                    attrs: {
+                      "data-title": "Current metatype minimum and maximum limit"
+                    }
+                  },
+                  [
+                    _vm._v(
+                      "\n                            " +
+                        _vm._s(_vm.metatype_attributes.charisma_min) +
+                        " / " +
+                        _vm._s(_vm.metatype_attributes.charisma_max) +
+                        "\n                        "
+                    )
+                  ]
+                )
+              ])
+            ])
+          ])
+        ])
       ])
     ])
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", [
+        _c("th", [
+          _vm._v("\n                        Body\n                    ")
+        ]),
+        _vm._v(" "),
+        _c("th", [
+          _vm._v("\n                        Agility\n                    ")
+        ]),
+        _vm._v(" "),
+        _c("th", [
+          _vm._v("\n                        Strength\n                    ")
+        ]),
+        _vm._v(" "),
+        _c("th", [
+          _vm._v("\n                        Reaction\n                    ")
+        ]),
+        _vm._v(" "),
+        _c("th", [
+          _vm._v("\n                        Willpower\n                    ")
+        ]),
+        _vm._v(" "),
+        _c("th", [
+          _vm._v("\n                        Logic\n                    ")
+        ]),
+        _vm._v(" "),
+        _c("th", [
+          _vm._v("\n                        Intuition\n                    ")
+        ]),
+        _vm._v(" "),
+        _c("th", [
+          _vm._v("\n                        Charisma\n                    ")
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", [
+      _c(
+        "button",
+        { staticClass: "qty_btn qtyminus", attrs: { type: "button" } },
+        [_vm._v("+")]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", [
+      _c(
+        "button",
+        { staticClass: "qty_btn qtyplus", attrs: { type: "button" } },
+        [_vm._v("-")]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", [
+      _c(
+        "button",
+        { staticClass: "qty_btn qtyminus", attrs: { type: "button" } },
+        [_vm._v("+")]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", [
+      _c(
+        "button",
+        { staticClass: "qty_btn qtyplus", attrs: { type: "button" } },
+        [_vm._v("-")]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", [
+      _c(
+        "button",
+        { staticClass: "qty_btn qtyminus", attrs: { type: "button" } },
+        [_vm._v("+")]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", [
+      _c(
+        "button",
+        { staticClass: "qty_btn qtyplus", attrs: { type: "button" } },
+        [_vm._v("-")]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", [
+      _c(
+        "button",
+        { staticClass: "qty_btn qtyminus", attrs: { type: "button" } },
+        [_vm._v("+")]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", [
+      _c(
+        "button",
+        { staticClass: "qty_btn qtyplus", attrs: { type: "button" } },
+        [_vm._v("-")]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", [
+      _c(
+        "button",
+        { staticClass: "qty_btn qtyminus", attrs: { type: "button" } },
+        [_vm._v("+")]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", [
+      _c(
+        "button",
+        { staticClass: "qty_btn qtyplus", attrs: { type: "button" } },
+        [_vm._v("-")]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", [
+      _c(
+        "button",
+        { staticClass: "qty_btn qtyminus", attrs: { type: "button" } },
+        [_vm._v("+")]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", [
+      _c(
+        "button",
+        { staticClass: "qty_btn qtyplus", attrs: { type: "button" } },
+        [_vm._v("-")]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", [
+      _c(
+        "button",
+        { staticClass: "qty_btn qtyminus", attrs: { type: "button" } },
+        [_vm._v("+")]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", [
+      _c(
+        "button",
+        { staticClass: "qty_btn qtyplus", attrs: { type: "button" } },
+        [_vm._v("-")]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", [
+      _c(
+        "button",
+        { staticClass: "qty_btn qtyminus", attrs: { type: "button" } },
+        [_vm._v("+")]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", [
+      _c(
+        "button",
+        { staticClass: "qty_btn qtyplus", attrs: { type: "button" } },
+        [_vm._v("-")]
+      )
+    ])
+  }
+]
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
@@ -54655,19 +56917,19 @@ if (false) {
 }
 
 /***/ }),
-/* 91 */
+/* 104 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(92)
+  __webpack_require__(105)
 }
 var normalizeComponent = __webpack_require__(0)
 /* script */
-var __vue_script__ = __webpack_require__(94)
+var __vue_script__ = __webpack_require__(107)
 /* template */
-var __vue_template__ = __webpack_require__(95)
+var __vue_template__ = __webpack_require__(108)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -54706,17 +56968,17 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 92 */
+/* 105 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(93);
+var content = __webpack_require__(106);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(5)("db1a8896", content, false, {});
+var update = __webpack_require__(4)("db1a8896", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -54732,28 +56994,29 @@ if(false) {
 }
 
 /***/ }),
-/* 93 */
+/* 106 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(4)(false);
+exports = module.exports = __webpack_require__(3)(false);
 // imports
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
 
 /***/ }),
-/* 94 */
+/* 107 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuex__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuex__ = __webpack_require__(2);
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
+//
 //
 //
 //
@@ -54904,7 +57167,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 });
 
 /***/ }),
-/* 95 */
+/* 108 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -54957,19 +57220,26 @@ var render = function() {
                 ]
               }
             },
-            _vm._l(_vm.filtering_magic_types, function(magicType) {
-              return _c(
-                "option",
-                { key: magicType.id, domProps: { value: magicType.id } },
-                [
-                  _vm._v(
-                    "\n                        " +
-                      _vm._s(_vm._f("trans")("magic." + magicType.label)) +
-                      "\n                    "
-                  )
-                ]
-              )
-            })
+            [
+              _c("option", { attrs: { value: "99", selected: "" } }, [
+                _vm._v("what type of magic you want?")
+              ]),
+              _vm._v(" "),
+              _vm._l(_vm.filtering_magic_types, function(magicType) {
+                return _c(
+                  "option",
+                  { key: magicType.id, domProps: { value: magicType.id } },
+                  [
+                    _vm._v(
+                      "\n                        " +
+                        _vm._s(_vm._f("trans")("magic." + magicType.label)) +
+                        "\n                    "
+                    )
+                  ]
+                )
+              })
+            ],
+            2
           )
         ]),
         _vm._v(" "),
@@ -55108,19 +57378,19 @@ if (false) {
 }
 
 /***/ }),
-/* 96 */
+/* 109 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(97)
+  __webpack_require__(110)
 }
 var normalizeComponent = __webpack_require__(0)
 /* script */
-var __vue_script__ = __webpack_require__(99)
+var __vue_script__ = __webpack_require__(112)
 /* template */
-var __vue_template__ = __webpack_require__(100)
+var __vue_template__ = __webpack_require__(113)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -55159,17 +57429,17 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 97 */
+/* 110 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(98);
+var content = __webpack_require__(111);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(5)("5672d44b", content, false, {});
+var update = __webpack_require__(4)("5672d44b", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -55185,10 +57455,10 @@ if(false) {
 }
 
 /***/ }),
-/* 98 */
+/* 111 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(4)(false);
+exports = module.exports = __webpack_require__(3)(false);
 // imports
 
 
@@ -55199,7 +57469,7 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 
 /***/ }),
-/* 99 */
+/* 112 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -55214,7 +57484,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 100 */
+/* 113 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -55234,15 +57504,15 @@ if (false) {
 }
 
 /***/ }),
-/* 101 */
+/* 114 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(0)
 /* script */
-var __vue_script__ = __webpack_require__(102)
+var __vue_script__ = __webpack_require__(115)
 /* template */
-var __vue_template__ = __webpack_require__(103)
+var __vue_template__ = __webpack_require__(116)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -55281,7 +57551,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 102 */
+/* 115 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -55354,7 +57624,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 103 */
+/* 116 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -55392,7 +57662,7 @@ if (false) {
 }
 
 /***/ }),
-/* 104 */
+/* 117 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -55558,7 +57828,7 @@ if (false) {
 }
 
 /***/ }),
-/* 105 */
+/* 118 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -55635,13 +57905,13 @@ if (false) {
 }
 
 /***/ }),
-/* 106 */
+/* 119 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
 
 /***/ }),
-/* 107 */
+/* 120 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
