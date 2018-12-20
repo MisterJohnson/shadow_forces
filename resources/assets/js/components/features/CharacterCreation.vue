@@ -46,6 +46,10 @@
             concept,
             selection
         },
+        created() {
+            this.$store.commit('creation/UPDATE_DATA');
+            this.$store.commit('creation/SET_TOASTED', this.$toasted);
+        },
         data() {
             return {
                 btns: [

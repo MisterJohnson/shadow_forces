@@ -1,7 +1,3 @@
-import getters from './getters';
-import mutations from './mutations';
-import actions from './actions';
-
 let state = {
     metatypes_attributes: [
         {
@@ -1068,13 +1064,29 @@ let state = {
         "movement": "x2/x4/+2",
         "created_at": "2018-10-14 05:45:02",
         "updated_at": "2018-10-14 05:45:02"
+    },
+    current_attr: {
+        "body": 1,
+        "agility": 1,
+        "reaction": 1,
+        "strength": 1,
+        "willpower": 1,
+        "logic": 1,
+        "intuition": 1,
+        "charisma": 1,
+        "edge": 2,
+        "magic": 0,
+    },
+    available_point: {
+        attributes: 20,
+        special: 0,
+        used_attributes: 0,
+        used_special: 0,
+        remaining_attributes: 20,
+        remaining_special: 0,
     }
 };
 
 export default {
-    namespaced: true,
     state,
-    actions,
-    getters,
-    mutations,
 };

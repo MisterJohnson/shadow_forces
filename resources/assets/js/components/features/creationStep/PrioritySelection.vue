@@ -30,6 +30,9 @@
             <div class="bigger-half" v-show="findZone(2)">
                 <magic :selector="getSelector('Magic')"></magic>
             </div>
+            <div class="bigger-half" v-show="findZone(3)">
+                <skill :selector="getSelector('Skills')"></skill>
+            </div>
             <div class="bigger-half" v-show="findZone(4)">
                 <resources :selector="getSelector('Resources')"></resources>
             </div>
@@ -57,29 +60,28 @@
                 default_resources: [
                     450000, 275000, 140000, 50000, 6000
                 ],
-                selectors: [
-                    { type: 'Metatype', ranking: 'A', id: 0, data: '', show: true },
-                    { type: 'Attributes', ranking: 'B', id: 1, data: '', show: false },
-                    { type: 'Magic', ranking: 'C', id: 2, data: '', show: false },
-                    { type: 'Skills', ranking: 'D', id: 3, data: '', show: false },
-                    { type: 'Resources', ranking: 'E', id: 4, data: '', show: false },
-                ],
-                errors: {},
             }
         },
         computed: {
             ...mapGetters({
-                default_ranking: 'priority/default_ranking'
+                default_ranking: 'creation/default_ranking',
+                errors: 'creation/errors',
+                special_points: 'creation/special_points',
             }),
+            selectors: {
+                get () {
+                    return this.$store.state.creation.selectors;
+                },
+                set (value) {
+                    this.$store.commit('creation/PRIORITY_UPDATE_PRIORITIES', value);
+                    this.$store.commit('creation/UPDATE_DATA', value);
+                },
+            },
         },
         methods: {
             changeLocation: function() {
-                for(let i = 0; i < this.selectors.length; i++) {
-                    this.selectors[i].ranking = this.default_ranking[i];
-                    if(this.selectors[i].type === 'Metatype') {
-                        this.$store.dispatch("metatype/updateData", this.selectors[i]);
-                    }
-                }
+                //this.$store.dispatch("creation/METATYPE_UPDATE_DATA", metatypeSelector);
+                //this.$store.dispatch("creation/ATTRIBUTE_UPDATE_DATA", {selector: attributeSelector, special_points: this.special_points});
             },
             getSelector: function(type) {
                 for (let i = 0; i < this.selectors.length; i++) {

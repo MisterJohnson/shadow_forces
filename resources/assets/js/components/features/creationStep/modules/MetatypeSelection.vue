@@ -67,12 +67,20 @@
                         <div>MAX : {{ metatype_attributes.strength_max }}</div>
                     </div>
                 </div>
-                <div style="order:3;" class="Rtable-cell Rtable-cell--foot">
+                <div style="order:3;" class="Rtable-cell">
                     <h4>REACTION</h4>
                     <div>
                         <div>MIN : {{ metatype_attributes.reaction_min }}</div>
                         <hr />
                         <div>MAX : {{ metatype_attributes.reaction_max }}</div>
+                    </div>
+                </div>
+                <div style="order:4;" class="Rtable-cell Rtable-cell--foot">
+                    <h4>EDGE</h4>
+                    <div>
+                        <div>MIN : {{ metatype_attributes.edge_min }}</div>
+                        <hr />
+                        <div>MAX : {{ metatype_attributes.edge_max }}</div>
                     </div>
                 </div>
 
@@ -100,12 +108,20 @@
                         <div>MAX : {{ metatype_attributes.intuition_max }}</div>
                     </div>
                 </div>
-                <div style="order:3;" class="Rtable-cell Rtable-cell--foot">
+                <div style="order:3;" class="Rtable-cell">
                     <h4>CHARISMA</h4>
                     <div>
                         <div>MIN : {{ metatype_attributes.charisma_min }}</div>
                         <hr />
                         <div>MAX : {{ metatype_attributes.charisma_max }}</div>
+                    </div>
+                </div>
+                <div style="order:4;" class="Rtable-cell Rtable-cell--foot">
+                    <h4>MAGIC</h4>
+                    <div>
+                        <div>MIN : {{ metatype_attributes.magic }}</div>
+                        <hr />
+                        <div>MAX : 12</div>
                     </div>
                 </div>
             </div>
@@ -127,11 +143,13 @@
         },
         computed: {
             ...mapGetters({
-                metatypes: 'metatype/types',
-                filtered_types: 'metatype/filtered_types',
-                metatype: 'metatype/type',
-                special_points: 'metatype/special_points',
-                metatype_attributes: 'attributes/metatype_attributes',
+                metatypes: 'creation/types',
+                filtered_types: 'creation/filtered_types',
+                metatype: 'creation/type',
+                special_points: 'creation/special_points',
+                metatype_attributes: 'creation/metatype_attributes',
+                character_attributes: 'creation/current_attr',
+
             }),
             select_class: function () {
                 return {
@@ -142,7 +160,7 @@
             },
         },
         mounted() {
-            this.$store.commit('metatype/FILTER_METATYPE', this.selector.ranking);
+
         },
         methods: {
             getMetatype: function(metatype) {
@@ -151,9 +169,10 @@
                 }
             },
             setMetatype: function() {
-                this.$store.commit('metatype/TYPE_UPDATED', this.metatypes.find(this.getMetatype));
-                this.$store.commit('attributes/SET_CURRENT_METATYPE_ATTRIBUTES', this.metatype.attributes_id);
-                this.$store.commit("metatype/UPDATE_DATA", this.selector);
+                this.$store.commit('creation/METATYPE_TYPE_UPDATED', this.metatypes.find(this.getMetatype));
+                this.$store.commit('creation/ATTRIBUTES_SET_CURRENT_METATYPE_ATTRIBUTES', this.metatypes.find(this.getMetatype).attributes_id);
+                this.$store.commit("creation/UPDATE_DATA", this.selector);
+                this.$store.commit("creation/ATTRIBUTES_SET_DATA", {selector:this.selector, special_points: this.special_points});
             },
         }
     }
@@ -292,6 +311,7 @@
     .Rtable-cell div{
         width: 65%;
         display: inline-block;
+        text-align: center;
     }
 
     @media all and (max-width: 900px) {
@@ -311,6 +331,9 @@
         }
         .Rtable--collapse > .Rtable-cell--foot {
             margin-bottom: 1em;
+        }
+        .Rtable-cell div{
+            width: 100%;
         }
     }
 

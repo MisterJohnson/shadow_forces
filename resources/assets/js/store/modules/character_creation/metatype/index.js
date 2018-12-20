@@ -560,29 +560,10 @@ let state = {
                 "updated_at": "2018-10-01 01:33:27"
             }
         ],
-    filtered_types: [],
-    type: {
-        "id": 99,
-        "metatype": "Human",
-        "traits_label": "metatype.traits.none",
-        "traits_id": 0,
-        "special_points": "9,7,5,3,1",
-        "description": "description.traits.none",
-        "priority_avail": "A,B,C,D,E",
-        "metatype_parent": "None",
-        "metatype_category": "metatype.title.metatype",
-        "attributes_id": 99,
-        "karma_cost": 0,
-        "created_at": "2018-10-01 01:33:25",
-        "updated_at": "2018-10-01 01:33:25"
-    },
+    typeId: 1,
     special_points: 0
 };
 
 export default {
-    namespaced: true,
     state,
-    actions,
-    getters,
-    mutations,
 };

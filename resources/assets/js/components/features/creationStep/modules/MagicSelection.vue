@@ -8,7 +8,7 @@
             </label>
             <div class="control has-icons-left">
                 <div v-bind:class="select_class">
-                    <select id="magic" class="cancel_select" v-model="magicId" @change="setMagicType()">
+                    <select id="magic" class="cancel_select" v-model="magic_id" @change="setMagicType()">
                         <option value="99" selected>what type of magic you want?</option>
                         <option v-for="magicType in filtering_magic_types" :key="magicType.id" :value="magicType.id">
                             {{ 'magic.' + magicType.label | trans }}
@@ -25,7 +25,7 @@
                 Magic Attribute:
             </label>
             <div class="control">
-                <input class="input cancel_select" type="text" id="magic_attr" v-model="change_magic_attribute" disabled>
+                <input class="input cancel_select" type="text" id="magic_attr" :value="magic.magic_attribute + ' ' + translate_lang(magic.label, 'magic')" disabled>
             </div>
         </div>
         <div class="half spacing">
@@ -33,7 +33,7 @@
                 Number of Available Skill:
             </label>
             <div class="control">
-                <input class="input cancel_select" type="text" id="magic_avail_skills" v-model="filter_number_of_skills" disabled>
+                <input class="input cancel_select" type="text" id="magic_avail_skills" :value="magic.number_of_skills + ' ' + translate_label('magic.skills_avail') + ' rating ' + this.magic.skill_rating" disabled>
             </div>
         </div>
         <div class="half spacing">
@@ -41,16 +41,16 @@
                 Number of spells / complex forms
             </label>
             <div class="control">
-                <input class="input cancel_select" type="text" id="number_spells" v-model="filter_number_free_spell" disabled>
+                <input class="input cancel_select" type="text" id="number_spells" :value="magic.number_free_spell + ' ' + translate_label('magic.spells_avail')" disabled>
             </div>
         </div>
         <div class="metatype_descriptor">
             <div class="description">
                 <h3>
-                    {{ 'magic.' + magic_type.label | trans }}
+                    {{ 'magic.' + magic.label | trans }}
                 </h3>
                 <p>
-                    {{ 'magic.' + magic_type.description| trans }}
+                    {{ 'magic.' + magic.description| trans }}
                 </p>
             </div>
         </div>
@@ -66,13 +66,13 @@
         data() {
             return {
                 loading: false,
-                magicId: 99,
-                magic_type: {},
             }
         },
         computed: {
             ...mapGetters({
-                magic_types: 'magic/magics',
+                magic_types: 'creation/magics',
+                magic: 'creation/magic',
+                magicId: 'creation/magicId',
             }),
             select_class: function () {
                 return {
@@ -81,16 +81,13 @@
                     'is-medium': true
                 }
             },
-            change_magic_attribute: function() {
-                if (this.magic_types.length > 0) {
-                    if(this.magicId !== 99) {
-                        console.log(this.magic_type);
-                        let label = (this.magic_type.label.includes('tech'))? this.filter_lang('magic.resonance_rating') : this.filter_lang('magic.magic_rating');
-                        return this.magic_type.magic_attribute + ' ' + label;
-                    }
-                } else {
-                    return 0;
-                }
+            magic_id: {
+                get () {
+                    return this.$store.state.creation.magicId;
+                },
+                set (value) {
+                    this.$store.commit('creation/MAGIC_UPDATE_ID', value);
+                },
             },
             filtering_magic_types: function() {
                 if (this.magic_types.length > 0) {
@@ -104,16 +101,6 @@
                     return filtered_magic_types;
                 }
             },
-            filter_number_of_skills: function() {
-                if(this.magicId !== 99) {
-                    return this.magic_type.number_of_skills + ' ' + this.filter_lang('magic.skills_avail') + ' rating ' + this.magic_type.skill_rating;
-                }
-            },
-            filter_number_free_spell: function() {
-                if(this.magicId !== 99) {
-                    return this.magic_type.number_free_spell + ' ' + this.filter_lang('magic.spells_avail');
-                }
-            }
         },
         methods: {
             getRanking: function(ranking) {
@@ -143,7 +130,13 @@
                 }
             },
             setMagicType: function() {
-                this.magic_type = this.magic_types.find(this.getMagicType);
+                console.log(this.magic);
+            },
+            translate_lang: function (sentence, type) {
+                return this.filter_lang(type+'.'+sentence);
+            },
+            translate_label: function (label) {
+                return this.filter_lang(label);
             },
         }
     }

@@ -26,6 +26,10 @@
     }
 }
 
+#cssmenu {
+    font-family: "Nunito", Sans-Serif !important;
+}
+
 .container-fluid.information {
     background: rgba(52, 52, 52, 1);
     margin: 0 auto;
@@ -98,6 +102,45 @@
                 margin: 100px auto 0;
             }
         }
+
+        .skills {
+            font-family: "Nunito", Sans-Serif !important;
+            font-weight: bold;
+
+            .skill {
+                display: block;
+                background-color: slategrey;
+                border: #5a6673 1px solid;
+                color: #fff;
+                font-weight: bold;
+
+                div.name, div.groups, div.selectors {
+                    width: 32%;
+                    display: inline-block;
+                    margin-left: 5px;
+                }
+
+                div.name, div.groups {
+                    position:relative;
+                    bottom: 10px;
+                }
+
+                div.selectors {
+                    .btns {
+                        display: inline-block;
+                        button {
+                            width: 36px;
+                            height: 36px;
+                        }
+                    }
+                }
+            }
+            .white {
+                background-color: white;
+                border: #e2e6e9 1px solid;
+                color: #000;
+            }
+        }
     }
 }
 
@@ -113,6 +156,7 @@
 }
 
 @import "steps";
+@import "character_creation";
 @import "~vue-wysiwyg/dist/vueWysiwyg.css";
 
 .editr--content {

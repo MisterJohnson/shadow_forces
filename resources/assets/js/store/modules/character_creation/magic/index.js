@@ -1,5 +1,3 @@
-import getters from "./getters";
-
 let state = {
     magics: [
             {
@@ -274,14 +272,24 @@ let state = {
                 "is_resonance": 0,
                 "created_at": "2018-09-28 15:41:40",
                 "updated_at": "2018-09-28 15:41:40"
+            },
+            {
+                "id": 99,
+                "magic_attribute": 0,
+                "magic_attribute_grade": "E",
+                "number_of_skills": 0,
+                "skill_rating": 0,
+                "number_free_spell": 0,
+                "label": "label.mundane.e",
+                "description": "description.mundane.e",
+                "is_resonance": 0,
+                "created_at": "2018-09-28 15:41:39",
+                "updated_at": "2018-09-28 15:41:39"
             }
         ],
+    magicId: 99,
 };
 
 export default {
-    namespaced: true,
     state,
-    //actions,
-    getters,
-    //mutations,
 };

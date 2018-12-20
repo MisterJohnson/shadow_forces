@@ -1,6 +1,6 @@
 const actions = {
     updatePriorities: (context, payload) => {
-        context.commit("metatype/UPDATE_DATA", payload);
+        context.commit("creation/UPDATE_DATA", payload);
     }
 };
 

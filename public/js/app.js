@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "/";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 16);
+/******/ 	return __webpack_require__(__webpack_require__.s = 21);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -179,8 +179,8 @@ module.exports = function normalizeComponent (
 "use strict";
 
 
-var bind = __webpack_require__(10);
-var isBuffer = __webpack_require__(24);
+var bind = __webpack_require__(11);
+var isBuffer = __webpack_require__(29);
 
 /*global toString:true*/
 
@@ -1529,7 +1529,7 @@ if (typeof DEBUG !== 'undefined' && DEBUG) {
   ) }
 }
 
-var listToStyles = __webpack_require__(82)
+var listToStyles = __webpack_require__(95)
 
 /*
 type StyleObject = {
@@ -1739,6 +1739,89 @@ function applyToTag (styleElement, obj) {
 
 /***/ }),
 /* 5 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+var selectorArray = {
+    metatypeSelector: { type: 'Metatype', ranking: 'A', id: 0, data: '', show: true },
+    attributeSelector: { type: 'Attributes', ranking: 'B', id: 1, data: '', show: false },
+    magicSelector: { type: 'Magic', ranking: 'C', id: 2, data: '', show: false },
+    skillSelector: { type: 'Skills', ranking: 'D', id: 3, data: '', show: false },
+    resourceSelector: { type: 'Resources', ranking: 'E', id: 4, data: '', show: false }
+};
+
+var default_attributes = [24, 20, 16, 14, 12];
+
+var getRanking = function getRanking(ranking) {
+    var index = 0;
+    switch (ranking) {
+        case 'A':
+            index = 0;
+            break;
+        case 'B':
+            index = 1;
+            break;
+        case 'C':
+            index = 2;
+            break;
+        case 'D':
+            index = 3;
+            break;
+        case 'E':
+            index = 4;
+            break;
+    }
+    return index;
+};
+
+var getRankingFromOrder = function getRankingFromOrder(ranking) {
+    var index = '';
+    switch (ranking) {
+        case 0:
+            index = 'A';
+            break;
+        case 1:
+            index = 'B';
+            break;
+        case 2:
+            index = 'C';
+            break;
+        case 3:
+            index = 'D';
+            break;
+        case 4:
+            index = 'E';
+            break;
+    }
+    return index;
+};
+
+var UPDATE_DATA = function UPDATE_DATA(state, payload) {
+    var selectors = selectorArray;
+    for (var i = 0; i < state.selectors.length; i++) {
+        state.selectors[i].ranking = getRankingFromOrder(i);
+        if (state.selectors[i].type === 'Metatype') {
+            selectors.metatypeSelector = state.selectors[i];
+        }
+        if (state.selectors[i].type === 'Attributes') {
+            selectors.attributeSelector = state.selectors[i];
+        }
+        if (state.selectors[i].type === 'Magic') {
+            selectors.magicSelector = state.selectors[i];
+        }
+    }
+};
+
+/* harmony default export */ __webpack_exports__["a"] = ({
+    selectorArray: selectorArray,
+    getRanking: getRanking,
+    default_attributes: default_attributes,
+    getRankingFromOrder: getRankingFromOrder,
+    UPDATE_DATA: UPDATE_DATA
+});
+
+/***/ }),
+/* 6 */
 /***/ (function(module, exports) {
 
 var g;
@@ -1765,14 +1848,14 @@ module.exports = g;
 
 
 /***/ }),
-/* 6 */
+/* 7 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 /* WEBPACK VAR INJECTION */(function(process) {
 
 var utils = __webpack_require__(1);
-var normalizeHeaderName = __webpack_require__(26);
+var normalizeHeaderName = __webpack_require__(31);
 
 var DEFAULT_CONTENT_TYPE = {
   'Content-Type': 'application/x-www-form-urlencoded'
@@ -1788,10 +1871,10 @@ function getDefaultAdapter() {
   var adapter;
   if (typeof XMLHttpRequest !== 'undefined') {
     // For browsers use XHR adapter
-    adapter = __webpack_require__(12);
+    adapter = __webpack_require__(13);
   } else if (typeof process !== 'undefined') {
     // For node use HTTP adapter
-    adapter = __webpack_require__(12);
+    adapter = __webpack_require__(13);
   }
   return adapter;
 }
@@ -1866,10 +1949,10 @@ utils.forEach(['post', 'put', 'patch'], function forEachMethodWithData(method) {
 
 module.exports = defaults;
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(11)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(12)))
 
 /***/ }),
-/* 7 */
+/* 8 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12832,10 +12915,10 @@ Vue.compile = compileToFunctions;
 
 module.exports = Vue;
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(5), __webpack_require__(41).setImmediate))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(6), __webpack_require__(46).setImmediate))
 
 /***/ }),
-/* 8 */
+/* 9 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -15373,10 +15456,10 @@ Popper.Defaults = Defaults;
 /* harmony default export */ __webpack_exports__["default"] = (Popper);
 //# sourceMappingURL=popper.js.map
 
-/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(5)))
+/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(6)))
 
 /***/ }),
-/* 9 */
+/* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -25747,7 +25830,7 @@ return jQuery;
 
 
 /***/ }),
-/* 10 */
+/* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -25765,7 +25848,7 @@ module.exports = function bind(fn, thisArg) {
 
 
 /***/ }),
-/* 11 */
+/* 12 */
 /***/ (function(module, exports) {
 
 // shim for using process in browser
@@ -25955,19 +26038,19 @@ process.umask = function() { return 0; };
 
 
 /***/ }),
-/* 12 */
+/* 13 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
 var utils = __webpack_require__(1);
-var settle = __webpack_require__(27);
-var buildURL = __webpack_require__(29);
-var parseHeaders = __webpack_require__(30);
-var isURLSameOrigin = __webpack_require__(31);
-var createError = __webpack_require__(13);
-var btoa = (typeof window !== 'undefined' && window.btoa && window.btoa.bind(window)) || __webpack_require__(32);
+var settle = __webpack_require__(32);
+var buildURL = __webpack_require__(34);
+var parseHeaders = __webpack_require__(35);
+var isURLSameOrigin = __webpack_require__(36);
+var createError = __webpack_require__(14);
+var btoa = (typeof window !== 'undefined' && window.btoa && window.btoa.bind(window)) || __webpack_require__(37);
 
 module.exports = function xhrAdapter(config) {
   return new Promise(function dispatchXhrRequest(resolve, reject) {
@@ -26064,7 +26147,7 @@ module.exports = function xhrAdapter(config) {
     // This is only done if running in a standard browser environment.
     // Specifically not if we're in a web worker, or react-native.
     if (utils.isStandardBrowserEnv()) {
-      var cookies = __webpack_require__(33);
+      var cookies = __webpack_require__(38);
 
       // Add xsrf header
       var xsrfValue = (config.withCredentials || isURLSameOrigin(config.url)) && config.xsrfCookieName ?
@@ -26142,13 +26225,13 @@ module.exports = function xhrAdapter(config) {
 
 
 /***/ }),
-/* 13 */
+/* 14 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var enhanceError = __webpack_require__(28);
+var enhanceError = __webpack_require__(33);
 
 /**
  * Create an Error with the specified message, config, error code, request and response.
@@ -26167,7 +26250,7 @@ module.exports = function createError(message, config, code, request, response) 
 
 
 /***/ }),
-/* 14 */
+/* 15 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -26179,7 +26262,7 @@ module.exports = function isCancel(value) {
 
 
 /***/ }),
-/* 15 */
+/* 16 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -26205,32 +26288,147 @@ module.exports = Cancel;
 
 
 /***/ }),
-/* 16 */
-/***/ (function(module, exports, __webpack_require__) {
-
-__webpack_require__(17);
-__webpack_require__(119);
-module.exports = __webpack_require__(120);
-
-
-/***/ }),
 /* 17 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__helpers_priority_helper__ = __webpack_require__(5);
+
+
+var types = function types(state) {
+    return state.types;
+};
+var type = function type(state) {
+    return function (id) {
+        return state.types.find(function (type) {
+            return type.id === id;
+        });
+    };
+};
+var typeId = function typeId(state) {
+    return state.typeId;
+};
+var special_points = function special_points(state) {
+    var ranking = __WEBPACK_IMPORTED_MODULE_0__helpers_priority_helper__["a" /* default */].getRanking(__WEBPACK_IMPORTED_MODULE_0__helpers_priority_helper__["a" /* default */].selectorArray.metatypeSelector.ranking);
+    var type = state.types.find(function (type) {
+        return type.id === state.typeId;
+    });
+    return type.special_points.split(',')[ranking];
+};
+var filtered_types = function filtered_types(state) {
+    var filtered_metatype = [];
+    if (state.types.length > 0) {
+        var ranking = __WEBPACK_IMPORTED_MODULE_0__helpers_priority_helper__["a" /* default */].selectorArray.metatypeSelector.ranking;
+        for (var i = 0; i < state.types.length; i++) {
+            if (state.types[i].priority_avail.includes(ranking)) {
+                filtered_metatype.push(state.types[i]);
+            }
+        }
+    }
+    return filtered_metatype;
+};
+
+/* harmony default export */ __webpack_exports__["a"] = ({
+    types: types,
+    type: type,
+    typeId: typeId,
+    special_points: special_points,
+    filtered_types: filtered_types
+});
+
+/***/ }),
+/* 18 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__helpers_priority_helper__ = __webpack_require__(5);
+
+
+var TYPE_UPDATED = function TYPE_UPDATED(state, type) {
+    state.typeId = type.id;
+};
+
+/* harmony default export */ __webpack_exports__["a"] = ({
+    TYPE_UPDATED: TYPE_UPDATED
+});
+
+/***/ }),
+/* 19 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+var actions = {
+    updateData: function updateData(_ref, payload) {
+        var commit = _ref.commit;
+
+        commit('UPDATE_DATA', payload);
+    }
+};
+
+/* harmony default export */ __webpack_exports__["a"] = (actions);
+
+/***/ }),
+/* 20 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+var ADD_ERRORS = function ADD_ERRORS(state, error) {
+    var err = state.error;
+    err.name = error.name;
+    err.code = error.code;
+    err.message = error.message;
+    err.id = state.errors.length;
+    state.errors.push(err);
+};
+
+var ADD_AND_ALERT = function ADD_AND_ALERT(state, error) {
+    var err = state.error;
+    err.name = error.name;
+    err.code = error.code;
+    err.message = error.message;
+    err.id = state.errors.length;
+    state.errors.push(err);
+    state.toasted.show(err.message).goAway(2500);
+};
+
+var REMOVE_ERRORS = function REMOVE_ERRORS(state, id) {
+    state.errors.splice(id, 1);
+};
+
+/* harmony default export */ __webpack_exports__["a"] = ({
+    ADD_ERRORS: ADD_ERRORS,
+    ADD_AND_ALERT: ADD_AND_ALERT,
+    REMOVE_ERRORS: REMOVE_ERRORS
+});
+
+/***/ }),
+/* 21 */
+/***/ (function(module, exports, __webpack_require__) {
+
+__webpack_require__(22);
+__webpack_require__(137);
+__webpack_require__(138);
+module.exports = __webpack_require__(139);
+
+
+/***/ }),
+/* 22 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue_toasted__ = __webpack_require__(43);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue_toasted__ = __webpack_require__(48);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue_toasted___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue_toasted__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue__ = __webpack_require__(8);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_vuex__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_lang_js__ = __webpack_require__(44);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_lang_js__ = __webpack_require__(49);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_lang_js___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_lang_js__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__vue_translations_js__ = __webpack_require__(45);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__vue_translations_js__ = __webpack_require__(50);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__vue_translations_js___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__vue_translations_js__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_vue_wysiwyg__ = __webpack_require__(46);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_vue_wysiwyg__ = __webpack_require__(51);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_vue_wysiwyg___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_vue_wysiwyg__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__store__ = __webpack_require__(47);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__store__ = __webpack_require__(52);
 
 /**
  * First we will load all of this project's JavaScript dependencies which
@@ -26238,9 +26436,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
  * building robust, powerful web applications using Vue and Laravel.
  */
 
-__webpack_require__(18);
+__webpack_require__(23);
 
-window.Vue = __webpack_require__(7);
+window.Vue = __webpack_require__(8);
 
 window.event = new __WEBPACK_IMPORTED_MODULE_1_vue___default.a();
 
@@ -26296,10 +26494,10 @@ __WEBPACK_IMPORTED_MODULE_1_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_2_vuex
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-__WEBPACK_IMPORTED_MODULE_1_vue___default.a.component('example-component', __webpack_require__(62));
-__WEBPACK_IMPORTED_MODULE_1_vue___default.a.component('mosaique', __webpack_require__(65));
-__WEBPACK_IMPORTED_MODULE_1_vue___default.a.component('btn_change', __webpack_require__(68));
-__WEBPACK_IMPORTED_MODULE_1_vue___default.a.component('character-creation', __webpack_require__(71));
+__WEBPACK_IMPORTED_MODULE_1_vue___default.a.component('example-component', __webpack_require__(75));
+__WEBPACK_IMPORTED_MODULE_1_vue___default.a.component('mosaique', __webpack_require__(78));
+__WEBPACK_IMPORTED_MODULE_1_vue___default.a.component('btn_change', __webpack_require__(81));
+__WEBPACK_IMPORTED_MODULE_1_vue___default.a.component('character-creation', __webpack_require__(84));
 
 var app = new __WEBPACK_IMPORTED_MODULE_1_vue___default.a({
     el: '#app',
@@ -26320,12 +26518,12 @@ var app = new __WEBPACK_IMPORTED_MODULE_1_vue___default.a({
 });
 
 /***/ }),
-/* 18 */
+/* 23 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
-window._ = __webpack_require__(19);
-window.Popper = __webpack_require__(8).default;
+window._ = __webpack_require__(24);
+window.Popper = __webpack_require__(9).default;
 
 /**
  * We'll load jQuery and the Bootstrap jQuery plugin which provides support
@@ -26334,9 +26532,9 @@ window.Popper = __webpack_require__(8).default;
  */
 
 try {
-  window.$ = window.jQuery = __webpack_require__(9);
+  window.$ = window.jQuery = __webpack_require__(10);
 
-  __webpack_require__(21);
+  __webpack_require__(26);
 } catch (e) {}
 
 /**
@@ -26345,7 +26543,7 @@ try {
  * CSRF token as a header based on the value of the "XSRF" token cookie.
  */
 
-window.axios = __webpack_require__(22);
+window.axios = __webpack_require__(27);
 
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
@@ -26381,7 +26579,7 @@ if (token) {
 // });
 
 /***/ }),
-/* 19 */
+/* 24 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global, module) {var __WEBPACK_AMD_DEFINE_RESULT__;/**
@@ -43493,10 +43691,10 @@ if (token) {
   }
 }.call(this));
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(5), __webpack_require__(20)(module)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(6), __webpack_require__(25)(module)))
 
 /***/ }),
-/* 20 */
+/* 25 */
 /***/ (function(module, exports) {
 
 module.exports = function(module) {
@@ -43524,7 +43722,7 @@ module.exports = function(module) {
 
 
 /***/ }),
-/* 21 */
+/* 26 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /*!
@@ -43533,7 +43731,7 @@ module.exports = function(module) {
   * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
   */
 (function (global, factory) {
-   true ? factory(exports, __webpack_require__(9), __webpack_require__(8)) :
+   true ? factory(exports, __webpack_require__(10), __webpack_require__(9)) :
   typeof define === 'function' && define.amd ? define(['exports', 'jquery', 'popper.js'], factory) :
   (factory((global.bootstrap = {}),global.jQuery,global.Popper));
 }(this, (function (exports,$,Popper) { 'use strict';
@@ -47474,22 +47672,22 @@ module.exports = function(module) {
 
 
 /***/ }),
-/* 22 */
+/* 27 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(23);
+module.exports = __webpack_require__(28);
 
 /***/ }),
-/* 23 */
+/* 28 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
 var utils = __webpack_require__(1);
-var bind = __webpack_require__(10);
-var Axios = __webpack_require__(25);
-var defaults = __webpack_require__(6);
+var bind = __webpack_require__(11);
+var Axios = __webpack_require__(30);
+var defaults = __webpack_require__(7);
 
 /**
  * Create an instance of Axios
@@ -47522,15 +47720,15 @@ axios.create = function create(instanceConfig) {
 };
 
 // Expose Cancel & CancelToken
-axios.Cancel = __webpack_require__(15);
-axios.CancelToken = __webpack_require__(39);
-axios.isCancel = __webpack_require__(14);
+axios.Cancel = __webpack_require__(16);
+axios.CancelToken = __webpack_require__(44);
+axios.isCancel = __webpack_require__(15);
 
 // Expose all/spread
 axios.all = function all(promises) {
   return Promise.all(promises);
 };
-axios.spread = __webpack_require__(40);
+axios.spread = __webpack_require__(45);
 
 module.exports = axios;
 
@@ -47539,7 +47737,7 @@ module.exports.default = axios;
 
 
 /***/ }),
-/* 24 */
+/* 29 */
 /***/ (function(module, exports) {
 
 /*!
@@ -47566,16 +47764,16 @@ function isSlowBuffer (obj) {
 
 
 /***/ }),
-/* 25 */
+/* 30 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var defaults = __webpack_require__(6);
+var defaults = __webpack_require__(7);
 var utils = __webpack_require__(1);
-var InterceptorManager = __webpack_require__(34);
-var dispatchRequest = __webpack_require__(35);
+var InterceptorManager = __webpack_require__(39);
+var dispatchRequest = __webpack_require__(40);
 
 /**
  * Create a new instance of Axios
@@ -47652,7 +47850,7 @@ module.exports = Axios;
 
 
 /***/ }),
-/* 26 */
+/* 31 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -47671,13 +47869,13 @@ module.exports = function normalizeHeaderName(headers, normalizedName) {
 
 
 /***/ }),
-/* 27 */
+/* 32 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var createError = __webpack_require__(13);
+var createError = __webpack_require__(14);
 
 /**
  * Resolve or reject a Promise based on response status.
@@ -47704,7 +47902,7 @@ module.exports = function settle(resolve, reject, response) {
 
 
 /***/ }),
-/* 28 */
+/* 33 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -47732,7 +47930,7 @@ module.exports = function enhanceError(error, config, code, request, response) {
 
 
 /***/ }),
-/* 29 */
+/* 34 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -47805,7 +48003,7 @@ module.exports = function buildURL(url, params, paramsSerializer) {
 
 
 /***/ }),
-/* 30 */
+/* 35 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -47865,7 +48063,7 @@ module.exports = function parseHeaders(headers) {
 
 
 /***/ }),
-/* 31 */
+/* 36 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -47940,7 +48138,7 @@ module.exports = (
 
 
 /***/ }),
-/* 32 */
+/* 37 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -47983,7 +48181,7 @@ module.exports = btoa;
 
 
 /***/ }),
-/* 33 */
+/* 38 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -48043,7 +48241,7 @@ module.exports = (
 
 
 /***/ }),
-/* 34 */
+/* 39 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -48102,18 +48300,18 @@ module.exports = InterceptorManager;
 
 
 /***/ }),
-/* 35 */
+/* 40 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
 var utils = __webpack_require__(1);
-var transformData = __webpack_require__(36);
-var isCancel = __webpack_require__(14);
-var defaults = __webpack_require__(6);
-var isAbsoluteURL = __webpack_require__(37);
-var combineURLs = __webpack_require__(38);
+var transformData = __webpack_require__(41);
+var isCancel = __webpack_require__(15);
+var defaults = __webpack_require__(7);
+var isAbsoluteURL = __webpack_require__(42);
+var combineURLs = __webpack_require__(43);
 
 /**
  * Throws a `Cancel` if cancellation has been requested.
@@ -48195,7 +48393,7 @@ module.exports = function dispatchRequest(config) {
 
 
 /***/ }),
-/* 36 */
+/* 41 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -48222,7 +48420,7 @@ module.exports = function transformData(data, headers, fns) {
 
 
 /***/ }),
-/* 37 */
+/* 42 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -48243,7 +48441,7 @@ module.exports = function isAbsoluteURL(url) {
 
 
 /***/ }),
-/* 38 */
+/* 43 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -48264,13 +48462,13 @@ module.exports = function combineURLs(baseURL, relativeURL) {
 
 
 /***/ }),
-/* 39 */
+/* 44 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var Cancel = __webpack_require__(15);
+var Cancel = __webpack_require__(16);
 
 /**
  * A `CancelToken` is an object that can be used to request cancellation of an operation.
@@ -48328,7 +48526,7 @@ module.exports = CancelToken;
 
 
 /***/ }),
-/* 40 */
+/* 45 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -48362,7 +48560,7 @@ module.exports = function spread(callback) {
 
 
 /***/ }),
-/* 41 */
+/* 46 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global) {var scope = (typeof global !== "undefined" && global) ||
@@ -48418,7 +48616,7 @@ exports._unrefActive = exports.active = function(item) {
 };
 
 // setimmediate attaches itself to the global object
-__webpack_require__(42);
+__webpack_require__(47);
 // On some exotic environments, it's not clear which object `setimmediate` was
 // able to install onto.  Search each possibility in the same order as the
 // `setimmediate` library.
@@ -48429,10 +48627,10 @@ exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
                          (typeof global !== "undefined" && global.clearImmediate) ||
                          (this && this.clearImmediate);
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(5)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(6)))
 
 /***/ }),
-/* 42 */
+/* 47 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global, process) {(function (global, undefined) {
@@ -48622,16 +48820,16 @@ exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
     attachTo.clearImmediate = clearImmediate;
 }(typeof self === "undefined" ? typeof global === "undefined" ? this : global : self));
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(5), __webpack_require__(11)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(6), __webpack_require__(12)))
 
 /***/ }),
-/* 43 */
+/* 48 */
 /***/ (function(module, exports, __webpack_require__) {
 
 !function(t,e){if(true)module.exports=e();else if("function"==typeof define&&define.amd)define([],e);else{var n=e();for(var r in n)("object"==typeof exports?exports:t)[r]=n[r]}}(this,function(){return function(t){function e(r){if(n[r])return n[r].exports;var i=n[r]={i:r,l:!1,exports:{}};return t[r].call(i.exports,i,i.exports,e),i.l=!0,i.exports}var n={};return e.m=t,e.c=n,e.i=function(t){return t},e.d=function(t,n,r){e.o(t,n)||Object.defineProperty(t,n,{configurable:!1,enumerable:!0,get:r})},e.n=function(t){var n=t&&t.__esModule?function(){return t.default}:function(){return t};return e.d(n,"a",n),n},e.o=function(t,e){return Object.prototype.hasOwnProperty.call(t,e)},e.p="/dist/",e(e.s=24)}([function(t,e,n){"use strict";function r(){p=!1}function i(t){if(!t)return void(l!==d&&(l=d,r()));if(t!==l){if(t.length!==d.length)throw new Error("Custom alphabet for shortid must be "+d.length+" unique characters. You submitted "+t.length+" characters: "+t);var e=t.split("").filter(function(t,e,n){return e!==n.lastIndexOf(t)});if(e.length)throw new Error("Custom alphabet for shortid must be "+d.length+" unique characters. These characters were not unique: "+e.join(", "));l=t,r()}}function o(t){return i(t),l}function a(t){h.seed(t),f!==t&&(r(),f=t)}function s(){l||i(d);for(var t,e=l.split(""),n=[],r=h.nextValue();e.length>0;)r=h.nextValue(),t=Math.floor(r*e.length),n.push(e.splice(t,1)[0]);return n.join("")}function u(){return p?p:p=s()}function c(t){return u()[t]}var l,f,p,h=n(18),d="0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_-";t.exports={characters:o,seed:a,lookup:c,shuffled:u}},function(t,e,n){"use strict";var r=n(6),i=n.n(r),o=300;e.a={animateIn:function(t){i()({targets:t,translateY:"-35px",opacity:1,duration:o,easing:"easeOutCubic"})},animateOut:function(t,e){i()({targets:t,opacity:0,marginTop:"-40px",duration:o,easing:"easeOutExpo",complete:e})},animateOutBottom:function(t,e){i()({targets:t,opacity:0,marginBottom:"-40px",duration:o,easing:"easeOutExpo",complete:e})},animateReset:function(t){i()({targets:t,left:0,opacity:1,duration:o,easing:"easeOutExpo"})},animatePanning:function(t,e,n){i()({targets:t,duration:10,easing:"easeOutQuad",left:e,opacity:n})},animatePanEnd:function(t,e){i()({targets:t,opacity:0,duration:o,easing:"easeOutExpo",complete:e})},clearAnimation:function(t){var e=i.a.timeline();t.forEach(function(t){e.add({targets:t.el,opacity:0,right:"-40px",duration:300,offset:"-=150",easing:"easeOutExpo",complete:function(){t.remove()}})})}}},function(t,e,n){"use strict";t.exports=n(15)},function(t,e,n){"use strict";function r(t,e){for(var n,r=0,o="";!n;)o+=t(e>>4*r&15|i()),n=e<Math.pow(16,r+1),r++;return o}var i=n(17);t.exports=r},function(t,e,n){"use strict";var r=n(8),i=n(1);n.d(e,"a",function(){return s});var o="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(t){return typeof t}:function(t){return t&&"function"==typeof Symbol&&t.constructor===Symbol&&t!==Symbol.prototype?"symbol":typeof t},a=n(2);n(11).polyfill();var s=function t(e){var n=this;return this.id=a.generate(),this.options=e,this.cached_options={},this.global={},this.groups=[],this.toasts=[],c(this),this.group=function(e){e||(e={}),e.globalToasts||(e.globalToasts={}),Object.assign(e.globalToasts,n.global);var r=new t(e);return n.groups.push(r),r},this.register=function(t,e,r){return r=r||{},l(n,t,e,r)},this.show=function(t,e){return u(n,t,e)},this.success=function(t,e){return e=e||{},e.type="success",u(n,t,e)},this.info=function(t,e){return e=e||{},e.type="info",u(n,t,e)},this.error=function(t,e){return e=e||{},e.type="error",u(n,t,e)},this.remove=function(t){n.toasts=n.toasts.filter(function(e){return e.el.hash!==t.hash}),t.parentNode&&t.parentNode.removeChild(t)},this.clear=function(t){return i.a.clearAnimation(n.toasts,function(){t&&t()}),n.toasts=[],!0},this},u=function(t,e,i){i=i||{};var a=null;if("object"!==(void 0===i?"undefined":o(i)))return console.error("Options should be a type of object. given : "+i),null;t.options.singleton&&t.toasts.length>0&&(t.cached_options=i,t.toasts[t.toasts.length-1].goAway(0));var s=Object.assign({},t.options);return Object.assign(s,i),a=n.i(r.a)(t,e,s),t.toasts.push(a),a},c=function(t){var e=t.options.globalToasts,n=function(e,n){return"string"==typeof n&&t[n]?t[n].apply(t,[e,{}]):u(t,e,n)};e&&(t.global={},Object.keys(e).forEach(function(r){t.global[r]=function(){var t=arguments.length>0&&void 0!==arguments[0]?arguments[0]:{};return e[r].apply(null,[t,n])}}))},l=function(t,e,n,r){t.options.globalToasts||(t.options.globalToasts={}),t.options.globalToasts[e]=function(t,e){var i=null;return"string"==typeof n&&(i=n),"function"==typeof n&&(i=n(t)),e(i,r)},c(t)}},function(t,e,n){n(21);var r=n(20)(null,null,null,null);t.exports=r.exports},function(t,e,n){var r,i,o,a=this;!function(n,a){i=[],r=a,o="function"==typeof r?r.apply(e,i):r,void 0!==o&&(t.exports=o)}(this,function(){function t(t){if(!D.col(t))try{return document.querySelectorAll(t)}catch(t){}}function e(t){return t.reduce(function(t,n){return t.concat(D.arr(n)?e(n):n)},[])}function n(e){return D.arr(e)?e:(D.str(e)&&(e=t(e)||e),e instanceof NodeList||e instanceof HTMLCollection?[].slice.call(e):[e])}function r(t,e){return t.some(function(t){return t===e})}function i(t){var e,n={};for(e in t)n[e]=t[e];return n}function o(t,e){var n,r=i(t);for(n in t)r[n]=e.hasOwnProperty(n)?e[n]:t[n];return r}function s(t,e){var n,r=i(t);for(n in e)r[n]=D.und(t[n])?e[n]:t[n];return r}function u(t){t=t.replace(/^#?([a-f\d])([a-f\d])([a-f\d])$/i,function(t,e,n,r){return e+e+n+n+r+r});var e=/^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(t);t=parseInt(e[1],16);var n=parseInt(e[2],16),e=parseInt(e[3],16);return"rgb("+t+","+n+","+e+")"}function c(t){function e(t,e,n){return 0>n&&(n+=1),1<n&&--n,n<1/6?t+6*(e-t)*n:.5>n?e:n<2/3?t+(e-t)*(2/3-n)*6:t}var n=/hsl\((\d+),\s*([\d.]+)%,\s*([\d.]+)%\)/g.exec(t);t=parseInt(n[1])/360;var r=parseInt(n[2])/100,n=parseInt(n[3])/100;if(0==r)r=n=t=n;else{var i=.5>n?n*(1+r):n+r-n*r,o=2*n-i,r=e(o,i,t+1/3),n=e(o,i,t);t=e(o,i,t-1/3)}return"rgb("+255*r+","+255*n+","+255*t+")"}function l(t){if(t=/([\+\-]?[0-9#\.]+)(%|px|pt|em|rem|in|cm|mm|ex|pc|vw|vh|deg|rad|turn)?/.exec(t))return t[2]}function f(t){return-1<t.indexOf("translate")?"px":-1<t.indexOf("rotate")||-1<t.indexOf("skew")?"deg":void 0}function p(t,e){return D.fnc(t)?t(e.target,e.id,e.total):t}function h(t,e){if(e in t.style)return getComputedStyle(t).getPropertyValue(e.replace(/([a-z])([A-Z])/g,"$1-$2").toLowerCase())||"0"}function d(t,e){return D.dom(t)&&r(_,e)?"transform":D.dom(t)&&(t.getAttribute(e)||D.svg(t)&&t[e])?"attribute":D.dom(t)&&"transform"!==e&&h(t,e)?"css":null!=t[e]?"object":void 0}function m(t,e){var n=f(e),n=-1<e.indexOf("scale")?1:0+n;if(t=t.style.transform,!t)return n;for(var r=[],i=[],o=[],a=/(\w+)\((.+?)\)/g;r=a.exec(t);)i.push(r[1]),o.push(r[2]);return t=o.filter(function(t,n){return i[n]===e}),t.length?t[0]:n}function v(t,e){switch(d(t,e)){case"transform":return m(t,e);case"css":return h(t,e);case"attribute":return t.getAttribute(e)}return t[e]||0}function g(t,e){var n=/^(\*=|\+=|-=)/.exec(t);if(!n)return t;switch(e=parseFloat(e),t=parseFloat(t.replace(n[0],"")),n[0][0]){case"+":return e+t;case"-":return e-t;case"*":return e*t}}function y(t){return D.obj(t)&&t.hasOwnProperty("totalLength")}function b(t,e){function n(n){return n=void 0===n?0:n,t.el.getPointAtLength(1<=e+n?e+n:0)}var r=n(),i=n(-1),o=n(1);switch(t.property){case"x":return r.x;case"y":return r.y;case"angle":return 180*Math.atan2(o.y-i.y,o.x-i.x)/Math.PI}}function x(t,e){var n=/-?\d*\.?\d+/g;if(t=y(t)?t.totalLength:t,D.col(t))e=D.rgb(t)?t:D.hex(t)?u(t):D.hsl(t)?c(t):void 0;else{var r=l(t);t=r?t.substr(0,t.length-r.length):t,e=e?t+e:t}return e+="",{original:e,numbers:e.match(n)?e.match(n).map(Number):[0],strings:e.split(n)}}function T(t,e){return e.reduce(function(e,n,r){return e+t[r-1]+n})}function w(t){return(t?e(D.arr(t)?t.map(n):n(t)):[]).filter(function(t,e,n){return n.indexOf(t)===e})}function E(t){var e=w(t);return e.map(function(t,n){return{target:t,id:n,total:e.length}})}function C(t,e){var r=i(e);if(D.arr(t)){var o=t.length;2!==o||D.obj(t[0])?D.fnc(e.duration)||(r.duration=e.duration/o):t={value:t}}return n(t).map(function(t,n){return n=n?0:e.delay,t=D.obj(t)&&!y(t)?t:{value:t},D.und(t.delay)&&(t.delay=n),t}).map(function(t){return s(t,r)})}function O(t,e){var n,r={};for(n in t){var i=p(t[n],e);D.arr(i)&&(i=i.map(function(t){return p(t,e)}),1===i.length&&(i=i[0])),r[n]=i}return r.duration=parseFloat(r.duration),r.delay=parseFloat(r.delay),r}function S(t){return D.arr(t)?X.apply(this,t):R[t]}function M(t,e){var n;return t.tweens.map(function(r){r=O(r,e);var i=r.value,o=v(e.target,t.name),a=n?n.to.original:o,a=D.arr(i)?i[0]:a,s=g(D.arr(i)?i[1]:i,a),o=l(s)||l(a)||l(o);return r.isPath=y(i),r.from=x(a,o),r.to=x(s,o),r.start=n?n.end:t.offset,r.end=r.start+r.delay+r.duration,r.easing=S(r.easing),r.elasticity=(1e3-Math.min(Math.max(r.elasticity,1),999))/1e3,D.col(r.from.original)&&(r.round=1),n=r})}function k(t,n){return e(t.map(function(t){return n.map(function(e){var n=d(t.target,e.name);if(n){var r=M(e,t);e={type:n,property:e.name,animatable:t,tweens:r,duration:r[r.length-1].end,delay:r[0].delay}}else e=void 0;return e})})).filter(function(t){return!D.und(t)})}function A(t,e,n){var r="delay"===t?Math.min:Math.max;return e.length?r.apply(Math,e.map(function(e){return e[t]})):n[t]}function P(t){var e,n=o(j,t),r=o(N,t),i=E(t.targets),a=[],u=s(n,r);for(e in t)u.hasOwnProperty(e)||"targets"===e||a.push({name:e,offset:u.offset,tweens:C(t[e],r)});return t=k(i,a),s(n,{children:[],animatables:i,animations:t,duration:A("duration",t,r),delay:A("delay",t,r)})}function I(t){function e(){return window.Promise&&new Promise(function(t){return l=t})}function n(t){return p.reversed?p.duration-t:t}function r(t){for(var e=0,n={},r=p.animations,i={};e<r.length;){var o=r[e],a=o.animatable,s=o.tweens;i.tween=s.filter(function(e){return t<e.end})[0]||s[s.length-1],i.isPath$1=i.tween.isPath,i.round=i.tween.round,i.eased=i.tween.easing(Math.min(Math.max(t-i.tween.start-i.tween.delay,0),i.tween.duration)/i.tween.duration,i.tween.elasticity),s=T(i.tween.to.numbers.map(function(t){return function(e,n){return n=t.isPath$1?0:t.tween.from.numbers[n],e=n+t.eased*(e-n),t.isPath$1&&(e=b(t.tween.value,e)),t.round&&(e=Math.round(e*t.round)/t.round),e}}(i)),i.tween.to.strings),z[o.type](a.target,o.property,s,n,a.id),o.currentValue=s,e++,i={isPath$1:i.isPath$1,tween:i.tween,eased:i.eased,round:i.round}}if(n)for(var u in n)L||(L=h(document.body,"transform")?"transform":"-webkit-transform"),p.animatables[u].target.style[L]=n[u].join(" ");p.currentTime=t,p.progress=t/p.duration*100}function i(t){p[t]&&p[t](p)}function o(){p.remaining&&!0!==p.remaining&&p.remaining--}function a(t){var a=p.duration,h=p.offset,d=p.delay,m=p.currentTime,v=p.reversed,g=n(t),g=Math.min(Math.max(g,0),a);if(p.children){var y=p.children;if(g>=p.currentTime)for(var b=0;b<y.length;b++)y[b].seek(g);else for(b=y.length;b--;)y[b].seek(g)}g>h&&g<a?(r(g),!p.began&&g>=d&&(p.began=!0,i("begin")),i("run")):(g<=h&&0!==m&&(r(0),v&&o()),g>=a&&m!==a&&(r(a),v||o())),t>=a&&(p.remaining?(u=s,"alternate"===p.direction&&(p.reversed=!p.reversed)):(p.pause(),"Promise"in window&&(l(),f=e()),p.completed||(p.completed=!0,i("complete"))),c=0),i("update")}t=void 0===t?{}:t;var s,u,c=0,l=null,f=e(),p=P(t);return p.reset=function(){var t=p.direction,e=p.loop;for(p.currentTime=0,p.progress=0,p.paused=!0,p.began=!1,p.completed=!1,p.reversed="reverse"===t,p.remaining="alternate"===t&&1===e?2:e,t=p.children.length;t--;)e=p.children[t],e.seek(e.offset),e.reset()},p.tick=function(t){s=t,u||(u=s),a((c+s-u)*I.speed)},p.seek=function(t){a(n(t))},p.pause=function(){var t=F.indexOf(p);-1<t&&F.splice(t,1),p.paused=!0},p.play=function(){p.paused&&(p.paused=!1,u=0,c=n(p.currentTime),F.push(p),Y||H())},p.reverse=function(){p.reversed=!p.reversed,u=0,c=n(p.currentTime)},p.restart=function(){p.pause(),p.reset(),p.play()},p.finished=f,p.reset(),p.autoplay&&p.play(),p}var L,j={update:void 0,begin:void 0,run:void 0,complete:void 0,loop:1,direction:"normal",autoplay:!0,offset:0},N={duration:1e3,delay:0,easing:"easeOutElastic",elasticity:500,round:0},_="translateX translateY translateZ rotate rotateX rotateY rotateZ scale scaleX scaleY scaleZ skewX skewY".split(" "),D={arr:function(t){return Array.isArray(t)},obj:function(t){return-1<Object.prototype.toString.call(t).indexOf("Object")},svg:function(t){return t instanceof SVGElement},dom:function(t){return t.nodeType||D.svg(t)},str:function(t){return"string"==typeof t},fnc:function(t){return"function"==typeof t},und:function(t){return void 0===t},hex:function(t){return/(^#[0-9A-F]{6}$)|(^#[0-9A-F]{3}$)/i.test(t)},rgb:function(t){return/^rgb/.test(t)},hsl:function(t){return/^hsl/.test(t)},col:function(t){return D.hex(t)||D.rgb(t)||D.hsl(t)}},X=function(){function t(t,e,n){return(((1-3*n+3*e)*t+(3*n-6*e))*t+3*e)*t}return function(e,n,r,i){if(0<=e&&1>=e&&0<=r&&1>=r){var o=new Float32Array(11);if(e!==n||r!==i)for(var a=0;11>a;++a)o[a]=t(.1*a,e,r);return function(a){if(e===n&&r===i)return a;if(0===a)return 0;if(1===a)return 1;for(var s=0,u=1;10!==u&&o[u]<=a;++u)s+=.1;--u;var u=s+(a-o[u])/(o[u+1]-o[u])*.1,c=3*(1-3*r+3*e)*u*u+2*(3*r-6*e)*u+3*e;if(.001<=c){for(s=0;4>s&&(c=3*(1-3*r+3*e)*u*u+2*(3*r-6*e)*u+3*e,0!==c);++s)var l=t(u,e,r)-a,u=u-l/c;a=u}else if(0===c)a=u;else{var u=s,s=s+.1,f=0;do l=u+(s-u)/2,c=t(l,e,r)-a,0<c?s=l:u=l;while(1e-7<Math.abs(c)&&10>++f);a=l}return t(a,n,i)}}}}(),R=function(){function t(t,e){return 0===t||1===t?t:-Math.pow(2,10*(t-1))*Math.sin(2*(t-1-e/(2*Math.PI)*Math.asin(1))*Math.PI/e)}var e,n="Quad Cubic Quart Quint Sine Expo Circ Back Elastic".split(" "),r={In:[[.55,.085,.68,.53],[.55,.055,.675,.19],[.895,.03,.685,.22],[.755,.05,.855,.06],[.47,0,.745,.715],[.95,.05,.795,.035],[.6,.04,.98,.335],[.6,-.28,.735,.045],t],Out:[[.25,.46,.45,.94],[.215,.61,.355,1],[.165,.84,.44,1],[.23,1,.32,1],[.39,.575,.565,1],[.19,1,.22,1],[.075,.82,.165,1],[.175,.885,.32,1.275],function(e,n){return 1-t(1-e,n)}],InOut:[[.455,.03,.515,.955],[.645,.045,.355,1],[.77,0,.175,1],[.86,0,.07,1],[.445,.05,.55,.95],[1,0,0,1],[.785,.135,.15,.86],[.68,-.55,.265,1.55],function(e,n){return.5>e?t(2*e,n)/2:1-t(-2*e+2,n)/2}]},i={linear:X(.25,.25,.75,.75)},o={};for(e in r)o.type=e,r[o.type].forEach(function(t){return function(e,r){i["ease"+t.type+n[r]]=D.fnc(e)?e:X.apply(a,e)}}(o)),o={type:o.type};return i}(),z={css:function(t,e,n){return t.style[e]=n},attribute:function(t,e,n){return t.setAttribute(e,n)},object:function(t,e,n){return t[e]=n},transform:function(t,e,n,r,i){r[i]||(r[i]=[]),r[i].push(e+"("+n+")")}},F=[],Y=0,H=function(){function t(){Y=requestAnimationFrame(e)}function e(e){var n=F.length;if(n){for(var r=0;r<n;)F[r]&&F[r].tick(e),r++;t()}else cancelAnimationFrame(Y),Y=0}return t}();return I.version="2.0.2",I.speed=1,I.running=F,I.remove=function(t){t=w(t);for(var e=F.length;e--;)for(var n=F[e],i=n.animations,o=i.length;o--;)r(t,i[o].animatable.target)&&(i.splice(o,1),i.length||n.pause())},I.getValue=v,I.path=function(e,n){var r=D.str(e)?t(e)[0]:e,i=n||100;return function(t){return{el:r,property:t,totalLength:r.getTotalLength()*(i/100)}}},I.setDashoffset=function(t){var e=t.getTotalLength();return t.setAttribute("stroke-dasharray",e),e},I.bezier=X,I.easings=R,I.timeline=function(t){var e=I(t);return e.pause(),e.duration=0,e.add=function(t){return e.children.forEach(function(t){t.began=!0,t.completed=!0}),n(t).forEach(function(t){var n=e.duration,r=t.offset;t.autoplay=!1,t.offset=D.und(r)?n:g(r,n),e.seek(t.offset),t=I(t),t.duration>n&&(e.duration=t.duration),t.began=!0,e.children.push(t)}),e.reset(),e.seek(0),e.autoplay&&e.restart(),e},e},I.random=function(t,e){return Math.floor(Math.random()*(e-t+1))+t},I})},function(t,e,n){"use strict";var r=n(1);n.d(e,"a",function(){return u});var i=this,o="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(t){return typeof t}:function(t){return t&&"function"==typeof Symbol&&t.constructor===Symbol&&t!==Symbol.prototype?"symbol":typeof t},a=function(t,e,n){return setTimeout(function(){if(n.cached_options.position&&n.cached_options.position.includes("bottom"))return void r.a.animateOutBottom(t,function(){n.remove(t)});r.a.animateOut(t,function(){n.remove(t)})},e),!0},s=function(t,e){return("object"===("undefined"==typeof HTMLElement?"undefined":o(HTMLElement))?e instanceof HTMLElement:e&&"object"===(void 0===e?"undefined":o(e))&&null!==e&&1===e.nodeType&&"string"==typeof e.nodeName)?t.appendChild(e):t.innerHTML=e,i},u=function(t,e){var n=!1;return{el:t,text:function(e){return s(t,e),this},goAway:function(){var r=arguments.length>0&&void 0!==arguments[0]?arguments[0]:800;return n=!0,a(t,r,e)},remove:function(){e.remove(t)},disposed:function(){return n}}}},function(t,e,n){"use strict";var r=n(12),i=n.n(r),o=n(1),a=n(7),s="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(t){return typeof t}:function(t){return t&&"function"==typeof Symbol&&t.constructor===Symbol&&t!==Symbol.prototype?"symbol":typeof t},u=n(2),c={},l=null,f=function(t){return t.className=t.className||null,t.onComplete=t.onComplete||null,t.position=t.position||"top-right",t.duration=t.duration||null,t.theme=t.theme||"primary",t.type=t.type||"default",t.containerClass=t.containerClass||null,t.fullWidth=t.fullWidth||!1,t.icon=t.icon||null,t.action=t.action||null,t.fitToScreen=t.fitToScreen||null,t.closeOnSwipe=void 0===t.closeOnSwipe||t.closeOnSwipe,t.iconPack=t.iconPack||"material",t.className&&"string"==typeof t.className&&(t.className=t.className.split(" ")),t.className||(t.className=[]),t.theme&&t.className.push(t.theme.trim()),t.type&&t.className.push(t.type),t.containerClass&&"string"==typeof t.containerClass&&(t.containerClass=t.containerClass.split(" ")),t.containerClass||(t.containerClass=[]),t.position&&t.containerClass.push(t.position.trim()),t.fullWidth&&t.containerClass.push("full-width"),t.fitToScreen&&t.containerClass.push("fit-to-screen"),c=t,t},p=function(t,e){var r=document.createElement("div");if(r.classList.add("toasted"),r.hash=u.generate(),e.className&&e.className.forEach(function(t){r.classList.add(t)}),("object"===("undefined"==typeof HTMLElement?"undefined":s(HTMLElement))?t instanceof HTMLElement:t&&"object"===(void 0===t?"undefined":s(t))&&null!==t&&1===t.nodeType&&"string"==typeof t.nodeName)?r.appendChild(t):r.innerHTML=t,h(e,r),e.closeOnSwipe){var c=new i.a(r,{prevent_default:!1});c.on("pan",function(t){var e=t.deltaX,n=80;r.classList.contains("panning")||r.classList.add("panning");var i=1-Math.abs(e/n);i<0&&(i=0),o.a.animatePanning(r,e,i)}),c.on("panend",function(t){var n=t.deltaX;Math.abs(n)>80?o.a.animatePanEnd(r,function(){"function"==typeof e.onComplete&&e.onComplete(),r.parentNode&&l.remove(r)}):(r.classList.remove("panning"),o.a.animateReset(r))})}if(Array.isArray(e.action))e.action.forEach(function(t){var e=m(t,n.i(a.a)(r,l));e&&r.appendChild(e)});else if("object"===s(e.action)){var f=m(e.action,n.i(a.a)(r,l));f&&r.appendChild(f)}return r},h=function(t,e){if(t.icon){var n=document.createElement("i");switch(t.iconPack){case"fontawesome":n.classList.add("fa");var r=t.icon.name?t.icon.name:t.icon;r.includes("fa-")?n.classList.add(r.trim()):n.classList.add("fa-"+r.trim());break;default:n.classList.add("material-icons"),n.textContent=t.icon.name?t.icon.name:t.icon}t.icon.after&&n.classList.add("after"),d(t,n,e)}},d=function(t,e,n){t.icon&&(t.icon.after&&t.icon.name?n.appendChild(e):(t.icon.name,n.insertBefore(e,n.firstChild)))},m=function(t,e){if(!t)return null;var n=document.createElement("a");if(n.classList.add("action"),n.classList.add("ripple"),t.text&&(n.text=t.text),t.href&&(n.href=t.href),t.icon){n.classList.add("icon");var r=document.createElement("i");switch(c.iconPack){case"fontawesome":r.classList.add("fa"),t.icon.includes("fa-")?r.classList.add(t.icon.trim()):r.classList.add("fa-"+t.icon.trim());break;default:r.classList.add("material-icons"),r.textContent=t.icon}n.appendChild(r)}return t.class&&("string"==typeof t.class?t.class.split(" ").forEach(function(t){n.classList.add(t)}):Array.isArray(t.class)&&t.class.forEach(function(t){n.classList.add(t.trim())})),t.push&&n.addEventListener("click",function(n){if(n.preventDefault(),!c.router)return void console.warn("[vue-toasted] : Vue Router instance is not attached. please check the docs");c.router.push(t.push),t.push.dontClose||e.goAway(0)}),t.onClick&&"function"==typeof t.onClick&&n.addEventListener("click",function(n){t.onClick&&(n.preventDefault(),t.onClick(n,e))}),n};e.a=function(t,e,r){l=t,r=f(r);var i=document.getElementById(l.id);null===i&&(i=document.createElement("div"),i.id=l.id,document.body.appendChild(i)),r.containerClass.unshift("toasted-container"),i.className!==r.containerClass.join(" ")&&(i.className="",r.containerClass.forEach(function(t){i.classList.add(t)}));var s=p(e,r);e&&i.appendChild(s),s.style.opacity=0,o.a.animateIn(s);var u=r.duration,c=void 0;return null!==u&&(c=setInterval(function(){null===s.parentNode&&window.clearInterval(c),s.classList.contains("panning")||(u-=20),u<=0&&(o.a.animateOut(s,function(){"function"==typeof r.onComplete&&r.onComplete(),s.parentNode&&l.remove(s)}),window.clearInterval(c))},20)),n.i(a.a)(s,l)}},function(t,e,n){e=t.exports=n(10)(),e.push([t.i,".toasted{padding:0 20px}.toasted.rounded{border-radius:24px}.toasted.primary{border-radius:2px;min-height:38px;line-height:1.1em;background-color:#353535;padding:0 20px;font-size:15px;font-weight:300;color:#fff;box-shadow:0 1px 3px rgba(0,0,0,.12),0 1px 2px rgba(0,0,0,.24)}.toasted.primary.success{background:#4caf50}.toasted.primary.error{background:#f44336}.toasted.primary.info{background:#3f51b5}.toasted.primary .action{color:#a1c2fa}.toasted.bubble{border-radius:30px;min-height:38px;line-height:1.1em;background-color:#ff7043;padding:0 20px;font-size:15px;font-weight:300;color:#fff;box-shadow:0 1px 3px rgba(0,0,0,.12),0 1px 2px rgba(0,0,0,.24)}.toasted.bubble.success{background:#4caf50}.toasted.bubble.error{background:#f44336}.toasted.bubble.info{background:#3f51b5}.toasted.bubble .action{color:#8e2b0c}.toasted.outline{border-radius:30px;min-height:38px;line-height:1.1em;background-color:#fff;border:1px solid #676767;padding:0 20px;font-size:15px;color:#676767;box-shadow:0 1px 3px rgba(0,0,0,.12),0 1px 2px rgba(0,0,0,.24);font-weight:700}.toasted.outline.success{color:#4caf50;border-color:#4caf50}.toasted.outline.error{color:#f44336;border-color:#f44336}.toasted.outline.info{color:#3f51b5;border-color:#3f51b5}.toasted.outline .action{color:#607d8b}.toasted-container{position:fixed;z-index:10000}.toasted-container,.toasted-container.full-width{display:-ms-flexbox;display:flex;-ms-flex-direction:column;flex-direction:column}.toasted-container.full-width{max-width:86%;width:100%}.toasted-container.full-width.fit-to-screen{min-width:100%}.toasted-container.full-width.fit-to-screen .toasted:first-child{margin-top:0}.toasted-container.full-width.fit-to-screen.top-right{top:0;right:0}.toasted-container.full-width.fit-to-screen.top-left{top:0;left:0}.toasted-container.full-width.fit-to-screen.top-center{top:0;left:0;-webkit-transform:translateX(0);transform:translateX(0)}.toasted-container.full-width.fit-to-screen.bottom-right{right:0;bottom:0}.toasted-container.full-width.fit-to-screen.bottom-left{left:0;bottom:0}.toasted-container.full-width.fit-to-screen.bottom-center{left:0;bottom:0;-webkit-transform:translateX(0);transform:translateX(0)}.toasted-container.top-right{top:10%;right:7%}.toasted-container.top-left{top:10%;left:7%}.toasted-container.top-center{top:10%;left:50%;-webkit-transform:translateX(-50%);transform:translateX(-50%)}.toasted-container.bottom-right{right:5%;bottom:7%}.toasted-container.bottom-left{left:5%;bottom:7%}.toasted-container.bottom-center{left:50%;-webkit-transform:translateX(-50%);transform:translateX(-50%);bottom:7%}.toasted-container.bottom-left .toasted,.toasted-container.top-left .toasted{float:left}.toasted-container.bottom-right .toasted,.toasted-container.top-right .toasted{float:right}.toasted-container .toasted{top:35px;width:auto;clear:both;margin-top:10px;position:relative;max-width:100%;height:auto;word-break:normal;display:-ms-flexbox;display:flex;-ms-flex-align:center;align-items:center;-ms-flex-pack:justify;justify-content:space-between;box-sizing:inherit}.toasted-container .toasted .fa,.toasted-container .toasted .material-icons{margin-right:.5rem;margin-left:-.4rem}.toasted-container .toasted .fa.after,.toasted-container .toasted .material-icons.after{margin-left:.5rem;margin-right:-.4rem}.toasted-container .toasted .action{text-decoration:none;font-size:.8rem;padding:8px;margin:5px -7px 5px 7px;border-radius:3px;text-transform:uppercase;letter-spacing:.03em;font-weight:600;cursor:pointer}.toasted-container .toasted .action.icon{padding:4px;display:-ms-flexbox;display:flex;-ms-flex-align:center;align-items:center;-ms-flex-pack:center;justify-content:center}.toasted-container .toasted .action.icon .fa,.toasted-container .toasted .action.icon .material-icons{margin-right:0;margin-left:4px}.toasted-container .toasted .action.icon:hover{text-decoration:none}.toasted-container .toasted .action:hover{text-decoration:underline}@media only screen and (max-width:600px){#toasted-container{min-width:100%}#toasted-container .toasted:first-child{margin-top:0}#toasted-container.top-right{top:0;right:0}#toasted-container.top-left{top:0;left:0}#toasted-container.top-center{top:0;left:0;-webkit-transform:translateX(0);transform:translateX(0)}#toasted-container.bottom-right{right:0;bottom:0}#toasted-container.bottom-left{left:0;bottom:0}#toasted-container.bottom-center{left:0;bottom:0;-webkit-transform:translateX(0);transform:translateX(0)}#toasted-container.bottom-center,#toasted-container.top-center{-ms-flex-align:stretch!important;align-items:stretch!important}#toasted-container.bottom-left .toasted,#toasted-container.bottom-right .toasted,#toasted-container.top-left .toasted,#toasted-container.top-right .toasted{float:none}#toasted-container .toasted{border-radius:0}}",""])},function(t,e){t.exports=function(){var t=[];return t.toString=function(){for(var t=[],e=0;e<this.length;e++){var n=this[e];n[2]?t.push("@media "+n[2]+"{"+n[1]+"}"):t.push(n[1])}return t.join("")},t.i=function(e,n){"string"==typeof e&&(e=[[null,e,""]]);for(var r={},i=0;i<this.length;i++){var o=this[i][0];"number"==typeof o&&(r[o]=!0)}for(i=0;i<e.length;i++){var a=e[i];"number"==typeof a[0]&&r[a[0]]||(n&&!a[2]?a[2]=n:n&&(a[2]="("+a[2]+") and ("+n+")"),t.push(a))}},t}},function(t,e,n){"use strict";function r(t,e){if(void 0===t||null===t)throw new TypeError("Cannot convert first argument to object");for(var n=Object(t),r=1;r<arguments.length;r++){var i=arguments[r];if(void 0!==i&&null!==i)for(var o=Object.keys(Object(i)),a=0,s=o.length;a<s;a++){var u=o[a],c=Object.getOwnPropertyDescriptor(i,u);void 0!==c&&c.enumerable&&(n[u]=i[u])}}return n}function i(){Object.assign||Object.defineProperty(Object,"assign",{enumerable:!1,configurable:!0,writable:!0,value:r})}t.exports={assign:r,polyfill:i}},function(t,e,n){var r;!function(i,o,a,s){"use strict";function u(t,e,n){return setTimeout(h(t,n),e)}function c(t,e,n){return!!Array.isArray(t)&&(l(t,n[e],n),!0)}function l(t,e,n){var r;if(t)if(t.forEach)t.forEach(e,n);else if(t.length!==s)for(r=0;r<t.length;)e.call(n,t[r],r,t),r++;else for(r in t)t.hasOwnProperty(r)&&e.call(n,t[r],r,t)}function f(t,e,n){var r="DEPRECATED METHOD: "+e+"\n"+n+" AT \n";return function(){var e=new Error("get-stack-trace"),n=e&&e.stack?e.stack.replace(/^[^\(]+?[\n$]/gm,"").replace(/^\s+at\s+/gm,"").replace(/^Object.<anonymous>\s*\(/gm,"{anonymous}()@"):"Unknown Stack Trace",o=i.console&&(i.console.warn||i.console.log);return o&&o.call(i.console,r,n),t.apply(this,arguments)}}function p(t,e,n){var r,i=e.prototype;r=t.prototype=Object.create(i),r.constructor=t,r._super=i,n&&mt(r,n)}function h(t,e){return function(){return t.apply(e,arguments)}}function d(t,e){return typeof t==yt?t.apply(e?e[0]||s:s,e):t}function m(t,e){return t===s?e:t}function v(t,e,n){l(x(e),function(e){t.addEventListener(e,n,!1)})}function g(t,e,n){l(x(e),function(e){t.removeEventListener(e,n,!1)})}function y(t,e){for(;t;){if(t==e)return!0;t=t.parentNode}return!1}function b(t,e){return t.indexOf(e)>-1}function x(t){return t.trim().split(/\s+/g)}function T(t,e,n){if(t.indexOf&&!n)return t.indexOf(e);for(var r=0;r<t.length;){if(n&&t[r][n]==e||!n&&t[r]===e)return r;r++}return-1}function w(t){return Array.prototype.slice.call(t,0)}function E(t,e,n){for(var r=[],i=[],o=0;o<t.length;){var a=e?t[o][e]:t[o];T(i,a)<0&&r.push(t[o]),i[o]=a,o++}return n&&(r=e?r.sort(function(t,n){return t[e]>n[e]}):r.sort()),r}function C(t,e){for(var n,r,i=e[0].toUpperCase()+e.slice(1),o=0;o<vt.length;){if(n=vt[o],r=n?n+i:e,r in t)return r;o++}return s}function O(){return Ct++}function S(t){var e=t.ownerDocument||t;return e.defaultView||e.parentWindow||i}function M(t,e){var n=this;this.manager=t,this.callback=e,this.element=t.element,this.target=t.options.inputTarget,this.domHandler=function(e){d(t.options.enable,[t])&&n.handler(e)},this.init()}function k(t){var e=t.options.inputClass;return new(e?e:Mt?H:kt?W:St?B:Y)(t,A)}function A(t,e,n){var r=n.pointers.length,i=n.changedPointers.length,o=e&Nt&&r-i===0,a=e&(Dt|Xt)&&r-i===0;n.isFirst=!!o,n.isFinal=!!a,o&&(t.session={}),n.eventType=e,P(t,n),t.emit("hammer.input",n),t.recognize(n),t.session.prevInput=n}function P(t,e){var n=t.session,r=e.pointers,i=r.length;n.firstInput||(n.firstInput=j(e)),i>1&&!n.firstMultiple?n.firstMultiple=j(e):1===i&&(n.firstMultiple=!1);var o=n.firstInput,a=n.firstMultiple,s=a?a.center:o.center,u=e.center=N(r);e.timeStamp=Tt(),e.deltaTime=e.timeStamp-o.timeStamp,e.angle=R(s,u),e.distance=X(s,u),I(n,e),e.offsetDirection=D(e.deltaX,e.deltaY);var c=_(e.deltaTime,e.deltaX,e.deltaY);e.overallVelocityX=c.x,e.overallVelocityY=c.y,e.overallVelocity=xt(c.x)>xt(c.y)?c.x:c.y,e.scale=a?F(a.pointers,r):1,e.rotation=a?z(a.pointers,r):0,e.maxPointers=n.prevInput?e.pointers.length>n.prevInput.maxPointers?e.pointers.length:n.prevInput.maxPointers:e.pointers.length,L(n,e);var l=t.element;y(e.srcEvent.target,l)&&(l=e.srcEvent.target),e.target=l}function I(t,e){var n=e.center,r=t.offsetDelta||{},i=t.prevDelta||{},o=t.prevInput||{};e.eventType!==Nt&&o.eventType!==Dt||(i=t.prevDelta={x:o.deltaX||0,y:o.deltaY||0},r=t.offsetDelta={x:n.x,y:n.y}),e.deltaX=i.x+(n.x-r.x),e.deltaY=i.y+(n.y-r.y)}function L(t,e){var n,r,i,o,a=t.lastInterval||e,u=e.timeStamp-a.timeStamp;if(e.eventType!=Xt&&(u>jt||a.velocity===s)){var c=e.deltaX-a.deltaX,l=e.deltaY-a.deltaY,f=_(u,c,l);r=f.x,i=f.y,n=xt(f.x)>xt(f.y)?f.x:f.y,o=D(c,l),t.lastInterval=e}else n=a.velocity,r=a.velocityX,i=a.velocityY,o=a.direction;e.velocity=n,e.velocityX=r,e.velocityY=i,e.direction=o}function j(t){for(var e=[],n=0;n<t.pointers.length;)e[n]={clientX:bt(t.pointers[n].clientX),clientY:bt(t.pointers[n].clientY)},n++;return{timeStamp:Tt(),pointers:e,center:N(e),deltaX:t.deltaX,deltaY:t.deltaY}}function N(t){var e=t.length;if(1===e)return{x:bt(t[0].clientX),y:bt(t[0].clientY)};for(var n=0,r=0,i=0;i<e;)n+=t[i].clientX,r+=t[i].clientY,i++;return{x:bt(n/e),y:bt(r/e)}}function _(t,e,n){return{x:e/t||0,y:n/t||0}}function D(t,e){return t===e?Rt:xt(t)>=xt(e)?t<0?zt:Ft:e<0?Yt:Ht}function X(t,e,n){n||(n=Ut);var r=e[n[0]]-t[n[0]],i=e[n[1]]-t[n[1]];return Math.sqrt(r*r+i*i)}function R(t,e,n){n||(n=Ut);var r=e[n[0]]-t[n[0]],i=e[n[1]]-t[n[1]];return 180*Math.atan2(i,r)/Math.PI}function z(t,e){return R(e[1],e[0],Bt)+R(t[1],t[0],Bt)}function F(t,e){return X(e[0],e[1],Bt)/X(t[0],t[1],Bt)}function Y(){this.evEl=Gt,this.evWin=Zt,this.pressed=!1,M.apply(this,arguments)}function H(){this.evEl=Kt,this.evWin=te,M.apply(this,arguments),this.store=this.manager.session.pointerEvents=[]}function q(){this.evTarget=ne,this.evWin=re,this.started=!1,M.apply(this,arguments)}function V(t,e){var n=w(t.touches),r=w(t.changedTouches);return e&(Dt|Xt)&&(n=E(n.concat(r),"identifier",!0)),[n,r]}function W(){this.evTarget=oe,this.targetIds={},M.apply(this,arguments)}function U(t,e){var n=w(t.touches),r=this.targetIds;if(e&(Nt|_t)&&1===n.length)return r[n[0].identifier]=!0,[n,n];var i,o,a=w(t.changedTouches),s=[],u=this.target;if(o=n.filter(function(t){return y(t.target,u)}),e===Nt)for(i=0;i<o.length;)r[o[i].identifier]=!0,i++;for(i=0;i<a.length;)r[a[i].identifier]&&s.push(a[i]),e&(Dt|Xt)&&delete r[a[i].identifier],i++;return s.length?[E(o.concat(s),"identifier",!0),s]:void 0}function B(){M.apply(this,arguments);var t=h(this.handler,this);this.touch=new W(this.manager,t),this.mouse=new Y(this.manager,t),this.primaryTouch=null,this.lastTouches=[]}function $(t,e){t&Nt?(this.primaryTouch=e.changedPointers[0].identifier,G.call(this,e)):t&(Dt|Xt)&&G.call(this,e)}function G(t){var e=t.changedPointers[0];if(e.identifier===this.primaryTouch){var n={x:e.clientX,y:e.clientY};this.lastTouches.push(n);var r=this.lastTouches,i=function(){var t=r.indexOf(n);t>-1&&r.splice(t,1)};setTimeout(i,ae)}}function Z(t){for(var e=t.srcEvent.clientX,n=t.srcEvent.clientY,r=0;r<this.lastTouches.length;r++){var i=this.lastTouches[r],o=Math.abs(e-i.x),a=Math.abs(n-i.y);if(o<=se&&a<=se)return!0}return!1}function Q(t,e){this.manager=t,this.set(e)}function J(t){if(b(t,he))return he;var e=b(t,de),n=b(t,me);return e&&n?he:e||n?e?de:me:b(t,pe)?pe:fe}function K(){if(!ce)return!1;var t={},e=i.CSS&&i.CSS.supports;return["auto","manipulation","pan-y","pan-x","pan-x pan-y","none"].forEach(function(n){t[n]=!e||i.CSS.supports("touch-action",n)}),t}function tt(t){this.options=mt({},this.defaults,t||{}),this.id=O(),this.manager=null,this.options.enable=m(this.options.enable,!0),this.state=ge,this.simultaneous={},this.requireFail=[]}function et(t){return t&we?"cancel":t&xe?"end":t&be?"move":t&ye?"start":""}function nt(t){return t==Ht?"down":t==Yt?"up":t==zt?"left":t==Ft?"right":""}function rt(t,e){var n=e.manager;return n?n.get(t):t}function it(){tt.apply(this,arguments)}function ot(){it.apply(this,arguments),this.pX=null,this.pY=null}function at(){it.apply(this,arguments)}function st(){tt.apply(this,arguments),this._timer=null,this._input=null}function ut(){it.apply(this,arguments)}function ct(){it.apply(this,arguments)}function lt(){tt.apply(this,arguments),this.pTime=!1,this.pCenter=!1,this._timer=null,this._input=null,this.count=0}function ft(t,e){return e=e||{},e.recognizers=m(e.recognizers,ft.defaults.preset),new pt(t,e)}function pt(t,e){this.options=mt({},ft.defaults,e||{}),this.options.inputTarget=this.options.inputTarget||t,this.handlers={},this.session={},this.recognizers=[],this.oldCssProps={},this.element=t,this.input=k(this),this.touchAction=new Q(this,this.options.touchAction),ht(this,!0),l(this.options.recognizers,function(t){var e=this.add(new t[0](t[1]));t[2]&&e.recognizeWith(t[2]),t[3]&&e.requireFailure(t[3])},this)}function ht(t,e){var n=t.element;if(n.style){var r;l(t.options.cssProps,function(i,o){r=C(n.style,o),e?(t.oldCssProps[r]=n.style[r],n.style[r]=i):n.style[r]=t.oldCssProps[r]||""}),e||(t.oldCssProps={})}}function dt(t,e){var n=o.createEvent("Event");n.initEvent(t,!0,!0),n.gesture=e,e.target.dispatchEvent(n)}var mt,vt=["","webkit","Moz","MS","ms","o"],gt=o.createElement("div"),yt="function",bt=Math.round,xt=Math.abs,Tt=Date.now;mt="function"!=typeof Object.assign?function(t){if(t===s||null===t)throw new TypeError("Cannot convert undefined or null to object");for(var e=Object(t),n=1;n<arguments.length;n++){var r=arguments[n];if(r!==s&&null!==r)for(var i in r)r.hasOwnProperty(i)&&(e[i]=r[i])}return e}:Object.assign;var wt=f(function(t,e,n){for(var r=Object.keys(e),i=0;i<r.length;)(!n||n&&t[r[i]]===s)&&(t[r[i]]=e[r[i]]),i++;return t},"extend","Use `assign`."),Et=f(function(t,e){return wt(t,e,!0)},"merge","Use `assign`."),Ct=1,Ot=/mobile|tablet|ip(ad|hone|od)|android/i,St="ontouchstart"in i,Mt=C(i,"PointerEvent")!==s,kt=St&&Ot.test(navigator.userAgent),At="touch",Pt="pen",It="mouse",Lt="kinect",jt=25,Nt=1,_t=2,Dt=4,Xt=8,Rt=1,zt=2,Ft=4,Yt=8,Ht=16,qt=zt|Ft,Vt=Yt|Ht,Wt=qt|Vt,Ut=["x","y"],Bt=["clientX","clientY"];M.prototype={handler:function(){},init:function(){this.evEl&&v(this.element,this.evEl,this.domHandler),this.evTarget&&v(this.target,this.evTarget,this.domHandler),this.evWin&&v(S(this.element),this.evWin,this.domHandler)},destroy:function(){this.evEl&&g(this.element,this.evEl,this.domHandler),this.evTarget&&g(this.target,this.evTarget,this.domHandler),this.evWin&&g(S(this.element),this.evWin,this.domHandler)}};var $t={mousedown:Nt,mousemove:_t,mouseup:Dt},Gt="mousedown",Zt="mousemove mouseup";p(Y,M,{handler:function(t){var e=$t[t.type];e&Nt&&0===t.button&&(this.pressed=!0),e&_t&&1!==t.which&&(e=Dt),this.pressed&&(e&Dt&&(this.pressed=!1),this.callback(this.manager,e,{pointers:[t],changedPointers:[t],pointerType:It,srcEvent:t}))}});var Qt={pointerdown:Nt,pointermove:_t,pointerup:Dt,pointercancel:Xt,pointerout:Xt},Jt={2:At,3:Pt,4:It,5:Lt},Kt="pointerdown",te="pointermove pointerup pointercancel";i.MSPointerEvent&&!i.PointerEvent&&(Kt="MSPointerDown",te="MSPointerMove MSPointerUp MSPointerCancel"),p(H,M,{handler:function(t){var e=this.store,n=!1,r=t.type.toLowerCase().replace("ms",""),i=Qt[r],o=Jt[t.pointerType]||t.pointerType,a=o==At,s=T(e,t.pointerId,"pointerId");i&Nt&&(0===t.button||a)?s<0&&(e.push(t),s=e.length-1):i&(Dt|Xt)&&(n=!0),s<0||(e[s]=t,this.callback(this.manager,i,{pointers:e,changedPointers:[t],pointerType:o,srcEvent:t}),n&&e.splice(s,1))}});var ee={touchstart:Nt,touchmove:_t,touchend:Dt,touchcancel:Xt},ne="touchstart",re="touchstart touchmove touchend touchcancel";p(q,M,{handler:function(t){var e=ee[t.type];if(e===Nt&&(this.started=!0),this.started){var n=V.call(this,t,e);e&(Dt|Xt)&&n[0].length-n[1].length===0&&(this.started=!1),this.callback(this.manager,e,{pointers:n[0],changedPointers:n[1],pointerType:At,srcEvent:t})}}});var ie={touchstart:Nt,touchmove:_t,touchend:Dt,touchcancel:Xt},oe="touchstart touchmove touchend touchcancel";p(W,M,{handler:function(t){var e=ie[t.type],n=U.call(this,t,e);n&&this.callback(this.manager,e,{pointers:n[0],changedPointers:n[1],pointerType:At,srcEvent:t})}});var ae=2500,se=25;p(B,M,{handler:function(t,e,n){var r=n.pointerType==At,i=n.pointerType==It;if(!(i&&n.sourceCapabilities&&n.sourceCapabilities.firesTouchEvents)){if(r)$.call(this,e,n);else if(i&&Z.call(this,n))return;this.callback(t,e,n)}},destroy:function(){this.touch.destroy(),this.mouse.destroy()}});var ue=C(gt.style,"touchAction"),ce=ue!==s,le="compute",fe="auto",pe="manipulation",he="none",de="pan-x",me="pan-y",ve=K();Q.prototype={set:function(t){t==le&&(t=this.compute()),ce&&this.manager.element.style&&ve[t]&&(this.manager.element.style[ue]=t),this.actions=t.toLowerCase().trim()},update:function(){this.set(this.manager.options.touchAction)},compute:function(){var t=[];return l(this.manager.recognizers,function(e){d(e.options.enable,[e])&&(t=t.concat(e.getTouchAction()))}),J(t.join(" "))},preventDefaults:function(t){var e=t.srcEvent,n=t.offsetDirection;if(this.manager.session.prevented)return void e.preventDefault();var r=this.actions,i=b(r,he)&&!ve[he],o=b(r,me)&&!ve[me],a=b(r,de)&&!ve[de];if(i){var s=1===t.pointers.length,u=t.distance<2,c=t.deltaTime<250;if(s&&u&&c)return}return a&&o?void 0:i||o&&n&qt||a&&n&Vt?this.preventSrc(e):void 0},preventSrc:function(t){this.manager.session.prevented=!0,t.preventDefault()}};var ge=1,ye=2,be=4,xe=8,Te=xe,we=16,Ee=32;tt.prototype={defaults:{},set:function(t){return mt(this.options,t),this.manager&&this.manager.touchAction.update(),this},recognizeWith:function(t){if(c(t,"recognizeWith",this))return this;var e=this.simultaneous;return t=rt(t,this),e[t.id]||(e[t.id]=t,t.recognizeWith(this)),this},dropRecognizeWith:function(t){return c(t,"dropRecognizeWith",this)?this:(t=rt(t,this),delete this.simultaneous[t.id],this)},requireFailure:function(t){if(c(t,"requireFailure",this))return this;var e=this.requireFail;return t=rt(t,this),T(e,t)===-1&&(e.push(t),t.requireFailure(this)),this},dropRequireFailure:function(t){if(c(t,"dropRequireFailure",this))return this;t=rt(t,this);var e=T(this.requireFail,t);return e>-1&&this.requireFail.splice(e,1),this},hasRequireFailures:function(){return this.requireFail.length>0},canRecognizeWith:function(t){return!!this.simultaneous[t.id]},emit:function(t){function e(e){n.manager.emit(e,t)}var n=this,r=this.state;r<xe&&e(n.options.event+et(r)),e(n.options.event),t.additionalEvent&&e(t.additionalEvent),r>=xe&&e(n.options.event+et(r))},tryEmit:function(t){if(this.canEmit())return this.emit(t);this.state=Ee},canEmit:function(){for(var t=0;t<this.requireFail.length;){if(!(this.requireFail[t].state&(Ee|ge)))return!1;t++}return!0},recognize:function(t){var e=mt({},t);if(!d(this.options.enable,[this,e]))return this.reset(),void(this.state=Ee);this.state&(Te|we|Ee)&&(this.state=ge),this.state=this.process(e),this.state&(ye|be|xe|we)&&this.tryEmit(e)},process:function(t){},getTouchAction:function(){},reset:function(){}},p(it,tt,{defaults:{pointers:1},attrTest:function(t){var e=this.options.pointers;return 0===e||t.pointers.length===e},process:function(t){var e=this.state,n=t.eventType,r=e&(ye|be),i=this.attrTest(t);return r&&(n&Xt||!i)?e|we:r||i?n&Dt?e|xe:e&ye?e|be:ye:Ee}}),p(ot,it,{defaults:{event:"pan",threshold:10,pointers:1,direction:Wt},getTouchAction:function(){var t=this.options.direction,e=[];return t&qt&&e.push(me),t&Vt&&e.push(de),e},directionTest:function(t){var e=this.options,n=!0,r=t.distance,i=t.direction,o=t.deltaX,a=t.deltaY;return i&e.direction||(e.direction&qt?(i=0===o?Rt:o<0?zt:Ft,n=o!=this.pX,r=Math.abs(t.deltaX)):(i=0===a?Rt:a<0?Yt:Ht,n=a!=this.pY,r=Math.abs(t.deltaY))),t.direction=i,n&&r>e.threshold&&i&e.direction},attrTest:function(t){return it.prototype.attrTest.call(this,t)&&(this.state&ye||!(this.state&ye)&&this.directionTest(t))},emit:function(t){this.pX=t.deltaX,this.pY=t.deltaY;var e=nt(t.direction);e&&(t.additionalEvent=this.options.event+e),this._super.emit.call(this,t)}}),p(at,it,{defaults:{event:"pinch",threshold:0,pointers:2},getTouchAction:function(){return[he]},attrTest:function(t){return this._super.attrTest.call(this,t)&&(Math.abs(t.scale-1)>this.options.threshold||this.state&ye)},emit:function(t){if(1!==t.scale){var e=t.scale<1?"in":"out";t.additionalEvent=this.options.event+e}this._super.emit.call(this,t)}}),p(st,tt,{defaults:{event:"press",pointers:1,time:251,threshold:9},getTouchAction:function(){return[fe]},process:function(t){var e=this.options,n=t.pointers.length===e.pointers,r=t.distance<e.threshold,i=t.deltaTime>e.time;if(this._input=t,!r||!n||t.eventType&(Dt|Xt)&&!i)this.reset();else if(t.eventType&Nt)this.reset(),this._timer=u(function(){this.state=Te,this.tryEmit()},e.time,this);else if(t.eventType&Dt)return Te;return Ee},reset:function(){clearTimeout(this._timer)},emit:function(t){this.state===Te&&(t&&t.eventType&Dt?this.manager.emit(this.options.event+"up",t):(this._input.timeStamp=Tt(),this.manager.emit(this.options.event,this._input)))}}),p(ut,it,{defaults:{event:"rotate",threshold:0,pointers:2},getTouchAction:function(){return[he]},attrTest:function(t){return this._super.attrTest.call(this,t)&&(Math.abs(t.rotation)>this.options.threshold||this.state&ye)}}),p(ct,it,{defaults:{event:"swipe",threshold:10,velocity:.3,direction:qt|Vt,pointers:1},getTouchAction:function(){return ot.prototype.getTouchAction.call(this)},attrTest:function(t){var e,n=this.options.direction;return n&(qt|Vt)?e=t.overallVelocity:n&qt?e=t.overallVelocityX:n&Vt&&(e=t.overallVelocityY),this._super.attrTest.call(this,t)&&n&t.offsetDirection&&t.distance>this.options.threshold&&t.maxPointers==this.options.pointers&&xt(e)>this.options.velocity&&t.eventType&Dt},emit:function(t){var e=nt(t.offsetDirection);e&&this.manager.emit(this.options.event+e,t),this.manager.emit(this.options.event,t)}}),p(lt,tt,{defaults:{event:"tap",pointers:1,taps:1,interval:300,time:250,threshold:9,posThreshold:10},getTouchAction:function(){return[pe]},process:function(t){var e=this.options,n=t.pointers.length===e.pointers,r=t.distance<e.threshold,i=t.deltaTime<e.time;if(this.reset(),t.eventType&Nt&&0===this.count)return this.failTimeout();if(r&&i&&n){if(t.eventType!=Dt)return this.failTimeout();var o=!this.pTime||t.timeStamp-this.pTime<e.interval,a=!this.pCenter||X(this.pCenter,t.center)<e.posThreshold;this.pTime=t.timeStamp,this.pCenter=t.center,a&&o?this.count+=1:this.count=1,this._input=t;if(0===this.count%e.taps)return this.hasRequireFailures()?(this._timer=u(function(){this.state=Te,this.tryEmit()},e.interval,this),ye):Te}return Ee},failTimeout:function(){return this._timer=u(function(){this.state=Ee},this.options.interval,this),Ee},reset:function(){clearTimeout(this._timer)},emit:function(){this.state==Te&&(this._input.tapCount=this.count,this.manager.emit(this.options.event,this._input))}}),ft.VERSION="2.0.7",ft.defaults={domEvents:!1,touchAction:le,enable:!0,inputTarget:null,inputClass:null,preset:[[ut,{enable:!1}],[at,{enable:!1},["rotate"]],[ct,{direction:qt}],[ot,{direction:qt},["swipe"]],[lt],[lt,{event:"doubletap",taps:2},["tap"]],[st]],cssProps:{userSelect:"none",touchSelect:"none",touchCallout:"none",contentZooming:"none",userDrag:"none",tapHighlightColor:"rgba(0,0,0,0)"}};var Ce=2;pt.prototype={set:function(t){return mt(this.options,t),t.touchAction&&this.touchAction.update(),t.inputTarget&&(this.input.destroy(),this.input.target=t.inputTarget,this.input.init()),this},stop:function(t){this.session.stopped=t?Ce:1},recognize:function(t){var e=this.session;if(!e.stopped){this.touchAction.preventDefaults(t);var n,r=this.recognizers,i=e.curRecognizer;(!i||i&&i.state&Te)&&(i=e.curRecognizer=null);for(var o=0;o<r.length;)n=r[o],e.stopped===Ce||i&&n!=i&&!n.canRecognizeWith(i)?n.reset():n.recognize(t),!i&&n.state&(ye|be|xe)&&(i=e.curRecognizer=n),o++}},get:function(t){if(t instanceof tt)return t;for(var e=this.recognizers,n=0;n<e.length;n++)if(e[n].options.event==t)return e[n];return null},add:function(t){if(c(t,"add",this))return this;var e=this.get(t.options.event);return e&&this.remove(e),this.recognizers.push(t),t.manager=this,this.touchAction.update(),t},remove:function(t){if(c(t,"remove",this))return this;if(t=this.get(t)){var e=this.recognizers,n=T(e,t);n!==-1&&(e.splice(n,1),this.touchAction.update())}return this},on:function(t,e){if(t!==s&&e!==s){var n=this.handlers;return l(x(t),function(t){n[t]=n[t]||[],n[t].push(e)}),this}},off:function(t,e){if(t!==s){var n=this.handlers;return l(x(t),function(t){e?n[t]&&n[t].splice(T(n[t],e),1):delete n[t]}),this}},emit:function(t,e){this.options.domEvents&&dt(t,e);var n=this.handlers[t]&&this.handlers[t].slice();if(n&&n.length){e.type=t,e.preventDefault=function(){e.srcEvent.preventDefault()};for(var r=0;r<n.length;)n[r](e),r++}},destroy:function(){this.element&&ht(this,!1),this.handlers={},this.session={},this.input.destroy(),this.element=null}},mt(ft,{INPUT_START:Nt,INPUT_MOVE:_t,INPUT_END:Dt,INPUT_CANCEL:Xt,STATE_POSSIBLE:ge,STATE_BEGAN:ye,STATE_CHANGED:be,STATE_ENDED:xe,STATE_RECOGNIZED:Te,STATE_CANCELLED:we,STATE_FAILED:Ee,DIRECTION_NONE:Rt,DIRECTION_LEFT:zt,DIRECTION_RIGHT:Ft,DIRECTION_UP:Yt,DIRECTION_DOWN:Ht,DIRECTION_HORIZONTAL:qt,DIRECTION_VERTICAL:Vt,DIRECTION_ALL:Wt,Manager:pt,Input:M,TouchAction:Q,TouchInput:W,MouseInput:Y,PointerEventInput:H,TouchMouseInput:B,SingleTouchInput:q,Recognizer:tt,AttrRecognizer:it,Tap:lt,Pan:ot,Swipe:ct,Pinch:at,Rotate:ut,Press:st,on:v,off:g,each:l,merge:Et,extend:wt,assign:mt,inherit:p,bindFn:h,prefixed:C}),(void 0!==i?i:"undefined"!=typeof self?self:{}).Hammer=ft,r=function(){return ft}.call(e,n,e,t),r!==s&&(t.exports=r)}(window,document,"Hammer")},function(t,e,n){"use strict";function r(t){var e="",n=Math.floor(.001*(Date.now()-u));return n===o?i++:(i=0,o=n),e+=a(s.lookup,c),e+=a(s.lookup,t),i>0&&(e+=a(s.lookup,i)),e+=a(s.lookup,n)}var i,o,a=n(3),s=n(0),u=1459707606518,c=6;t.exports=r},function(t,e,n){"use strict";function r(t){var e=i.shuffled();return{version:15&e.indexOf(t.substr(0,1)),worker:15&e.indexOf(t.substr(1,1))}}var i=n(0);t.exports=r},function(t,e,n){"use strict";function r(e){return s.seed(e),t.exports}function i(e){return f=e,t.exports}function o(t){return void 0!==t&&s.characters(t),s.shuffled()}function a(){return c(f)}var s=n(0),u=(n(3),n(14)),c=n(13),l=n(16),f=n(19)||0;t.exports=a,t.exports.generate=a,t.exports.seed=r,t.exports.worker=i,t.exports.characters=o,t.exports.decode=u,t.exports.isValid=l},function(t,e,n){"use strict";function r(t){if(!t||"string"!=typeof t||t.length<6)return!1;for(var e=i.characters(),n=t.length,r=0;r<n;r++)if(e.indexOf(t[r])===-1)return!1;return!0}var i=n(0);t.exports=r},function(t,e,n){"use strict";function r(){if(!i||!i.getRandomValues)return 48&Math.floor(256*Math.random());var t=new Uint8Array(1);return i.getRandomValues(t),48&t[0]}var i="object"==typeof window&&(window.crypto||window.msCrypto);t.exports=r},function(t,e,n){"use strict";function r(){return o=(9301*o+49297)%233280,o/233280}function i(t){o=t}var o=1;t.exports={nextValue:r,seed:i}},function(t,e,n){"use strict";t.exports=0},function(t,e){t.exports=function(t,e,n,r){var i,o=t=t||{},a=typeof t.default;"object"!==a&&"function"!==a||(i=t,o=t.default);var s="function"==typeof o?o.options:o;if(e&&(s.render=e.render,s.staticRenderFns=e.staticRenderFns),n&&(s._scopeId=n),r){var u=Object.create(s.computed||null);Object.keys(r).forEach(function(t){var e=r[t];u[t]=function(){return e}}),s.computed=u}return{esModule:i,exports:o,options:s}}},function(t,e,n){var r=n(9);"string"==typeof r&&(r=[[t.i,r,""]]),r.locals&&(t.exports=r.locals);n(22)("514c6ff8",r,!0)},function(t,e,n){function r(t){for(var e=0;e<t.length;e++){var n=t[e],r=l[n.id];if(r){r.refs++;for(var i=0;i<r.parts.length;i++)r.parts[i](n.parts[i]);for(;i<n.parts.length;i++)r.parts.push(o(n.parts[i]));r.parts.length>n.parts.length&&(r.parts.length=n.parts.length)}else{for(var a=[],i=0;i<n.parts.length;i++)a.push(o(n.parts[i]));l[n.id]={id:n.id,refs:1,parts:a}}}}function i(){var t=document.createElement("style");return t.type="text/css",f.appendChild(t),t}function o(t){var e,n,r=document.querySelector('style[data-vue-ssr-id~="'+t.id+'"]');if(r){if(d)return m;r.parentNode.removeChild(r)}if(v){var o=h++;r=p||(p=i()),e=a.bind(null,r,o,!1),n=a.bind(null,r,o,!0)}else r=i(),e=s.bind(null,r),n=function(){r.parentNode.removeChild(r)};return e(t),function(r){if(r){if(r.css===t.css&&r.media===t.media&&r.sourceMap===t.sourceMap)return;e(t=r)}else n()}}function a(t,e,n,r){var i=n?"":r.css;if(t.styleSheet)t.styleSheet.cssText=g(e,i);else{var o=document.createTextNode(i),a=t.childNodes;a[e]&&t.removeChild(a[e]),a.length?t.insertBefore(o,a[e]):t.appendChild(o)}}function s(t,e){var n=e.css,r=e.media,i=e.sourceMap;if(r&&t.setAttribute("media",r),i&&(n+="\n/*# sourceURL="+i.sources[0]+" */",n+="\n/*# sourceMappingURL=data:application/json;base64,"+btoa(unescape(encodeURIComponent(JSON.stringify(i))))+" */"),t.styleSheet)t.styleSheet.cssText=n;else{for(;t.firstChild;)t.removeChild(t.firstChild);t.appendChild(document.createTextNode(n))}}var u="undefined"!=typeof document;if("undefined"!=typeof DEBUG&&DEBUG&&!u)throw new Error("vue-style-loader cannot be used in a non-browser environment. Use { target: 'node' } in your Webpack config to indicate a server-rendering environment.");var c=n(23),l={},f=u&&(document.head||document.getElementsByTagName("head")[0]),p=null,h=0,d=!1,m=function(){},v="undefined"!=typeof navigator&&/msie [6-9]\b/.test(navigator.userAgent.toLowerCase());t.exports=function(t,e,n){d=n;var i=c(t,e);return r(i),function(e){for(var n=[],o=0;o<i.length;o++){var a=i[o],s=l[a.id];s.refs--,n.push(s)}e?(i=c(t,e),r(i)):i=[];for(var o=0;o<n.length;o++){var s=n[o];if(0===s.refs){for(var u=0;u<s.parts.length;u++)s.parts[u]();delete l[s.id]}}}};var g=function(){var t=[];return function(e,n){return t[e]=n,t.filter(Boolean).join("\n")}}()},function(t,e){t.exports=function(t,e){for(var n=[],r={},i=0;i<e.length;i++){var o=e[i],a=o[0],s=o[1],u=o[2],c=o[3],l={id:t+":"+i,css:s,media:u,sourceMap:c};r[a]?r[a].parts.push(l):n.push(r[a]={id:a,parts:[l]})}return n}},function(t,e,n){"use strict";Object.defineProperty(e,"__esModule",{value:!0});var r=n(4),i=n(5),o=n.n(i),a={install:function(t,e){e||(e={});var n=new r.a(e);t.component("toasted",o.a),t.toasted=t.prototype.$toasted=n}};"undefined"!=typeof window&&window.Vue&&(window.Toasted=a),e.default=a}])});
 
 /***/ }),
-/* 44 */
+/* 49 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -49312,32 +49510,26 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 
 
 /***/ }),
-/* 45 */
+/* 50 */
 /***/ (function(module, exports) {
 
-module.exports = { "en.articles": { "link": { "1": "\/article\/runnerhub", "2": "\/article\/how-to-be-a-decker", "3": "\/article\/how-to-be-a-street-sam", "4": "\/article\/shadowrun-returns", "5": "\/article\/shadowrun-experience", "6": "\/article\/street-life", "7": "\/article\/looking-for-gm", "8": "\/article\/shadowrun-api" }, "title": { "1": "Read the Runnerhub blog, shadowrunner stories are great", "2": "How to be a great decker, Guide to the matrix", "3": "Kicking some ass, How to stick your katana in ganger's", "4": "Play the new shadowrun game", "5": "Live the shadowrunnner feel with the new game Cyberpunk", "6": "Experience the street life as a shadowrunner", "7": "Looking for new GM?", "8": "Try out the new shadowrun api, with all the books included" } }, "en.auth": { "failed": "These credentials do not match our records.", "throttle": "Too many login attempts. Please try again in :seconds seconds." }, "en.auth.message": { "authenticate": { "account_not_activated": "The account hasn't been activated, please check your email again.", "account_not_found": "The account wasn't found, please try again!", "account_suspended": "The account was suspended, It can be cause from multiple reason. Delay = :delay", "success": "You have sucessfully loged in, Welcome to the Jackpoint!" } }, "en.login": { "form": { "label": { "email": "Email address:", "password": "Password:" } }, "title": { "login": "Login" } }, "en.magic": { "description": { "adept": { "b": "", "c": "", "d": "" }, "apprentice": { "b": "", "c": "", "d": "" }, "aspected": { "b": "", "c": "", "d": "" }, "aware": { "d": "" }, "enchanter": { "c": "" }, "explorer": { "c": "" }, "magician": { "a": "", "b": "", "c": "" }, "mys": { "a": "", "b": "", "c": "" }, "tech": { "a": "", "b": "", "c": "" } }, "label": { "adept": { "b": "Adept +", "c": "Adept", "d": "Adept -" }, "apprentice": { "b": "Apprentice +", "c": "Apprentice", "d": "Apprentice -" }, "aspected": { "b": "Aspected +", "c": "Aspected", "d": "Aspected -" }, "aware": { "d": "Aware" }, "enchanter": { "c": "Enchanter" }, "explorer": { "c": "Explorer" }, "magician": { "a": "Magician +", "b": "Magician", "c": "Magician -" }, "mys": { "a": "Mystic Adept +", "b": "Mystic Adept", "c": "Mystic Adept -" }, "tech": { "a": "Technomancer +", "b": "Technomancer", "c": "Technomancer -" } }, "magic_rating": "magic rating", "resonance_rating": "resonance rating", "skills_avail": "magical related skills", "spells_avail": "Free Spell", "undefined": "Currently loading" }, "en.pagination": { "next": "Next &raquo;", "previous": "&laquo; Previous" }, "en.passwords": { "password": "Passwords must be at least six characters and match the confirmation.", "reset": "Your password has been reset!", "sent": "We have e-mailed your password reset link!", "token": "This password reset token is invalid.", "user": "We can't find a user with that e-mail address." }, "en.validation": { "accepted": "The :attribute must be accepted.", "active_url": "The :attribute is not a valid URL.", "after": "The :attribute must be a date after :date.", "after_or_equal": "The :attribute must be a date after or equal to :date.", "alpha": "The :attribute may only contain letters.", "alpha_dash": "The :attribute may only contain letters, numbers, dashes and underscores.", "alpha_num": "The :attribute may only contain letters and numbers.", "array": "The :attribute must be an array.", "attributes": [], "before": "The :attribute must be a date before :date.", "before_or_equal": "The :attribute must be a date before or equal to :date.", "between": { "array": "The :attribute must have between :min and :max items.", "file": "The :attribute must be between :min and :max kilobytes.", "numeric": "The :attribute must be between :min and :max.", "string": "The :attribute must be between :min and :max characters." }, "boolean": "The :attribute field must be true or false.", "confirmed": "The :attribute confirmation does not match.", "custom": { "attribute-name": { "rule-name": "custom-message" } }, "date": "The :attribute is not a valid date.", "date_format": "The :attribute does not match the format :format.", "different": "The :attribute and :other must be different.", "digits": "The :attribute must be :digits digits.", "digits_between": "The :attribute must be between :min and :max digits.", "dimensions": "The :attribute has invalid image dimensions.", "distinct": "The :attribute field has a duplicate value.", "email": "The :attribute must be a valid email address.", "exists": "The selected :attribute is invalid.", "file": "The :attribute must be a file.", "filled": "The :attribute field must have a value.", "gt": { "array": "The :attribute must have more than :value items.", "file": "The :attribute must be greater than :value kilobytes.", "numeric": "The :attribute must be greater than :value.", "string": "The :attribute must be greater than :value characters." }, "gte": { "array": "The :attribute must have :value items or more.", "file": "The :attribute must be greater than or equal :value kilobytes.", "numeric": "The :attribute must be greater than or equal :value.", "string": "The :attribute must be greater than or equal :value characters." }, "image": "The :attribute must be an image.", "in": "The selected :attribute is invalid.", "in_array": "The :attribute field does not exist in :other.", "integer": "The :attribute must be an integer.", "ip": "The :attribute must be a valid IP address.", "ipv4": "The :attribute must be a valid IPv4 address.", "ipv6": "The :attribute must be a valid IPv6 address.", "json": "The :attribute must be a valid JSON string.", "lt": { "array": "The :attribute must have less than :value items.", "file": "The :attribute must be less than :value kilobytes.", "numeric": "The :attribute must be less than :value.", "string": "The :attribute must be less than :value characters." }, "lte": { "array": "The :attribute must not have more than :value items.", "file": "The :attribute must be less than or equal :value kilobytes.", "numeric": "The :attribute must be less than or equal :value.", "string": "The :attribute must be less than or equal :value characters." }, "max": { "array": "The :attribute may not have more than :max items.", "file": "The :attribute may not be greater than :max kilobytes.", "numeric": "The :attribute may not be greater than :max.", "string": "The :attribute may not be greater than :max characters." }, "mimes": "The :attribute must be a file of type: :values.", "mimetypes": "The :attribute must be a file of type: :values.", "min": { "array": "The :attribute must have at least :min items.", "file": "The :attribute must be at least :min kilobytes.", "numeric": "The :attribute must be at least :min.", "string": "The :attribute must be at least :min characters." }, "not_in": "The selected :attribute is invalid.", "not_regex": "The :attribute format is invalid.", "numeric": "The :attribute must be a number.", "present": "The :attribute field must be present.", "regex": "The :attribute format is invalid.", "required": "The :attribute field is required.", "required_if": "The :attribute field is required when :other is :value.", "required_unless": "The :attribute field is required unless :other is in :values.", "required_with": "The :attribute field is required when :values is present.", "required_with_all": "The :attribute field is required when :values is present.", "required_without": "The :attribute field is required when :values is not present.", "required_without_all": "The :attribute field is required when none of :values are present.", "same": "The :attribute and :other must match.", "size": { "array": "The :attribute must contain :size items.", "file": "The :attribute must be :size kilobytes.", "numeric": "The :attribute must be :size.", "string": "The :attribute must be :size characters." }, "string": "The :attribute must be a string.", "timezone": "The :attribute must be a valid zone.", "unique": "The :attribute has already been taken.", "uploaded": "The :attribute failed to upload.", "url": "The :attribute format is invalid." }, "fr.articles": { "link": { "1": "\/article\/runnerhub", "2": "\/article\/how-to-be-a-decker", "3": "\/article\/how-to-be-a-street-sam", "4": "\/article\/shadowrun-returns", "5": "\/article\/shadowrun-experience", "6": "\/article\/street-life", "7": "\/article\/looking-for-gm", "8": "\/article\/shadowrun-api" }, "title": { "1": "Lisez le blog the Runnerhub, Venez rire des histoires de Shadowrunners", "2": "Comment \xEAtre un bon decker, Guide de la Matrix", "3": "Bottez des deri\xE8res, Comment poignarder des ganger's avec votre katana", "4": "Jouer au nouveau jeu de shadowrun!", "5": "Vivez l'exp\xE9rience shadowrun avec le nouveau jeu CyberPubk", "6": "Exp\xE9rimenter la vie de ganger avec shadowrun", "7": "Voulez-vous trouver un nouveau gm?", "8": "Essayer le nouvel api pour hadowrun, avec de toute nouvelle fonctionalit\xE9s" } }, "fr.auth.message": { "authenticate": { "account_not_activated": "Le compte n'a pas \xE9t\xE9 activer, veuillez v\xE9rifier vos courriel pour l'activer.", "account_not_found": "Le compte n'a pas \xE9t\xE9 trouv\xE9, veuillez r\xE9essayer de nouveau!", "account_suspended": "Le compte \xE0 \xE9t\xE9 suspendue, cela peu \xEAtre caus\xE9 par plusieurs raisons. D\xE9lais = :delay", "success": "Vous vous \xEAtes connect\xE9 avec succ\xE8s, bienvenue sur le Jackpoint" } }, "fr.login": { "form": { "label": { "email": "Adresse Courriel:", "password": "Mot de Passe:" } }, "title": { "login": "Se connecter" } }, "fr.magic": { "description": { "adept": { "b": "", "c": "", "d": "" }, "apprentice": { "b": "", "c": "", "d": "" }, "aspected": { "b": "", "c": "", "d": "" }, "aware": { "d": "" }, "enchanter": { "c": "" }, "explorer": { "c": "" }, "magician": { "a": "", "b": "", "c": "" }, "mys": { "a": "", "b": "", "c": "" }, "tech": { "a": "", "b": "", "c": "" } }, "label": { "adept": { "b": "Adept +", "c": "Adept", "d": "Adept -" }, "apprentice": { "b": "Apprentice +", "c": "Apprentice", "d": "Apprentice -" }, "aspected": { "b": "Aspected +", "c": "Aspected", "d": "Aspected -" }, "aware": { "d": "Aware" }, "enchanter": { "c": "Enchanter" }, "explorer": { "c": "Explorer" }, "magician": { "a": "Magician +", "b": "Magician", "c": "Magician -" }, "mys": { "a": "Mystic Adept +", "b": "Mystic Adept", "c": "Mystic Adept -" }, "tech": { "a": "Technomancer +", "b": "Technomancer", "c": "Technomancer -" } }, "magic_rating": "magic rating", "resonance_rating": "resonance rating", "skills_avail": "magical related skills", "spells_avail": "Free Spell", "undefined": "En train de t\xE9l\xE9charger" } };
+module.exports = { "en.articles": { "link": { "1": "\/article\/runnerhub", "2": "\/article\/how-to-be-a-decker", "3": "\/article\/how-to-be-a-street-sam", "4": "\/article\/shadowrun-returns", "5": "\/article\/shadowrun-experience", "6": "\/article\/street-life", "7": "\/article\/looking-for-gm", "8": "\/article\/shadowrun-api" }, "title": { "1": "Read the Runnerhub blog, shadowrunner stories are great", "2": "How to be a great decker, Guide to the matrix", "3": "Kicking some ass, How to stick your katana in ganger's", "4": "Play the new shadowrun game", "5": "Live the shadowrunnner feel with the new game Cyberpunk", "6": "Experience the street life as a shadowrunner", "7": "Looking for new GM?", "8": "Try out the new shadowrun api, with all the books included" } }, "en.auth": { "failed": "These credentials do not match our records.", "throttle": "Too many login attempts. Please try again in :seconds seconds." }, "en.auth.message": { "authenticate": { "account_not_activated": "The account hasn't been activated, please check your email again.", "account_not_found": "The account wasn't found, please try again!", "account_suspended": "The account was suspended, It can be cause from multiple reason. Delay = :delay", "success": "You have sucessfully loged in, Welcome to the Jackpoint!" } }, "en.label": { "acting": "Acting", "aeronautics": { "mechanic": "Aeronautics mechanic" }, "alchemy": "Alchemy", "animal": { "handling": "Animal handling" }, "arcana": "Arcana", "archery": "Archery", "armorer": "Armorer", "artificing": "Artificing", "artisan": "Artisan", "assessing": "Assessing", "astral": { "combat": "Astral combat" }, "athletics": "Athletics", "automatics": "Automatics", "automotive": { "mechanic": "Automotive mechanic" }, "banishing": "Banishing", "binding": "Binding", "biotech": "Biotech", "biotechnology": "Biotechnology", "blades": "Blades", "chemistry": "Chemistry", "close": { "combat": "Close combat" }, "clubs": "Clubs", "compiling": "Compiling", "computer": "Computer", "con": "Con", "conjuring": "Conjuring", "counterspelling": "Counterspelling", "cracking": "Cracking", "cybercombat": "Cybercombat", "cybertechnology": "Cybertechnology", "decompiling": "Decompiling", "demolitions": "Demolitions", "disenchanting": "Disenchanting", "disguise": "Disguise", "diving": "Diving", "electronic": { "warfare": "Electronic warfare" }, "electronics": "Electronics", "enchanting": "Enchanting", "engineering": "Engineering", "escape": { "artist": "Escape artist" }, "etiquette": "Etiquette", "exotic": { "melee": "Exotic melee combat", "ranged": "Exotic Ranged combat" }, "filter": { "default": "Filter by", "skill_group": "Groups", "skill_group_point": "Skill Group Points", "skill_name": "Skills", "skill_point": "Skill Points" }, "firearms": "Firearms", "first": { "aid": "First aid" }, "flight": "Flight", "forgery": "Forgery", "free": { "fall": "Free fall" }, "gunnery": "Gunnery", "gymnastic": "Gymnastic", "hacking": "Hacking", "hardware": "Hardware", "heavy": { "weapon": "Heavy weapon" }, "impersonation": "Impersonation", "industrial": { "mechanic": "Industrial mechanic" }, "influence": "Influence", "instruction": "Instruction", "intimidation": "Intimidation", "leadership": "Leadership", "locksmith": "Locksmith", "longarms": "Longarms", "medicine": "Medicine", "nautical": { "mechanic": "Nautical mechanic" }, "navigation": "Navigation", "negociation": "Negociation", "no": { "group": "No group" }, "outdoors": "Outdoors", "palming": "Palming", "perception": "Perception", "performance": "Performance", "pilot": { "aerospace": "Aerospace", "aircraft": "Aircraft", "exotic": { "vehicle": "Exotic vehicle" }, "groundcraft": "Groundcraft", "walker": "Walker", "watercraft": "Watercraft" }, "pistols": "Pistols", "registering": "Registering", "ritual": { "spellcasting": "Ritual spellcasting" }, "running": "Running", "skill": { "group": "Group" }, "sneaking": "Sneaking", "software": "Software", "sorcery": "Sorcery", "spellcasting": "Spellcasting", "stealth": "Stealth", "summoning": "Summoning", "survival": "Survival", "swimming": "Swimming", "tasking": "Tasking", "throwing": { "weapon": "Throwing weapon" }, "tracking": "Tracking", "unarmed": { "combat": "Unarmed combat" } }, "en.login": { "form": { "label": { "email": "Email address:", "password": "Password:" } }, "title": { "login": "Login" } }, "en.magic": { "description": { "adept": { "b": "", "c": "", "d": "" }, "apprentice": { "b": "", "c": "", "d": "" }, "aspected": { "b": "", "c": "", "d": "" }, "aware": { "d": "" }, "enchanter": { "c": "" }, "explorer": { "c": "" }, "magician": { "a": "", "b": "", "c": "" }, "mys": { "a": "", "b": "", "c": "" }, "tech": { "a": "", "b": "", "c": "" } }, "label": { "adept": { "b": "Adept +", "c": "Adept", "d": "Adept -" }, "apprentice": { "b": "Apprentice +", "c": "Apprentice", "d": "Apprentice -" }, "aspected": { "b": "Aspected +", "c": "Aspected", "d": "Aspected -" }, "aware": { "d": "Aware" }, "enchanter": { "c": "Enchanter" }, "explorer": { "c": "Explorer" }, "magician": { "a": "Magician +", "b": "Magician", "c": "Magician -" }, "mys": { "a": "Mystic Adept +", "b": "Mystic Adept", "c": "Mystic Adept -" }, "tech": { "a": "Technomancer +", "b": "Technomancer", "c": "Technomancer -" } }, "magic_rating": "magic rating", "resonance_rating": "resonance rating", "skills_avail": "magical related skills", "spells_avail": "Free Spell", "undefined": "Currently loading" }, "en.pagination": { "next": "Next &raquo;", "previous": "&laquo; Previous" }, "en.passwords": { "password": "Passwords must be at least six characters and match the confirmation.", "reset": "Your password has been reset!", "sent": "We have e-mailed your password reset link!", "token": "This password reset token is invalid.", "user": "We can't find a user with that e-mail address." }, "en.validation": { "accepted": "The :attribute must be accepted.", "active_url": "The :attribute is not a valid URL.", "after": "The :attribute must be a date after :date.", "after_or_equal": "The :attribute must be a date after or equal to :date.", "alpha": "The :attribute may only contain letters.", "alpha_dash": "The :attribute may only contain letters, numbers, dashes and underscores.", "alpha_num": "The :attribute may only contain letters and numbers.", "array": "The :attribute must be an array.", "attributes": [], "before": "The :attribute must be a date before :date.", "before_or_equal": "The :attribute must be a date before or equal to :date.", "between": { "array": "The :attribute must have between :min and :max items.", "file": "The :attribute must be between :min and :max kilobytes.", "numeric": "The :attribute must be between :min and :max.", "string": "The :attribute must be between :min and :max characters." }, "boolean": "The :attribute field must be true or false.", "confirmed": "The :attribute confirmation does not match.", "custom": { "attribute-name": { "rule-name": "custom-message" } }, "date": "The :attribute is not a valid date.", "date_format": "The :attribute does not match the format :format.", "different": "The :attribute and :other must be different.", "digits": "The :attribute must be :digits digits.", "digits_between": "The :attribute must be between :min and :max digits.", "dimensions": "The :attribute has invalid image dimensions.", "distinct": "The :attribute field has a duplicate value.", "email": "The :attribute must be a valid email address.", "exists": "The selected :attribute is invalid.", "file": "The :attribute must be a file.", "filled": "The :attribute field must have a value.", "gt": { "array": "The :attribute must have more than :value items.", "file": "The :attribute must be greater than :value kilobytes.", "numeric": "The :attribute must be greater than :value.", "string": "The :attribute must be greater than :value characters." }, "gte": { "array": "The :attribute must have :value items or more.", "file": "The :attribute must be greater than or equal :value kilobytes.", "numeric": "The :attribute must be greater than or equal :value.", "string": "The :attribute must be greater than or equal :value characters." }, "image": "The :attribute must be an image.", "in": "The selected :attribute is invalid.", "in_array": "The :attribute field does not exist in :other.", "integer": "The :attribute must be an integer.", "ip": "The :attribute must be a valid IP address.", "ipv4": "The :attribute must be a valid IPv4 address.", "ipv6": "The :attribute must be a valid IPv6 address.", "json": "The :attribute must be a valid JSON string.", "lt": { "array": "The :attribute must have less than :value items.", "file": "The :attribute must be less than :value kilobytes.", "numeric": "The :attribute must be less than :value.", "string": "The :attribute must be less than :value characters." }, "lte": { "array": "The :attribute must not have more than :value items.", "file": "The :attribute must be less than or equal :value kilobytes.", "numeric": "The :attribute must be less than or equal :value.", "string": "The :attribute must be less than or equal :value characters." }, "max": { "array": "The :attribute may not have more than :max items.", "file": "The :attribute may not be greater than :max kilobytes.", "numeric": "The :attribute may not be greater than :max.", "string": "The :attribute may not be greater than :max characters." }, "mimes": "The :attribute must be a file of type: :values.", "mimetypes": "The :attribute must be a file of type: :values.", "min": { "array": "The :attribute must have at least :min items.", "file": "The :attribute must be at least :min kilobytes.", "numeric": "The :attribute must be at least :min.", "string": "The :attribute must be at least :min characters." }, "not_in": "The selected :attribute is invalid.", "not_regex": "The :attribute format is invalid.", "numeric": "The :attribute must be a number.", "present": "The :attribute field must be present.", "regex": "The :attribute format is invalid.", "required": "The :attribute field is required.", "required_if": "The :attribute field is required when :other is :value.", "required_unless": "The :attribute field is required unless :other is in :values.", "required_with": "The :attribute field is required when :values is present.", "required_with_all": "The :attribute field is required when :values is present.", "required_without": "The :attribute field is required when :values is not present.", "required_without_all": "The :attribute field is required when none of :values are present.", "same": "The :attribute and :other must match.", "size": { "array": "The :attribute must contain :size items.", "file": "The :attribute must be :size kilobytes.", "numeric": "The :attribute must be :size.", "string": "The :attribute must be :size characters." }, "string": "The :attribute must be a string.", "timezone": "The :attribute must be a valid zone.", "unique": "The :attribute has already been taken.", "uploaded": "The :attribute failed to upload.", "url": "The :attribute format is invalid." }, "fr.articles": { "link": { "1": "\/article\/runnerhub", "2": "\/article\/how-to-be-a-decker", "3": "\/article\/how-to-be-a-street-sam", "4": "\/article\/shadowrun-returns", "5": "\/article\/shadowrun-experience", "6": "\/article\/street-life", "7": "\/article\/looking-for-gm", "8": "\/article\/shadowrun-api" }, "title": { "1": "Lisez le blog the Runnerhub, Venez rire des histoires de Shadowrunners", "2": "Comment \xEAtre un bon decker, Guide de la Matrix", "3": "Bottez des deri\xE8res, Comment poignarder des ganger's avec votre katana", "4": "Jouer au nouveau jeu de shadowrun!", "5": "Vivez l'exp\xE9rience shadowrun avec le nouveau jeu CyberPubk", "6": "Exp\xE9rimenter la vie de ganger avec shadowrun", "7": "Voulez-vous trouver un nouveau gm?", "8": "Essayer le nouvel api pour hadowrun, avec de toute nouvelle fonctionalit\xE9s" } }, "fr.auth.message": { "authenticate": { "account_not_activated": "Le compte n'a pas \xE9t\xE9 activer, veuillez v\xE9rifier vos courriel pour l'activer.", "account_not_found": "Le compte n'a pas \xE9t\xE9 trouv\xE9, veuillez r\xE9essayer de nouveau!", "account_suspended": "Le compte \xE0 \xE9t\xE9 suspendue, cela peu \xEAtre caus\xE9 par plusieurs raisons. D\xE9lais = :delay", "success": "Vous vous \xEAtes connect\xE9 avec succ\xE8s, bienvenue sur le Jackpoint" } }, "fr.label": { "acting": "Interpr\xE9ter", "aeronautics": { "mechanic": "M\xE9canique A\xE9ronautique" }, "alchemy": "Alchimie", "animal": { "handling": "Dressages d'animaux" }, "arcana": "Arcane", "archery": "Archerie", "armorer": "Armurier", "artificing": "Arteficier", "artisan": "Artisanat", "assessing": "\xC9valuer", "astral": { "combat": "Combat Astral" }, "athletics": "Athl\xE9tisme", "automatics": "Armes automatiques", "automotive": { "mechanic": "M\xE9canique automobile" }, "banishing": "B\xE2nir", "binding": "Lier", "biotech": "Techno Transhumanisme", "biotechnology": "Biotechnologie", "blades": "Lames", "chemistry": "Chimie", "close": { "combat": "Combat rapprocher" }, "clubs": "B\xE2ton", "compiling": "Compiler", "computer": "Ordinateur", "con": "Convaincre", "conjuring": "Invocation", "counterspelling": "Contre sort", "cracking": "Craquage", "cybercombat": "Guerre informatique", "cybertechnology": "Cybertechnologie", "decompiling": "D\xE9compiler", "demolitions": "d\xE9molitions", "disenchanting": "D\xE9senchantement", "disguise": "D\xE9guisement", "diving": "Plonger", "electronic": { "warfare": "Guerre \xE9lectronique" }, "electronics": "\xC9lectronique", "enchanting": "Enchantement", "engineering": "M\xE9caniques", "escape": { "artist": "Technique d'\xE9vasion" }, "etiquette": "\xC9tiquette", "exotic": { "melee": "Armes exotique de m\xE9l\xEAe", "ranged": "Armes exotique \xE0 distance" }, "filter": { "default": "Filtrer par", "skill_group": "Groupes", "skill_group_point": "Points de comp\xE9tence de groupe", "skill_name": "Comp\xE9tences", "skill_point": "Points de comp\xE9tence" }, "firearms": "Armes \xE0 feu", "first": { "aid": "Premier soins" }, "flight": "Vol", "forgery": "Contrefa\xE7on", "free": { "fall": "Chute libre" }, "gunnery": "Artilleur", "gymnastic": "Gymnastique", "hacking": "Piratage", "hardware": "Mat\xE9riel informatique", "heavy": { "weapon": "Armes lourdes" }, "impersonation": "Impersonification", "industrial": { "mechanic": "M\xE9canique industrielle" }, "influence": "influencer", "instruction": "Instruire", "intimidation": "Intimidation", "leadership": "Leadership", "locksmith": "Serrurerie", "longarms": "Armes \xE0 baril long", "medicine": "M\xE9dication", "nautical": { "mechanic": "M\xE9canique Nautique" }, "navigation": "Navigation", "negociation": "N\xE9gociation", "no": { "group": "Sans groupe" }, "outdoors": "Technique d'ext\xE9rieur", "palming": "Prestidigitation", "perception": "Perception", "performance": "Performance", "pilot": { "aerospace": "Pilotage a\xE9rospacial", "aircraft": "Pilotage d'a\xE9ronef", "exotic": { "vehicle": "Pilotage de v\xE9hicule exotique" }, "groundcraft": "Pilotage v\xE9hicule tout-terrain", "walker": "Pilotage de marcheur", "watercraft": "Pilotage d'embarcation" }, "pistols": "Armes de poing", "registering": "Enregistrer", "ritual": { "spellcasting": "Lancer de sort rituel" }, "running": "Course", "skill": { "group": "Groupe" }, "sneaking": "Camouflage", "software": "Logiciel informatique", "sorcery": "Sorcellerie", "spellcasting": "Lancer de sort", "stealth": "Infiltration", "summoning": "Convoquer", "survival": "Survie", "swimming": "Nage", "tasking": "R\xE9aliser", "throwing": { "weapon": "Armes de lancer" }, "tracking": "Traque", "unarmed": { "combat": "Combat \xE0 main nue" } }, "fr.login": { "form": { "label": { "email": "Adresse Courriel:", "password": "Mot de Passe:" } }, "title": { "login": "Se connecter" } }, "fr.magic": { "description": { "adept": { "b": "", "c": "", "d": "" }, "apprentice": { "b": "", "c": "", "d": "" }, "aspected": { "b": "", "c": "", "d": "" }, "aware": { "d": "" }, "enchanter": { "c": "" }, "explorer": { "c": "" }, "magician": { "a": "", "b": "", "c": "" }, "mys": { "a": "", "b": "", "c": "" }, "tech": { "a": "", "b": "", "c": "" } }, "label": { "adept": { "b": "Adept +", "c": "Adept", "d": "Adept -" }, "apprentice": { "b": "Apprentice +", "c": "Apprentice", "d": "Apprentice -" }, "aspected": { "b": "Aspected +", "c": "Aspected", "d": "Aspected -" }, "aware": { "d": "Aware" }, "enchanter": { "c": "Enchanter" }, "explorer": { "c": "Explorer" }, "magician": { "a": "Magician +", "b": "Magician", "c": "Magician -" }, "mys": { "a": "Mystic Adept +", "b": "Mystic Adept", "c": "Mystic Adept -" }, "tech": { "a": "Technomancer +", "b": "Technomancer", "c": "Technomancer -" } }, "magic_rating": "magic rating", "resonance_rating": "resonance rating", "skills_avail": "magical related skills", "spells_avail": "Free Spell", "undefined": "En train de t\xE9l\xE9charger" } };
 
 /***/ }),
-/* 46 */
+/* 51 */
 /***/ (function(module, exports, __webpack_require__) {
 
 !function(e,t){ true?module.exports=t():"function"==typeof define&&define.amd?define("vueWysiwyg",[],t):"object"==typeof exports?exports.vueWysiwyg=t():e.vueWysiwyg=t()}("undefined"!=typeof self?self:this,function(){return function(e){var t={};function n(i){if(t[i])return t[i].exports;var o=t[i]={i:i,l:!1,exports:{}};return e[i].call(o.exports,o,o.exports,n),o.l=!0,o.exports}return n.m=e,n.c=t,n.d=function(e,t,i){n.o(e,t)||Object.defineProperty(e,t,{configurable:!1,enumerable:!0,get:i})},n.n=function(e){var t=e&&e.__esModule?function(){return e.default}:function(){return e};return n.d(t,"a",t),t},n.o=function(e,t){return Object.prototype.hasOwnProperty.call(e,t)},n.p="/vue-wysiwyg/",n(n.s=18)}([function(e,t,n){"use strict";t.a=function(e,t,n,i,o,r,s,a){var l=typeof(e=e||{}).default;"object"!==l&&"function"!==l||(e=e.default);var u,c="function"==typeof e?e.options:e;t&&(c.render=t,c.staticRenderFns=n,c._compiled=!0);i&&(c.functional=!0);r&&(c._scopeId=r);s?(u=function(e){(e=e||this.$vnode&&this.$vnode.ssrContext||this.parent&&this.parent.$vnode&&this.parent.$vnode.ssrContext)||"undefined"==typeof __VUE_SSR_CONTEXT__||(e=__VUE_SSR_CONTEXT__),o&&o.call(this,e),e&&e._registeredComponents&&e._registeredComponents.add(s)},c._ssrRegister=u):o&&(u=a?function(){o.call(this,this.$root.$options.shadowRoot)}:o);if(u)if(c.functional){c._injectStyles=u;var d=c.render;c.render=function(e,t){return u.call(t),d(e,t)}}else{var p=c.beforeCreate;c.beforeCreate=p?[].concat(p,u):[u]}return{exports:e,options:c}}},function(e,t,n){"use strict";var i=new function(){var e={listeners:{},on:function(t,n){void 0===e.listeners[t]&&(e.listeners[t]=[]),e.listeners[t].push(n)},emit:function(t){for(var n=arguments.length,i=Array(1<n?n-1:0),o=1;o<n;o++)i[o-1]=arguments[o];void 0!==e.listeners[t]&&e.listeners[t].forEach(function(e){return e.apply(i)})}};return e};i.options={image:{uploadURL:"None",dropzoneOptions:{}},hideModules:{},paragraphSeparator:"div",maxHeight:void 0,customModules:[]},i.utils={getHTMLOfSelection:function(){if(void 0!==window.getSelection){var e=window.getSelection();if(0<e.rangeCount){var t=e.getRangeAt(0).cloneContents(),n=document.createElement("div");return n.appendChild(t),n.innerHTML}}return""}},t.a=i},function(e,t,n){"use strict";t.__esModule=!0;var i,o=n(20),r=(i=o)&&i.__esModule?i:{default:i};t.default=r.default||function(e){for(var t=1;t<arguments.length;t++){var n=arguments[t];for(var i in n)Object.prototype.hasOwnProperty.call(n,i)&&(e[i]=n[i])}return e}},function(e,t){var n=e.exports="undefined"!=typeof window&&window.Math==Math?window:"undefined"!=typeof self&&self.Math==Math?self:Function("return this")();"number"==typeof __g&&(__g=n)},function(e,t){e.exports=function(e){return"object"==typeof e?null!==e:"function"==typeof e}},function(e,t,n){e.exports=!n(6)(function(){return 7!=Object.defineProperty({},"a",{get:function(){return 7}}).a})},function(e,t){e.exports=function(e){try{return!!e()}catch(e){return!0}}},function(e,t){var n=e.exports={version:"2.5.3"};"number"==typeof __e&&(__e=n)},function(e,t,n){var i=n(9),o=n(10);e.exports=function(e){return i(o(e))}},function(e,t,n){var i=n(37);e.exports=Object("z").propertyIsEnumerable(0)?Object:function(e){return"String"==i(e)?e.split(""):Object(e)}},function(e,t){e.exports=function(e){if(void 0==e)throw TypeError("Can't call method on  "+e);return e}},function(e,t){var n=Math.ceil,i=Math.floor;e.exports=function(e){return isNaN(e=+e)?0:(e>0?i:n)(e)}},function(e,t,n){"use strict";var i=n(2),o=n.n(i),r=n(1),s=n(50),a=n.n(s),l=n(51),u=n(53),c=n.n(u),d=n(54),p=n.n(d),h=n(55),f=n.n(h),v=n(56),m=n.n(v),g=n(57),b=n.n(g),w=n(58),y=n.n(w),q=n(59),k=n(61),z=n(63),x=n.n(z),F=n(64),E=n.n(F),_=n(65),C=n.n(_),S=n(66),L=n(72),M=n(75),T=n.n(M),A=n(76),O=n.n(A),D=[c.a,p.a,f.a,O.a,m.a,b.a,y.a,O.a,q.a,k.a,x.a,E.a,C.a,O.a,S.a,L.a,O.a,T.a];t.a={model:{prop:"html",event:"html"},props:{html:{type:String,default:""},placeholder:{type:String,default:"Enter text..."},options:Object},components:{Btn:l.a},data:function(){return{selection:""}},computed:{mergedOptions:function(){return o()({},r.a.options,this.options)},modules:function(){var e=this,t=this.mergedOptions.iconOverrides;return D.filter(function(t){return void 0===e.mergedOptions.hideModules||!e.mergedOptions.hideModules[t.title]}).map(function(e){return void 0!==t&&void 0!==t[e.title]&&(e.icon=t[e.title]),e}).concat(this.mergedOptions.customModules)},btnsWithDashboards:function(){return this.modules?this.modules.filter(function(e){return e.render}):[]},innerHTML:{get:function(){return this.$refs.content.innerHTML},set:function(e){this.$refs.content.innerHTML!==e&&(this.$refs.content.innerHTML=e)}}},methods:{saveSelection:function(){if(void 0!==window.getSelection){if(this.selection=window.getSelection(),this.selection.getRangeAt&&this.selection.rangeCount)return this.selection.getRangeAt(0)}else if(document.selection&&document.selection.createRange)return document.selection.createRange();return null},restoreSelection:function(e){e&&(void 0===window.getSelection?document.selection&&e.select&&e.select():(this.selection=window.getSelection(),this.selection.removeAllRanges(),this.selection.addRange(e)))},clearSelection:function(){this.selection=null;var e=window.getSelection();e&&(void 0!==e.empty&&e.empty(),void 0!==e.removeAllRanges&&e.removeAllRanges())},exec:function(e,t,n){!1!==n&&this.selection&&this.restoreSelection(this.selection),document.execCommand(e,!1,t||""),this.clearSelection(),this.$nextTick(this.emit)},onDocumentClick:function(e){for(var t,n=0;n<this.btnsWithDashboards.length;n++)(t=this.$refs["btn-"+this.btnsWithDashboards[n].title][0])&&t.showDashboard&&!t.$el.contains(e.target)&&t.closeDashboard()},emit:function(){this.$emit("html",this.$refs.content.innerHTML),this.$emit("change",this.$refs.content.innerHTML)},onInput:a()(function(){this.emit()},300),onFocus:function(){document.execCommand("defaultParagraphSeparator",!1,this.mergedOptions.paragraphSeparator)},onContentBlur:function(){this.selection=this.saveSelection()},syncHTML:function(){this.html!==this.$refs.content.innerHTML&&(this.innerHTML=this.html)}},mounted:function(){this.unwatch=this.$watch("html",this.syncHTML,{immediate:!0}),document.addEventListener("click",this.onDocumentClick),this.$refs.content.addEventListener("focus",this.onFocus),this.$refs.content.addEventListener("input",this.onInput),this.$refs.content.addEventListener("blur",this.onContentBlur,{capture:!0}),this.$refs.content.style.maxHeight=this.mergedOptions.maxHeight},beforeDestroy:function(){this.unwatch(),document.removeEventListener("click",this.onDocumentClick),this.$refs.content.removeEventListener("blur",this.onContentBlur),this.$refs.content.removeEventListener("input",this.onInput),this.$refs.content.removeEventListener("focus",this.onFocus)}}},function(e,t,n){"use strict";var i=n(1);t.a={props:["module","options"],data:function(){return{showDashboard:!1}},computed:{uid:function(){return this.$parent._uid}},methods:{closeDashboard:function(){this.showDashboard=!1},openDashboard:function(){this.showDashboard=!0},exec:function(){this.$parent.exec.apply(null,arguments)},onBtnClick:function(e){var t=this;if(e.preventDefault(),void 0!==this.module.action)this.exec.apply(null,this.module.action);else if(void 0!==this.module.customAction)this.module.customAction(i.a.utils).forEach(function(e){return t.exec.apply(null,e)});else if(!(void 0===this.module.render||this.$refs.dashboard&&this.$refs.dashboard.contains(e.target)))return this.showDashboard=!this.showDashboard,void i.a.emit(this.uid+"_"+(this.showDashboard?"show":"hide")+"_dashboard_"+this.module.title)}}}},function(e,t,n){"use strict";t.a={title:"headings",description:"Headings (h1-h6)",icon:'<svg viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1682 1664q-44 0-132.5-3.5t-133.5-3.5q-44 0-132 3.5t-132 3.5q-24 0-37-20.5t-13-45.5q0-31 17-46t39-17 51-7 45-15q33-21 33-140l-1-391q0-21-1-31-13-4-50-4h-675q-38 0-51 4-1 10-1 31l-1 371q0 142 37 164 16 10 48 13t57 3.5 45 15 20 45.5q0 26-12.5 48t-36.5 22q-47 0-139.5-3.5t-138.5-3.5q-43 0-128 3.5t-127 3.5q-23 0-35.5-21t-12.5-45q0-30 15.5-45t36-17.5 47.5-7.5 42-15q33-23 33-143l-1-57v-813q0-3 .5-26t0-36.5-1.5-38.5-3.5-42-6.5-36.5-11-31.5-16-18q-15-10-45-12t-53-2-41-14-18-45q0-26 12-48t36-22q46 0 138.5 3.5t138.5 3.5q42 0 126.5-3.5t126.5-3.5q25 0 37.5 22t12.5 48q0 30-17 43.5t-38.5 14.5-49.5 4-43 13q-35 21-35 160l1 320q0 21 1 32 13 3 39 3h699q25 0 38-3 1-11 1-32l1-320q0-139-35-160-18-11-58.5-12.5t-66-13-25.5-49.5q0-26 12.5-48t37.5-22q44 0 132 3.5t132 3.5q43 0 129-3.5t129-3.5q25 0 37.5 22t12.5 48q0 30-17.5 44t-40 14.5-51.5 3-44 12.5q-35 23-35 161l1 943q0 119 34 140 16 10 46 13.5t53.5 4.5 41.5 15.5 18 44.5q0 26-12 48t-36 22z"/></svg>',methods:{insertHeading:function(e){this.$parent.closeDashboard(),this.$emit("exec","formatBlock",e.target.textContent)}}}},function(e,t,n){"use strict";var i=n(1);t.a={title:"link",icon:'<svg width="1792" height="1792" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1520 1216q0-40-28-68l-208-208q-28-28-68-28-42 0-72 32 3 3 19 18.5t21.5 21.5 15 19 13 25.5 3.5 27.5q0 40-28 68t-68 28q-15 0-27.5-3.5t-25.5-13-19-15-21.5-21.5-18.5-19q-33 31-33 73 0 40 28 68l206 207q27 27 68 27 40 0 68-26l147-146q28-28 28-67zm-703-705q0-40-28-68l-206-207q-28-28-68-28-39 0-68 27l-147 146q-28 28-28 67 0 40 28 68l208 208q27 27 68 27 42 0 72-31-3-3-19-18.5t-21.5-21.5-15-19-13-25.5-3.5-27.5q0-40 28-68t68-28q15 0 27.5 3.5t25.5 13 19 15 21.5 21.5 18.5 19q33-31 33-73zm895 705q0 120-85 203l-147 146q-83 83-203 83-121 0-204-85l-206-207q-83-83-83-203 0-123 88-209l-88-88q-86 88-208 88-120 0-204-84l-208-208q-84-84-84-204t85-203l147-146q83-83 203-83 121 0 204 85l206 207q83 83 83 203 0 123-88 209l88 88q86-88 208-88 120 0 204 84l208 208q84 84 84 204z"/></svg>',description:"Hyperlink",props:{uid:null},data:function(){return{url:"",title:""}},methods:{insertLink:function(){this.$emit("exec","insertHTML","<a href='"+this.url+"'>"+this.title+"</a>"),this.$parent.closeDashboard(),this.url="",this.title=""}},created:function(){var e=this;i.a.on(this.uid+"_show_dashboard_link",function(){e.$nextTick(function(){e.$refs.url.focus()})})}}},function(e,t,n){"use strict";var i=n(2),o=n.n(i),r=n(67),s=n.n(r),a=(n(1),n(70));n.n(a);t.a={title:"image",icon:'<svg width="1792" height="1792" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M576 576q0 80-56 136t-136 56-136-56-56-136 56-136 136-56 136 56 56 136zm1024 384v448h-1408v-192l320-320 160 160 512-512zm96-704h-1600q-13 0-22.5 9.5t-9.5 22.5v1216q0 13 9.5 22.5t22.5 9.5h1600q13 0 22.5-9.5t9.5-22.5v-1216q0-13-9.5-22.5t-22.5-9.5zm160 32v1216q0 66-47 113t-113 47h-1600q-66 0-113-47t-47-113v-1216q0-66 47-113t113-47h1600q66 0 113 47t47 113z"/></svg>',description:"Insert Image",props:["options"],components:{Dropzone:s.a},computed:{uploadURL:function(){return this.options.image.uploadURL},dropzoneOptions:function(){return o()({},this.options.image.dropzoneOptions,{id:this._uid+"vwdropzone",url:this.uploadURL,autoProcessQueue:"None"!==this.uploadURL,dictDefaultMessage:'<i class="fa"><svg fill="#666" width="26" height="24" viewBox="0 0 2048 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1344 864q0-14-9-23l-352-352q-9-9-23-9t-23 9l-351 351q-10 12-10 24 0 14 9 23t23 9h224v352q0 13 9.5 22.5t22.5 9.5h192q13 0 22.5-9.5t9.5-22.5v-352h224q13 0 22.5-9.5t9.5-22.5zm640 288q0 159-112.5 271.5t-271.5 112.5h-1088q-185 0-316.5-131.5t-131.5-316.5q0-130 70-240t188-165q-2-30-2-43 0-212 150-362t362-150q156 0 285.5 87t188.5 231q71-62 166-62 106 0 181 75t75 181q0 76-41 138 130 31 213.5 135.5t83.5 238.5z"/></svg></i><br>Click here to upload...'})}},methods:{fileUploaded:function(e,t){t&&this.$emit("exec","insertHTML","<img src="+t+">")},fileAdded:function(e){var t=this;if(!e||"None"===this.uploadURL){var n=new FileReader;n.addEventListener("load",function(){t.$emit("exec","insertHTML","<img src="+n.result+">")},!1),n.readAsDataURL(e)}}}}},function(e,t,n){"use strict";t.a={title:"table",description:"Insert Table",icon:'<svg width="1792" height="1792" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M576 1376v-192q0-14-9-23t-23-9h-320q-14 0-23 9t-9 23v192q0 14 9 23t23 9h320q14 0 23-9t9-23zm0-384v-192q0-14-9-23t-23-9h-320q-14 0-23 9t-9 23v192q0 14 9 23t23 9h320q14 0 23-9t9-23zm512 384v-192q0-14-9-23t-23-9h-320q-14 0-23 9t-9 23v192q0 14 9 23t23 9h320q14 0 23-9t9-23zm-512-768v-192q0-14-9-23t-23-9h-320q-14 0-23 9t-9 23v192q0 14 9 23t23 9h320q14 0 23-9t9-23zm512 384v-192q0-14-9-23t-23-9h-320q-14 0-23 9t-9 23v192q0 14 9 23t23 9h320q14 0 23-9t9-23zm512 384v-192q0-14-9-23t-23-9h-320q-14 0-23 9t-9 23v192q0 14 9 23t23 9h320q14 0 23-9t9-23zm-512-768v-192q0-14-9-23t-23-9h-320q-14 0-23 9t-9 23v192q0 14 9 23t23 9h320q14 0 23-9t9-23zm512 384v-192q0-14-9-23t-23-9h-320q-14 0-23 9t-9 23v192q0 14 9 23t23 9h320q14 0 23-9t9-23zm0-384v-192q0-14-9-23t-23-9h-320q-14 0-23 9t-9 23v192q0 14 9 23t23 9h320q14 0 23-9t9-23zm128-320v1088q0 66-47 113t-113 47h-1344q-66 0-113-47t-47-113v-1088q0-66 47-113t113-47h1344q66 0 113 47t47 113z"/></svg>',data:function(){return{rows:2,cols:2}},methods:{insertTable:function(){var e=("<tr>"+"<td></td>".repeat(this.cols)+"</tr>").repeat(this.rows);this.$emit("exec","insertHTML","<table><tbody>"+e+"</tbody></table>"),this.$parent.closeDashboard()}}}},function(e,t,n){e.exports=n(19)},function(e,t,n){"use strict";Object.defineProperty(t,"__esModule",{value:!0});var i=n(2),o=n.n(i),r=n(48),s=n(1);t.default={install:function(e){var t=1<arguments.length&&void 0!==arguments[1]?arguments[1]:{};s.a.options=o()({},s.a.options,t),e.component("wysiwyg",r.a)},component:r.a}},function(e,t,n){e.exports={default:n(21),__esModule:!0}},function(e,t,n){n(22),e.exports=n(7).Object.assign},function(e,t,n){var i=n(23);i(i.S+i.F,"Object",{assign:n(33)})},function(e,t,n){var i=n(3),o=n(7),r=n(24),s=n(26),a=function(e,t,n){var l,u,c,d=e&a.F,p=e&a.G,h=e&a.S,f=e&a.P,v=e&a.B,m=e&a.W,g=p?o:o[t]||(o[t]={}),b=g.prototype,w=p?i:h?i[t]:(i[t]||{}).prototype;for(l in p&&(n=t),n)(u=!d&&w&&void 0!==w[l])&&l in g||(c=u?w[l]:n[l],g[l]=p&&"function"!=typeof w[l]?n[l]:v&&u?r(c,i):m&&w[l]==c?function(e){var t=function(t,n,i){if(this instanceof e){switch(arguments.length){case 0:return new e;case 1:return new e(t);case 2:return new e(t,n)}return new e(t,n,i)}return e.apply(this,arguments)};return t.prototype=e.prototype,t}(c):f&&"function"==typeof c?r(Function.call,c):c,f&&((g.virtual||(g.virtual={}))[l]=c,e&a.R&&b&&!b[l]&&s(b,l,c)))};a.F=1,a.G=2,a.S=4,a.P=8,a.B=16,a.W=32,a.U=64,a.R=128,e.exports=a},function(e,t,n){var i=n(25);e.exports=function(e,t,n){if(i(e),void 0===t)return e;switch(n){case 1:return function(n){return e.call(t,n)};case 2:return function(n,i){return e.call(t,n,i)};case 3:return function(n,i,o){return e.call(t,n,i,o)}}return function(){return e.apply(t,arguments)}}},function(e,t){e.exports=function(e){if("function"!=typeof e)throw TypeError(e+" is not a function!");return e}},function(e,t,n){var i=n(27),o=n(32);e.exports=n(5)?function(e,t,n){return i.f(e,t,o(1,n))}:function(e,t,n){return e[t]=n,e}},function(e,t,n){var i=n(28),o=n(29),r=n(31),s=Object.defineProperty;t.f=n(5)?Object.defineProperty:function(e,t,n){if(i(e),t=r(t,!0),i(n),o)try{return s(e,t,n)}catch(e){}if("get"in n||"set"in n)throw TypeError("Accessors not supported!");return"value"in n&&(e[t]=n.value),e}},function(e,t,n){var i=n(4);e.exports=function(e){if(!i(e))throw TypeError(e+" is not an object!");return e}},function(e,t,n){e.exports=!n(5)&&!n(6)(function(){return 7!=Object.defineProperty(n(30)("div"),"a",{get:function(){return 7}}).a})},function(e,t,n){var i=n(4),o=n(3).document,r=i(o)&&i(o.createElement);e.exports=function(e){return r?o.createElement(e):{}}},function(e,t,n){var i=n(4);e.exports=function(e,t){if(!i(e))return e;var n,o;if(t&&"function"==typeof(n=e.toString)&&!i(o=n.call(e)))return o;if("function"==typeof(n=e.valueOf)&&!i(o=n.call(e)))return o;if(!t&&"function"==typeof(n=e.toString)&&!i(o=n.call(e)))return o;throw TypeError("Can't convert object to primitive value")}},function(e,t){e.exports=function(e,t){return{enumerable:!(1&e),configurable:!(2&e),writable:!(4&e),value:t}}},function(e,t,n){"use strict";var i=n(34),o=n(45),r=n(46),s=n(47),a=n(9),l=Object.assign;e.exports=!l||n(6)(function(){var e={},t={},n=Symbol(),i="abcdefghijklmnopqrst";return e[n]=7,i.split("").forEach(function(e){t[e]=e}),7!=l({},e)[n]||Object.keys(l({},t)).join("")!=i})?function(e,t){for(var n=s(e),l=arguments.length,u=1,c=o.f,d=r.f;l>u;)for(var p,h=a(arguments[u++]),f=c?i(h).concat(c(h)):i(h),v=f.length,m=0;v>m;)d.call(h,p=f[m++])&&(n[p]=h[p]);return n}:l},function(e,t,n){var i=n(35),o=n(44);e.exports=Object.keys||function(e){return i(e,o)}},function(e,t,n){var i=n(36),o=n(8),r=n(38)(!1),s=n(41)("IE_PROTO");e.exports=function(e,t){var n,a=o(e),l=0,u=[];for(n in a)n!=s&&i(a,n)&&u.push(n);for(;t.length>l;)i(a,n=t[l++])&&(~r(u,n)||u.push(n));return u}},function(e,t){var n={}.hasOwnProperty;e.exports=function(e,t){return n.call(e,t)}},function(e,t){var n={}.toString;e.exports=function(e){return n.call(e).slice(8,-1)}},function(e,t,n){var i=n(8),o=n(39),r=n(40);e.exports=function(e){return function(t,n,s){var a,l=i(t),u=o(l.length),c=r(s,u);if(e&&n!=n){for(;u>c;)if((a=l[c++])!=a)return!0}else for(;u>c;c++)if((e||c in l)&&l[c]===n)return e||c||0;return!e&&-1}}},function(e,t,n){var i=n(11),o=Math.min;e.exports=function(e){return e>0?o(i(e),9007199254740991):0}},function(e,t,n){var i=n(11),o=Math.max,r=Math.min;e.exports=function(e,t){return(e=i(e))<0?o(e+t,0):r(e,t)}},function(e,t,n){var i=n(42)("keys"),o=n(43);e.exports=function(e){return i[e]||(i[e]=o(e))}},function(e,t,n){var i=n(3),o=i["__core-js_shared__"]||(i["__core-js_shared__"]={});e.exports=function(e){return o[e]||(o[e]={})}},function(e,t){var n=0,i=Math.random();e.exports=function(e){return"Symbol(".concat(void 0===e?"":e,")_",(++n+i).toString(36))}},function(e,t){e.exports="constructor,hasOwnProperty,isPrototypeOf,propertyIsEnumerable,toLocaleString,toString,valueOf".split(",")},function(e,t){t.f=Object.getOwnPropertySymbols},function(e,t){t.f={}.propertyIsEnumerable},function(e,t,n){var i=n(10);e.exports=function(e){return Object(i(e))}},function(e,t,n){"use strict";var i=n(12),o=n(77),r=n(0);var s=function(e){n(49)},a=Object(r.a)(i.a,o.a,o.b,!1,s,null,null);t.a=a.exports},function(e,t){},function(e,t){e.exports=function(e,t,n){var i,o,r,s,a;function l(){var u=Date.now()-s;u<t&&u>=0?i=setTimeout(l,t-u):(i=null,n||(a=e.apply(r,o),r=o=null))}null==t&&(t=100);var u=function(){r=this,o=arguments,s=Date.now();var u=n&&!i;return i||(i=setTimeout(l,t)),u&&(a=e.apply(r,o),r=o=null),a};return u.clear=function(){i&&(clearTimeout(i),i=null)},u.flush=function(){i&&(a=e.apply(r,o),r=o=null,clearTimeout(i),i=null)},u}},function(e,t,n){"use strict";var i=n(13),o=n(52),r=n(0),s=Object(r.a)(i.a,o.a,o.b,!1,null,null,null);t.a=s.exports},function(e,t,n){"use strict";n.d(t,"a",function(){return i}),n.d(t,"b",function(){return o});var i=function(){var e=this,t=e.$createElement,n=e._self._c||t;return n("div",{on:{mousedown:e.onBtnClick}},[n("a",{class:"vw-btn-"+e.module.title,domProps:{innerHTML:e._s(e.module.icon)}}),n("div",{directives:[{name:"show",rawName:"v-show",value:e.showDashboard,expression:"showDashboard"}],ref:"dashboard",staticClass:"dashboard"},[e.module.render?e._m(0):e._e()],1)])},o=[function(){var e=this.$createElement;return(this._self._c||e)(this.module,{ref:"moduleDashboard",tag:"component",attrs:{uid:this.uid,options:this.options},on:{exec:this.exec}})}]},function(e,t){e.exports={title:"bold",action:["bold"],description:"Bold",icon:'<svg width="1792" height="1792" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M747 1521q74 32 140 32 376 0 376-335 0-114-41-180-27-44-61.5-74t-67.5-46.5-80.5-25-84-10.5-94.5-2q-73 0-101 10 0 53-.5 159t-.5 158q0 8-1 67.5t-.5 96.5 4.5 83.5 12 66.5zm-14-746q42 7 109 7 82 0 143-13t110-44.5 74.5-89.5 25.5-142q0-70-29-122.5t-79-82-108-43.5-124-14q-50 0-130 13 0 50 4 151t4 152q0 27-.5 80t-.5 79q0 46 1 69zm-541 889l2-94q15-4 85-16t106-27q7-12 12.5-27t8.5-33.5 5.5-32.5 3-37.5.5-34v-65.5q0-982-22-1025-4-8-22-14.5t-44.5-11-49.5-7-48.5-4.5-30.5-3l-4-83q98-2 340-11.5t373-9.5q23 0 68.5.5t67.5.5q70 0 136.5 13t128.5 42 108 71 74 104.5 28 137.5q0 52-16.5 95.5t-39 72-64.5 57.5-73 45-84 40q154 35 256.5 134t102.5 248q0 100-35 179.5t-93.5 130.5-138 85.5-163.5 48.5-176 14q-44 0-132-3t-132-3q-106 0-307 11t-231 12z"/></svg>'}},function(e,t){e.exports={title:"italic",description:"Italic",action:["italic"],icon:'<svg width="1792" height="1792" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M384 1662l17-85q6-2 81.5-21.5t111.5-37.5q28-35 41-101 1-7 62-289t114-543.5 52-296.5v-25q-24-13-54.5-18.5t-69.5-8-58-5.5l19-103q33 2 120 6.5t149.5 7 120.5 2.5q48 0 98.5-2.5t121-7 98.5-6.5q-5 39-19 89-30 10-101.5 28.5t-108.5 33.5q-8 19-14 42.5t-9 40-7.5 45.5-6.5 42q-27 148-87.5 419.5t-77.5 355.5q-2 9-13 58t-20 90-16 83.5-6 57.5l1 18q17 4 185 31-3 44-16 99-11 0-32.5 1.5t-32.5 1.5q-29 0-87-10t-86-10q-138-2-206-2-51 0-143 9t-121 11z"/></svg>'}},function(e,t){e.exports={title:"underline",action:["underline"],description:"Underline",icon:'<svg width="1792" height="1792" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M176 223q-37-2-45-4l-3-88q13-1 40-1 60 0 112 4 132 7 166 7 86 0 168-3 116-4 146-5 56 0 86-2l-1 14 2 64v9q-60 9-124 9-60 0-79 25-13 14-13 132 0 13 .5 32.5t.5 25.5l1 229 14 280q6 124 51 202 35 59 96 92 88 47 177 47 104 0 191-28 56-18 99-51 48-36 65-64 36-56 53-114 21-73 21-229 0-79-3.5-128t-11-122.5-13.5-159.5l-4-59q-5-67-24-88-34-35-77-34l-100 2-14-3 2-86h84l205 10q76 3 196-10l18 2q6 38 6 51 0 7-4 31-45 12-84 13-73 11-79 17-15 15-15 41 0 7 1.5 27t1.5 31q8 19 22 396 6 195-15 304-15 76-41 122-38 65-112 123-75 57-182 89-109 33-255 33-167 0-284-46-119-47-179-122-61-76-83-195-16-80-16-237v-333q0-188-17-213-25-36-147-39zm1488 1409v-64q0-14-9-23t-23-9h-1472q-14 0-23 9t-9 23v64q0 14 9 23t23 9h1472q14 0 23-9t9-23z"/></svg>'}},function(e,t){e.exports={title:"justifyLeft",action:["justifyLeft"],description:"Justify Left",icon:'<svg width="1792" height="1792" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1792 1344v128q0 26-19 45t-45 19h-1664q-26 0-45-19t-19-45v-128q0-26 19-45t45-19h1664q26 0 45 19t19 45zm-384-384v128q0 26-19 45t-45 19h-1280q-26 0-45-19t-19-45v-128q0-26 19-45t45-19h1280q26 0 45 19t19 45zm256-384v128q0 26-19 45t-45 19h-1536q-26 0-45-19t-19-45v-128q0-26 19-45t45-19h1536q26 0 45 19t19 45zm-384-384v128q0 26-19 45t-45 19h-1152q-26 0-45-19t-19-45v-128q0-26 19-45t45-19h1152q26 0 45 19t19 45z"/></svg>'}},function(e,t){e.exports={title:"justifyCenter",action:["justifyCenter"],description:"Center",icon:'<svg width="1792" height="1792" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1792 1344v128q0 26-19 45t-45 19h-1664q-26 0-45-19t-19-45v-128q0-26 19-45t45-19h1664q26 0 45 19t19 45zm-384-384v128q0 26-19 45t-45 19h-896q-26 0-45-19t-19-45v-128q0-26 19-45t45-19h896q26 0 45 19t19 45zm256-384v128q0 26-19 45t-45 19h-1408q-26 0-45-19t-19-45v-128q0-26 19-45t45-19h1408q26 0 45 19t19 45zm-384-384v128q0 26-19 45t-45 19h-640q-26 0-45-19t-19-45v-128q0-26 19-45t45-19h640q26 0 45 19t19 45z"/></svg>'}},function(e,t){e.exports={title:"justifyRight",action:["justifyRight"],description:"Justify Right",icon:'<svg viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1792 1344v128q0 26-19 45t-45 19h-1664q-26 0-45-19t-19-45v-128q0-26 19-45t45-19h1664q26 0 45 19t19 45zm0-384v128q0 26-19 45t-45 19h-1280q-26 0-45-19t-19-45v-128q0-26 19-45t45-19h1280q26 0 45 19t19 45zm0-384v128q0 26-19 45t-45 19h-1536q-26 0-45-19t-19-45v-128q0-26 19-45t45-19h1536q26 0 45 19t19 45zm0-384v128q0 26-19 45t-45 19h-1152q-26 0-45-19t-19-45v-128q0-26 19-45t45-19h1152q26 0 45 19t19 45z"/></svg>'}},function(e,t,n){"use strict";var i=n(14),o=n(60),r=n(0),s=Object(r.a)(i.a,o.a,o.b,!1,null,null,null);t.a=s.exports},function(e,t,n){"use strict";n.d(t,"a",function(){return i}),n.d(t,"b",function(){return o});var i=function(){var e=this,t=e.$createElement,n=e._self._c||t;return n("div",[n("button",{attrs:{type:"button"},on:{click:e.insertHeading}},[e._v("H1")]),e._v(" "),n("button",{attrs:{type:"button"},on:{click:e.insertHeading}},[e._v("H2")]),e._v(" "),n("button",{attrs:{type:"button"},on:{click:e.insertHeading}},[e._v("H3")]),e._v(" "),n("button",{attrs:{type:"button"},on:{click:e.insertHeading}},[e._v("H4")]),e._v(" "),n("button",{attrs:{type:"button"},on:{click:e.insertHeading}},[e._v("H5")]),e._v(" "),n("button",{attrs:{type:"button"},on:{click:e.insertHeading}},[e._v("H6")])])},o=[]},function(e,t,n){"use strict";var i=n(15),o=n(62),r=n(0),s=Object(r.a)(i.a,o.a,o.b,!1,null,null,null);t.a=s.exports},function(e,t,n){"use strict";n.d(t,"a",function(){return i}),n.d(t,"b",function(){return o});var i=function(){var e=this,t=e.$createElement,n=e._self._c||t;return n("form",{on:{submit:function(t){t.preventDefault(),e.insertLink(t)}}},[n("label",[e._v("\n        URL\n        "),n("input",{directives:[{name:"model",rawName:"v-model",value:e.url,expression:"url"}],ref:"url",staticStyle:{width:"40%"},attrs:{type:"text"},domProps:{value:e.url},on:{input:function(t){t.target.composing||(e.url=t.target.value)}}})]),e._v(" "),n("label",[e._v("\n        Link Title\n        "),n("input",{directives:[{name:"model",rawName:"v-model",value:e.title,expression:"title"}],staticStyle:{width:"40%"},attrs:{type:"text"},domProps:{value:e.title},on:{input:function(t){t.target.composing||(e.title=t.target.value)}}})]),e._v(" "),n("button",{attrs:{type:"submit"}},[e._v("Insert")])])},o=[]},function(e,t){e.exports={title:"code",icon:'<svg height="1792" viewBox="0 0 1792 1792" width="1792" xmlns="http://www.w3.org/2000/svg"><path d="M553 1399l-50 50q-10 10-23 10t-23-10l-466-466q-10-10-10-23t10-23l466-466q10-10 23-10t23 10l50 50q10 10 10 23t-10 23l-393 393 393 393q10 10 10 23t-10 23zm591-1067l-373 1291q-4 13-15.5 19.5t-23.5 2.5l-62-17q-13-4-19.5-15.5t-2.5-24.5l373-1291q4-13 15.5-19.5t23.5-2.5l62 17q13 4 19.5 15.5t2.5 24.5zm657 651l-466 466q-10 10-23 10t-23-10l-50-50q-10-10-10-23t10-23l393-393-393-393q-10-10-10-23t10-23l50-50q10-10 23-10t23 10l466 466q10 10 10 23t-10 23z"/></svg>',description:"Code",action:["formatBlock","pre"]}},function(e,t){e.exports={title:"orderedList",action:["insertOrderedList"],description:"Ordered List (1, 2, 3)",icon:'<svg width="1792" height="1792" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M381 1620q0 80-54.5 126t-135.5 46q-106 0-172-66l57-88q49 45 106 45 29 0 50.5-14.5t21.5-42.5q0-64-105-56l-26-56q8-10 32.5-43.5t42.5-54 37-38.5v-1q-16 0-48.5 1t-48.5 1v53h-106v-152h333v88l-95 115q51 12 81 49t30 88zm2-627v159h-362q-6-36-6-54 0-51 23.5-93t56.5-68 66-47.5 56.5-43.5 23.5-45q0-25-14.5-38.5t-39.5-13.5q-46 0-81 58l-85-59q24-51 71.5-79.5t105.5-28.5q73 0 123 41.5t50 112.5q0 50-34 91.5t-75 64.5-75.5 50.5-35.5 52.5h127v-60h105zm1409 319v192q0 13-9.5 22.5t-22.5 9.5h-1216q-13 0-22.5-9.5t-9.5-22.5v-192q0-14 9-23t23-9h1216q13 0 22.5 9.5t9.5 22.5zm-1408-899v99h-335v-99h107q0-41 .5-122t.5-121v-12h-2q-8 17-50 54l-71-76 136-127h106v404h108zm1408 387v192q0 13-9.5 22.5t-22.5 9.5h-1216q-13 0-22.5-9.5t-9.5-22.5v-192q0-14 9-23t23-9h1216q13 0 22.5 9.5t9.5 22.5zm0-512v192q0 13-9.5 22.5t-22.5 9.5h-1216q-13 0-22.5-9.5t-9.5-22.5v-192q0-13 9.5-22.5t22.5-9.5h1216q13 0 22.5 9.5t9.5 22.5z"/></svg>'}},function(e,t){e.exports={title:"unorderedList",action:["insertUnorderedList"],description:"Bullet List",icon:'<svg width="1792" height="1792" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M384 1408q0 80-56 136t-136 56-136-56-56-136 56-136 136-56 136 56 56 136zm0-512q0 80-56 136t-136 56-136-56-56-136 56-136 136-56 136 56 56 136zm1408 416v192q0 13-9.5 22.5t-22.5 9.5h-1216q-13 0-22.5-9.5t-9.5-22.5v-192q0-13 9.5-22.5t22.5-9.5h1216q13 0 22.5 9.5t9.5 22.5zm-1408-928q0 80-56 136t-136 56-136-56-56-136 56-136 136-56 136 56 56 136zm1408 416v192q0 13-9.5 22.5t-22.5 9.5h-1216q-13 0-22.5-9.5t-9.5-22.5v-192q0-13 9.5-22.5t22.5-9.5h1216q13 0 22.5 9.5t9.5 22.5zm0-512v192q0 13-9.5 22.5t-22.5 9.5h-1216q-13 0-22.5-9.5t-9.5-22.5v-192q0-13 9.5-22.5t22.5-9.5h1216q13 0 22.5 9.5t9.5 22.5z"/></svg>'}},function(e,t,n){"use strict";var i=n(16),o=n(71),r=n(0),s=Object(r.a)(i.a,o.a,o.b,!1,null,null,null);t.a=s.exports},function(e,t,n){var i;i=function(){"use strict";var e={getSignedURL:function(e,t){var n={filePath:e.name,contentType:e.type};return new Promise(function(i,o){var r=new FormData,s=new XMLHttpRequest,a="function"==typeof t.signingURL?t.signingURL(e):t.signingURL;s.open("POST",a),s.onload=function(){200==s.status?i(JSON.parse(s.response)):o(s.statusText)},s.onerror=function(e){console.error("Network Error : Could not send request to AWS (Maybe CORS errors)"),o(e)},Object.entries(t.headers||{}).forEach(function(e){var t=e[0],n=e[1];s.setRequestHeader(t,n)}),n=Object.assign(n,t.params||{}),Object.entries(n).forEach(function(e){var t=e[0],n=e[1];r.append(t,n)}),s.send(r)})},sendFile:function(e,t){var n=new FormData;return this.getSignedURL(e,t).then(function(t){var i=t.signature;return Object.keys(i).forEach(function(e){n.append(e,i[e])}),n.append("file",e),new Promise(function(e,i){var o=new XMLHttpRequest;o.open("POST",t.postEndpoint),o.onload=function(){if(201==o.status){var t=(new window.DOMParser).parseFromString(o.response,"text/xml").firstChild.children[0].innerHTML;e({success:!0,message:t})}else{var n=(new window.DOMParser).parseFromString(o.response,"text/xml").firstChild.children[0].innerHTML;i({success:!1,message:n+". Request is marked as resolved when returns as status 201"})}},o.onerror=function(e){var t=(new window.DOMParser).parseFromString(o.response,"text/xml").firstChild.children[1].innerHTML;i({success:!1,message:t})},o.send(n)})}).catch(function(e){return e})}};return{render:function(){var e=this,t=e.$createElement;return(e._self._c||t)("div",{ref:"dropzoneElement",class:{"vue-dropzone dropzone":e.includeStyling},attrs:{id:e.id}})},staticRenderFns:[],props:{id:{type:String,required:!0},options:{type:Object,required:!0},includeStyling:{type:Boolean,default:!0,required:!1},awss3:{type:Object,required:!1,default:null},destroyDropzone:{type:Boolean,default:!0,required:!1}},data:function(){return{isS3:!1,wasQueueAutoProcess:!0}},computed:{dropzoneSettings:function(){var e={thumbnailWidth:200,thumbnailHeight:200};return Object.keys(this.options).forEach(function(t){e[t]=this.options[t]},this),null!==this.awss3&&(e.autoProcessQueue=!1,this.isS3=!0,void 0!==this.options.autoProcessQueue&&(this.wasQueueAutoProcess=this.options.autoProcessQueue)),e}},methods:{manuallyAddFile:function(e,t){e.manuallyAdded=!0,this.dropzone.emit("addedfile",e),t&&this.dropzone.emit("thumbnail",e,t);for(var n=e.previewElement.querySelectorAll("[data-dz-thumbnail]"),i=0;i<n.length;i++)n[i].style.width=this.dropzoneSettings.thumbnailWidth+"px",n[i].style.height=this.dropzoneSettings.thumbnailHeight+"px",n[i].style["object-fit"]="contain";this.dropzone.emit("complete",e),this.dropzone.options.maxFiles&&this.dropzone.options.maxFiles--,this.dropzone.files.push(e),this.$emit("vdropzone-file-added-manually",e)},setOption:function(e,t){this.dropzone.options[e]=t},removeAllFiles:function(e){this.dropzone.removeAllFiles(e)},processQueue:function(){var e=this,t=this.dropzone;this.isS3&&!this.wasQueueAutoProcess?this.getQueuedFiles().forEach(function(t){e.getSignedAndUploadToS3(t)}):this.dropzone.processQueue(),this.dropzone.on("success",function(){t.options.autoProcessQueue=!0}),this.dropzone.on("queuecomplete",function(){t.options.autoProcessQueue=!1})},init:function(){return this.dropzone.init()},destroy:function(){return this.dropzone.destroy()},updateTotalUploadProgress:function(){return this.dropzone.updateTotalUploadProgress()},getFallbackForm:function(){return this.dropzone.getFallbackForm()},getExistingFallback:function(){return this.dropzone.getExistingFallback()},setupEventListeners:function(){return this.dropzone.setupEventListeners()},removeEventListeners:function(){return this.dropzone.removeEventListeners()},disable:function(){return this.dropzone.disable()},enable:function(){return this.dropzone.enable()},filesize:function(e){return this.dropzone.filesize(e)},accept:function(e,t){return this.dropzone.accept(e,t)},addFile:function(e){return this.dropzone.addFile(e)},removeFile:function(e){this.dropzone.removeFile(e)},getAcceptedFiles:function(){return this.dropzone.getAcceptedFiles()},getRejectedFiles:function(){return this.dropzone.getRejectedFiles()},getFilesWithStatus:function(){return this.dropzone.getFilesWithStatus()},getQueuedFiles:function(){return this.dropzone.getQueuedFiles()},getUploadingFiles:function(){return this.dropzone.getUploadingFiles()},getAddedFiles:function(){return this.dropzone.getAddedFiles()},getActiveFiles:function(){return this.dropzone.getActiveFiles()},getSignedAndUploadToS3:function(t){var n=this;e.sendFile(t,this.awss3).then(function(e){e.success?(t.s3ObjectLocation=e.message,setTimeout(function(){return n.dropzone.processFile(t)}),n.$emit("vdropzone-s3-upload-success",e.message)):"undefined"!=typeof message?n.$emit("vdropzone-s3-upload-error",e.message):n.$emit("vdropzone-s3-upload-error","Network Error : Could not send request to AWS. (Maybe CORS error)")}).catch(function(e){alert(e)})},setAWSSigningURL:function(e){this.isS3&&(this.awss3.signingURL=e)}},mounted:function(){if(!this.$isServer||!this.hasBeenMounted){this.hasBeenMounted=!0;var e=n(68);e.autoDiscover=!1,this.dropzone=new e(this.$refs.dropzoneElement,this.dropzoneSettings);var t=this;this.dropzone.on("thumbnail",function(e,n){t.$emit("vdropzone-thumbnail",e,n)}),this.dropzone.on("addedfile",function(e){t.duplicateCheck&&this.files.length&&this.files.forEach(function(n){n.name===e.name&&(this.removeFile(e),t.$emit("duplicate-file",e))},this),t.$emit("vdropzone-file-added",e),t.isS3&&t.wasQueueAutoProcess&&t.getSignedAndUploadToS3(e)}),this.dropzone.on("addedfiles",function(e){t.$emit("vdropzone-files-added",e)}),this.dropzone.on("removedfile",function(e){t.$emit("vdropzone-removed-file",e),e.manuallyAdded&&t.dropzone.options.maxFiles++}),this.dropzone.on("success",function(e,n){t.$emit("vdropzone-success",e,n),t.isS3&&t.wasQueueAutoProcess&&t.setOption("autoProcessQueue",!1)}),this.dropzone.on("successmultiple",function(e,n){t.$emit("vdropzone-success-multiple",e,n)}),this.dropzone.on("error",function(e,n,i){t.$emit("vdropzone-error",e,n,i)}),this.dropzone.on("errormultiple",function(e,n,i){t.$emit("vdropzone-error-multiple",e,n,i)}),this.dropzone.on("sending",function(e,n,i){t.isS3&&i.append("s3ObjectLocation",e.s3ObjectLocation),t.$emit("vdropzone-sending",e,n,i)}),this.dropzone.on("sendingmultiple",function(e,n,i){t.$emit("vdropzone-sending-multiple",e,n,i)}),this.dropzone.on("complete",function(e){t.$emit("vdropzone-complete",e)}),this.dropzone.on("completemultiple",function(e){t.$emit("vdropzone-complete-multiple",e)}),this.dropzone.on("canceled",function(e){t.$emit("vdropzone-canceled",e)}),this.dropzone.on("canceledmultiple",function(e){t.$emit("vdropzone-canceled-multiple",e)}),this.dropzone.on("maxfilesreached",function(e){t.$emit("vdropzone-max-files-reached",e)}),this.dropzone.on("maxfilesexceeded",function(e){t.$emit("vdropzone-max-files-exceeded",e)}),this.dropzone.on("processing",function(e){t.$emit("vdropzone-processing",e)}),this.dropzone.on("processing",function(e){t.$emit("vdropzone-processing",e)}),this.dropzone.on("processingmultiple",function(e){t.$emit("vdropzone-processing-multiple",e)}),this.dropzone.on("uploadprogress",function(e,n,i){t.$emit("vdropzone-upload-progress",e,n,i)}),this.dropzone.on("totaluploadprogress",function(e,n,i){t.$emit("vdropzone-total-upload-progress",e,n,i)}),this.dropzone.on("reset",function(){t.$emit("vdropzone-reset")}),this.dropzone.on("queuecomplete",function(){t.$emit("vdropzone-queue-complete")}),this.dropzone.on("drop",function(e){t.$emit("vdropzone-drop",e)}),this.dropzone.on("dragstart",function(e){t.$emit("vdropzone-drag-start",e)}),this.dropzone.on("dragend",function(e){t.$emit("vdropzone-drag-end",e)}),this.dropzone.on("dragenter",function(e){t.$emit("vdropzone-drag-enter",e)}),this.dropzone.on("dragover",function(e){t.$emit("vdropzone-drag-over",e)}),this.dropzone.on("dragleave",function(e){t.$emit("vdropzone-drag-leave",e)}),t.$emit("vdropzone-mounted")}},beforeDestroy:function(){this.destroyDropzone&&this.dropzone.destroy()}}},e.exports=i()},function(e,t,n){"use strict";(function(e){var t=function(){function e(e,t){for(var n=0;n<t.length;n++){var i=t[n];i.enumerable=i.enumerable||!1,i.configurable=!0,"value"in i&&(i.writable=!0),Object.defineProperty(e,i.key,i)}}return function(t,n,i){return n&&e(t.prototype,n),i&&e(t,i),t}}();function n(e,t){if(!e)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return!t||"object"!=typeof t&&"function"!=typeof t?e:t}function i(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}var o=function(){function e(){i(this,e)}return t(e,[{key:"on",value:function(e,t){return this._callbacks=this._callbacks||{},this._callbacks[e]||(this._callbacks[e]=[]),this._callbacks[e].push(t),this}},{key:"emit",value:function(e){this._callbacks=this._callbacks||{};var t=this._callbacks[e];if(t){for(var n=arguments.length,i=Array(n>1?n-1:0),o=1;o<n;o++)i[o-1]=arguments[o];for(var r=0,s=s=t;;){if(r>=s.length)break;s[r++].apply(this,i)}}return this}},{key:"off",value:function(e,t){if(!this._callbacks||0===arguments.length)return this._callbacks={},this;var n=this._callbacks[e];if(!n)return this;if(1===arguments.length)return delete this._callbacks[e],this;for(var i=0;i<n.length;i++){if(n[i]===t){n.splice(i,1);break}}return this}}]),e}(),r=function(e){function r(e,t){i(this,r);var o,s=n(this,(r.__proto__||Object.getPrototypeOf(r)).call(this)),a=void 0;if(s.element=e,s.version=r.version,s.defaultOptions.previewTemplate=s.defaultOptions.previewTemplate.replace(/\n*/g,""),s.clickableElements=[],s.listeners=[],s.files=[],"string"==typeof s.element&&(s.element=document.querySelector(s.element)),!s.element||null==s.element.nodeType)throw new Error("Invalid dropzone element.");if(s.element.dropzone)throw new Error("Dropzone already attached.");r.instances.push(s),s.element.dropzone=s;var l,u=null!=(o=r.optionsForElement(s.element))?o:{};if(s.options=r.extend({},s.defaultOptions,u,null!=t?t:{}),s.options.forceFallback||!r.isBrowserSupported())return l=s.options.fallback.call(s),n(s,l);if(null==s.options.url&&(s.options.url=s.element.getAttribute("action")),!s.options.url)throw new Error("No URL provided.");if(s.options.acceptedFiles&&s.options.acceptedMimeTypes)throw new Error("You can't provide both 'acceptedFiles' and 'acceptedMimeTypes'. 'acceptedMimeTypes' is deprecated.");if(s.options.uploadMultiple&&s.options.chunking)throw new Error("You cannot set both: uploadMultiple and chunking.");return s.options.acceptedMimeTypes&&(s.options.acceptedFiles=s.options.acceptedMimeTypes,delete s.options.acceptedMimeTypes),null!=s.options.renameFilename&&(s.options.renameFile=function(e){return s.options.renameFilename.call(s,e.name,e)}),s.options.method=s.options.method.toUpperCase(),(a=s.getExistingFallback())&&a.parentNode&&a.parentNode.removeChild(a),!1!==s.options.previewsContainer&&(s.options.previewsContainer?s.previewsContainer=r.getElement(s.options.previewsContainer,"previewsContainer"):s.previewsContainer=s.element),s.options.clickable&&(!0===s.options.clickable?s.clickableElements=[s.element]:s.clickableElements=r.getElements(s.options.clickable,"clickable")),s.init(),s}return function(e,t){if("function"!=typeof t&&null!==t)throw new TypeError("Super expression must either be null or a function, not "+typeof t);e.prototype=Object.create(t&&t.prototype,{constructor:{value:e,enumerable:!1,writable:!0,configurable:!0}}),t&&(Object.setPrototypeOf?Object.setPrototypeOf(e,t):e.__proto__=t)}(r,o),t(r,null,[{key:"initClass",value:function(){this.prototype.Emitter=o,this.prototype.events=["drop","dragstart","dragend","dragenter","dragover","dragleave","addedfile","addedfiles","removedfile","thumbnail","error","errormultiple","processing","processingmultiple","uploadprogress","totaluploadprogress","sending","sendingmultiple","success","successmultiple","canceled","canceledmultiple","complete","completemultiple","reset","maxfilesexceeded","maxfilesreached","queuecomplete"],this.prototype.defaultOptions={url:null,method:"post",withCredentials:!1,timeout:3e4,parallelUploads:2,uploadMultiple:!1,chunking:!1,forceChunking:!1,chunkSize:2e6,parallelChunkUploads:!1,retryChunks:!1,retryChunksLimit:3,maxFilesize:256,paramName:"file",createImageThumbnails:!0,maxThumbnailFilesize:10,thumbnailWidth:120,thumbnailHeight:120,thumbnailMethod:"crop",resizeWidth:null,resizeHeight:null,resizeMimeType:null,resizeQuality:.8,resizeMethod:"contain",filesizeBase:1e3,maxFiles:null,headers:null,clickable:!0,ignoreHiddenFiles:!0,acceptedFiles:null,acceptedMimeTypes:null,autoProcessQueue:!0,autoQueue:!0,addRemoveLinks:!1,previewsContainer:null,hiddenInputContainer:"body",capture:null,renameFilename:null,renameFile:null,forceFallback:!1,dictDefaultMessage:"Drop files here to upload",dictFallbackMessage:"Your browser does not support drag'n'drop file uploads.",dictFallbackText:"Please use the fallback form below to upload your files like in the olden days.",dictFileTooBig:"File is too big ({{filesize}}MiB). Max filesize: {{maxFilesize}}MiB.",dictInvalidFileType:"You can't upload files of this type.",dictResponseError:"Server responded with {{statusCode}} code.",dictCancelUpload:"Cancel upload",dictCancelUploadConfirmation:"Are you sure you want to cancel this upload?",dictRemoveFile:"Remove file",dictRemoveFileConfirmation:null,dictMaxFilesExceeded:"You can not upload any more files.",dictFileSizeUnits:{tb:"TB",gb:"GB",mb:"MB",kb:"KB",b:"b"},init:function(){},params:function(e,t,n){if(n)return{dzuuid:n.file.upload.uuid,dzchunkindex:n.index,dztotalfilesize:n.file.size,dzchunksize:this.options.chunkSize,dztotalchunkcount:n.file.upload.totalChunkCount,dzchunkbyteoffset:n.index*this.options.chunkSize}},accept:function(e,t){return t()},chunksUploaded:function(e,t){t()},fallback:function(){var e=void 0;this.element.className=this.element.className+" dz-browser-not-supported";for(var t=0,n=n=this.element.getElementsByTagName("div");;){if(t>=n.length)break;var i=n[t++];if(/(^| )dz-message($| )/.test(i.className)){e=i,i.className="dz-message";break}}e||(e=r.createElement('<div class="dz-message"><span></span></div>'),this.element.appendChild(e));var o=e.getElementsByTagName("span")[0];return o&&(null!=o.textContent?o.textContent=this.options.dictFallbackMessage:null!=o.innerText&&(o.innerText=this.options.dictFallbackMessage)),this.element.appendChild(this.getFallbackForm())},resize:function(e,t,n,i){var o={srcX:0,srcY:0,srcWidth:e.width,srcHeight:e.height},r=e.width/e.height;null==t&&null==n?(t=o.srcWidth,n=o.srcHeight):null==t?t=n*r:null==n&&(n=t/r);var s=(t=Math.min(t,o.srcWidth))/(n=Math.min(n,o.srcHeight));if(o.srcWidth>t||o.srcHeight>n)if("crop"===i)r>s?(o.srcHeight=e.height,o.srcWidth=o.srcHeight*s):(o.srcWidth=e.width,o.srcHeight=o.srcWidth/s);else{if("contain"!==i)throw new Error("Unknown resizeMethod '"+i+"'");r>s?n=t/r:t=n*r}return o.srcX=(e.width-o.srcWidth)/2,o.srcY=(e.height-o.srcHeight)/2,o.trgWidth=t,o.trgHeight=n,o},transformFile:function(e,t){return(this.options.resizeWidth||this.options.resizeHeight)&&e.type.match(/image.*/)?this.resizeImage(e,this.options.resizeWidth,this.options.resizeHeight,this.options.resizeMethod,t):t(e)},previewTemplate:'<div class="dz-preview dz-file-preview">\n  <div class="dz-image"><img data-dz-thumbnail /></div>\n  <div class="dz-details">\n    <div class="dz-size"><span data-dz-size></span></div>\n    <div class="dz-filename"><span data-dz-name></span></div>\n  </div>\n  <div class="dz-progress"><span class="dz-upload" data-dz-uploadprogress></span></div>\n  <div class="dz-error-message"><span data-dz-errormessage></span></div>\n  <div class="dz-success-mark">\n    <svg width="54px" height="54px" viewBox="0 0 54 54" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">\n      <title>Check</title>\n      <defs></defs>\n      <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">\n        <path d="M23.5,31.8431458 L17.5852419,25.9283877 C16.0248253,24.3679711 13.4910294,24.366835 11.9289322,25.9289322 C10.3700136,27.4878508 10.3665912,30.0234455 11.9283877,31.5852419 L20.4147581,40.0716123 C20.5133999,40.1702541 20.6159315,40.2626649 20.7218615,40.3488435 C22.2835669,41.8725651 24.794234,41.8626202 26.3461564,40.3106978 L43.3106978,23.3461564 C44.8771021,21.7797521 44.8758057,19.2483887 43.3137085,17.6862915 C41.7547899,16.1273729 39.2176035,16.1255422 37.6538436,17.6893022 L23.5,31.8431458 Z M27,53 C41.3594035,53 53,41.3594035 53,27 C53,12.6405965 41.3594035,1 27,1 C12.6405965,1 1,12.6405965 1,27 C1,41.3594035 12.6405965,53 27,53 Z" id="Oval-2" stroke-opacity="0.198794158" stroke="#747474" fill-opacity="0.816519475" fill="#FFFFFF" sketch:type="MSShapeGroup"></path>\n      </g>\n    </svg>\n  </div>\n  <div class="dz-error-mark">\n    <svg width="54px" height="54px" viewBox="0 0 54 54" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">\n      <title>Error</title>\n      <defs></defs>\n      <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">\n        <g id="Check-+-Oval-2" sketch:type="MSLayerGroup" stroke="#747474" stroke-opacity="0.198794158" fill="#FFFFFF" fill-opacity="0.816519475">\n          <path d="M32.6568542,29 L38.3106978,23.3461564 C39.8771021,21.7797521 39.8758057,19.2483887 38.3137085,17.6862915 C36.7547899,16.1273729 34.2176035,16.1255422 32.6538436,17.6893022 L27,23.3431458 L21.3461564,17.6893022 C19.7823965,16.1255422 17.2452101,16.1273729 15.6862915,17.6862915 C14.1241943,19.2483887 14.1228979,21.7797521 15.6893022,23.3461564 L21.3431458,29 L15.6893022,34.6538436 C14.1228979,36.2202479 14.1241943,38.7516113 15.6862915,40.3137085 C17.2452101,41.8726271 19.7823965,41.8744578 21.3461564,40.3106978 L27,34.6568542 L32.6538436,40.3106978 C34.2176035,41.8744578 36.7547899,41.8726271 38.3137085,40.3137085 C39.8758057,38.7516113 39.8771021,36.2202479 38.3106978,34.6538436 L32.6568542,29 Z M27,53 C41.3594035,53 53,41.3594035 53,27 C53,12.6405965 41.3594035,1 27,1 C12.6405965,1 1,12.6405965 1,27 C1,41.3594035 12.6405965,53 27,53 Z" id="Oval-2" sketch:type="MSShapeGroup"></path>\n        </g>\n      </g>\n    </svg>\n  </div>\n</div>',drop:function(e){return this.element.classList.remove("dz-drag-hover")},dragstart:function(e){},dragend:function(e){return this.element.classList.remove("dz-drag-hover")},dragenter:function(e){return this.element.classList.add("dz-drag-hover")},dragover:function(e){return this.element.classList.add("dz-drag-hover")},dragleave:function(e){return this.element.classList.remove("dz-drag-hover")},paste:function(e){},reset:function(){return this.element.classList.remove("dz-started")},addedfile:function(e){var t=this;if(this.element===this.previewsContainer&&this.element.classList.add("dz-started"),this.previewsContainer){e.previewElement=r.createElement(this.options.previewTemplate.trim()),e.previewTemplate=e.previewElement,this.previewsContainer.appendChild(e.previewElement);for(var n=0,i=i=e.previewElement.querySelectorAll("[data-dz-name]");;){if(n>=i.length)break;var o=i[n++];o.textContent=e.name}for(var s=0,a=a=e.previewElement.querySelectorAll("[data-dz-size]");!(s>=a.length);)(o=a[s++]).innerHTML=this.filesize(e.size);this.options.addRemoveLinks&&(e._removeLink=r.createElement('<a class="dz-remove" href="javascript:undefined;" data-dz-remove>'+this.options.dictRemoveFile+"</a>"),e.previewElement.appendChild(e._removeLink));for(var l=function(n){return n.preventDefault(),n.stopPropagation(),e.status===r.UPLOADING?r.confirm(t.options.dictCancelUploadConfirmation,function(){return t.removeFile(e)}):t.options.dictRemoveFileConfirmation?r.confirm(t.options.dictRemoveFileConfirmation,function(){return t.removeFile(e)}):t.removeFile(e)},u=0,c=c=e.previewElement.querySelectorAll("[data-dz-remove]");;){if(u>=c.length)break;c[u++].addEventListener("click",l)}}},removedfile:function(e){return null!=e.previewElement&&null!=e.previewElement.parentNode&&e.previewElement.parentNode.removeChild(e.previewElement),this._updateMaxFilesReachedClass()},thumbnail:function(e,t){if(e.previewElement){e.previewElement.classList.remove("dz-file-preview");for(var n=0,i=i=e.previewElement.querySelectorAll("[data-dz-thumbnail]");;){if(n>=i.length)break;var o=i[n++];o.alt=e.name,o.src=t}return setTimeout(function(){return e.previewElement.classList.add("dz-image-preview")},1)}},error:function(e,t){if(e.previewElement){e.previewElement.classList.add("dz-error"),"String"!=typeof t&&t.error&&(t=t.error);for(var n=0,i=i=e.previewElement.querySelectorAll("[data-dz-errormessage]");;){if(n>=i.length)break;i[n++].textContent=t}}},errormultiple:function(){},processing:function(e){if(e.previewElement&&(e.previewElement.classList.add("dz-processing"),e._removeLink))return e._removeLink.textContent=this.options.dictCancelUpload},processingmultiple:function(){},uploadprogress:function(e,t,n){if(e.previewElement)for(var i=0,o=o=e.previewElement.querySelectorAll("[data-dz-uploadprogress]");;){if(i>=o.length)break;var r=o[i++];"PROGRESS"===r.nodeName?r.value=t:r.style.width=t+"%"}},totaluploadprogress:function(){},sending:function(){},sendingmultiple:function(){},success:function(e){if(e.previewElement)return e.previewElement.classList.add("dz-success")},successmultiple:function(){},canceled:function(e){return this.emit("error",e,"Upload canceled.")},canceledmultiple:function(){},complete:function(e){if(e._removeLink&&(e._removeLink.textContent=this.options.dictRemoveFile),e.previewElement)return e.previewElement.classList.add("dz-complete")},completemultiple:function(){},maxfilesexceeded:function(){},maxfilesreached:function(){},queuecomplete:function(){},addedfiles:function(){}},this.prototype._thumbnailQueue=[],this.prototype._processingThumbnail=!1}},{key:"extend",value:function(e){for(var t=arguments.length,n=Array(t>1?t-1:0),i=1;i<t;i++)n[i-1]=arguments[i];for(var o=0,r=r=n;;){if(o>=r.length)break;var s=r[o++];for(var a in s){var l=s[a];e[a]=l}}return e}}]),t(r,[{key:"getAcceptedFiles",value:function(){return this.files.filter(function(e){return e.accepted}).map(function(e){return e})}},{key:"getRejectedFiles",value:function(){return this.files.filter(function(e){return!e.accepted}).map(function(e){return e})}},{key:"getFilesWithStatus",value:function(e){return this.files.filter(function(t){return t.status===e}).map(function(e){return e})}},{key:"getQueuedFiles",value:function(){return this.getFilesWithStatus(r.QUEUED)}},{key:"getUploadingFiles",value:function(){return this.getFilesWithStatus(r.UPLOADING)}},{key:"getAddedFiles",value:function(){return this.getFilesWithStatus(r.ADDED)}},{key:"getActiveFiles",value:function(){return this.files.filter(function(e){return e.status===r.UPLOADING||e.status===r.QUEUED}).map(function(e){return e})}},{key:"init",value:function(){var e=this;if("form"===this.element.tagName&&this.element.setAttribute("enctype","multipart/form-data"),this.element.classList.contains("dropzone")&&!this.element.querySelector(".dz-message")&&this.element.appendChild(r.createElement('<div class="dz-default dz-message"><span>'+this.options.dictDefaultMessage+"</span></div>")),this.clickableElements.length){!function t(){return e.hiddenFileInput&&e.hiddenFileInput.parentNode.removeChild(e.hiddenFileInput),e.hiddenFileInput=document.createElement("input"),e.hiddenFileInput.setAttribute("type","file"),(null===e.options.maxFiles||e.options.maxFiles>1)&&e.hiddenFileInput.setAttribute("multiple","multiple"),e.hiddenFileInput.className="dz-hidden-input",null!==e.options.acceptedFiles&&e.hiddenFileInput.setAttribute("accept",e.options.acceptedFiles),null!==e.options.capture&&e.hiddenFileInput.setAttribute("capture",e.options.capture),e.hiddenFileInput.style.visibility="hidden",e.hiddenFileInput.style.position="absolute",e.hiddenFileInput.style.top="0",e.hiddenFileInput.style.left="0",e.hiddenFileInput.style.height="0",e.hiddenFileInput.style.width="0",document.querySelector(e.options.hiddenInputContainer).appendChild(e.hiddenFileInput),e.hiddenFileInput.addEventListener("change",function(){var n=e.hiddenFileInput.files;if(n.length)for(var i=0,o=o=n;!(i>=o.length);){var r=o[i++];e.addFile(r)}return e.emit("addedfiles",n),t()})}()}this.URL=null!==window.URL?window.URL:window.webkitURL;for(var t=0,n=n=this.events;;){if(t>=n.length)break;var i=n[t++];this.on(i,this.options[i])}this.on("uploadprogress",function(){return e.updateTotalUploadProgress()}),this.on("removedfile",function(){return e.updateTotalUploadProgress()}),this.on("canceled",function(t){return e.emit("complete",t)}),this.on("complete",function(t){if(0===e.getAddedFiles().length&&0===e.getUploadingFiles().length&&0===e.getQueuedFiles().length)return setTimeout(function(){return e.emit("queuecomplete")},0)});var o=function(e){return e.stopPropagation(),e.preventDefault?e.preventDefault():e.returnValue=!1};return this.listeners=[{element:this.element,events:{dragstart:function(t){return e.emit("dragstart",t)},dragenter:function(t){return o(t),e.emit("dragenter",t)},dragover:function(t){var n=void 0;try{n=t.dataTransfer.effectAllowed}catch(e){}return t.dataTransfer.dropEffect="move"===n||"linkMove"===n?"move":"copy",o(t),e.emit("dragover",t)},dragleave:function(t){return e.emit("dragleave",t)},drop:function(t){return o(t),e.drop(t)},dragend:function(t){return e.emit("dragend",t)}}}],this.clickableElements.forEach(function(t){return e.listeners.push({element:t,events:{click:function(n){return(t!==e.element||n.target===e.element||r.elementInside(n.target,e.element.querySelector(".dz-message")))&&e.hiddenFileInput.click(),!0}}})}),this.enable(),this.options.init.call(this)}},{key:"destroy",value:function(){return this.disable(),this.removeAllFiles(!0),(null!=this.hiddenFileInput?this.hiddenFileInput.parentNode:void 0)&&(this.hiddenFileInput.parentNode.removeChild(this.hiddenFileInput),this.hiddenFileInput=null),delete this.element.dropzone,r.instances.splice(r.instances.indexOf(this),1)}},{key:"updateTotalUploadProgress",value:function(){var e=void 0,t=0,n=0;if(this.getActiveFiles().length){for(var i=0,o=o=this.getActiveFiles();;){if(i>=o.length)break;var r=o[i++];t+=r.upload.bytesSent,n+=r.upload.total}e=100*t/n}else e=100;return this.emit("totaluploadprogress",e,n,t)}},{key:"_getParamName",value:function(e){return"function"==typeof this.options.paramName?this.options.paramName(e):this.options.paramName+(this.options.uploadMultiple?"["+e+"]":"")}},{key:"_renameFile",value:function(e){return"function"!=typeof this.options.renameFile?e.name:this.options.renameFile(e)}},{key:"getFallbackForm",value:function(){var e,t=void 0;if(e=this.getExistingFallback())return e;var n='<div class="dz-fallback">';this.options.dictFallbackText&&(n+="<p>"+this.options.dictFallbackText+"</p>"),n+='<input type="file" name="'+this._getParamName(0)+'" '+(this.options.uploadMultiple?'multiple="multiple"':void 0)+' /><input type="submit" value="Upload!"></div>';var i=r.createElement(n);return"FORM"!==this.element.tagName?(t=r.createElement('<form action="'+this.options.url+'" enctype="multipart/form-data" method="'+this.options.method+'"></form>')).appendChild(i):(this.element.setAttribute("enctype","multipart/form-data"),this.element.setAttribute("method",this.options.method)),null!=t?t:i}},{key:"getExistingFallback",value:function(){for(var e=function(e){for(var t=0,n=n=e;;){if(t>=n.length)break;var i=n[t++];if(/(^| )fallback($| )/.test(i.className))return i}},t=["div","form"],n=0;n<t.length;n++){var i,o=t[n];if(i=e(this.element.getElementsByTagName(o)))return i}}},{key:"setupEventListeners",value:function(){return this.listeners.map(function(e){return function(){var t=[];for(var n in e.events){var i=e.events[n];t.push(e.element.addEventListener(n,i,!1))}return t}()})}},{key:"removeEventListeners",value:function(){return this.listeners.map(function(e){return function(){var t=[];for(var n in e.events){var i=e.events[n];t.push(e.element.removeEventListener(n,i,!1))}return t}()})}},{key:"disable",value:function(){var e=this;return this.clickableElements.forEach(function(e){return e.classList.remove("dz-clickable")}),this.removeEventListeners(),this.files.map(function(t){return e.cancelUpload(t)})}},{key:"enable",value:function(){return this.clickableElements.forEach(function(e){return e.classList.add("dz-clickable")}),this.setupEventListeners()}},{key:"filesize",value:function(e){var t=0,n="b";if(e>0){for(var i=["tb","gb","mb","kb","b"],o=0;o<i.length;o++){var r=i[o];if(e>=Math.pow(this.options.filesizeBase,4-o)/10){t=e/Math.pow(this.options.filesizeBase,4-o),n=r;break}}t=Math.round(10*t)/10}return"<strong>"+t+"</strong> "+this.options.dictFileSizeUnits[n]}},{key:"_updateMaxFilesReachedClass",value:function(){return null!=this.options.maxFiles&&this.getAcceptedFiles().length>=this.options.maxFiles?(this.getAcceptedFiles().length===this.options.maxFiles&&this.emit("maxfilesreached",this.files),this.element.classList.add("dz-max-files-reached")):this.element.classList.remove("dz-max-files-reached")}},{key:"drop",value:function(e){if(e.dataTransfer){this.emit("drop",e);var t=e.dataTransfer.files;if(this.emit("addedfiles",t),t.length){var n=e.dataTransfer.items;n&&n.length&&null!=n[0].webkitGetAsEntry?this._addFilesFromItems(n):this.handleFiles(t)}}}},{key:"paste",value:function(e){if(null!=(void 0!==(t=null!=e?e.clipboardData:void 0)&&null!==t?function(e){return e.items}(t):void 0)){var t;this.emit("paste",e);var n=e.clipboardData.items;return n.length?this._addFilesFromItems(n):void 0}}},{key:"handleFiles",value:function(e){var t=this;return e.map(function(e){return t.addFile(e)})}},{key:"_addFilesFromItems",value:function(e){var t=this;return function(){for(var n=[],i=0,o=o=e;;){if(i>=o.length)break;var r,s=o[i++];null!=s.webkitGetAsEntry&&(r=s.webkitGetAsEntry())?r.isFile?n.push(t.addFile(s.getAsFile())):r.isDirectory?n.push(t._addFilesFromDirectory(r,r.name)):n.push(void 0):null!=s.getAsFile&&(null==s.kind||"file"===s.kind)?n.push(t.addFile(s.getAsFile())):n.push(void 0)}return n}()}},{key:"_addFilesFromDirectory",value:function(e,t){var n=this,i=e.createReader(),o=function(e){return t=console,n="log",i=function(t){return t.log(e)},void 0!==t&&null!==t&&"function"==typeof t[n]?i(t,n):void 0;var t,n,i};return function e(){return i.readEntries(function(i){if(i.length>0){for(var o=0,r=r=i;!(o>=r.length);){var s=r[o++];s.isFile?s.file(function(e){if(!n.options.ignoreHiddenFiles||"."!==e.name.substring(0,1))return e.fullPath=t+"/"+e.name,n.addFile(e)}):s.isDirectory&&n._addFilesFromDirectory(s,t+"/"+s.name)}e()}return null},o)}()}},{key:"accept",value:function(e,t){return e.size>1024*this.options.maxFilesize*1024?t(this.options.dictFileTooBig.replace("{{filesize}}",Math.round(e.size/1024/10.24)/100).replace("{{maxFilesize}}",this.options.maxFilesize)):r.isValidFile(e,this.options.acceptedFiles)?null!=this.options.maxFiles&&this.getAcceptedFiles().length>=this.options.maxFiles?(t(this.options.dictMaxFilesExceeded.replace("{{maxFiles}}",this.options.maxFiles)),this.emit("maxfilesexceeded",e)):this.options.accept.call(this,e,t):t(this.options.dictInvalidFileType)}},{key:"addFile",value:function(e){var t=this;return e.upload={uuid:r.uuidv4(),progress:0,total:e.size,bytesSent:0,filename:this._renameFile(e),chunked:this.options.chunking&&(this.options.forceChunking||e.size>this.options.chunkSize),totalChunkCount:Math.ceil(e.size/this.options.chunkSize)},this.files.push(e),e.status=r.ADDED,this.emit("addedfile",e),this._enqueueThumbnail(e),this.accept(e,function(n){return n?(e.accepted=!1,t._errorProcessing([e],n)):(e.accepted=!0,t.options.autoQueue&&t.enqueueFile(e)),t._updateMaxFilesReachedClass()})}},{key:"enqueueFiles",value:function(e){for(var t=0,n=n=e;;){if(t>=n.length)break;var i=n[t++];this.enqueueFile(i)}return null}},{key:"enqueueFile",value:function(e){var t=this;if(e.status!==r.ADDED||!0!==e.accepted)throw new Error("This file can't be queued because it has already been processed or was rejected.");if(e.status=r.QUEUED,this.options.autoProcessQueue)return setTimeout(function(){return t.processQueue()},0)}},{key:"_enqueueThumbnail",value:function(e){var t=this;if(this.options.createImageThumbnails&&e.type.match(/image.*/)&&e.size<=1024*this.options.maxThumbnailFilesize*1024)return this._thumbnailQueue.push(e),setTimeout(function(){return t._processThumbnailQueue()},0)}},{key:"_processThumbnailQueue",value:function(){var e=this;if(!this._processingThumbnail&&0!==this._thumbnailQueue.length){this._processingThumbnail=!0;var t=this._thumbnailQueue.shift();return this.createThumbnail(t,this.options.thumbnailWidth,this.options.thumbnailHeight,this.options.thumbnailMethod,!0,function(n){return e.emit("thumbnail",t,n),e._processingThumbnail=!1,e._processThumbnailQueue()})}}},{key:"removeFile",value:function(e){if(e.status===r.UPLOADING&&this.cancelUpload(e),this.files=s(this.files,e),this.emit("removedfile",e),0===this.files.length)return this.emit("reset")}},{key:"removeAllFiles",value:function(e){null==e&&(e=!1);for(var t=0,n=n=this.files.slice();;){if(t>=n.length)break;var i=n[t++];(i.status!==r.UPLOADING||e)&&this.removeFile(i)}return null}},{key:"resizeImage",value:function(e,t,n,i,o){var s=this;return this.createThumbnail(e,t,n,i,!1,function(t,n){if(null===n)return o(e);var i=s.options.resizeMimeType;null==i&&(i=e.type);var a=n.toDataURL(i,s.options.resizeQuality);return"image/jpeg"!==i&&"image/jpg"!==i||(a=u.restore(e.dataURL,a)),o(r.dataURItoBlob(a))})}},{key:"createThumbnail",value:function(e,t,n,i,o,r){var s=this,a=new FileReader;return a.onload=function(){if(e.dataURL=a.result,"image/svg+xml"!==e.type)return s.createThumbnailFromUrl(e,t,n,i,o,r);null!=r&&r(a.result)},a.readAsDataURL(e)}},{key:"createThumbnailFromUrl",value:function(e,t,n,i,o,r,s){var a=this,u=document.createElement("img");return s&&(u.crossOrigin=s),u.onload=function(){var s=function(e){return e(1)};return"undefined"!=typeof EXIF&&null!==EXIF&&o&&(s=function(e){return EXIF.getData(u,function(){return e(EXIF.getTag(this,"Orientation"))})}),s(function(o){e.width=u.width,e.height=u.height;var s=a.options.resize.call(a,e,t,n,i),c=document.createElement("canvas"),d=c.getContext("2d");switch(c.width=s.trgWidth,c.height=s.trgHeight,o>4&&(c.width=s.trgHeight,c.height=s.trgWidth),o){case 2:d.translate(c.width,0),d.scale(-1,1);break;case 3:d.translate(c.width,c.height),d.rotate(Math.PI);break;case 4:d.translate(0,c.height),d.scale(1,-1);break;case 5:d.rotate(.5*Math.PI),d.scale(1,-1);break;case 6:d.rotate(.5*Math.PI),d.translate(0,-c.height);break;case 7:d.rotate(.5*Math.PI),d.translate(c.width,-c.height),d.scale(-1,1);break;case 8:d.rotate(-.5*Math.PI),d.translate(-c.width,0)}l(d,u,null!=s.srcX?s.srcX:0,null!=s.srcY?s.srcY:0,s.srcWidth,s.srcHeight,null!=s.trgX?s.trgX:0,null!=s.trgY?s.trgY:0,s.trgWidth,s.trgHeight);var p=c.toDataURL("image/png");if(null!=r)return r(p,c)})},null!=r&&(u.onerror=r),u.src=e.dataURL}},{key:"processQueue",value:function(){var e=this.options.parallelUploads,t=this.getUploadingFiles().length,n=t;if(!(t>=e)){var i=this.getQueuedFiles();if(i.length>0){if(this.options.uploadMultiple)return this.processFiles(i.slice(0,e-t));for(;n<e;){if(!i.length)return;this.processFile(i.shift()),n++}}}}},{key:"processFile",value:function(e){return this.processFiles([e])}},{key:"processFiles",value:function(e){for(var t=0,n=n=e;;){if(t>=n.length)break;var i=n[t++];i.processing=!0,i.status=r.UPLOADING,this.emit("processing",i)}return this.options.uploadMultiple&&this.emit("processingmultiple",e),this.uploadFiles(e)}},{key:"_getFilesWithXhr",value:function(e){return this.files.filter(function(t){return t.xhr===e}).map(function(e){return e})}},{key:"cancelUpload",value:function(e){if(e.status===r.UPLOADING){for(var t=this._getFilesWithXhr(e.xhr),n=0,i=i=t;;){if(n>=i.length)break;i[n++].status=r.CANCELED}void 0!==e.xhr&&e.xhr.abort();for(var o=0,s=s=t;;){if(o>=s.length)break;var a=s[o++];this.emit("canceled",a)}this.options.uploadMultiple&&this.emit("canceledmultiple",t)}else e.status!==r.ADDED&&e.status!==r.QUEUED||(e.status=r.CANCELED,this.emit("canceled",e),this.options.uploadMultiple&&this.emit("canceledmultiple",[e]));if(this.options.autoProcessQueue)return this.processQueue()}},{key:"resolveOption",value:function(e){if("function"==typeof e){for(var t=arguments.length,n=Array(t>1?t-1:0),i=1;i<t;i++)n[i-1]=arguments[i];return e.apply(this,n)}return e}},{key:"uploadFile",value:function(e){return this.uploadFiles([e])}},{key:"uploadFiles",value:function(e){var t=this;this._transformFiles(e,function(n){if(e[0].upload.chunked){var i=e[0],o=n[0];i.upload.chunks=[];var s=function(){for(var n=0;void 0!==i.upload.chunks[n];)n++;if(!(n>=i.upload.totalChunkCount)){0;var s=n*t.options.chunkSize,a=Math.min(s+t.options.chunkSize,i.size),l={name:t._getParamName(0),data:o.webkitSlice?o.webkitSlice(s,a):o.slice(s,a),filename:i.upload.filename,chunkIndex:n};i.upload.chunks[n]={file:i,index:n,dataBlock:l,status:r.UPLOADING,progress:0,retries:0},t._uploadData(e,[l])}};if(i.upload.finishedChunkUpload=function(n){var o=!0;n.status=r.SUCCESS,n.dataBlock=null;for(var a=0;a<i.upload.totalChunkCount;a++){if(void 0===i.upload.chunks[a])return s();i.upload.chunks[a].status!==r.SUCCESS&&(o=!1)}o&&t.options.chunksUploaded(i,function(){t._finished(e,"",null)})},t.options.parallelChunkUploads)for(var a=0;a<i.upload.totalChunkCount;a++)s();else s()}else{for(var l=[],u=0;u<e.length;u++)l[u]={name:t._getParamName(u),data:n[u],filename:e[u].upload.filename};t._uploadData(e,l)}})}},{key:"_getChunk",value:function(e,t){for(var n=0;n<e.upload.totalChunkCount;n++)if(void 0!==e.upload.chunks[n]&&e.upload.chunks[n].xhr===t)return e.upload.chunks[n]}},{key:"_uploadData",value:function(e,t){for(var n=this,i=new XMLHttpRequest,o=0,s=s=e;;){if(o>=s.length)break;s[o++].xhr=i}e[0].upload.chunked&&(e[0].upload.chunks[t[0].chunkIndex].xhr=i);var a=this.resolveOption(this.options.method,e),l=this.resolveOption(this.options.url,e);i.open(a,l,!0),i.timeout=this.resolveOption(this.options.timeout,e),i.withCredentials=!!this.options.withCredentials,i.onload=function(t){n._finishedUploading(e,i,t)},i.onerror=function(){n._handleUploadError(e,i)},(null!=i.upload?i.upload:i).onprogress=function(t){return n._updateFilesUploadProgress(e,i,t)};var u={Accept:"application/json","Cache-Control":"no-cache","X-Requested-With":"XMLHttpRequest"};for(var c in this.options.headers&&r.extend(u,this.options.headers),u){var d=u[c];d&&i.setRequestHeader(c,d)}var p=new FormData;if(this.options.params){var h=this.options.params;for(var f in"function"==typeof h&&(h=h.call(this,e,i,e[0].upload.chunked?this._getChunk(e[0],i):null)),h){var v=h[f];p.append(f,v)}}for(var m=0,g=g=e;;){if(m>=g.length)break;var b=g[m++];this.emit("sending",b,i,p)}this.options.uploadMultiple&&this.emit("sendingmultiple",e,i,p),this._addFormElementData(p);for(var w=0;w<t.length;w++){var y=t[w];p.append(y.name,y.data,y.filename)}this.submitRequest(i,p,e)}},{key:"_transformFiles",value:function(e,t){for(var n=this,i=[],o=0,r=function(r){n.options.transformFile.call(n,e[r],function(n){i[r]=n,++o===e.length&&t(i)})},s=0;s<e.length;s++)r(s)}},{key:"_addFormElementData",value:function(e){if("FORM"===this.element.tagName)for(var t=0,n=n=this.element.querySelectorAll("input, textarea, select, button");;){if(t>=n.length)break;var i=n[t++],o=i.getAttribute("name"),r=i.getAttribute("type");if(r&&(r=r.toLowerCase()),void 0!==o&&null!==o)if("SELECT"===i.tagName&&i.hasAttribute("multiple"))for(var s=0,a=a=i.options;;){if(s>=a.length)break;var l=a[s++];l.selected&&e.append(o,l.value)}else(!r||"checkbox"!==r&&"radio"!==r||i.checked)&&e.append(o,i.value)}}},{key:"_updateFilesUploadProgress",value:function(e,t,n){var i=void 0;if(void 0!==n){if(i=100*n.loaded/n.total,e[0].upload.chunked){var o=e[0],r=this._getChunk(o,t);r.progress=i,r.total=n.total,r.bytesSent=n.loaded;o.upload.progress=0,o.upload.total=0,o.upload.bytesSent=0;for(var s=0;s<o.upload.totalChunkCount;s++)void 0!==o.upload.chunks[s]&&void 0!==o.upload.chunks[s].progress&&(o.upload.progress+=o.upload.chunks[s].progress,o.upload.total+=o.upload.chunks[s].total,o.upload.bytesSent+=o.upload.chunks[s].bytesSent);o.upload.progress=o.upload.progress/o.upload.totalChunkCount}else for(var a=0,l=l=e;;){if(a>=l.length)break;var u=l[a++];u.upload.progress=i,u.upload.total=n.total,u.upload.bytesSent=n.loaded}for(var c=0,d=d=e;;){if(c>=d.length)break;var p=d[c++];this.emit("uploadprogress",p,p.upload.progress,p.upload.bytesSent)}}else{var h=!0;i=100;for(var f=0,v=v=e;;){if(f>=v.length)break;var m=v[f++];100===m.upload.progress&&m.upload.bytesSent===m.upload.total||(h=!1),m.upload.progress=i,m.upload.bytesSent=m.upload.total}if(h)return;for(var g=0,b=b=e;;){if(g>=b.length)break;var w=b[g++];this.emit("uploadprogress",w,i,w.upload.bytesSent)}}}},{key:"_finishedUploading",value:function(e,t,n){var i=void 0;if(e[0].status!==r.CANCELED&&4===t.readyState){if("arraybuffer"!==t.responseType&&"blob"!==t.responseType&&(i=t.responseText,t.getResponseHeader("content-type")&&~t.getResponseHeader("content-type").indexOf("application/json")))try{i=JSON.parse(i)}catch(e){n=e,i="Invalid JSON response from server."}this._updateFilesUploadProgress(e),200<=t.status&&t.status<300?e[0].upload.chunked?e[0].upload.finishedChunkUpload(this._getChunk(e[0],t)):this._finished(e,i,n):this._handleUploadError(e,t,i)}}},{key:"_handleUploadError",value:function(e,t,n){if(e[0].status!==r.CANCELED){if(e[0].upload.chunked&&this.options.retryChunks){var i=this._getChunk(e[0],t);if(i.retries++<this.options.retryChunksLimit)return void this._uploadData(e,[i.dataBlock]);console.warn("Retried this chunk too often. Giving up.")}for(var o=0,s=s=e;;){if(o>=s.length)break;s[o++];this._errorProcessing(e,n||this.options.dictResponseError.replace("{{statusCode}}",t.status),t)}}}},{key:"submitRequest",value:function(e,t,n){e.send(t)}},{key:"_finished",value:function(e,t,n){for(var i=0,o=o=e;;){if(i>=o.length)break;var s=o[i++];s.status=r.SUCCESS,this.emit("success",s,t,n),this.emit("complete",s)}if(this.options.uploadMultiple&&(this.emit("successmultiple",e,t,n),this.emit("completemultiple",e)),this.options.autoProcessQueue)return this.processQueue()}},{key:"_errorProcessing",value:function(e,t,n){for(var i=0,o=o=e;;){if(i>=o.length)break;var s=o[i++];s.status=r.ERROR,this.emit("error",s,t,n),this.emit("complete",s)}if(this.options.uploadMultiple&&(this.emit("errormultiple",e,t,n),this.emit("completemultiple",e)),this.options.autoProcessQueue)return this.processQueue()}}],[{key:"uuidv4",value:function(){return"xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g,function(e){var t=16*Math.random()|0;return("x"===e?t:3&t|8).toString(16)})}}]),r}();r.initClass(),r.version="5.3.0",r.options={},r.optionsForElement=function(e){return e.getAttribute("id")?r.options[a(e.getAttribute("id"))]:void 0},r.instances=[],r.forElement=function(e){if("string"==typeof e&&(e=document.querySelector(e)),null==(null!=e?e.dropzone:void 0))throw new Error("No Dropzone found for given element. This is probably because you're trying to access it before Dropzone had the time to initialize. Use the `init` option to setup any additional observers on your Dropzone.");return e.dropzone},r.autoDiscover=!0,r.discover=function(){var e=void 0;if(document.querySelectorAll)e=document.querySelectorAll(".dropzone");else{e=[];var t=function(t){return function(){for(var n=[],i=0,o=o=t;;){if(i>=o.length)break;var r=o[i++];/(^| )dropzone($| )/.test(r.className)?n.push(e.push(r)):n.push(void 0)}return n}()};t(document.getElementsByTagName("div")),t(document.getElementsByTagName("form"))}return function(){for(var t=[],n=0,i=i=e;;){if(n>=i.length)break;var o=i[n++];!1!==r.optionsForElement(o)?t.push(new r(o)):t.push(void 0)}return t}()},r.blacklistedBrowsers=[/opera.*(Macintosh|Windows Phone).*version\/12/i],r.isBrowserSupported=function(){var e=!0;if(window.File&&window.FileReader&&window.FileList&&window.Blob&&window.FormData&&document.querySelector)if("classList"in document.createElement("a"))for(var t=0,n=n=r.blacklistedBrowsers;;){if(t>=n.length)break;n[t++].test(navigator.userAgent)&&(e=!1)}else e=!1;else e=!1;return e},r.dataURItoBlob=function(e){for(var t=atob(e.split(",")[1]),n=e.split(",")[0].split(":")[1].split(";")[0],i=new ArrayBuffer(t.length),o=new Uint8Array(i),r=0,s=t.length,a=0<=s;a?r<=s:r>=s;a?r++:r--)o[r]=t.charCodeAt(r);return new Blob([i],{type:n})};var s=function(e,t){return e.filter(function(e){return e!==t}).map(function(e){return e})},a=function(e){return e.replace(/[\-_](\w)/g,function(e){return e.charAt(1).toUpperCase()})};r.createElement=function(e){var t=document.createElement("div");return t.innerHTML=e,t.childNodes[0]},r.elementInside=function(e,t){if(e===t)return!0;for(;e=e.parentNode;)if(e===t)return!0;return!1},r.getElement=function(e,t){var n=void 0;if("string"==typeof e?n=document.querySelector(e):null!=e.nodeType&&(n=e),null==n)throw new Error("Invalid `"+t+"` option provided. Please provide a CSS selector or a plain HTML element.");return n},r.getElements=function(e,t){var n=void 0,i=void 0;if(e instanceof Array){i=[];try{for(var o=0,r=r=e;!(o>=r.length);)n=r[o++],i.push(this.getElement(n,t))}catch(e){i=null}}else if("string"==typeof e){i=[];for(var s=0,a=a=document.querySelectorAll(e);!(s>=a.length);)n=a[s++],i.push(n)}else null!=e.nodeType&&(i=[e]);if(null==i||!i.length)throw new Error("Invalid `"+t+"` option provided. Please provide a CSS selector, a plain HTML element or a list of those.");return i},r.confirm=function(e,t,n){return window.confirm(e)?t():null!=n?n():void 0},r.isValidFile=function(e,t){if(!t)return!0;t=t.split(",");for(var n=e.type,i=n.replace(/\/.*$/,""),o=0,r=r=t;;){if(o>=r.length)break;var s=r[o++];if("."===(s=s.trim()).charAt(0)){if(-1!==e.name.toLowerCase().indexOf(s.toLowerCase(),e.name.length-s.length))return!0}else if(/\/\*$/.test(s)){if(i===s.replace(/\/.*$/,""))return!0}else if(n===s)return!0}return!1},"undefined"!=typeof jQuery&&null!==jQuery&&(jQuery.fn.dropzone=function(e){return this.each(function(){return new r(this,e)})}),void 0!==e&&null!==e?e.exports=r:window.Dropzone=r,r.ADDED="added",r.QUEUED="queued",r.ACCEPTED=r.QUEUED,r.UPLOADING="uploading",r.PROCESSING=r.UPLOADING,r.CANCELED="canceled",r.ERROR="error",r.SUCCESS="success";var l=function(e,t,n,i,o,r,s,a,l,u){var c=function(e){e.naturalWidth;var t=e.naturalHeight,n=document.createElement("canvas");n.width=1,n.height=t;var i=n.getContext("2d");i.drawImage(e,0,0);for(var o=i.getImageData(1,0,1,t).data,r=0,s=t,a=t;a>r;)0===o[4*(a-1)+3]?s=a:r=a,a=s+r>>1;var l=a/t;return 0===l?1:l}(t);return e.drawImage(t,n,i,o,r,s,a,l,u/c)},u=function(){function e(){i(this,e)}return t(e,null,[{key:"initClass",value:function(){this.KEY_STR="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/="}},{key:"encode64",value:function(e){for(var t="",n=void 0,i=void 0,o="",r=void 0,s=void 0,a=void 0,l="",u=0;r=(n=e[u++])>>2,s=(3&n)<<4|(i=e[u++])>>4,a=(15&i)<<2|(o=e[u++])>>6,l=63&o,isNaN(i)?a=l=64:isNaN(o)&&(l=64),t=t+this.KEY_STR.charAt(r)+this.KEY_STR.charAt(s)+this.KEY_STR.charAt(a)+this.KEY_STR.charAt(l),n=i=o="",r=s=a=l="",u<e.length;);return t}},{key:"restore",value:function(e,t){if(!e.match("data:image/jpeg;base64,"))return t;var n=this.decode64(e.replace("data:image/jpeg;base64,","")),i=this.slice2Segments(n),o=this.exifManipulation(t,i);return"data:image/jpeg;base64,"+this.encode64(o)}},{key:"exifManipulation",value:function(e,t){var n=this.getExifArray(t),i=this.insertExif(e,n);return new Uint8Array(i)}},{key:"getExifArray",value:function(e){for(var t=void 0,n=0;n<e.length;){if(255===(t=e[n])[0]&225===t[1])return t;n++}return[]}},{key:"insertExif",value:function(e,t){var n=e.replace("data:image/jpeg;base64,",""),i=this.decode64(n),o=i.indexOf(255,3),r=i.slice(0,o),s=i.slice(o),a=r;return a=(a=a.concat(t)).concat(s)}},{key:"slice2Segments",value:function(e){for(var t=0,n=[];;){if(255===e[t]&218===e[t+1])break;if(255===e[t]&216===e[t+1])t+=2;else{var i=t+(256*e[t+2]+e[t+3])+2,o=e.slice(t,i);n.push(o),t=i}if(t>e.length)break}return n}},{key:"decode64",value:function(e){var t=void 0,n=void 0,i="",o=void 0,r=void 0,s="",a=0,l=[];for(/[^A-Za-z0-9\+\/\=]/g.exec(e)&&console.warn("There were invalid base64 characters in the input text.\nValid base64 characters are A-Z, a-z, 0-9, '+', '/',and '='\nExpect errors in decoding."),e=e.replace(/[^A-Za-z0-9\+\/\=]/g,"");t=this.KEY_STR.indexOf(e.charAt(a++))<<2|(o=this.KEY_STR.indexOf(e.charAt(a++)))>>4,n=(15&o)<<4|(r=this.KEY_STR.indexOf(e.charAt(a++)))>>2,i=(3&r)<<6|(s=this.KEY_STR.indexOf(e.charAt(a++))),l.push(t),64!==r&&l.push(n),64!==s&&l.push(i),t=n=i="",o=r=s="",a<e.length;);return l}}]),e}();u.initClass();r._autoDiscoverFunction=function(){if(r.autoDiscover)return r.discover()},function(e,t){var n=!1,i=!0,o=e.document,r=o.documentElement,s=o.addEventListener?"addEventListener":"attachEvent",a=o.addEventListener?"removeEventListener":"detachEvent",l=o.addEventListener?"":"on",u=function i(r){if("readystatechange"!==r.type||"complete"===o.readyState)return("load"===r.type?e:o)[a](l+r.type,i,!1),!n&&(n=!0)?t.call(e,r.type||r):void 0};if("complete"!==o.readyState){if(o.createEventObject&&r.doScroll){try{i=!e.frameElement}catch(e){}i&&function e(){try{r.doScroll("left")}catch(t){return void setTimeout(e,50)}return u("poll")}()}o[s](l+"DOMContentLoaded",u,!1),o[s](l+"readystatechange",u,!1),e[s](l+"load",u,!1)}}(window,r._autoDiscoverFunction)}).call(t,n(69)(e))},function(e,t){e.exports=function(e){return e.webpackPolyfill||(e.deprecate=function(){},e.paths=[],e.children||(e.children=[]),Object.defineProperty(e,"loaded",{enumerable:!0,get:function(){return e.l}}),Object.defineProperty(e,"id",{enumerable:!0,get:function(){return e.i}}),e.webpackPolyfill=1),e}},function(e,t){},function(e,t,n){"use strict";n.d(t,"a",function(){return i}),n.d(t,"b",function(){return o});var i=function(){var e=this.$createElement;return(this._self._c||e)("Dropzone",{ref:"dropzone",attrs:{options:this.dropzoneOptions,id:this._uid+"vwdropzone"},on:{"vdropzone-success":this.fileUploaded,"vdropzone-file-added":this.fileAdded}})},o=[]},function(e,t,n){"use strict";var i=n(17),o=n(74),r=n(0);var s=function(e){n(73)},a=Object(r.a)(i.a,o.a,o.b,!1,s,"data-v-ebce4d12",null);t.a=a.exports},function(e,t){},function(e,t,n){"use strict";n.d(t,"a",function(){return i}),n.d(t,"b",function(){return o});var i=function(){var e=this,t=e.$createElement,n=e._self._c||t;return n("form",{staticClass:"form",on:{submit:function(t){t.preventDefault(),e.insertTable(t)}}},[n("label",[n("div",[e._v("Rows")]),e._v(" "),n("input",{directives:[{name:"model",rawName:"v-model",value:e.rows,expression:"rows"}],staticStyle:{width:"60px"},attrs:{type:"number",min:"2"},domProps:{value:e.rows},on:{input:function(t){t.target.composing||(e.rows=t.target.value)}}})]),e._v(" "),n("label",[n("div",[e._v("Columns")]),e._v(" "),n("input",{directives:[{name:"model",rawName:"v-model",value:e.cols,expression:"cols"}],staticStyle:{width:"60px"},attrs:{type:"number",min:"2"},domProps:{value:e.cols},on:{input:function(t){t.target.composing||(e.cols=t.target.value)}}})]),e._v(" "),n("button",{attrs:{type:"submit"}},[e._v("Insert")])])},o=[]},function(e,t){e.exports={title:"removeFormat",action:["removeFormat"],description:"Remove formatting.\nClears headings, bold, italic, underlined text, etc.",icon:'<svg width="1792" height="1792" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M832 1408l336-384h-768l-336 384h768zm1013-1077q15 34 9.5 71.5t-30.5 65.5l-896 1024q-38 44-96 44h-768q-38 0-69.5-20.5t-47.5-54.5q-15-34-9.5-71.5t30.5-65.5l896-1024q38-44 96-44h768q38 0 69.5 20.5t47.5 54.5z"/></svg>'}},function(e,t){e.exports={title:"separator",icon:"<i class='vw-separator'></i>"}},function(e,t,n){"use strict";n.d(t,"a",function(){return i}),n.d(t,"b",function(){return o});var i=function(){var e=this,t=e.$createElement,n=e._self._c||t;return n("div",{staticClass:"editr"},[n("div",{staticClass:"editr--toolbar"},e._l(e.modules,function(t,i){return n("Btn",{key:t.title+i,ref:"btn-"+t.title,refInFor:!0,attrs:{module:t,options:e.mergedOptions,title:t.description||""}})})),n("div",{ref:"content",staticClass:"editr--content",attrs:{contenteditable:"true",tabindex:"1",placeholder:e.placeholder}})])},o=[]}])});
 
 /***/ }),
-/* 47 */
+/* 52 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue__ = __webpack_require__(8);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vuex__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__modules_magic__ = __webpack_require__(48);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__modules_metatype__ = __webpack_require__(50);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__modules_priority__ = __webpack_require__(54);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__modules_attributes__ = __webpack_require__(58);
-
-
-
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__modules_character_creation__ = __webpack_require__(53);
 
 
 
@@ -49346,21 +49538,73 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vuex
 
 /* harmony default export */ __webpack_exports__["a"] = (new __WEBPACK_IMPORTED_MODULE_1_vuex__["a" /* default */].Store({
     modules: {
-        magic: __WEBPACK_IMPORTED_MODULE_2__modules_magic__["a" /* default */],
-        metatype: __WEBPACK_IMPORTED_MODULE_3__modules_metatype__["a" /* default */],
-        priority: __WEBPACK_IMPORTED_MODULE_4__modules_priority__["a" /* default */],
-        attributes: __WEBPACK_IMPORTED_MODULE_5__modules_attributes__["a" /* default */]
+        creation: __WEBPACK_IMPORTED_MODULE_2__modules_character_creation__["a" /* default */]
     }
 }));
 
 /***/ }),
-/* 48 */
+/* 53 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__getters__ = __webpack_require__(49);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__magic_index__ = __webpack_require__(54);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__metatype_index__ = __webpack_require__(55);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__attributes_index__ = __webpack_require__(56);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__priority_index__ = __webpack_require__(57);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__skill_index__ = __webpack_require__(58);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__errors_index__ = __webpack_require__(59);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__actions__ = __webpack_require__(60);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__getters__ = __webpack_require__(64);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__mutations__ = __webpack_require__(70);
 
 
+
+
+
+
+
+
+
+
+
+var state = {
+    magics: __WEBPACK_IMPORTED_MODULE_0__magic_index__["a" /* default */].state.magics,
+    magicId: __WEBPACK_IMPORTED_MODULE_0__magic_index__["a" /* default */].state.magicId,
+
+    skills: __WEBPACK_IMPORTED_MODULE_4__skill_index__["a" /* default */].state.skills,
+    skill_array: __WEBPACK_IMPORTED_MODULE_4__skill_index__["a" /* default */].state.skill_array,
+    available_skill_points: __WEBPACK_IMPORTED_MODULE_4__skill_index__["a" /* default */].state.available_skill_points,
+
+    types: __WEBPACK_IMPORTED_MODULE_1__metatype_index__["a" /* default */].state.types,
+    typeId: __WEBPACK_IMPORTED_MODULE_1__metatype_index__["a" /* default */].state.typeId,
+    special_points: __WEBPACK_IMPORTED_MODULE_1__metatype_index__["a" /* default */].state.special_points,
+
+    metatypes_attributes: __WEBPACK_IMPORTED_MODULE_2__attributes_index__["a" /* default */].state.metatypes_attributes,
+    metatype_attributes: __WEBPACK_IMPORTED_MODULE_2__attributes_index__["a" /* default */].state.metatype_attributes,
+    current_attr: __WEBPACK_IMPORTED_MODULE_2__attributes_index__["a" /* default */].state.current_attr,
+    available_point: __WEBPACK_IMPORTED_MODULE_2__attributes_index__["a" /* default */].state.available_point,
+
+    default_ranking: __WEBPACK_IMPORTED_MODULE_3__priority_index__["a" /* default */].state.default_ranking,
+    selectors: __WEBPACK_IMPORTED_MODULE_3__priority_index__["a" /* default */].state.selectors,
+
+    errors: __WEBPACK_IMPORTED_MODULE_5__errors_index__["a" /* default */].state.errors,
+    error: __WEBPACK_IMPORTED_MODULE_5__errors_index__["a" /* default */].state.error,
+    toasted: __WEBPACK_IMPORTED_MODULE_5__errors_index__["a" /* default */].state.toasted
+};
+
+/* harmony default export */ __webpack_exports__["a"] = ({
+    namespaced: true,
+    state: state,
+    actions: __WEBPACK_IMPORTED_MODULE_6__actions__["a" /* default */],
+    getters: __WEBPACK_IMPORTED_MODULE_7__getters__["a" /* default */],
+    mutations: __WEBPACK_IMPORTED_MODULE_8__mutations__["a" /* default */]
+});
+
+/***/ }),
+/* 54 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
 var state = {
     magics: [{
         "id": 1,
@@ -49614,38 +49858,34 @@ var state = {
         "is_resonance": 0,
         "created_at": "2018-09-28 15:41:40",
         "updated_at": "2018-09-28 15:41:40"
-    }]
+    }, {
+        "id": 99,
+        "magic_attribute": 0,
+        "magic_attribute_grade": "E",
+        "number_of_skills": 0,
+        "skill_rating": 0,
+        "number_free_spell": 0,
+        "label": "label.mundane.e",
+        "description": "description.mundane.e",
+        "is_resonance": 0,
+        "created_at": "2018-09-28 15:41:39",
+        "updated_at": "2018-09-28 15:41:39"
+    }],
+    magicId: 99
 };
 
 /* harmony default export */ __webpack_exports__["a"] = ({
-    namespaced: true,
-    state: state,
-    //actions,
-    getters: __WEBPACK_IMPORTED_MODULE_0__getters__["a" /* default */]
-    //mutations,
+    state: state
 });
 
 /***/ }),
-/* 49 */
+/* 55 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-var magics = function magics(state) {
-    return state.magics;
-};
-
-/* harmony default export */ __webpack_exports__["a"] = ({
-    magics: magics
-});
-
-/***/ }),
-/* 50 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__getters__ = __webpack_require__(51);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__mutations__ = __webpack_require__(52);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__actions__ = __webpack_require__(53);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__getters__ = __webpack_require__(17);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__mutations__ = __webpack_require__(18);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__actions__ = __webpack_require__(19);
 
 
 
@@ -50170,175 +50410,12 @@ var state = {
         "created_at": "2018-10-01 01:33:27",
         "updated_at": "2018-10-01 01:33:27"
     }],
-    filtered_types: [],
-    type: {
-        "id": 99,
-        "metatype": "Human",
-        "traits_label": "metatype.traits.none",
-        "traits_id": 0,
-        "special_points": "9,7,5,3,1",
-        "description": "description.traits.none",
-        "priority_avail": "A,B,C,D,E",
-        "metatype_parent": "None",
-        "metatype_category": "metatype.title.metatype",
-        "attributes_id": 99,
-        "karma_cost": 0,
-        "created_at": "2018-10-01 01:33:25",
-        "updated_at": "2018-10-01 01:33:25"
-    },
+    typeId: 1,
     special_points: 0
 };
 
 /* harmony default export */ __webpack_exports__["a"] = ({
-    namespaced: true,
-    state: state,
-    actions: __WEBPACK_IMPORTED_MODULE_2__actions__["a" /* default */],
-    getters: __WEBPACK_IMPORTED_MODULE_0__getters__["a" /* default */],
-    mutations: __WEBPACK_IMPORTED_MODULE_1__mutations__["a" /* default */]
-});
-
-/***/ }),
-/* 51 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-var types = function types(state) {
-    return state.types;
-};
-var type = function type(state) {
-    return state.type;
-};
-var special_points = function special_points(state) {
-    return state.special_points;
-};
-var filtered_types = function filtered_types(state) {
-    return state.filtered_types;
-};
-
-/* harmony default export */ __webpack_exports__["a"] = ({
-    types: types,
-    type: type,
-    special_points: special_points,
-    filtered_types: filtered_types
-});
-
-/***/ }),
-/* 52 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-var TYPE_UPDATED = function TYPE_UPDATED(state, type) {
-    state.type = type;
-};
-
-var FILTER_METATYPE = function FILTER_METATYPE(state, ranking) {
-    if (state.types.length > 0) {
-        var filtered_metatype = [];
-        for (var i = 0; i < state.types.length; i++) {
-            if (state.types[i].priority_avail.includes(ranking)) {
-                filtered_metatype.push(state.types[i]);
-            }
-        }
-        state.filtered_types = filtered_metatype;
-    }
-};
-
-var UPDATE_DATA = function UPDATE_DATA(state, selector) {
-    if (state.types.length > 0) {
-        if (state.type.id !== 99) {
-            var ranking = getRanking(state, selector.ranking);
-            state.special_points = state.type.special_points.split(',')[ranking];
-        } else {
-            state.special_points = 0;
-        }
-    } else {
-        state.special_points = 0;
-    }
-};
-
-var getRanking = function getRanking(state, ranking) {
-    var index = 0;
-    switch (ranking) {
-        case 'A':
-            index = 0;
-            break;
-        case 'B':
-            index = 1;
-            break;
-        case 'C':
-            index = 2;
-            break;
-        case 'D':
-            index = 3;
-            break;
-        case 'E':
-            index = 4;
-            break;
-    }
-    return index;
-};
-
-/* harmony default export */ __webpack_exports__["a"] = ({
-    TYPE_UPDATED: TYPE_UPDATED,
-    UPDATE_DATA: UPDATE_DATA,
-    FILTER_METATYPE: FILTER_METATYPE
-});
-
-/***/ }),
-/* 53 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-var actions = {
-    updateData: function updateData(_ref, payload) {
-        var commit = _ref.commit;
-
-        commit('UPDATE_DATA', payload);
-        commit('FILTER_METATYPE', payload.ranking);
-    }
-};
-
-/* harmony default export */ __webpack_exports__["a"] = (actions);
-
-/***/ }),
-/* 54 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__getters__ = __webpack_require__(55);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__mutations__ = __webpack_require__(56);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__actions__ = __webpack_require__(57);
-
-
-
-
-var state = {
-    default_ranking: ['A', 'B', 'C', 'D', 'E']
-};
-
-/* harmony default export */ __webpack_exports__["a"] = ({
-    namespaced: true,
-    state: state,
-    actions: __WEBPACK_IMPORTED_MODULE_2__actions__["a" /* default */],
-    getters: __WEBPACK_IMPORTED_MODULE_0__getters__["a" /* default */],
-    mutations: __WEBPACK_IMPORTED_MODULE_1__mutations__["a" /* default */]
-});
-
-/***/ }),
-/* 55 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-var selectors = function selectors(state) {
-    return state.selectors;
-};
-var default_ranking = function default_ranking(state) {
-    return state.default_ranking;
-};
-
-/* harmony default export */ __webpack_exports__["a"] = ({
-    selectors: selectors,
-    default_ranking: default_ranking
+    state: state
 });
 
 /***/ }),
@@ -50346,37 +50423,6 @@ var default_ranking = function default_ranking(state) {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-var UPDATE_PRIORITIES = function UPDATE_PRIORITIES(state, selectors) {};
-
-/* harmony default export */ __webpack_exports__["a"] = ({
-    UPDATE_PRIORITIES: UPDATE_PRIORITIES
-});
-
-/***/ }),
-/* 57 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-var actions = {
-    updatePriorities: function updatePriorities(context, payload) {
-        context.commit("metatype/UPDATE_DATA", payload);
-    }
-};
-
-/* harmony default export */ __webpack_exports__["a"] = (actions);
-
-/***/ }),
-/* 58 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__getters__ = __webpack_require__(59);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__mutations__ = __webpack_require__(60);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__actions__ = __webpack_require__(61);
-
-
-
-
 var state = {
     metatypes_attributes: [{
         "id": 1,
@@ -51405,19 +51451,1257 @@ var state = {
         "movement": "x2/x4/+2",
         "created_at": "2018-10-14 05:45:02",
         "updated_at": "2018-10-14 05:45:02"
+    },
+    current_attr: {
+        "body": 1,
+        "agility": 1,
+        "reaction": 1,
+        "strength": 1,
+        "willpower": 1,
+        "logic": 1,
+        "intuition": 1,
+        "charisma": 1,
+        "edge": 2,
+        "magic": 0
+    },
+    available_point: {
+        attributes: 20,
+        special: 0,
+        used_attributes: 0,
+        used_special: 0,
+        remaining_attributes: 20,
+        remaining_special: 0
     }
 };
 
 /* harmony default export */ __webpack_exports__["a"] = ({
-    namespaced: true,
-    state: state,
-    actions: __WEBPACK_IMPORTED_MODULE_2__actions__["a" /* default */],
-    getters: __WEBPACK_IMPORTED_MODULE_0__getters__["a" /* default */],
-    mutations: __WEBPACK_IMPORTED_MODULE_1__mutations__["a" /* default */]
+    state: state
+});
+
+/***/ }),
+/* 57 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+var state = {
+    default_ranking: ['A', 'B', 'C', 'D', 'E'],
+    selectors: [{ type: 'Metatype', ranking: 'A', id: 0, data: '', show: true }, { type: 'Attributes', ranking: 'B', id: 1, data: '', show: false }, { type: 'Magic', ranking: 'C', id: 2, data: '', show: false }, { type: 'Skills', ranking: 'D', id: 3, data: '', show: false }, { type: 'Resources', ranking: 'E', id: 4, data: '', show: false }]
+};
+
+/* harmony default export */ __webpack_exports__["a"] = ({
+    state: state
+});
+
+/***/ }),
+/* 58 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+var state = {
+    skills: [{
+        "id": 1,
+        "skill_rating": 0,
+        "skill_label": "label.archery",
+        "skill_type": "Combat Skills",
+        "description": "description.archery",
+        "is_group": 0,
+        "group_skills_id": "",
+        "created_at": "2018-09-28 15:41:40",
+        "updated_at": "2018-09-28 15:41:40"
+    }, {
+        "id": 2,
+        "skill_rating": 0,
+        "skill_label": "label.automatics",
+        "skill_type": "Combat Skills",
+        "description": "description.automatics",
+        "is_group": 0,
+        "group_skills_id": "",
+        "created_at": "2018-09-28 15:41:40",
+        "updated_at": "2018-09-28 15:41:40"
+    }, {
+        "id": 3,
+        "skill_rating": 0,
+        "skill_label": "label.longarms",
+        "skill_type": "Combat Skills",
+        "description": "description.longarms",
+        "is_group": 0,
+        "group_skills_id": "",
+        "created_at": "2018-09-28 15:41:40",
+        "updated_at": "2018-09-28 15:41:40"
+    }, {
+        "id": 4,
+        "skill_rating": 0,
+        "skill_label": "label.pistols",
+        "skill_type": "Combat Skills",
+        "description": "description.pistols",
+        "is_group": 0,
+        "group_skills_id": "",
+        "created_at": "2018-09-28 15:41:40",
+        "updated_at": "2018-09-28 15:41:40"
+    }, {
+        "id": 5,
+        "skill_rating": 0,
+        "skill_label": "label.firearms",
+        "skill_type": "Combat Skills",
+        "description": "description.firearms",
+        "is_group": 1,
+        "group_skills_id": "2,3,4",
+        "created_at": "2018-09-28 15:41:40",
+        "updated_at": "2018-09-28 15:41:40"
+    }, {
+        "id": 6,
+        "skill_rating": 0,
+        "skill_label": "label.blades",
+        "skill_type": "Combat Skills",
+        "description": "description.blades",
+        "is_group": 0,
+        "group_skills_id": "",
+        "created_at": "2018-09-28 15:41:40",
+        "updated_at": "2018-09-28 15:41:40"
+    }, {
+        "id": 7,
+        "skill_rating": 0,
+        "skill_label": "label.clubs",
+        "skill_type": "Combat Skills",
+        "description": "description.clubs",
+        "is_group": 0,
+        "group_skills_id": 0,
+        "created_at": "2018-09-28 15:41:40",
+        "updated_at": "2018-09-28 15:41:40"
+    }, {
+        "id": 8,
+        "skill_rating": 0,
+        "skill_label": "label.unarmed.combat",
+        "skill_type": "Combat Skills",
+        "description": "description.unarmed.combat",
+        "is_group": 0,
+        "group_skills_id": 0,
+        "created_at": "2018-09-28 15:41:40",
+        "updated_at": "2018-09-28 15:41:40"
+    }, {
+        "id": 9,
+        "skill_rating": 0,
+        "skill_label": "label.close.combat",
+        "skill_type": "Combat Skills",
+        "description": "description.close.combat",
+        "is_group": 1,
+        "group_skills_id": "6,7,8",
+        "created_at": "2018-09-28 15:41:40",
+        "updated_at": "2018-09-28 15:41:40"
+    }, {
+        "id": 10,
+        "skill_rating": 0,
+        "skill_label": "label.exotic.melee",
+        "skill_type": "Combat Skills",
+        "description": "description.exotic.melee",
+        "is_group": 0,
+        "group_skills_id": "",
+        "created_at": "2018-09-28 15:41:40",
+        "updated_at": "2018-09-28 15:41:40"
+    }, {
+        "id": 11,
+        "skill_rating": 0,
+        "skill_label": "label.exotic.ranged",
+        "skill_type": "Combat Skills",
+        "description": "description.exotic.ranged",
+        "is_group": 0,
+        "group_skills_id": 0,
+        "created_at": "2018-09-28 15:41:40",
+        "updated_at": "2018-09-28 15:41:40"
+    }, {
+        "id": 12,
+        "skill_rating": 0,
+        "skill_label": "label.heavy.weapon",
+        "skill_type": "Combat Skills",
+        "description": "description.heavy.weapon",
+        "is_group": 0,
+        "group_skills_id": 0,
+        "created_at": "2018-09-28 15:41:40",
+        "updated_at": "2018-09-28 15:41:40"
+    }, {
+        "id": 13,
+        "skill_rating": 0,
+        "skill_label": "label.throwing.weapon",
+        "skill_type": "Combat Skills",
+        "description": "description.throwing.weapon",
+        "is_group": 0,
+        "group_skills_id": 0,
+        "created_at": "2018-09-28 15:41:40",
+        "updated_at": "2018-09-28 15:41:40"
+    }, {
+        "id": 14,
+        "skill_rating": 0,
+        "skill_label": "label.gymnastic",
+        "skill_type": "Physical Skills",
+        "description": "description.gymnastic",
+        "is_group": 0,
+        "group_skills_id": 0,
+        "created_at": "2018-09-28 15:41:40",
+        "updated_at": "2018-09-28 15:41:40"
+    }, {
+        "id": 15,
+        "skill_rating": 0,
+        "skill_label": "label.running",
+        "skill_type": "Physical Skills",
+        "description": "description.running",
+        "is_group": 0,
+        "group_skills_id": 0,
+        "created_at": "2018-09-28 15:41:40",
+        "updated_at": "2018-09-28 15:41:40"
+    }, {
+        "id": 16,
+        "skill_rating": 0,
+        "skill_label": "label.swimming",
+        "skill_type": "Physical Skills",
+        "description": "description.swimming",
+        "is_group": 0,
+        "group_skills_id": 0,
+        "created_at": "2018-09-28 15:41:40",
+        "updated_at": "2018-09-28 15:41:40"
+    }, {
+        "id": 17,
+        "skill_rating": 0,
+        "skill_label": "label.athletics",
+        "skill_type": "Physical Skills",
+        "description": "description.athletics",
+        "is_group": 1,
+        "group_skills_id": "14,15,16",
+        "created_at": "2018-09-28 15:41:40",
+        "updated_at": "2018-09-28 15:41:40"
+    }, {
+        "id": 18,
+        "skill_rating": 0,
+        "skill_label": "label.navigation",
+        "skill_type": "Technical Skills",
+        "description": "description.navigation",
+        "is_group": 0,
+        "group_skills_id": 0,
+        "created_at": "2018-09-28 15:41:40",
+        "updated_at": "2018-09-28 15:41:40"
+    }, {
+        "id": 19,
+        "skill_rating": 0,
+        "skill_label": "label.survival",
+        "skill_type": "Physical Skills",
+        "description": "description.survival",
+        "is_group": 0,
+        "group_skills_id": 0,
+        "created_at": "2018-09-28 15:41:41",
+        "updated_at": "2018-09-28 15:41:41"
+    }, {
+        "id": 20,
+        "skill_rating": 0,
+        "skill_label": "label.tracking",
+        "skill_type": "Physical Skills",
+        "description": "description.tracking",
+        "is_group": 0,
+        "group_skills_id": 0,
+        "created_at": "2018-09-28 15:41:41",
+        "updated_at": "2018-09-28 15:41:41"
+    }, {
+        "id": 21,
+        "skill_rating": 0,
+        "skill_label": "label.outdoors",
+        "skill_type": "Physical Skills",
+        "description": "description.outdoors",
+        "is_group": 1,
+        "group_skills_id": "18,19,20",
+        "created_at": "2018-09-28 15:41:41",
+        "updated_at": "2018-09-28 15:41:41"
+    }, {
+        "id": 22,
+        "skill_rating": 0,
+        "skill_label": "label.disguise",
+        "skill_type": "Physical Skills",
+        "description": "description.disguise",
+        "is_group": 0,
+        "group_skills_id": 0,
+        "created_at": "2018-09-28 15:41:41",
+        "updated_at": "2018-09-28 15:41:41"
+    }, {
+        "id": 23,
+        "skill_rating": 0,
+        "skill_label": "label.palming",
+        "skill_type": "Physical Skills",
+        "description": "description.palming",
+        "is_group": 0,
+        "group_skills_id": 0,
+        "created_at": "2018-09-28 15:41:41",
+        "updated_at": "2018-09-28 15:41:41"
+    }, {
+        "id": 24,
+        "skill_rating": 0,
+        "skill_label": "label.sneaking",
+        "skill_type": "Physical Skills",
+        "description": "description.sneaking",
+        "is_group": 0,
+        "group_skills_id": 0,
+        "created_at": "2018-09-28 15:41:41",
+        "updated_at": "2018-09-28 15:41:41"
+    }, {
+        "id": 25,
+        "skill_rating": 0,
+        "skill_label": "label.stealth",
+        "skill_type": "Physical Skills",
+        "description": "description.stealth",
+        "is_group": 1,
+        "group_skills_id": "22,23,24",
+        "created_at": "2018-09-28 15:41:41",
+        "updated_at": "2018-09-28 15:41:41"
+    }, {
+        "id": 26,
+        "skill_rating": 0,
+        "skill_label": "label.diving",
+        "skill_type": "Physical Skills",
+        "description": "description.diving",
+        "is_group": 0,
+        "group_skills_id": 0,
+        "created_at": "2018-09-28 15:41:41",
+        "updated_at": "2018-09-28 15:41:41"
+    }, {
+        "id": 27,
+        "skill_rating": 0,
+        "skill_label": "label.escape.artist",
+        "skill_type": "Physical Skills",
+        "description": "description.escape.artist",
+        "is_group": 0,
+        "group_skills_id": 0,
+        "created_at": "2018-09-28 15:41:41",
+        "updated_at": "2018-09-28 15:41:41"
+    }, {
+        "id": 28,
+        "skill_rating": 0,
+        "skill_label": "label.flight",
+        "skill_type": "Physical Skills",
+        "description": "description.flight",
+        "is_group": 0,
+        "group_skills_id": 0,
+        "created_at": "2018-09-28 15:41:41",
+        "updated_at": "2018-09-28 15:41:41"
+    }, {
+        "id": 29,
+        "skill_rating": 0,
+        "skill_label": "label.free.fall",
+        "skill_type": "Physical Skills",
+        "description": "description.free.fall",
+        "is_group": 0,
+        "group_skills_id": 0,
+        "created_at": "2018-09-28 15:41:41",
+        "updated_at": "2018-09-28 15:41:41"
+    }, {
+        "id": 30,
+        "skill_rating": 0,
+        "skill_label": "label.perception",
+        "skill_type": "Physical Skills",
+        "description": "description.perception",
+        "is_group": 0,
+        "group_skills_id": 0,
+        "created_at": "2018-09-28 15:41:41",
+        "updated_at": "2018-09-28 15:41:41"
+    }, {
+        "id": 32,
+        "skill_rating": 0,
+        "skill_label": "label.con",
+        "skill_type": "Social Skills",
+        "description": "description.con",
+        "is_group": 0,
+        "group_skills_id": 0,
+        "created_at": "2018-09-28 15:41:41",
+        "updated_at": "2018-09-28 15:41:41"
+    }, {
+        "id": 33,
+        "skill_rating": 0,
+        "skill_label": "label.impersonation",
+        "skill_type": "Social Skills",
+        "description": "description.impersonation",
+        "is_group": 0,
+        "group_skills_id": 0,
+        "created_at": "2018-09-28 15:41:41",
+        "updated_at": "2018-09-28 15:41:41"
+    }, {
+        "id": 34,
+        "skill_rating": 0,
+        "skill_label": "label.performance",
+        "skill_type": "Social Skills",
+        "description": "description.performance",
+        "is_group": 0,
+        "group_skills_id": 0,
+        "created_at": "2018-09-28 15:41:41",
+        "updated_at": "2018-09-28 15:41:41"
+    }, {
+        "id": 35,
+        "skill_rating": 0,
+        "skill_label": "label.acting",
+        "skill_type": "Physical Skills",
+        "description": "description.acting",
+        "is_group": 1,
+        "group_skills_id": "32,33,34",
+        "created_at": "2018-09-28 15:41:41",
+        "updated_at": "2018-09-28 15:41:41"
+    }, {
+        "id": 36,
+        "skill_rating": 0,
+        "skill_label": "label.etiquette",
+        "skill_type": "Social Skills",
+        "description": "description.etiquette",
+        "is_group": 0,
+        "group_skills_id": 0,
+        "created_at": "2018-09-28 15:41:41",
+        "updated_at": "2018-09-28 15:41:41"
+    }, {
+        "id": 37,
+        "skill_rating": 0,
+        "skill_label": "label.leadership",
+        "skill_type": "Social Skills",
+        "description": "description.leadership",
+        "is_group": 0,
+        "group_skills_id": 0,
+        "created_at": "2018-09-28 15:41:41",
+        "updated_at": "2018-09-28 15:41:41"
+    }, {
+        "id": 38,
+        "skill_rating": 0,
+        "skill_label": "label.negociation",
+        "skill_type": "Social Skills",
+        "description": "description.negociation",
+        "is_group": 0,
+        "group_skills_id": 0,
+        "created_at": "2018-09-28 15:41:41",
+        "updated_at": "2018-09-28 15:41:41"
+    }, {
+        "id": 39,
+        "skill_rating": 0,
+        "skill_label": "label.influence",
+        "skill_type": "Social Skills",
+        "description": "description.influence",
+        "is_group": 1,
+        "group_skills_id": "36,37,38",
+        "created_at": "2018-09-28 15:41:41",
+        "updated_at": "2018-09-28 15:41:41"
+    }, {
+        "id": 40,
+        "skill_rating": 0,
+        "skill_label": "label.instruction",
+        "skill_type": "Social Skills",
+        "description": "description.instruction",
+        "is_group": 0,
+        "group_skills_id": 0,
+        "created_at": "2018-09-28 15:41:41",
+        "updated_at": "2018-09-28 15:41:41"
+    }, {
+        "id": 41,
+        "skill_rating": 0,
+        "skill_label": "label.intimidation",
+        "skill_type": "Social Skills",
+        "description": "description.intimidation",
+        "is_group": 0,
+        "group_skills_id": 0,
+        "created_at": "2018-09-28 15:41:41",
+        "updated_at": "2018-09-28 15:41:41"
+    }, {
+        "id": 42,
+        "skill_rating": 0,
+        "skill_label": "label.banishing",
+        "skill_type": "Magical Skills",
+        "description": "description.banishing",
+        "is_group": 0,
+        "group_skills_id": 0,
+        "created_at": "2018-09-28 15:41:41",
+        "updated_at": "2018-09-28 15:41:41"
+    }, {
+        "id": 43,
+        "skill_rating": 0,
+        "skill_label": "label.binding",
+        "skill_type": "Magical Skills",
+        "description": "description.binding",
+        "is_group": 0,
+        "group_skills_id": 0,
+        "created_at": "2018-09-28 15:41:41",
+        "updated_at": "2018-09-28 15:41:41"
+    }, {
+        "id": 44,
+        "skill_rating": 0,
+        "skill_label": "label.summoning",
+        "skill_type": "Magical Skills",
+        "description": "description.summoning",
+        "is_group": 0,
+        "group_skills_id": 0,
+        "created_at": "2018-09-28 15:41:41",
+        "updated_at": "2018-09-28 15:41:41"
+    }, {
+        "id": 45,
+        "skill_rating": 0,
+        "skill_label": "label.conjuring",
+        "skill_type": "Magical Skills",
+        "description": "description.conjuring",
+        "is_group": 1,
+        "group_skills_id": "42,43,44",
+        "created_at": "2018-09-28 15:41:41",
+        "updated_at": "2018-09-28 15:41:41"
+    }, {
+        "id": 46,
+        "skill_rating": 0,
+        "skill_label": "label.alchemy",
+        "skill_type": "Magical Skills",
+        "description": "description.alchemy",
+        "is_group": 0,
+        "group_skills_id": 0,
+        "created_at": "2018-09-28 15:41:41",
+        "updated_at": "2018-09-28 15:41:41"
+    }, {
+        "id": 47,
+        "skill_rating": 0,
+        "skill_label": "label.artificing",
+        "skill_type": "Magical Skills",
+        "description": "description.artificing",
+        "is_group": 0,
+        "group_skills_id": 0,
+        "created_at": "2018-09-28 15:41:41",
+        "updated_at": "2018-09-28 15:41:41"
+    }, {
+        "id": 48,
+        "skill_rating": 0,
+        "skill_label": "label.disenchanting",
+        "skill_type": "Magical Skills",
+        "description": "description.disenchanting",
+        "is_group": 0,
+        "group_skills_id": 0,
+        "created_at": "2018-09-28 15:41:41",
+        "updated_at": "2018-09-28 15:41:41"
+    }, {
+        "id": 49,
+        "skill_rating": 0,
+        "skill_label": "label.enchanting",
+        "skill_type": "Magical Skills",
+        "description": "description.enchanting",
+        "is_group": 1,
+        "group_skills_id": "46,47,48",
+        "created_at": "2018-09-28 15:41:41",
+        "updated_at": "2018-09-28 15:41:41"
+    }, {
+        "id": 50,
+        "skill_rating": 0,
+        "skill_label": "label.counterspelling",
+        "skill_type": "Magical Skills",
+        "description": "description.counterspelling",
+        "is_group": 0,
+        "group_skills_id": 0,
+        "created_at": "2018-09-28 15:41:42",
+        "updated_at": "2018-09-28 15:41:42"
+    }, {
+        "id": 51,
+        "skill_rating": 0,
+        "skill_label": "label.ritual.spellcasting",
+        "skill_type": "Magical Skills",
+        "description": "description.ritual.spellcasting",
+        "is_group": 0,
+        "group_skills_id": 0,
+        "created_at": "2018-09-28 15:41:42",
+        "updated_at": "2018-09-28 15:41:42"
+    }, {
+        "id": 52,
+        "skill_rating": 0,
+        "skill_label": "label.spellcasting",
+        "skill_type": "Magical Skills",
+        "description": "description.spellcasting",
+        "is_group": 0,
+        "group_skills_id": 0,
+        "created_at": "2018-09-28 15:41:42",
+        "updated_at": "2018-09-28 15:41:42"
+    }, {
+        "id": 53,
+        "skill_rating": 0,
+        "skill_label": "label.sorcery",
+        "skill_type": "Magical Skills",
+        "description": "description.sorcery",
+        "is_group": 1,
+        "group_skills_id": "50,51,52",
+        "created_at": "2018-09-28 15:41:42",
+        "updated_at": "2018-09-28 15:41:42"
+    }, {
+        "id": 54,
+        "skill_rating": 0,
+        "skill_label": "label.arcana",
+        "skill_type": "Magical Skills",
+        "description": "description.arcana",
+        "is_group": 0,
+        "group_skills_id": 0,
+        "created_at": "2018-09-28 15:41:42",
+        "updated_at": "2018-09-28 15:41:42"
+    }, {
+        "id": 55,
+        "skill_rating": 0,
+        "skill_label": "label.assessing",
+        "skill_type": "Magical Skills",
+        "description": "description.assessing",
+        "is_group": 0,
+        "group_skills_id": 0,
+        "created_at": "2018-09-28 15:41:42",
+        "updated_at": "2018-09-28 15:41:42"
+    }, {
+        "id": 56,
+        "skill_rating": 0,
+        "skill_label": "label.astral.combat",
+        "skill_type": "Magical Skills",
+        "description": "description.astral.combat",
+        "is_group": 0,
+        "group_skills_id": 0,
+        "created_at": "2018-09-28 15:41:42",
+        "updated_at": "2018-09-28 15:41:42"
+    }, {
+        "id": 57,
+        "skill_rating": 0,
+        "skill_label": "label.compiling",
+        "skill_type": "Resonance Skills",
+        "description": "description.compiling",
+        "is_group": 0,
+        "group_skills_id": 0,
+        "created_at": "2018-09-28 15:41:42",
+        "updated_at": "2018-09-28 15:41:42"
+    }, {
+        "id": 58,
+        "skill_rating": 0,
+        "skill_label": "label.decompiling",
+        "skill_type": "Resonance Skills",
+        "description": "description.decompiling",
+        "is_group": 0,
+        "group_skills_id": 0,
+        "created_at": "2018-09-28 15:41:42",
+        "updated_at": "2018-09-28 15:41:42"
+    }, {
+        "id": 59,
+        "skill_rating": 0,
+        "skill_label": "label.registering",
+        "skill_type": "Resonance Skills",
+        "description": "description.registering",
+        "is_group": 0,
+        "group_skills_id": 0,
+        "created_at": "2018-09-28 15:41:42",
+        "updated_at": "2018-09-28 15:41:42"
+    }, {
+        "id": 60,
+        "skill_rating": 0,
+        "skill_label": "label.tasking",
+        "skill_type": "Resonance Skills",
+        "description": "description.tasking",
+        "is_group": 1,
+        "group_skills_id": "57,58,59",
+        "created_at": "2018-09-28 15:41:42",
+        "updated_at": "2018-09-28 15:41:42"
+    }, {
+        "id": 61,
+        "skill_rating": 0,
+        "skill_label": "label.biotechnology",
+        "skill_type": "Technical Skills",
+        "description": "description.biotechnology",
+        "is_group": 0,
+        "group_skills_id": 0,
+        "created_at": "2018-09-28 15:41:42",
+        "updated_at": "2018-09-28 15:41:42"
+    }, {
+        "id": 62,
+        "skill_rating": 0,
+        "skill_label": "label.cybertechnology",
+        "skill_type": "Technical Skills",
+        "description": "description.cybertechnology",
+        "is_group": 0,
+        "group_skills_id": 0,
+        "created_at": "2018-09-28 15:41:42",
+        "updated_at": "2018-09-28 15:41:42"
+    }, {
+        "id": 63,
+        "skill_rating": 0,
+        "skill_label": "label.first.aid",
+        "skill_type": "Technical Skills",
+        "description": "description.first.aid",
+        "is_group": 0,
+        "group_skills_id": 0,
+        "created_at": "2018-09-28 15:41:42",
+        "updated_at": "2018-09-28 15:41:42"
+    }, {
+        "id": 64,
+        "skill_rating": 0,
+        "skill_label": "label.medicine",
+        "skill_type": "Technical Skills",
+        "description": "description.medicine",
+        "is_group": 0,
+        "group_skills_id": 0,
+        "created_at": "2018-09-28 15:41:42",
+        "updated_at": "2018-09-28 15:41:42"
+    }, {
+        "id": 65,
+        "skill_rating": 0,
+        "skill_label": "label.biotech",
+        "skill_type": "Technical Skills",
+        "description": "description.biotech",
+        "is_group": 1,
+        "group_skills_id": "61,62,63,64",
+        "created_at": "2018-09-28 15:41:42",
+        "updated_at": "2018-09-28 15:41:42"
+    }, {
+        "id": 66,
+        "skill_rating": 0,
+        "skill_label": "label.cybercombat",
+        "skill_type": "Technical Skills",
+        "description": "description.cybercombat",
+        "is_group": 0,
+        "group_skills_id": 0,
+        "created_at": "2018-09-28 15:41:42",
+        "updated_at": "2018-09-28 15:41:42"
+    }, {
+        "id": 67,
+        "skill_rating": 0,
+        "skill_label": "label.electronic.warfare",
+        "skill_type": "Technical Skills",
+        "description": "description.electronic.warfare",
+        "is_group": 0,
+        "group_skills_id": 0,
+        "created_at": "2018-09-28 15:41:42",
+        "updated_at": "2018-09-28 15:41:42"
+    }, {
+        "id": 68,
+        "skill_rating": 0,
+        "skill_label": "label.hacking",
+        "skill_type": "Technical Skills",
+        "description": "description.hacking",
+        "is_group": 0,
+        "group_skills_id": 0,
+        "created_at": "2018-09-28 15:41:42",
+        "updated_at": "2018-09-28 15:41:42"
+    }, {
+        "id": 69,
+        "skill_rating": 0,
+        "skill_label": "label.cracking",
+        "skill_type": "Technical Skills",
+        "description": "description.cracking",
+        "is_group": 1,
+        "group_skills_id": "66,67,68",
+        "created_at": "2018-09-28 15:41:42",
+        "updated_at": "2018-09-28 15:41:42"
+    }, {
+        "id": 70,
+        "skill_rating": 0,
+        "skill_label": "label.computer",
+        "skill_type": "Technical Skills",
+        "description": "description.computer",
+        "is_group": 0,
+        "group_skills_id": 0,
+        "created_at": "2018-09-28 15:41:42",
+        "updated_at": "2018-09-28 15:41:42"
+    }, {
+        "id": 71,
+        "skill_rating": 0,
+        "skill_label": "label.hardware",
+        "skill_type": "Technical Skills",
+        "description": "description.hardware",
+        "is_group": 0,
+        "group_skills_id": 0,
+        "created_at": "2018-09-28 15:41:42",
+        "updated_at": "2018-09-28 15:41:42"
+    }, {
+        "id": 72,
+        "skill_rating": 0,
+        "skill_label": "label.software",
+        "skill_type": "Technical Skills",
+        "description": "description.software",
+        "is_group": 0,
+        "group_skills_id": 0,
+        "created_at": "2018-09-28 15:41:42",
+        "updated_at": "2018-09-28 15:41:42"
+    }, {
+        "id": 73,
+        "skill_rating": 0,
+        "skill_label": "label.electronics",
+        "skill_type": "Technical Skills",
+        "description": "description.electronics",
+        "is_group": 1,
+        "group_skills_id": "70,71,72",
+        "created_at": "2018-09-28 15:41:42",
+        "updated_at": "2018-09-28 15:41:42"
+    }, {
+        "id": 74,
+        "skill_rating": 0,
+        "skill_label": "label.aeronautics.mechanic",
+        "skill_type": "Technical Skills",
+        "description": "description.aeronautics.mechanic",
+        "is_group": 0,
+        "group_skills_id": 0,
+        "created_at": "2018-09-28 15:41:42",
+        "updated_at": "2018-09-28 15:41:42"
+    }, {
+        "id": 75,
+        "skill_rating": 0,
+        "skill_label": "label.automotive.mechanic",
+        "skill_type": "Technical Skills",
+        "description": "description.automotive.mechanic",
+        "is_group": 0,
+        "group_skills_id": 0,
+        "created_at": "2018-09-28 15:41:42",
+        "updated_at": "2018-09-28 15:41:42"
+    }, {
+        "id": 76,
+        "skill_rating": 0,
+        "skill_label": "label.industrial.mechanic",
+        "skill_type": "Technical Skills",
+        "description": "description.industrial.mechanic",
+        "is_group": 0,
+        "group_skills_id": 0,
+        "created_at": "2018-09-28 15:41:42",
+        "updated_at": "2018-09-28 15:41:42"
+    }, {
+        "id": 77,
+        "skill_rating": 0,
+        "skill_label": "label.nautical.mechanic",
+        "skill_type": "Technical Skills",
+        "description": "description.nautical.mechanic",
+        "is_group": 0,
+        "group_skills_id": 0,
+        "created_at": "2018-09-28 15:41:43",
+        "updated_at": "2018-09-28 15:41:43"
+    }, {
+        "id": 78,
+        "skill_rating": 0,
+        "skill_label": "label.engineering",
+        "skill_type": "Technical Skills",
+        "description": "description.engineering",
+        "is_group": 1,
+        "group_skills_id": "74,75,76,77",
+        "created_at": "2018-09-28 15:41:43",
+        "updated_at": "2018-09-28 15:41:43"
+    }, {
+        "id": 79,
+        "skill_rating": 0,
+        "skill_label": "label.animal.handling",
+        "skill_type": "Technical Skills",
+        "description": "description.animal.handling",
+        "is_group": 0,
+        "group_skills_id": "",
+        "created_at": "2018-09-28 15:41:43",
+        "updated_at": "2018-09-28 15:41:43"
+    }, {
+        "id": 80,
+        "skill_rating": 0,
+        "skill_label": "label.armorer",
+        "skill_type": "Technical Skills",
+        "description": "description.armorer",
+        "is_group": 0,
+        "group_skills_id": "",
+        "created_at": "2018-09-28 15:41:43",
+        "updated_at": "2018-09-28 15:41:43"
+    }, {
+        "id": 81,
+        "skill_rating": 0,
+        "skill_label": "label.artisan",
+        "skill_type": "Technical Skills",
+        "description": "description.artisan",
+        "is_group": 0,
+        "group_skills_id": "",
+        "created_at": "2018-09-28 15:41:43",
+        "updated_at": "2018-09-28 15:41:43"
+    }, {
+        "id": 82,
+        "skill_rating": 0,
+        "skill_label": "label.chemistry",
+        "skill_type": "Technical Skills",
+        "description": "description.chemistry",
+        "is_group": 0,
+        "group_skills_id": "",
+        "created_at": "2018-09-28 15:41:43",
+        "updated_at": "2018-09-28 15:41:43"
+    }, {
+        "id": 83,
+        "skill_rating": 0,
+        "skill_label": "label.demolitions",
+        "skill_type": "Technical Skills",
+        "description": "description.demolitions",
+        "is_group": 0,
+        "group_skills_id": "",
+        "created_at": "2018-09-28 15:41:43",
+        "updated_at": "2018-09-28 15:41:43"
+    }, {
+        "id": 84,
+        "skill_rating": 0,
+        "skill_label": "label.forgery",
+        "skill_type": "Technical Skills",
+        "description": "description.forgery",
+        "is_group": 0,
+        "group_skills_id": "",
+        "created_at": "2018-09-28 15:41:43",
+        "updated_at": "2018-09-28 15:41:43"
+    }, {
+        "id": 85,
+        "skill_rating": 0,
+        "skill_label": "label.forgery",
+        "skill_type": "Technical Skills",
+        "description": "description.forgery",
+        "is_group": 0,
+        "group_skills_id": "",
+        "created_at": "2018-09-28 15:41:43",
+        "updated_at": "2018-09-28 15:41:43"
+    }, {
+        "id": 86,
+        "skill_rating": 0,
+        "skill_label": "label.locksmith",
+        "skill_type": "Technical Skills",
+        "description": "description.locksmith",
+        "is_group": 0,
+        "group_skills_id": "",
+        "created_at": "2018-09-28 15:41:43",
+        "updated_at": "2018-09-28 15:41:43"
+    }, {
+        "id": 87,
+        "skill_rating": 0,
+        "skill_label": "label.gunnery",
+        "skill_type": "Vehicle Skills",
+        "description": "description.gunnery",
+        "is_group": 0,
+        "group_skills_id": "",
+        "created_at": "2018-09-28 15:41:43",
+        "updated_at": "2018-09-28 15:41:43"
+    }, {
+        "id": 88,
+        "skill_rating": 0,
+        "skill_label": "label.pilot.aerospace",
+        "skill_type": "Vehicle Skills",
+        "description": "description.pilot.aerospace",
+        "is_group": 0,
+        "group_skills_id": "",
+        "created_at": "2018-09-28 15:41:43",
+        "updated_at": "2018-09-28 15:41:43"
+    }, {
+        "id": 89,
+        "skill_rating": 0,
+        "skill_label": "label.pilot.aircraft",
+        "skill_type": "Vehicle Skills",
+        "description": "description.pilot.aircraft",
+        "is_group": 0,
+        "group_skills_id": "",
+        "created_at": "2018-09-28 15:41:43",
+        "updated_at": "2018-09-28 15:41:43"
+    }, {
+        "id": 90,
+        "skill_rating": 0,
+        "skill_label": "label.pilot.exotic.vehicle",
+        "skill_type": "Vehicle Skills",
+        "description": "description.pilot.exotic.vehicle",
+        "is_group": 0,
+        "group_skills_id": "",
+        "created_at": "2018-09-28 15:41:43",
+        "updated_at": "2018-09-28 15:41:43"
+    }, {
+        "id": 91,
+        "skill_rating": 0,
+        "skill_label": "label.pilot.groundcraft",
+        "skill_type": "Vehicle Skills",
+        "description": "description.pilot.groundcraft",
+        "is_group": 0,
+        "group_skills_id": "",
+        "created_at": "2018-09-28 15:41:43",
+        "updated_at": "2018-09-28 15:41:43"
+    }, {
+        "id": 92,
+        "skill_rating": 0,
+        "skill_label": "label.pilot.walker",
+        "skill_type": "Vehicle Skills",
+        "description": "description.pilot.walker",
+        "is_group": 0,
+        "group_skills_id": "",
+        "created_at": "2018-09-28 15:41:43",
+        "updated_at": "2018-09-28 15:41:43"
+    }, {
+        "id": 93,
+        "skill_rating": 0,
+        "skill_label": "label.pilot.watercraft",
+        "skill_type": "Vehicle Skills",
+        "description": "description.pilot.watercraft",
+        "is_group": 0,
+        "group_skills_id": "",
+        "created_at": "2018-09-28 15:41:43",
+        "updated_at": "2018-09-28 15:41:43"
+    }],
+    available_skill_points: {
+        skill_points: 22,
+        skill_group_points: 0,
+        used_skill_points: 0,
+        used_skill_group_points: 0,
+        remaining_skill_points: 20,
+        remaining_skill_group_points: 0
+    },
+    skill_array: {
+        "A": [46, 10],
+        "B": [36, 5],
+        "C": [28, 2],
+        "D": [22, 0],
+        "E": [18, 0]
+    }
+};
+
+/* harmony default export */ __webpack_exports__["a"] = ({
+    state: state
 });
 
 /***/ }),
 /* 59 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+var state = {
+    errors: [],
+    error: {
+        id: 0,
+        name: "",
+        message: "",
+        code: ""
+    },
+    toasted: null
+};
+
+/* harmony default export */ __webpack_exports__["a"] = ({
+    state: state
+});
+
+/***/ }),
+/* 60 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__metatype_actions__ = __webpack_require__(19);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__attributes_actions__ = __webpack_require__(61);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__priority_actions__ = __webpack_require__(62);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__magic_actions__ = __webpack_require__(63);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__magic_actions___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__magic_actions__);
+
+
+
+
+
+/* harmony default export */ __webpack_exports__["a"] = ({
+    METATYPE_UPDATE_DATA: __WEBPACK_IMPORTED_MODULE_0__metatype_actions__["a" /* default */].updateData,
+    ATTRIBUTE_UPDATE_DATA: __WEBPACK_IMPORTED_MODULE_1__attributes_actions__["a" /* default */].updateData,
+    PRIORITY_UPDATE_PRIORITIES: __WEBPACK_IMPORTED_MODULE_2__priority_actions__["a" /* default */].updatePriorities
+});
+
+/***/ }),
+/* 61 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+var actions = {
+    updateData: function updateData(_ref, payload) {
+        var commit = _ref.commit;
+
+        commit('SET_DATA', payload);
+        commit('ATTRIBUTES_SET_ATTRIBUTES', { attributes: default_attributes[getRanking(payload.selector.ranking)], special: payload.special_points });
+    }
+};
+
+var default_attributes = [24, 20, 16, 14, 12];
+
+var getRanking = function getRanking(ranking) {
+    var index = 0;
+    switch (ranking) {
+        case 'A':
+            index = 0;
+            break;
+        case 'B':
+            index = 1;
+            break;
+        case 'C':
+            index = 2;
+            break;
+        case 'D':
+            index = 3;
+            break;
+        case 'E':
+            index = 4;
+            break;
+    }
+    return index;
+};
+
+/* harmony default export */ __webpack_exports__["a"] = (actions);
+
+/***/ }),
+/* 62 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+var actions = {
+    updatePriorities: function updatePriorities(context, payload) {
+        context.commit("creation/UPDATE_DATA", payload);
+    }
+};
+
+/* harmony default export */ __webpack_exports__["a"] = (actions);
+
+/***/ }),
+/* 63 */
+/***/ (function(module, exports) {
+
+
+
+/***/ }),
+/* 64 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__magic_getters__ = __webpack_require__(65);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__skill_getters__ = __webpack_require__(66);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__metatype_getters__ = __webpack_require__(17);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__attributes_getters__ = __webpack_require__(67);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__priority_getters__ = __webpack_require__(68);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__errors_getters__ = __webpack_require__(69);
+
+
+
+
+
+
+
+/* harmony default export */ __webpack_exports__["a"] = ({
+    magics: __WEBPACK_IMPORTED_MODULE_0__magic_getters__["a" /* default */].magics,
+    magic: __WEBPACK_IMPORTED_MODULE_0__magic_getters__["a" /* default */].magic,
+    magicId: __WEBPACK_IMPORTED_MODULE_0__magic_getters__["a" /* default */].magicId,
+
+    skills: __WEBPACK_IMPORTED_MODULE_1__skill_getters__["a" /* default */].skills,
+    remaining_skill_points: __WEBPACK_IMPORTED_MODULE_1__skill_getters__["a" /* default */].remaining_skill_points,
+    remaining_skill_group_points: __WEBPACK_IMPORTED_MODULE_1__skill_getters__["a" /* default */].remaining_skill_group_points,
+    get_group_from_skill: __WEBPACK_IMPORTED_MODULE_1__skill_getters__["a" /* default */].get_group_from_skill,
+    filter_skills: __WEBPACK_IMPORTED_MODULE_1__skill_getters__["a" /* default */].filter_skills,
+
+    type: __WEBPACK_IMPORTED_MODULE_2__metatype_getters__["a" /* default */].type,
+    typeId: __WEBPACK_IMPORTED_MODULE_2__metatype_getters__["a" /* default */].typeId,
+    types: __WEBPACK_IMPORTED_MODULE_2__metatype_getters__["a" /* default */].types,
+    special_points: __WEBPACK_IMPORTED_MODULE_2__metatype_getters__["a" /* default */].special_points,
+    filtered_types: __WEBPACK_IMPORTED_MODULE_2__metatype_getters__["a" /* default */].filtered_types,
+
+    metatypes_attributes: __WEBPACK_IMPORTED_MODULE_3__attributes_getters__["a" /* default */].metatypes_attributes,
+    metatype_attributes: __WEBPACK_IMPORTED_MODULE_3__attributes_getters__["a" /* default */].metatype_attributes,
+    current_attr: __WEBPACK_IMPORTED_MODULE_3__attributes_getters__["a" /* default */].current_attr,
+    available_point: __WEBPACK_IMPORTED_MODULE_3__attributes_getters__["a" /* default */].available_point,
+    remaining_point: __WEBPACK_IMPORTED_MODULE_3__attributes_getters__["a" /* default */].remaining_point,
+
+    selectors: __WEBPACK_IMPORTED_MODULE_4__priority_getters__["a" /* default */].selectors,
+    default_ranking: __WEBPACK_IMPORTED_MODULE_4__priority_getters__["a" /* default */].default_ranking,
+
+    errors: __WEBPACK_IMPORTED_MODULE_5__errors_getters__["a" /* default */].errors,
+    error: __WEBPACK_IMPORTED_MODULE_5__errors_getters__["a" /* default */].error
+});
+
+/***/ }),
+/* 65 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+var magics = function magics(state) {
+    return state.magics;
+};
+var magic = function magic(state) {
+    return state.magics.find(function (magic) {
+        return magic.id === state.magicId;
+    });
+};
+var magicId = function magicId(state) {
+    return state.magicId;
+};
+
+/* harmony default export */ __webpack_exports__["a"] = ({
+    magics: magics,
+    magic: magic,
+    magicId: magicId
+});
+
+/***/ }),
+/* 66 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+var skills = function skills(state) {
+    return state.skills;
+};
+var remaining_skill_points = function remaining_skill_points(state) {
+    return state.available_skill_points.remaining_skill_points - state.available_skill_points.used_skill_points;
+};
+var remaining_skill_group_points = function remaining_skill_group_points(state) {
+    return state.available_skill_points.remaining_skill_group_points - state.available_skill_points.used_skill_group_points;
+};
+
+var get_group_from_skill = function get_group_from_skill(state) {
+    return function (id) {
+        var label = '';
+        for (var i = 0; i < state.skills.length; i++) {
+            if (state.skills[i].is_group !== 0) {
+                label = find_label(state.skills[i], id, label);
+            }
+        }
+        if (label === '') {
+            label = 'label.no.group';
+        }
+        return label;
+    };
+};
+
+function find_label(skill, id, label) {
+    var group = skill.group_skills_id.split(',');
+    for (var i = 0; i < group.length; i++) {
+        if (parseInt(group[i]) === id) {
+            label = skill.skill_label;
+        } else if (skill.id === id) {
+            label = 'label.skill.group';
+        }
+    }
+    return label;
+}
+
+function currentSkill(state, id) {
+    return state.skills.find(function (skill) {
+        return skill.id === id;
+    });
+}
+
+var filter_skills = function filter_skills(state) {
+    return function (payload) {
+        var filter_skill = payload.skill.toLowerCase();
+        var filter_group = payload.group.toLowerCase();
+        var filter_lang = payload.translator;
+        var skills = [];
+        if (filter_skill !== '' || filter_group !== '') {
+            for (var i = 0; i < state.skills.length; i++) {
+                var detect_duplicate = false;
+                var skill_label = filter_lang(state.skills[i].skill_label).toLowerCase();
+                if (filter_skill !== '' && skill_label.indexOf(filter_skill) !== -1) {
+                    detect_duplicate = true;
+                    skills.push(state.skills[i]);
+                }
+                if (filter_group !== '' && skill_label.indexOf(filter_group) !== -1) {
+                    if (!detect_duplicate) skills.push(state.skills[i]);
+                }
+            }
+            return skills.sort(function (a, b) {
+                if (a.is_group < b.is_group) return 1;
+                if (a.is_group > b.is_group) return -1;
+                return 0;
+            });
+        } else {
+            return state.skills.sort(function (a, b) {
+                if (a.is_group < b.is_group) return 1;
+                if (a.is_group > b.is_group) return -1;
+                return 0;
+            });
+        }
+    };
+};
+
+/* harmony default export */ __webpack_exports__["a"] = ({
+    skills: skills,
+    filter_skills: filter_skills,
+    remaining_skill_points: remaining_skill_points,
+    remaining_skill_group_points: remaining_skill_group_points,
+    get_group_from_skill: get_group_from_skill
+});
+
+/***/ }),
+/* 67 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -51427,48 +52711,487 @@ var metatypes_attributes = function metatypes_attributes(state) {
 var metatype_attributes = function metatype_attributes(state) {
     return state.metatype_attributes;
 };
+var current_attr = function current_attr(state) {
+    return state.current_attr;
+};
+var available_point = function available_point(state) {
+    return state.available_point;
+};
+var remaining_point = function remaining_point(state) {
+    return {
+        remaining_attributes: state.available_point.attributes - state.available_point.used_attributes,
+        remaining_special: state.available_point.special - state.available_point.used_special
+    };
+};
 
 /* harmony default export */ __webpack_exports__["a"] = ({
     metatypes_attributes: metatypes_attributes,
-    metatype_attributes: metatype_attributes
+    metatype_attributes: metatype_attributes,
+    current_attr: current_attr,
+    available_point: available_point,
+    remaining_point: remaining_point
 });
 
 /***/ }),
-/* 60 */
+/* 68 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+var selectors = function selectors(state) {
+    return state.selectors;
+};
+var default_ranking = function default_ranking(state) {
+    return state.default_ranking;
+};
+
+/* harmony default export */ __webpack_exports__["a"] = ({
+    selectors: selectors,
+    default_ranking: default_ranking
+});
+
+/***/ }),
+/* 69 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+var errors = function errors(state) {
+    return state.errors;
+};
+var error = function error(state) {
+    return function (id) {
+        return state.errors[id];
+    };
+};
+
+/* harmony default export */ __webpack_exports__["a"] = ({
+    errors: errors,
+    error: error
+});
+
+/***/ }),
+/* 70 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__metatype_mutations__ = __webpack_require__(18);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__skill_mutations__ = __webpack_require__(71);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__attributes_mutations__ = __webpack_require__(72);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__priority_mutations__ = __webpack_require__(73);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__magic_mutations__ = __webpack_require__(74);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__errors_mutations__ = __webpack_require__(20);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__helpers_priority_helper__ = __webpack_require__(5);
+
+
+
+
+
+
+
+
+/* harmony default export */ __webpack_exports__["a"] = ({
+    METATYPE_TYPE_UPDATED: __WEBPACK_IMPORTED_MODULE_0__metatype_mutations__["a" /* default */].TYPE_UPDATED,
+
+    MAGIC_UPDATE_MAGICS: __WEBPACK_IMPORTED_MODULE_4__magic_mutations__["a" /* default */].UPDATE_PRIORITIES,
+    MAGIC_UPDATE_ID: __WEBPACK_IMPORTED_MODULE_4__magic_mutations__["a" /* default */].UPDATE_ID,
+
+    SKILL_ADD: __WEBPACK_IMPORTED_MODULE_1__skill_mutations__["a" /* default */].ADD,
+    SKILL_REMOVE: __WEBPACK_IMPORTED_MODULE_1__skill_mutations__["a" /* default */].REMOVE,
+    SKILL_GROUP_ADD: __WEBPACK_IMPORTED_MODULE_1__skill_mutations__["a" /* default */].ADD_GROUP,
+    SKILL_GROUP_REMOVE: __WEBPACK_IMPORTED_MODULE_1__skill_mutations__["a" /* default */].REMOVE_GROUP,
+
+    ATTRIBUTES_SET_CURRENT_METATYPE_ATTRIBUTES: __WEBPACK_IMPORTED_MODULE_2__attributes_mutations__["a" /* default */].SET_CURRENT_METATYPE_ATTRIBUTES,
+    ATTRIBUTES_INCREMENT_ATTRIBUTE: __WEBPACK_IMPORTED_MODULE_2__attributes_mutations__["a" /* default */].INCREMENT_ATTRIBUTE,
+    ATTRIBUTES_SET_ATTRIBUTES: __WEBPACK_IMPORTED_MODULE_2__attributes_mutations__["a" /* default */].SET_ATTRIBUTES,
+    ATTRIBUTES_SET_DATA: __WEBPACK_IMPORTED_MODULE_2__attributes_mutations__["a" /* default */].SET_DATA,
+
+    PRIORITY_UPDATE_PRIORITIES: __WEBPACK_IMPORTED_MODULE_3__priority_mutations__["a" /* default */].UPDATE_PRIORITIES,
+
+    ADD_ERRORS: __WEBPACK_IMPORTED_MODULE_5__errors_mutations__["a" /* default */].ADD_ERRORS,
+    ADD_AND_ALERT: __WEBPACK_IMPORTED_MODULE_5__errors_mutations__["a" /* default */].ADD_AND_ALERT,
+    REMOVE_ERRORS: __WEBPACK_IMPORTED_MODULE_5__errors_mutations__["a" /* default */].REMOVE_ERRORS,
+
+    UPDATE_DATA: function UPDATE_DATA(state, payload) {
+        var selectors = __WEBPACK_IMPORTED_MODULE_6__helpers_priority_helper__["a" /* default */].selectorArray;
+        for (var i = 0; i < state.selectors.length; i++) {
+            state.selectors[i].ranking = state.default_ranking[i];
+            if (state.selectors[i].type === 'Metatype') {
+                selectors.metatypeSelector = state.selectors[i];
+            }
+            if (state.selectors[i].type === 'Attributes') {
+                selectors.attributeSelector = state.selectors[i];
+            }
+            if (state.selectors[i].type === 'Magic') {
+                selectors.magicSelector = state.selectors[i];
+            }
+            if (state.selectors[i].type === 'Skills') {
+                selectors.skillSelector = state.selectors[i];
+            }
+        }
+        __WEBPACK_IMPORTED_MODULE_1__skill_mutations__["a" /* default */].UPDATE_PRIORITIES(state, payload);
+    },
+
+    SET_TOASTED: function SET_TOASTED(state, payload) {
+        state.toasted = payload;
+    }
+});
+
+/***/ }),
+/* 71 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__helpers_priority_helper__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__errors_mutations__ = __webpack_require__(20);
+
+
+var SKILL_POINT = 0;
+var SKILL_GROUP_POINT = 1;
+
+var UPDATE_PRIORITIES = function UPDATE_PRIORITIES(state, payload) {
+    for (var i = 0; i < state.selectors.length; i++) {
+        state.selectors[i].ranking = __WEBPACK_IMPORTED_MODULE_0__helpers_priority_helper__["a" /* default */].getRankingFromOrder(i);
+        if (state.selectors[i].type === 'Skills') {
+            state.available_skill_points.skill_points = state.skill_array[state.selectors[i].ranking][SKILL_POINT];
+            state.available_skill_points.skill_group_points = state.skill_array[state.selectors[i].ranking][SKILL_GROUP_POINT];
+            state.available_skill_points.remaining_skill_points = state.skill_array[state.selectors[i].ranking][SKILL_POINT];
+            state.available_skill_points.remaining_skill_group_points = state.skill_array[state.selectors[i].ranking][SKILL_GROUP_POINT];
+        }
+    }
+};
+
+var ADD = function ADD(state, payload) {
+    if (state.skills[payload].skill_rating < 6) {
+        state.skills[payload].skill_rating++;
+    } else {
+        state.skills[payload].skill_rating++;
+        var err = {
+            id: 0,
+            name: 'Errors.Skill.overflow.error',
+            code: 100,
+            message: 'Please set the skill to 6 or lower at character creation.'
+        };
+        __WEBPACK_IMPORTED_MODULE_1__errors_mutations__["a" /* default */].ADD_AND_ALERT(state, err);
+    }
+    state.available_skill_points.used_skill_points++;
+    if (state.available_skill_points.remaining_skill_points - state.available_skill_points.used_skill_points < 0) {
+        var _err = {
+            id: 1,
+            name: 'Errors.Skill.no.skill.point',
+            code: 100,
+            message: 'You do not have any skill point left'
+        };
+        __WEBPACK_IMPORTED_MODULE_1__errors_mutations__["a" /* default */].ADD_AND_ALERT(state, _err);
+    }
+};
+
+var REMOVE = function REMOVE(state, id) {
+    if (state.skills[id].skill_rating > 0) {
+        state.skills[id].skill_rating--;
+        if (state.errors.length > 0) {
+            __WEBPACK_IMPORTED_MODULE_1__errors_mutations__["a" /* default */].REMOVE_ERRORS(state, 0);
+        }
+        state.available_skill_points.used_skill_points--;
+    }
+    if (state.available_skill_points.remaining_skill_points - state.available_skill_points.used_skill_points >= 0) {
+        if (state.errors.length > 0) {
+            __WEBPACK_IMPORTED_MODULE_1__errors_mutations__["a" /* default */].REMOVE_ERRORS(state, 1);
+        }
+    }
+};
+
+var ADD_GROUP = function ADD_GROUP(state, payload) {
+    if (state.skills[payload].skill_rating < 6) {
+        state.skills[payload].skill_rating++;
+    } else {
+        state.skills[payload].skill_rating++;
+        var err = {
+            id: 0,
+            name: 'Errors.Skill.overflow.error',
+            code: 100,
+            message: 'Please set the skill group to 6 or lower at character creation.'
+        };
+        __WEBPACK_IMPORTED_MODULE_1__errors_mutations__["a" /* default */].ADD_AND_ALERT(state, err);
+    }
+    state.available_skill_points.used_skill_group_points++;
+
+    if (state.available_skill_points.remaining_skill_group_points - state.available_skill_points.used_skill_group_points < 0) {
+        var _err2 = {
+            id: 2,
+            name: 'Errors.Skill.no.skill.group.point',
+            code: 100,
+            message: 'You do not have any skill group points left'
+        };
+        __WEBPACK_IMPORTED_MODULE_1__errors_mutations__["a" /* default */].ADD_AND_ALERT(state, _err2);
+    }
+};
+
+var REMOVE_GROUP = function REMOVE_GROUP(state, id) {
+    if (state.skills[id].skill_rating > 0) {
+        state.skills[id].skill_rating--;
+        if (state.errors.length > 0) {
+            __WEBPACK_IMPORTED_MODULE_1__errors_mutations__["a" /* default */].REMOVE_ERRORS(state, 0);
+        }
+        state.available_skill_points.used_skill_group_points--;
+        if (state.available_skill_points.remaining_skill_group_points - state.available_skill_points.used_skill_group_points >= 0) {
+            if (state.errors.length > 0) {
+                __WEBPACK_IMPORTED_MODULE_1__errors_mutations__["a" /* default */].REMOVE_ERRORS(state, 2);
+            }
+        }
+    }
+};
+
+/* harmony default export */ __webpack_exports__["a"] = ({
+    UPDATE_PRIORITIES: UPDATE_PRIORITIES,
+    ADD: ADD,
+    REMOVE: REMOVE,
+    ADD_GROUP: ADD_GROUP,
+    REMOVE_GROUP: REMOVE_GROUP
+});
+
+/***/ }),
+/* 72 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 var SET_CURRENT_METATYPE_ATTRIBUTES = function SET_CURRENT_METATYPE_ATTRIBUTES(state, id) {
     for (var i = 0; i < state.metatypes_attributes.length; i++) {
         if (state.metatypes_attributes[i].id === id) {
+            var currentAttrArray = set_character_attr_diff(state);
             state.metatype_attributes = state.metatypes_attributes[i];
+            state.current_attr = set_character_main_attributes(state, currentAttrArray);
+        }
+    }
+};
+
+var UPDATE_DATA = function UPDATE_DATA(state, payload) {
+    SET_ATTRIBUTES(state, payload);
+    SET_DATA(state, payload);
+};
+
+var SET_ATTRIBUTES = function SET_ATTRIBUTES(state, payload) {
+    state.available_point.attributes = payload.attributes;
+    state.available_point.special = payload.special;
+};
+
+var SET_DATA = function SET_DATA(state, payload) {
+    state.available_point.special = payload.special_points;
+    state.available_point.remaining_special = payload.special_points;
+};
+
+var INCREMENT_ATTRIBUTE = function INCREMENT_ATTRIBUTE(state, payload) {
+    var attribute_name = payload.name;
+    var increment = payload.increment;
+    select_increment(state, attribute_name, increment);
+};
+
+var default_attributes = [24, 20, 16, 14, 12];
+
+var getRanking = function getRanking(state, ranking) {
+    var index = 0;
+    switch (ranking) {
+        case 'A':
+            index = 0;
+            break;
+        case 'B':
+            index = 1;
+            break;
+        case 'C':
+            index = 2;
+            break;
+        case 'D':
+            index = 3;
+            break;
+        case 'E':
+            index = 4;
+            break;
+    }
+    return index;
+};
+
+function set_character_main_attributes(state, attr_array) {
+    var current_attr = {
+        body: state.metatype_attributes.body_min + attr_array.body,
+        agility: state.metatype_attributes.agility_min + attr_array.agility,
+        reaction: state.metatype_attributes.reaction_min + attr_array.reaction,
+        strength: state.metatype_attributes.strength_min + attr_array.strength,
+        willpower: state.metatype_attributes.willpower_min + attr_array.willpower,
+        logic: state.metatype_attributes.logic_min + attr_array.logic,
+        intuition: state.metatype_attributes.intuition_min + attr_array.intuition,
+        charisma: state.metatype_attributes.charisma_min + attr_array.charisma,
+        edge: state.metatype_attributes.edge_min + attr_array.edge,
+        magic: state.metatype_attributes.magic + attr_array.magic
+    };
+    return current_attr;
+}
+
+function set_character_attr_diff(state) {
+    var current_attr = {
+        body: state.current_attr.body - state.metatype_attributes.body_min,
+        agility: state.current_attr.agility - state.metatype_attributes.agility_min,
+        reaction: state.current_attr.reaction - state.metatype_attributes.reaction_min,
+        strength: state.current_attr.strength - state.metatype_attributes.strength_min,
+        willpower: state.current_attr.willpower - state.metatype_attributes.willpower_min,
+        logic: state.current_attr.logic - state.metatype_attributes.logic_min,
+        intuition: state.current_attr.intuition - state.metatype_attributes.intuition_min,
+        charisma: state.current_attr.charisma - state.metatype_attributes.charisma_min,
+        edge: state.current_attr.edge - state.metatype_attributes.edge_min,
+        magic: state.current_attr.magic - state.metatype_attributes.magic
+    };
+    return current_attr;
+}
+
+function select_increment(state, attribute_name, increment) {
+    switch (attribute_name) {
+        case 'body':
+            if (state.current_attr.body <= state.metatype_attributes.body_max && state.current_attr.body >= state.metatype_attributes.body_min) {
+                state.current_attr.body = addIncrement(state, state.current_attr.body, increment, state.metatype_attributes.body_min, state.metatype_attributes.body_max);
+            }
+            break;
+        case 'agility':
+            if (state.current_attr.agility <= state.metatype_attributes.agility_max && state.current_attr.agility >= state.metatype_attributes.agility_min) {
+                state.current_attr.agility = addIncrement(state, state.current_attr.agility, increment, state.metatype_attributes.agility_min, state.metatype_attributes.agility_max);
+            }
+            break;
+        case 'reaction':
+            if (state.current_attr.reaction <= state.metatype_attributes.reaction_max && state.current_attr.reaction >= state.metatype_attributes.reaction_min) {
+                state.current_attr.reaction = addIncrement(state, state.current_attr.reaction, increment, state.metatype_attributes.reaction_min, state.metatype_attributes.reaction_max);
+            }
+            break;
+        case 'strength':
+            if (state.current_attr.strength <= state.metatype_attributes.strength_max && state.current_attr.strength >= state.metatype_attributes.strength_min) {
+                state.current_attr.strength = addIncrement(state, state.current_attr.strength, increment, state.metatype_attributes.strength_min, state.metatype_attributes.strength_max);
+            }
+            break;
+        case 'willpower':
+            if (state.current_attr.willpower <= state.metatype_attributes.willpower_max && state.current_attr.willpower >= state.metatype_attributes.willpower_min) {
+                state.current_attr.willpower = addIncrement(state, state.current_attr.willpower, increment, state.metatype_attributes.willpower_min, state.metatype_attributes.willpower_max);
+            }
+            break;
+        case 'logic':
+            if (state.current_attr.logic <= state.metatype_attributes.logic_max && state.current_attr.logic >= state.metatype_attributes.logic_min) {
+                state.current_attr.logic = addIncrement(state, state.current_attr.logic, increment, state.metatype_attributes.logic_min, state.metatype_attributes.logic_max);
+            }
+            break;
+        case 'intuition':
+            if (state.current_attr.intuition <= state.metatype_attributes.intuition_max && state.current_attr.intuition >= state.metatype_attributes.intuition_min) {
+                state.current_attr.intuition = addIncrement(state, state.current_attr.intuition, increment, state.metatype_attributes.intuition_min, state.metatype_attributes.intuition_max);
+            }
+            break;
+        case 'charisma':
+            if (state.current_attr.charisma <= state.metatype_attributes.charisma_max && state.current_attr.charisma >= state.metatype_attributes.charisma_min) {
+                state.current_attr.charisma = addIncrement(state, state.current_attr.charisma, increment, state.metatype_attributes.charisma_min, state.metatype_attributes.charisma_max);
+            }
+            break;
+        case 'edge':
+            if (state.current_attr.edge <= state.metatype_attributes.edge_max && state.current_attr.edge >= state.metatype_attributes.edge_min) {
+                state.current_attr.edge = addIncrement(state, state.current_attr.edge, increment, state.metatype_attributes.edge_min, state.metatype_attributes.edge_max, true);
+            }
+            break;
+        case 'magic':
+            if (state.current_attr.magic <= 12 && state.current_attr.magic >= 0) {
+                state.current_attr.magic = addIncrement(state, state.current_attr.magic, increment, 0, 12, true);
+            }
+            break;
+        default:
+            break;
+    }
+}
+
+function addIncrement(state, attribute, increment, min, max) {
+    var exception = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : false;
+
+    if (increment === 'minus') {
+        if (attribute !== min) {
+            attribute = attribute - 1;
+            if (!exception) {
+                state.available_point.used_attributes = state.available_point.used_attributes - 1;
+            } else {
+                state.available_point.used_special = state.available_point.used_special - 1;
+            }
+        }
+    } else {
+        if (attribute !== max) {
+            attribute = attribute + 1;
+            if (!exception) {
+                state.available_point.used_attributes = state.available_point.used_attributes + 1;
+            } else {
+                state.available_point.used_special = state.available_point.used_special + 1;
+            }
+        }
+    }
+    return attribute;
+}
+
+/* harmony default export */ __webpack_exports__["a"] = ({
+    SET_CURRENT_METATYPE_ATTRIBUTES: SET_CURRENT_METATYPE_ATTRIBUTES,
+    INCREMENT_ATTRIBUTE: INCREMENT_ATTRIBUTE,
+    SET_ATTRIBUTES: SET_ATTRIBUTES,
+    SET_DATA: SET_DATA
+});
+
+/***/ }),
+/* 73 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__helpers_priority_helper__ = __webpack_require__(5);
+
+
+var UPDATE_PRIORITIES = function UPDATE_PRIORITIES(state, payload) {
+    state.selectors = payload;
+    __WEBPACK_IMPORTED_MODULE_0__helpers_priority_helper__["a" /* default */].UPDATE_DATA(state, payload);
+    for (var i = 0; i < state.selectors.length; i++) {
+        state.selectors[i].ranking = __WEBPACK_IMPORTED_MODULE_0__helpers_priority_helper__["a" /* default */].getRankingFromOrder(i);
+        if (state.selectors[i].type === 'Attributes') {
+            state.available_point.attributes = __WEBPACK_IMPORTED_MODULE_0__helpers_priority_helper__["a" /* default */].default_attributes[i];
+            state.available_point.remaining_attributes = __WEBPACK_IMPORTED_MODULE_0__helpers_priority_helper__["a" /* default */].default_attributes[i];
+
+            state.available_point.special = state.special_points;
+            state.available_point.remaining_special = state.special_points;
         }
     }
 };
 
 /* harmony default export */ __webpack_exports__["a"] = ({
-    SET_CURRENT_METATYPE_ATTRIBUTES: SET_CURRENT_METATYPE_ATTRIBUTES
+    UPDATE_PRIORITIES: UPDATE_PRIORITIES
 });
 
 /***/ }),
-/* 61 */
+/* 74 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-var actions = {};
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__helpers_priority_helper__ = __webpack_require__(5);
 
-/* harmony default export */ __webpack_exports__["a"] = (actions);
+
+var UPDATE_PRIORITIES = function UPDATE_PRIORITIES(state, payload) {
+    state.selectors = payload;
+    __WEBPACK_IMPORTED_MODULE_0__helpers_priority_helper__["a" /* default */].UPDATE_DATA(state, payload);
+    for (var i = 0; i < state.selectors.length; i++) {
+        state.selectors[i].ranking = __WEBPACK_IMPORTED_MODULE_0__helpers_priority_helper__["a" /* default */].getRankingFromOrder(i);
+        if (state.selectors[i].type === 'Magic') {}
+    }
+};
+
+var UPDATE_ID = function UPDATE_ID(state, payload) {
+    state.magicId = payload;
+};
+
+/* harmony default export */ __webpack_exports__["a"] = ({
+    UPDATE_PRIORITIES: UPDATE_PRIORITIES,
+    UPDATE_ID: UPDATE_ID
+});
 
 /***/ }),
-/* 62 */
+/* 75 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(0)
 /* script */
-var __vue_script__ = __webpack_require__(63)
+var __vue_script__ = __webpack_require__(76)
 /* template */
-var __vue_template__ = __webpack_require__(64)
+var __vue_template__ = __webpack_require__(77)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -51507,7 +53230,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 63 */
+/* 76 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -51536,7 +53259,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 64 */
+/* 77 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -51579,15 +53302,15 @@ if (false) {
 }
 
 /***/ }),
-/* 65 */
+/* 78 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(0)
 /* script */
-var __vue_script__ = __webpack_require__(66)
+var __vue_script__ = __webpack_require__(79)
 /* template */
-var __vue_template__ = __webpack_require__(67)
+var __vue_template__ = __webpack_require__(80)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -51626,7 +53349,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 66 */
+/* 79 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -51720,7 +53443,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 67 */
+/* 80 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -51915,15 +53638,15 @@ if (false) {
 }
 
 /***/ }),
-/* 68 */
+/* 81 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(0)
 /* script */
-var __vue_script__ = __webpack_require__(69)
+var __vue_script__ = __webpack_require__(82)
 /* template */
-var __vue_template__ = __webpack_require__(70)
+var __vue_template__ = __webpack_require__(83)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -51962,7 +53685,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 69 */
+/* 82 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -51998,7 +53721,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 70 */
+/* 83 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -52064,15 +53787,15 @@ if (false) {
 }
 
 /***/ }),
-/* 71 */
+/* 84 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(0)
 /* script */
-var __vue_script__ = __webpack_require__(72)
+var __vue_script__ = __webpack_require__(85)
 /* template */
-var __vue_template__ = __webpack_require__(118)
+var __vue_template__ = __webpack_require__(136)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -52111,16 +53834,16 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 72 */
+/* 85 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__base_Steps__ = __webpack_require__(73);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__base_Steps__ = __webpack_require__(86);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__base_Steps___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__base_Steps__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__creationStep_ConceptStep__ = __webpack_require__(79);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__creationStep_ConceptStep__ = __webpack_require__(92);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__creationStep_ConceptStep___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__creationStep_ConceptStep__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__creationStep_PrioritySelection__ = __webpack_require__(90);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__creationStep_PrioritySelection__ = __webpack_require__(103);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__creationStep_PrioritySelection___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__creationStep_PrioritySelection__);
 //
 //
@@ -52169,6 +53892,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         steps: __WEBPACK_IMPORTED_MODULE_0__base_Steps___default.a,
         concept: __WEBPACK_IMPORTED_MODULE_1__creationStep_ConceptStep___default.a,
         selection: __WEBPACK_IMPORTED_MODULE_2__creationStep_PrioritySelection___default.a
+    },
+    created: function created() {
+        this.$store.commit('creation/UPDATE_DATA');
+        this.$store.commit('creation/SET_TOASTED', this.$toasted);
     },
     data: function data() {
         return {
@@ -52223,15 +53950,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 73 */
+/* 86 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(0)
 /* script */
-var __vue_script__ = __webpack_require__(74)
+var __vue_script__ = __webpack_require__(87)
 /* template */
-var __vue_template__ = __webpack_require__(78)
+var __vue_template__ = __webpack_require__(91)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -52270,12 +53997,12 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 74 */
+/* 87 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Step__ = __webpack_require__(75);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Step__ = __webpack_require__(88);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Step___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__Step__);
 //
 //
@@ -52320,15 +54047,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 75 */
+/* 88 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(0)
 /* script */
-var __vue_script__ = __webpack_require__(76)
+var __vue_script__ = __webpack_require__(89)
 /* template */
-var __vue_template__ = __webpack_require__(77)
+var __vue_template__ = __webpack_require__(90)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -52367,7 +54094,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 76 */
+/* 89 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -52406,7 +54133,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 77 */
+/* 90 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -52448,7 +54175,7 @@ if (false) {
 }
 
 /***/ }),
-/* 78 */
+/* 91 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -52482,19 +54209,19 @@ if (false) {
 }
 
 /***/ }),
-/* 79 */
+/* 92 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(80)
+  __webpack_require__(93)
 }
 var normalizeComponent = __webpack_require__(0)
 /* script */
-var __vue_script__ = __webpack_require__(83)
+var __vue_script__ = __webpack_require__(96)
 /* template */
-var __vue_template__ = __webpack_require__(89)
+var __vue_template__ = __webpack_require__(102)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -52533,13 +54260,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 80 */
+/* 93 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(81);
+var content = __webpack_require__(94);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -52559,7 +54286,7 @@ if(false) {
 }
 
 /***/ }),
-/* 81 */
+/* 94 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(3)(false);
@@ -52573,7 +54300,7 @@ exports.push([module.i, "\n.closing-up {\n    margin-bottom: 0;\n    margin-top:
 
 
 /***/ }),
-/* 82 */
+/* 95 */
 /***/ (function(module, exports) {
 
 /**
@@ -52606,12 +54333,12 @@ module.exports = function listToStyles (parentId, list) {
 
 
 /***/ }),
-/* 83 */
+/* 96 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__base_FilePreview__ = __webpack_require__(84);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__base_FilePreview__ = __webpack_require__(97);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__base_FilePreview___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__base_FilePreview__);
 //
 //
@@ -52698,19 +54425,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 84 */
+/* 97 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(85)
+  __webpack_require__(98)
 }
 var normalizeComponent = __webpack_require__(0)
 /* script */
-var __vue_script__ = __webpack_require__(87)
+var __vue_script__ = __webpack_require__(100)
 /* template */
-var __vue_template__ = __webpack_require__(88)
+var __vue_template__ = __webpack_require__(101)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -52749,13 +54476,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 85 */
+/* 98 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(86);
+var content = __webpack_require__(99);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -52775,7 +54502,7 @@ if(false) {
 }
 
 /***/ }),
-/* 86 */
+/* 99 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(3)(false);
@@ -52789,7 +54516,7 @@ exports.push([module.i, "\n.portrait {\n    width: 40%;\n    display: inline-blo
 
 
 /***/ }),
-/* 87 */
+/* 100 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -52908,7 +54635,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 88 */
+/* 101 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -52986,7 +54713,7 @@ if (false) {
 }
 
 /***/ }),
-/* 89 */
+/* 102 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -53293,15 +55020,15 @@ if (false) {
 }
 
 /***/ }),
-/* 90 */
+/* 103 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(0)
 /* script */
-var __vue_script__ = __webpack_require__(91)
+var __vue_script__ = __webpack_require__(104)
 /* template */
-var __vue_template__ = __webpack_require__(117)
+var __vue_template__ = __webpack_require__(135)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -53340,26 +55067,29 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 91 */
+/* 104 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuedraggable__ = __webpack_require__(92);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuedraggable__ = __webpack_require__(105);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuedraggable___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vuedraggable__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__modules_MetatypeSelection__ = __webpack_require__(94);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__modules_MetatypeSelection__ = __webpack_require__(107);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__modules_MetatypeSelection___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__modules_MetatypeSelection__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__modules_AttributeSelection__ = __webpack_require__(99);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__modules_AttributeSelection__ = __webpack_require__(112);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__modules_AttributeSelection___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__modules_AttributeSelection__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__modules_MagicSelection__ = __webpack_require__(104);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__modules_MagicSelection__ = __webpack_require__(117);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__modules_MagicSelection___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__modules_MagicSelection__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__modules_SkillComponent__ = __webpack_require__(109);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__modules_SkillComponent__ = __webpack_require__(122);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__modules_SkillComponent___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__modules_SkillComponent__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__modules_ResourcesSelection__ = __webpack_require__(114);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__modules_ResourcesSelection__ = __webpack_require__(132);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__modules_ResourcesSelection___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5__modules_ResourcesSelection__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_vuex__ = __webpack_require__(2);
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
+//
+//
+//
 //
 //
 //
@@ -53416,23 +55146,29 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
     data: function data() {
         return {
             loading: false,
-            default_resources: [450000, 275000, 140000, 50000, 6000],
-            selectors: [{ type: 'Metatype', ranking: 'A', id: 0, data: '', show: true }, { type: 'Attributes', ranking: 'B', id: 1, data: '', show: false }, { type: 'Magic', ranking: 'C', id: 2, data: '', show: false }, { type: 'Skills', ranking: 'D', id: 3, data: '', show: false }, { type: 'Resources', ranking: 'E', id: 4, data: '', show: false }],
-            errors: {}
+            default_resources: [450000, 275000, 140000, 50000, 6000]
         };
     },
 
     computed: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_6_vuex__["b" /* mapGetters */])({
-        default_ranking: 'priority/default_ranking'
-    })),
+        default_ranking: 'creation/default_ranking',
+        errors: 'creation/errors',
+        special_points: 'creation/special_points'
+    }), {
+        selectors: {
+            get: function get() {
+                return this.$store.state.creation.selectors;
+            },
+            set: function set(value) {
+                this.$store.commit('creation/PRIORITY_UPDATE_PRIORITIES', value);
+                this.$store.commit('creation/UPDATE_DATA', value);
+            }
+        }
+    }),
     methods: {
         changeLocation: function changeLocation() {
-            for (var i = 0; i < this.selectors.length; i++) {
-                this.selectors[i].ranking = this.default_ranking[i];
-                if (this.selectors[i].type === 'Metatype') {
-                    this.$store.dispatch("metatype/updateData", this.selectors[i]);
-                }
-            }
+            //this.$store.dispatch("creation/METATYPE_UPDATE_DATA", metatypeSelector);
+            //this.$store.dispatch("creation/ATTRIBUTE_UPDATE_DATA", {selector: attributeSelector, special_points: this.special_points});
         },
         getSelector: function getSelector(type) {
             for (var i = 0; i < this.selectors.length; i++) {
@@ -53462,7 +55198,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 });
 
 /***/ }),
-/* 92 */
+/* 105 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -53862,7 +55598,7 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
   }
 
   if (true) {
-    var Sortable = __webpack_require__(93);
+    var Sortable = __webpack_require__(106);
     module.exports = buildDraggable(Sortable);
   } else if (typeof define == "function" && define.amd) {
     define(['sortablejs'], function (Sortable) {
@@ -53875,7 +55611,7 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
 })();
 
 /***/ }),
-/* 93 */
+/* 106 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;/**!
@@ -55425,19 +57161,19 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;/**!
 
 
 /***/ }),
-/* 94 */
+/* 107 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(95)
+  __webpack_require__(108)
 }
 var normalizeComponent = __webpack_require__(0)
 /* script */
-var __vue_script__ = __webpack_require__(97)
+var __vue_script__ = __webpack_require__(110)
 /* template */
-var __vue_template__ = __webpack_require__(98)
+var __vue_template__ = __webpack_require__(111)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -55476,13 +57212,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 95 */
+/* 108 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(96);
+var content = __webpack_require__(109);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -55502,7 +57238,7 @@ if(false) {
 }
 
 /***/ }),
-/* 96 */
+/* 109 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(3)(false);
@@ -55510,13 +57246,13 @@ exports = module.exports = __webpack_require__(3)(false);
 
 
 // module
-exports.push([module.i, "\n.attr_array {\n        margin-top: 25px;\n}\n.attr_array table {\n        text-align: center;\n}\n.attr_array tr, .attr_array td, .attr_array thead th{\n        text-align: center !important;\n}\n.attr_array td div:first-child, .attr_array td div:last-child{\n        vertical-align: middle;\n        height: 10px;\n}\n\n    /* Variables\n================================== */\n    /* Tables\n    ================================== */\n.Rtable {\n        display: -webkit-box;\n        display: -ms-flexbox;\n        display: flex;\n        -ms-flex-wrap: wrap;\n            flex-wrap: wrap;\n        margin: 0 0 3em 0;\n        padding: 0;\n}\n.Rtable-cell {\n        -webkit-box-sizing: border-box;\n                box-sizing: border-box;\n        -webkit-box-flex: 1;\n            -ms-flex-positive: 1;\n                flex-grow: 1;\n        width: 100%;\n        padding: 0.8em 1.2em;\n        overflow: hidden;\n        list-style: none;\n        border: solid 3px white;\n        background: rgba(112, 128, 144, 0.2);\n}\n    /* Table column sizing\n    ================================== */\n.Rtable--2cols > .Rtable-cell {\n        width: 50%;\n}\n.Rtable--3cols > .Rtable-cell {\n        width: 33.33%;\n}\n.Rtable--4cols > .Rtable-cell {\n        width: 25%;\n}\n.Rtable--5cols > .Rtable-cell {\n        width: 20%;\n}\n.Rtable--6cols > .Rtable-cell {\n        width: 16.6%;\n}\n\n    /* Apply styles\n    ================================== */\n.Rtable {\n        position: relative;\n        top: 3px;\n        left: 3px;\n}\n.Rtable-cell {\n        margin: -3px 0 0 -3px;\n        background-color: white;\n        border-color: #e2e6e9;\n}\n    /* Cell styles\n    ================================== */\n.Rtable-cell--dark {\n        background-color: slategrey;\n        border-color: #5a6673;\n        color: white;\n}\n.Rtable-cell--dark > h1,\n    .Rtable-cell--dark > h2,\n    .Rtable-cell--dark > h3,\n    .Rtable-cell--dark > h4,\n    .Rtable-cell--dark > h5,\n    .Rtable-cell--dark > h6 {\n        color: white;\n}\n.Rtable-cell--medium {\n        background-color: #b8c0c8;\n        border-color: #a9b3bc;\n}\n.Rtable-cell--light {\n        background-color: white;\n        border-color: #e2e6e9;\n}\n.Rtable-cell--highlight {\n        background-color: lightgreen;\n        border-color: #64e764;\n}\n.Rtable-cell--alert {\n        background-color: darkorange;\n        border-color: #cc7000;\n        color: white;\n}\n.Rtable-cell--alert > h1,\n    .Rtable-cell--alert > h2,\n    .Rtable-cell--alert > h3,\n    .Rtable-cell--alert > h4,\n    .Rtable-cell--alert > h5,\n    .Rtable-cell--alert > h6 {\n        color: white;\n}\n.Rtable-cell--head {\n        background-color: slategrey;\n        border-color: #5a6673;\n        color: white;\n}\n.Rtable-cell--head > h1,\n    .Rtable-cell--head > h2,\n    .Rtable-cell--head > h3,\n    .Rtable-cell--head > h4,\n    .Rtable-cell--head > h5,\n    .Rtable-cell--head > h6 {\n        color: white;\n}\n.Rtable-cell--foot {\n        background-color: #b8c0c8;\n        border-color: #a9b3bc;\n}\n    /* Responsive\n    ==================================== */\n.Rtable-cell h4 {\n        width: 30%;\n        height: 100%;\n        display: inline-block;\n        vertical-align: top;\n}\n.Rtable-cell div{\n        width: 65%;\n        display: inline-block;\n}\n@media all and (max-width: 900px) {\n.Rtable-cell h4 {\n            width: 100%;\n            height: 15%;\n            display: block;\n            vertical-align: top;\n}\n}\n@media all and (max-width: 500px) {\n.Rtable--collapse {\n            display: block;\n}\n.Rtable--collapse > .Rtable-cell {\n            width: 100% !important;\n}\n.Rtable--collapse > .Rtable-cell--foot {\n            margin-bottom: 1em;\n}\n}\n.no-flexbox .Rtable {\n        display: block;\n}\n.no-flexbox .Rtable > .Rtable-cell {\n        width: 100%;\n}\n.no-flexbox .Rtable > .Rtable-cell--foot {\n        margin-bottom: 1em;\n}\n", ""]);
+exports.push([module.i, "\n.attr_array {\n        margin-top: 25px;\n}\n.attr_array table {\n        text-align: center;\n}\n.attr_array tr, .attr_array td, .attr_array thead th{\n        text-align: center !important;\n}\n.attr_array td div:first-child, .attr_array td div:last-child{\n        vertical-align: middle;\n        height: 10px;\n}\n\n    /* Variables\n================================== */\n    /* Tables\n    ================================== */\n.Rtable {\n        display: -webkit-box;\n        display: -ms-flexbox;\n        display: flex;\n        -ms-flex-wrap: wrap;\n            flex-wrap: wrap;\n        margin: 0 0 3em 0;\n        padding: 0;\n}\n.Rtable-cell {\n        -webkit-box-sizing: border-box;\n                box-sizing: border-box;\n        -webkit-box-flex: 1;\n            -ms-flex-positive: 1;\n                flex-grow: 1;\n        width: 100%;\n        padding: 0.8em 1.2em;\n        overflow: hidden;\n        list-style: none;\n        border: solid 3px white;\n        background: rgba(112, 128, 144, 0.2);\n}\n    /* Table column sizing\n    ================================== */\n.Rtable--2cols > .Rtable-cell {\n        width: 50%;\n}\n.Rtable--3cols > .Rtable-cell {\n        width: 33.33%;\n}\n.Rtable--4cols > .Rtable-cell {\n        width: 25%;\n}\n.Rtable--5cols > .Rtable-cell {\n        width: 20%;\n}\n.Rtable--6cols > .Rtable-cell {\n        width: 16.6%;\n}\n\n    /* Apply styles\n    ================================== */\n.Rtable {\n        position: relative;\n        top: 3px;\n        left: 3px;\n}\n.Rtable-cell {\n        margin: -3px 0 0 -3px;\n        background-color: white;\n        border-color: #e2e6e9;\n}\n    /* Cell styles\n    ================================== */\n.Rtable-cell--dark {\n        background-color: slategrey;\n        border-color: #5a6673;\n        color: white;\n}\n.Rtable-cell--dark > h1,\n    .Rtable-cell--dark > h2,\n    .Rtable-cell--dark > h3,\n    .Rtable-cell--dark > h4,\n    .Rtable-cell--dark > h5,\n    .Rtable-cell--dark > h6 {\n        color: white;\n}\n.Rtable-cell--medium {\n        background-color: #b8c0c8;\n        border-color: #a9b3bc;\n}\n.Rtable-cell--light {\n        background-color: white;\n        border-color: #e2e6e9;\n}\n.Rtable-cell--highlight {\n        background-color: lightgreen;\n        border-color: #64e764;\n}\n.Rtable-cell--alert {\n        background-color: darkorange;\n        border-color: #cc7000;\n        color: white;\n}\n.Rtable-cell--alert > h1,\n    .Rtable-cell--alert > h2,\n    .Rtable-cell--alert > h3,\n    .Rtable-cell--alert > h4,\n    .Rtable-cell--alert > h5,\n    .Rtable-cell--alert > h6 {\n        color: white;\n}\n.Rtable-cell--head {\n        background-color: slategrey;\n        border-color: #5a6673;\n        color: white;\n}\n.Rtable-cell--head > h1,\n    .Rtable-cell--head > h2,\n    .Rtable-cell--head > h3,\n    .Rtable-cell--head > h4,\n    .Rtable-cell--head > h5,\n    .Rtable-cell--head > h6 {\n        color: white;\n}\n.Rtable-cell--foot {\n        background-color: #b8c0c8;\n        border-color: #a9b3bc;\n}\n    /* Responsive\n    ==================================== */\n.Rtable-cell h4 {\n        width: 30%;\n        height: 100%;\n        display: inline-block;\n        vertical-align: top;\n}\n.Rtable-cell div{\n        width: 65%;\n        display: inline-block;\n        text-align: center;\n}\n@media all and (max-width: 900px) {\n.Rtable-cell h4 {\n            width: 100%;\n            height: 15%;\n            display: block;\n            vertical-align: top;\n}\n}\n@media all and (max-width: 500px) {\n.Rtable--collapse {\n            display: block;\n}\n.Rtable--collapse > .Rtable-cell {\n            width: 100% !important;\n}\n.Rtable--collapse > .Rtable-cell--foot {\n            margin-bottom: 1em;\n}\n.Rtable-cell div{\n            width: 100%;\n}\n}\n.no-flexbox .Rtable {\n        display: block;\n}\n.no-flexbox .Rtable > .Rtable-cell {\n        width: 100%;\n}\n.no-flexbox .Rtable > .Rtable-cell--foot {\n        margin-bottom: 1em;\n}\n", ""]);
 
 // exports
 
 
 /***/ }),
-/* 97 */
+/* 110 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -55524,6 +57260,22 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuex__ = __webpack_require__(2);
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -55653,11 +57405,13 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
     },
 
     computed: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_0_vuex__["b" /* mapGetters */])({
-        metatypes: 'metatype/types',
-        filtered_types: 'metatype/filtered_types',
-        metatype: 'metatype/type',
-        special_points: 'metatype/special_points',
-        metatype_attributes: 'attributes/metatype_attributes'
+        metatypes: 'creation/types',
+        filtered_types: 'creation/filtered_types',
+        metatype: 'creation/type',
+        special_points: 'creation/special_points',
+        metatype_attributes: 'creation/metatype_attributes',
+        character_attributes: 'creation/current_attr'
+
     }), {
         select_class: function select_class() {
             return {
@@ -55667,9 +57421,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
             };
         }
     }),
-    mounted: function mounted() {
-        this.$store.commit('metatype/FILTER_METATYPE', this.selector.ranking);
-    },
+    mounted: function mounted() {},
 
     methods: {
         getMetatype: function getMetatype(metatype) {
@@ -55678,15 +57430,16 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
             }
         },
         setMetatype: function setMetatype() {
-            this.$store.commit('metatype/TYPE_UPDATED', this.metatypes.find(this.getMetatype));
-            this.$store.commit('attributes/SET_CURRENT_METATYPE_ATTRIBUTES', this.metatype.attributes_id);
-            this.$store.commit("metatype/UPDATE_DATA", this.selector);
+            this.$store.commit('creation/METATYPE_TYPE_UPDATED', this.metatypes.find(this.getMetatype));
+            this.$store.commit('creation/ATTRIBUTES_SET_CURRENT_METATYPE_ATTRIBUTES', this.metatypes.find(this.getMetatype).attributes_id);
+            this.$store.commit("creation/UPDATE_DATA", this.selector);
+            this.$store.commit("creation/ATTRIBUTES_SET_DATA", { selector: this.selector, special_points: this.special_points });
         }
     }
 });
 
 /***/ }),
-/* 98 */
+/* 111 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -55910,10 +57663,7 @@ var render = function() {
             _vm._v(" "),
             _c(
               "div",
-              {
-                staticClass: "Rtable-cell Rtable-cell--foot",
-                staticStyle: { order: "3" }
-              },
+              { staticClass: "Rtable-cell", staticStyle: { order: "3" } },
               [
                 _c("h4", [_vm._v("REACTION")]),
                 _vm._v(" "),
@@ -55930,6 +57680,29 @@ var render = function() {
                     _vm._v(
                       "MAX : " + _vm._s(_vm.metatype_attributes.reaction_max)
                     )
+                  ])
+                ])
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass: "Rtable-cell Rtable-cell--foot",
+                staticStyle: { order: "4" }
+              },
+              [
+                _c("h4", [_vm._v("EDGE")]),
+                _vm._v(" "),
+                _c("div", [
+                  _c("div", [
+                    _vm._v("MIN : " + _vm._s(_vm.metatype_attributes.edge_min))
+                  ]),
+                  _vm._v(" "),
+                  _c("hr"),
+                  _vm._v(" "),
+                  _c("div", [
+                    _vm._v("MAX : " + _vm._s(_vm.metatype_attributes.edge_max))
                   ])
                 ])
               ]
@@ -56008,10 +57781,7 @@ var render = function() {
             _vm._v(" "),
             _c(
               "div",
-              {
-                staticClass: "Rtable-cell Rtable-cell--foot",
-                staticStyle: { order: "3" }
-              },
+              { staticClass: "Rtable-cell", staticStyle: { order: "3" } },
               [
                 _c("h4", [_vm._v("CHARISMA")]),
                 _vm._v(" "),
@@ -56029,6 +57799,27 @@ var render = function() {
                       "MAX : " + _vm._s(_vm.metatype_attributes.charisma_max)
                     )
                   ])
+                ])
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass: "Rtable-cell Rtable-cell--foot",
+                staticStyle: { order: "4" }
+              },
+              [
+                _c("h4", [_vm._v("MAGIC")]),
+                _vm._v(" "),
+                _c("div", [
+                  _c("div", [
+                    _vm._v("MIN : " + _vm._s(_vm.metatype_attributes.magic))
+                  ]),
+                  _vm._v(" "),
+                  _c("hr"),
+                  _vm._v(" "),
+                  _c("div", [_vm._v("MAX : 12")])
                 ])
               ]
             )
@@ -56057,19 +57848,19 @@ if (false) {
 }
 
 /***/ }),
-/* 99 */
+/* 112 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(100)
+  __webpack_require__(113)
 }
 var normalizeComponent = __webpack_require__(0)
 /* script */
-var __vue_script__ = __webpack_require__(102)
+var __vue_script__ = __webpack_require__(115)
 /* template */
-var __vue_template__ = __webpack_require__(103)
+var __vue_template__ = __webpack_require__(116)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -56108,13 +57899,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 100 */
+/* 113 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(101);
+var content = __webpack_require__(114);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -56134,7 +57925,7 @@ if(false) {
 }
 
 /***/ }),
-/* 101 */
+/* 114 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(3)(false);
@@ -56142,13 +57933,13 @@ exports = module.exports = __webpack_require__(3)(false);
 
 
 // module
-exports.push([module.i, "\n.attr_calculator {\n    text-align: center;\n    padding: 5px;\n    border: 1px dotted #ccc;\n    margin: 2%;\n}\n.qty {\n    width: 40px;\n    height: 25px;\n    text-align: center;\n}\nbutton.qtyplus { width:25px; height:25px; margin: 5px;\n}\nbutton.qtyminus { width:25px; height:25px; margin: 5px;\n}\n", ""]);
+exports.push([module.i, "\n.attr_calculator {\n    text-align: center;\n    padding: 5px;\n    border: 1px dotted #ccc;\n    margin: 2%;\n}\n.qty {\n    width: 40px;\n    height: 25px;\n    text-align: center;\n}\n.attr_array input {\n    width: 30.5% !important;\n}\n", ""]);
 
 // exports
 
 
 /***/ }),
-/* 102 */
+/* 115 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -56156,6 +57947,34 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuex__ = __webpack_require__(2);
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -56297,29 +58116,74 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
     data: function data() {
         return {
-            loading: false,
-            default_attributes: [24, 20, 16, 14, 12]
+            default_attributes: [24, 20, 16, 14, 12],
+            loading: false
         };
+    },
+    mounted: function mounted() {
+        var current_ranking = this.selector;
+        var ranking = this.getRanking(current_ranking.ranking);
+        this.$store.commit('creation/ATTRIBUTES_SET_ATTRIBUTES', { attributes: this.default_attributes[ranking], special: this.special_points });
     },
 
     computed: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_0_vuex__["b" /* mapGetters */])({
-        metatypes: 'metatype/types',
-        filtered_types: 'metatype/filtered_types',
-        metatype: 'metatype/type',
-        special_points: 'metatype/special_points',
-        metatype_attributes: 'attributes/metatype_attributes'
+        metatypes: 'creation/types',
+        filtered_types: 'creation/filtered_types',
+        metatype: 'creation/type',
+        special_points: 'creation/special_points',
+        metatype_attributes: 'creation/metatype_attributes',
+        character_attributes: 'creation/current_attr',
+        points: 'creation/available_point',
+        remaining: 'creation/remaining_point'
     }), {
-        select_class: function select_class() {
+
+        attributes_class: function attributes_class() {
+            var activate = false;
+            if (this.remaining.remaining_attributes < 0) {
+                this.$toasted.show('You exceed the amount of available attribute!').goAway(2500);
+                activate = true;
+            } else {
+                activate = false;
+            }
             return {
-                select: true,
-                'is-loading': this.loading,
-                'is-medium': true
+                'text-danger': activate,
+                'border-danger': activate
             };
         },
-        change_attributes_points: function change_attributes_points() {
-            var current_ranking = this.selector;
-            var ranking = this.getRanking(current_ranking.ranking);
-            return this.default_attributes[ranking];
+        special_class: function special_class() {
+            var activate = false;
+            if (this.remaining.remaining_special < 0) {
+                this.$toasted.show('You exceed the amount of available special attribute!').goAway(2500);
+                activate = true;
+            } else {
+                activate = false;
+            }
+            return {
+                'text-danger': activate,
+                'border-danger': activate
+            };
+        },
+        max_attr: function max_attr() {
+            var _this = this;
+
+            var activate = false;
+            var count_max = 0;
+            Object.keys(this.character_attributes).forEach(function (key) {
+                var val = _this.character_attributes[key]; // value of the current key
+                if (_this.metatype_attributes[key + '_max'] === val) {
+                    count_max++;
+                }
+            });
+            if (count_max > 1) {
+                activate = true;
+                this.$toasted.show('You have more than 1 attribute set to it\'s maximum').goAway(2500);
+            } else {
+                activate = false;
+            }
+            return {
+                'border border-danger': activate,
+                'text-danger': activate
+            };
         }
     }),
     methods: {
@@ -56343,12 +58207,15 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
                     break;
             }
             return index;
+        },
+        incrementAttribute: function incrementAttribute(name, increment) {
+            this.$store.commit('creation/ATTRIBUTES_INCREMENT_ATTRIBUTE', { name: name, increment: increment });
         }
     }
 });
 
 /***/ }),
-/* 103 */
+/* 116 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -56368,545 +58235,562 @@ var render = function() {
       _c("div", { staticClass: "control" }, [
         _c("input", {
           staticClass: "input cancel_select",
+          class: _vm.attributes_class,
           attrs: { type: "text", id: "attributes", disabled: "" },
-          domProps: { value: _vm.change_attributes_points }
+          domProps: { value: _vm.remaining.remaining_attributes }
         })
+      ])
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "half" }, [
+      _c("label", { attrs: { for: "attributes" } }, [
+        _vm._v("\n            Number of Special Attributes points:\n        ")
       ]),
       _vm._v(" "),
-      _c("div", { staticClass: "attr_array" }, [
-        _c("table", [
-          _vm._m(0),
-          _vm._v(" "),
-          _c("tbody", [
-            _c("tr", [
-              _c("td", [
-                _c("div", { staticClass: "attr_calculator" }, [
-                  _vm._m(1),
-                  _vm._v(" "),
-                  _c("div", [
-                    _c("label", { attrs: { for: "body" } }),
-                    _c("input", {
-                      staticClass: "qty",
-                      attrs: { type: "text", name: "body", id: "body" },
-                      domProps: { value: _vm.metatype_attributes.body_min }
-                    })
-                  ]),
-                  _vm._v(" "),
-                  _vm._m(2)
-                ]),
+      _c("div", { staticClass: "control" }, [
+        _c("input", {
+          staticClass: "input cancel_select",
+          class: _vm.special_class,
+          attrs: { type: "text", id: "special_attributes_point", disabled: "" },
+          domProps: { value: _vm.remaining.remaining_special }
+        })
+      ])
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "attr_array", class: _vm.max_attr }, [
+      _c("h3", [_vm._v("Attributes")]),
+      _vm._v(" "),
+      _c("div", { staticClass: "Rtable Rtable--2cols Rtable--collapse" }, [
+        _c(
+          "div",
+          {
+            staticClass: "Rtable-cell Rtable-cell--head",
+            staticStyle: { order: "0" }
+          },
+          [
+            _c("h4", [_vm._v("BODY")]),
+            _vm._v(" "),
+            _c("div", [
+              _c("div", [
+                _vm._v("\n                        CURRENT : "),
+                _c("br"),
                 _vm._v(" "),
                 _c(
-                  "em",
+                  "button",
                   {
-                    attrs: {
-                      "data-title": "Current metatype minimum and maximum limit"
+                    staticClass: "btn btn-md btn-danger",
+                    attrs: { type: "button" },
+                    on: {
+                      click: function($event) {
+                        _vm.incrementAttribute("body", "minus")
+                      }
                     }
                   },
-                  [
-                    _vm._v(
-                      "\n                            " +
-                        _vm._s(_vm.metatype_attributes.body_min) +
-                        " / " +
-                        _vm._s(_vm.metatype_attributes.body_max) +
-                        "\n                        "
-                    )
-                  ]
+                  [_vm._v("-")]
+                ),
+                _vm._v(" "),
+                _c("input", {
+                  attrs: { type: "text" },
+                  domProps: { value: _vm.character_attributes.body }
+                }),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-md btn-success",
+                    attrs: { type: "button" },
+                    on: {
+                      click: function($event) {
+                        _vm.incrementAttribute("body", "plus")
+                      }
+                    }
+                  },
+                  [_vm._v("+")]
                 )
               ]),
               _vm._v(" "),
-              _c("td", [
-                _c("div", { staticClass: "attr_calculator" }, [
-                  _vm._m(3),
-                  _vm._v(" "),
-                  _c("div", [
-                    _c("label", { attrs: { for: "agility" } }),
-                    _c("input", {
-                      staticClass: "qty",
-                      attrs: { type: "text", name: "agility", id: "agility" },
-                      domProps: { value: _vm.metatype_attributes.agility_min }
-                    })
-                  ]),
-                  _vm._v(" "),
-                  _vm._m(4)
-                ]),
-                _vm._v(" "),
-                _c(
-                  "em",
-                  {
-                    attrs: {
-                      "data-title": "Current metatype minimum and maximum limit"
-                    }
-                  },
-                  [
-                    _vm._v(
-                      "\n                            " +
-                        _vm._s(_vm.metatype_attributes.agility_min) +
-                        " / " +
-                        _vm._s(_vm.metatype_attributes.agility_max) +
-                        "\n                        "
-                    )
-                  ]
-                )
-              ]),
+              _c("hr"),
               _vm._v(" "),
-              _c("td", [
-                _c("div", { staticClass: "attr_calculator" }, [
-                  _vm._m(5),
-                  _vm._v(" "),
-                  _c("div", [
-                    _c("label", { attrs: { for: "strength" } }),
-                    _c("input", {
-                      staticClass: "qty",
-                      attrs: { type: "text", name: "strength", id: "strength" },
-                      domProps: { value: _vm.metatype_attributes.strength_min }
-                    })
-                  ]),
-                  _vm._v(" "),
-                  _vm._m(6)
-                ]),
-                _vm._v(" "),
-                _c(
-                  "em",
-                  {
-                    attrs: {
-                      "data-title": "Current metatype minimum and maximum limit"
-                    }
-                  },
-                  [
-                    _vm._v(
-                      "\n                            " +
-                        _vm._s(_vm.metatype_attributes.strength_min) +
-                        " / " +
-                        _vm._s(_vm.metatype_attributes.strength_max) +
-                        "\n                        "
-                    )
-                  ]
-                )
-              ]),
-              _vm._v(" "),
-              _c("td", [
-                _c("div", { staticClass: "attr_calculator" }, [
-                  _vm._m(7),
-                  _vm._v(" "),
-                  _c("div", [
-                    _c("label", { attrs: { for: "reaction" } }),
-                    _c("input", {
-                      staticClass: "qty",
-                      attrs: { type: "text", name: "reaction", id: "reaction" },
-                      domProps: { value: _vm.metatype_attributes.reaction_min }
-                    })
-                  ]),
-                  _vm._v(" "),
-                  _vm._m(8)
-                ]),
-                _vm._v(" "),
-                _c(
-                  "em",
-                  {
-                    attrs: {
-                      "data-title": "Current metatype minimum and maximum limit"
-                    }
-                  },
-                  [
-                    _vm._v(
-                      "\n                            " +
-                        _vm._s(_vm.metatype_attributes.reaction_min) +
-                        " / " +
-                        _vm._s(_vm.metatype_attributes.reaction_max) +
-                        "\n                        "
-                    )
-                  ]
-                )
-              ]),
-              _vm._v(" "),
-              _c("td", [
-                _c("div", { staticClass: "attr_calculator" }, [
-                  _vm._m(9),
-                  _vm._v(" "),
-                  _c("div", [
-                    _c("label", { attrs: { for: "willpower" } }),
-                    _c("input", {
-                      staticClass: "qty",
-                      attrs: {
-                        type: "text",
-                        name: "willpower",
-                        id: "willpower"
-                      },
-                      domProps: { value: _vm.metatype_attributes.willpower_min }
-                    })
-                  ]),
-                  _vm._v(" "),
-                  _vm._m(10)
-                ]),
-                _vm._v(" "),
-                _c(
-                  "em",
-                  {
-                    attrs: {
-                      "data-title": "Current metatype minimum and maximum limit"
-                    }
-                  },
-                  [
-                    _vm._v(
-                      "\n                            " +
-                        _vm._s(_vm.metatype_attributes.willpower_min) +
-                        " / " +
-                        _vm._s(_vm.metatype_attributes.willpower_max) +
-                        "\n                        "
-                    )
-                  ]
-                )
-              ]),
-              _vm._v(" "),
-              _c("td", [
-                _c("div", { staticClass: "attr_calculator" }, [
-                  _vm._m(11),
-                  _vm._v(" "),
-                  _c("div", [
-                    _c("label", { attrs: { for: "logic" } }),
-                    _c("input", {
-                      staticClass: "qty",
-                      attrs: { type: "text", name: "logic", id: "logic" },
-                      domProps: { value: _vm.metatype_attributes.logic_min }
-                    })
-                  ]),
-                  _vm._v(" "),
-                  _vm._m(12)
-                ]),
-                _vm._v(" "),
-                _c(
-                  "em",
-                  {
-                    attrs: {
-                      "data-title": "Current metatype minimum and maximum limit"
-                    }
-                  },
-                  [
-                    _vm._v(
-                      "\n                            " +
-                        _vm._s(_vm.metatype_attributes.logic_min) +
-                        " / " +
-                        _vm._s(_vm.metatype_attributes.logic_max) +
-                        "\n                        "
-                    )
-                  ]
-                )
-              ]),
-              _vm._v(" "),
-              _c("td", [
-                _c("div", { staticClass: "attr_calculator" }, [
-                  _vm._m(13),
-                  _vm._v(" "),
-                  _c("div", [
-                    _c("label", { attrs: { for: "intuition" } }),
-                    _c("input", {
-                      staticClass: "qty",
-                      attrs: {
-                        type: "text",
-                        name: "intuition",
-                        id: "intuition"
-                      },
-                      domProps: { value: _vm.metatype_attributes.intuition_min }
-                    })
-                  ]),
-                  _vm._v(" "),
-                  _vm._m(14)
-                ]),
-                _vm._v(" "),
-                _c(
-                  "em",
-                  {
-                    attrs: {
-                      "data-title": "Current metatype minimum and maximum limit"
-                    }
-                  },
-                  [
-                    _vm._v(
-                      "\n                            " +
-                        _vm._s(_vm.metatype_attributes.intuition_min) +
-                        " / " +
-                        _vm._s(_vm.metatype_attributes.intuition_max) +
-                        "\n                        "
-                    )
-                  ]
-                )
-              ]),
-              _vm._v(" "),
-              _c("td", [
-                _c("div", { staticClass: "attr_calculator" }, [
-                  _vm._m(15),
-                  _vm._v(" "),
-                  _c("div", [
-                    _c("label", { attrs: { for: "charisma" } }),
-                    _c("input", {
-                      staticClass: "qty",
-                      attrs: { type: "text", name: "charisma", id: "charisma" },
-                      domProps: { value: _vm.metatype_attributes.charisma_min }
-                    })
-                  ]),
-                  _vm._v(" "),
-                  _vm._m(16)
-                ]),
-                _vm._v(" "),
-                _c(
-                  "em",
-                  {
-                    attrs: {
-                      "data-title": "Current metatype minimum and maximum limit"
-                    }
-                  },
-                  [
-                    _vm._v(
-                      "\n                            " +
-                        _vm._s(_vm.metatype_attributes.charisma_min) +
-                        " / " +
-                        _vm._s(_vm.metatype_attributes.charisma_max) +
-                        "\n                        "
-                    )
-                  ]
-                )
+              _c("div", [
+                _vm._v("MAX : " + _vm._s(_vm.metatype_attributes.body_max))
               ])
             ])
+          ]
+        ),
+        _vm._v(" "),
+        _c("div", { staticClass: "Rtable-cell", staticStyle: { order: "1" } }, [
+          _c("h4", [_vm._v("AGILITY")]),
+          _vm._v(" "),
+          _c("div", [
+            _c("div", [
+              _vm._v("\n                        CURRENT : "),
+              _c("br"),
+              _vm._v(" "),
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-md btn-danger",
+                  attrs: { type: "button" },
+                  on: {
+                    click: function($event) {
+                      _vm.incrementAttribute("agility", "minus")
+                    }
+                  }
+                },
+                [_vm._v("-")]
+              ),
+              _vm._v(" "),
+              _c("input", {
+                attrs: { type: "text" },
+                domProps: { value: _vm.character_attributes.agility }
+              }),
+              _vm._v(" "),
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-md btn-success",
+                  attrs: { type: "button" },
+                  on: {
+                    click: function($event) {
+                      _vm.incrementAttribute("agility", "plus")
+                    }
+                  }
+                },
+                [_vm._v("+")]
+              )
+            ]),
+            _vm._v(" "),
+            _c("hr"),
+            _vm._v(" "),
+            _c("div", [
+              _vm._v("MAX : " + _vm._s(_vm.metatype_attributes.agility_max))
+            ])
           ])
-        ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "Rtable-cell", staticStyle: { order: "2" } }, [
+          _c("h4", [_vm._v("STRENGTH")]),
+          _vm._v(" "),
+          _c("div", [
+            _c("div", [
+              _vm._v("\n                        CURRENT : "),
+              _c("br"),
+              _vm._v(" "),
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-md btn-danger",
+                  attrs: { type: "button" },
+                  on: {
+                    click: function($event) {
+                      _vm.incrementAttribute("strength", "minus")
+                    }
+                  }
+                },
+                [_vm._v("-")]
+              ),
+              _vm._v(" "),
+              _c("input", {
+                attrs: { type: "text" },
+                domProps: { value: _vm.character_attributes.strength }
+              }),
+              _vm._v(" "),
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-md btn-success",
+                  attrs: { type: "button" },
+                  on: {
+                    click: function($event) {
+                      _vm.incrementAttribute("strength", "plus")
+                    }
+                  }
+                },
+                [_vm._v("+")]
+              )
+            ]),
+            _vm._v(" "),
+            _c("hr"),
+            _vm._v(" "),
+            _c("div", [
+              _vm._v("MAX : " + _vm._s(_vm.metatype_attributes.strength_max))
+            ])
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "Rtable-cell", staticStyle: { order: "3" } }, [
+          _c("h4", [_vm._v("REACTION")]),
+          _vm._v(" "),
+          _c("div", [
+            _c("div", [
+              _vm._v("\n                        CURRENT : "),
+              _c("br"),
+              _vm._v(" "),
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-md btn-danger",
+                  attrs: { type: "button" },
+                  on: {
+                    click: function($event) {
+                      _vm.incrementAttribute("reaction", "minus")
+                    }
+                  }
+                },
+                [_vm._v("-")]
+              ),
+              _vm._v(" "),
+              _c("input", {
+                attrs: { type: "text" },
+                domProps: { value: _vm.character_attributes.reaction }
+              }),
+              _vm._v(" "),
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-md btn-success",
+                  attrs: { type: "button" },
+                  on: {
+                    click: function($event) {
+                      _vm.incrementAttribute("reaction", "plus")
+                    }
+                  }
+                },
+                [_vm._v("+")]
+              )
+            ]),
+            _vm._v(" "),
+            _c("hr"),
+            _vm._v(" "),
+            _c("div", [
+              _vm._v("MAX : " + _vm._s(_vm.metatype_attributes.reaction_max))
+            ])
+          ])
+        ]),
+        _vm._v(" "),
+        _c(
+          "div",
+          {
+            staticClass: "Rtable-cell Rtable-cell--foot",
+            staticStyle: { order: "4" }
+          },
+          [
+            _c("h4", [_vm._v("EDGE")]),
+            _vm._v(" "),
+            _c("div", [
+              _c("div", [
+                _vm._v("\n                        CURRENT : "),
+                _c("br"),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-md btn-danger",
+                    attrs: { type: "button" },
+                    on: {
+                      click: function($event) {
+                        _vm.incrementAttribute("edge", "minus")
+                      }
+                    }
+                  },
+                  [_vm._v("-")]
+                ),
+                _vm._v(" "),
+                _c("input", {
+                  attrs: { type: "text" },
+                  domProps: { value: _vm.character_attributes.edge }
+                }),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-md btn-success",
+                    attrs: { type: "button" },
+                    on: {
+                      click: function($event) {
+                        _vm.incrementAttribute("edge", "plus")
+                      }
+                    }
+                  },
+                  [_vm._v("+")]
+                )
+              ]),
+              _vm._v(" "),
+              _c("hr"),
+              _vm._v(" "),
+              _c("div", [
+                _vm._v("MAX : " + _vm._s(_vm.metatype_attributes.edge_max))
+              ])
+            ])
+          ]
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          {
+            staticClass: "Rtable-cell Rtable-cell--head",
+            staticStyle: { order: "0" }
+          },
+          [
+            _c("h4", [_vm._v("WILLPOWER")]),
+            _vm._v(" "),
+            _c("div", [
+              _c("div", [
+                _vm._v("\n                        CURRENT : "),
+                _c("br"),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-md btn-danger",
+                    attrs: { type: "button" },
+                    on: {
+                      click: function($event) {
+                        _vm.incrementAttribute("willpower", "minus")
+                      }
+                    }
+                  },
+                  [_vm._v("-")]
+                ),
+                _vm._v(" "),
+                _c("input", {
+                  attrs: { type: "text" },
+                  domProps: { value: _vm.character_attributes.willpower }
+                }),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-md btn-success",
+                    attrs: { type: "button" },
+                    on: {
+                      click: function($event) {
+                        _vm.incrementAttribute("willpower", "plus")
+                      }
+                    }
+                  },
+                  [_vm._v("+")]
+                )
+              ]),
+              _vm._v(" "),
+              _c("hr"),
+              _vm._v(" "),
+              _c("div", [
+                _vm._v("MAX : " + _vm._s(_vm.metatype_attributes.willpower_max))
+              ])
+            ])
+          ]
+        ),
+        _vm._v(" "),
+        _c("div", { staticClass: "Rtable-cell", staticStyle: { order: "1" } }, [
+          _c("h4", [_vm._v("LOGIC")]),
+          _vm._v(" "),
+          _c("div", [
+            _c("div", [
+              _vm._v("\n                        CURRENT : "),
+              _c("br"),
+              _vm._v(" "),
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-md btn-danger",
+                  attrs: { type: "button" },
+                  on: {
+                    click: function($event) {
+                      _vm.incrementAttribute("logic", "minus")
+                    }
+                  }
+                },
+                [_vm._v("-")]
+              ),
+              _vm._v(" "),
+              _c("input", {
+                attrs: { type: "text" },
+                domProps: { value: _vm.character_attributes.logic }
+              }),
+              _vm._v(" "),
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-md btn-success",
+                  attrs: { type: "button" },
+                  on: {
+                    click: function($event) {
+                      _vm.incrementAttribute("logic", "plus")
+                    }
+                  }
+                },
+                [_vm._v("+")]
+              )
+            ]),
+            _vm._v(" "),
+            _c("hr"),
+            _vm._v(" "),
+            _c("div", [
+              _vm._v("MAX : " + _vm._s(_vm.metatype_attributes.logic_max))
+            ])
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "Rtable-cell", staticStyle: { order: "2" } }, [
+          _c("h4", [_vm._v("INTUITION")]),
+          _vm._v(" "),
+          _c("div", [
+            _c("div", [
+              _vm._v("\n                        CURRENT : "),
+              _c("br"),
+              _vm._v(" "),
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-md btn-danger",
+                  attrs: { type: "button" },
+                  on: {
+                    click: function($event) {
+                      _vm.incrementAttribute("intuition", "minus")
+                    }
+                  }
+                },
+                [_vm._v("-")]
+              ),
+              _vm._v(" "),
+              _c("input", {
+                attrs: { type: "text" },
+                domProps: { value: _vm.character_attributes.intuition }
+              }),
+              _vm._v(" "),
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-md btn-success",
+                  attrs: { type: "button" },
+                  on: {
+                    click: function($event) {
+                      _vm.incrementAttribute("intuition", "plus")
+                    }
+                  }
+                },
+                [_vm._v("+")]
+              )
+            ]),
+            _vm._v(" "),
+            _c("hr"),
+            _vm._v(" "),
+            _c("div", [
+              _vm._v("MAX : " + _vm._s(_vm.metatype_attributes.intuition_max))
+            ])
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "Rtable-cell", staticStyle: { order: "3" } }, [
+          _c("h4", [_vm._v("CHARISMA")]),
+          _vm._v(" "),
+          _c("div", [
+            _c("div", [
+              _vm._v("\n                        CURRENT : "),
+              _c("br"),
+              _vm._v(" "),
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-md btn-danger",
+                  attrs: { type: "button" },
+                  on: {
+                    click: function($event) {
+                      _vm.incrementAttribute("charisma", "minus")
+                    }
+                  }
+                },
+                [_vm._v("-")]
+              ),
+              _vm._v(" "),
+              _c("input", {
+                attrs: { type: "text" },
+                domProps: { value: _vm.character_attributes.charisma }
+              }),
+              _vm._v(" "),
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-md btn-success",
+                  attrs: { type: "button" },
+                  on: {
+                    click: function($event) {
+                      _vm.incrementAttribute("charisma", "plus")
+                    }
+                  }
+                },
+                [_vm._v("+")]
+              )
+            ]),
+            _vm._v(" "),
+            _c("hr"),
+            _vm._v(" "),
+            _c("div", [
+              _vm._v("MAX : " + _vm._s(_vm.metatype_attributes.charisma_max))
+            ])
+          ])
+        ]),
+        _vm._v(" "),
+        _c(
+          "div",
+          {
+            staticClass: "Rtable-cell Rtable-cell--foot",
+            staticStyle: { order: "4" }
+          },
+          [
+            _c("h4", [_vm._v("MAGIC")]),
+            _vm._v(" "),
+            _c("div", [
+              _c("div", [
+                _vm._v("\n                        CURRENT : "),
+                _c("br"),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-md btn-danger",
+                    attrs: { type: "button" },
+                    on: {
+                      click: function($event) {
+                        _vm.incrementAttribute("magic", "minus")
+                      }
+                    }
+                  },
+                  [_vm._v("-")]
+                ),
+                _vm._v(" "),
+                _c("input", {
+                  attrs: { type: "text" },
+                  domProps: { value: _vm.character_attributes.magic }
+                }),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-md btn-success",
+                    attrs: { type: "button" },
+                    on: {
+                      click: function($event) {
+                        _vm.incrementAttribute("magic", "plus")
+                      }
+                    }
+                  },
+                  [_vm._v("+")]
+                )
+              ]),
+              _vm._v(" "),
+              _c("hr"),
+              _vm._v(" "),
+              _c("div", [_vm._v("MAX : 12")])
+            ])
+          ]
+        )
       ])
     ])
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("thead", [
-      _c("tr", [
-        _c("th", [
-          _vm._v("\n                        Body\n                    ")
-        ]),
-        _vm._v(" "),
-        _c("th", [
-          _vm._v("\n                        Agility\n                    ")
-        ]),
-        _vm._v(" "),
-        _c("th", [
-          _vm._v("\n                        Strength\n                    ")
-        ]),
-        _vm._v(" "),
-        _c("th", [
-          _vm._v("\n                        Reaction\n                    ")
-        ]),
-        _vm._v(" "),
-        _c("th", [
-          _vm._v("\n                        Willpower\n                    ")
-        ]),
-        _vm._v(" "),
-        _c("th", [
-          _vm._v("\n                        Logic\n                    ")
-        ]),
-        _vm._v(" "),
-        _c("th", [
-          _vm._v("\n                        Intuition\n                    ")
-        ]),
-        _vm._v(" "),
-        _c("th", [
-          _vm._v("\n                        Charisma\n                    ")
-        ])
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", [
-      _c(
-        "button",
-        { staticClass: "qty_btn qtyminus", attrs: { type: "button" } },
-        [_vm._v("+")]
-      )
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", [
-      _c(
-        "button",
-        { staticClass: "qty_btn qtyplus", attrs: { type: "button" } },
-        [_vm._v("-")]
-      )
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", [
-      _c(
-        "button",
-        { staticClass: "qty_btn qtyminus", attrs: { type: "button" } },
-        [_vm._v("+")]
-      )
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", [
-      _c(
-        "button",
-        { staticClass: "qty_btn qtyplus", attrs: { type: "button" } },
-        [_vm._v("-")]
-      )
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", [
-      _c(
-        "button",
-        { staticClass: "qty_btn qtyminus", attrs: { type: "button" } },
-        [_vm._v("+")]
-      )
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", [
-      _c(
-        "button",
-        { staticClass: "qty_btn qtyplus", attrs: { type: "button" } },
-        [_vm._v("-")]
-      )
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", [
-      _c(
-        "button",
-        { staticClass: "qty_btn qtyminus", attrs: { type: "button" } },
-        [_vm._v("+")]
-      )
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", [
-      _c(
-        "button",
-        { staticClass: "qty_btn qtyplus", attrs: { type: "button" } },
-        [_vm._v("-")]
-      )
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", [
-      _c(
-        "button",
-        { staticClass: "qty_btn qtyminus", attrs: { type: "button" } },
-        [_vm._v("+")]
-      )
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", [
-      _c(
-        "button",
-        { staticClass: "qty_btn qtyplus", attrs: { type: "button" } },
-        [_vm._v("-")]
-      )
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", [
-      _c(
-        "button",
-        { staticClass: "qty_btn qtyminus", attrs: { type: "button" } },
-        [_vm._v("+")]
-      )
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", [
-      _c(
-        "button",
-        { staticClass: "qty_btn qtyplus", attrs: { type: "button" } },
-        [_vm._v("-")]
-      )
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", [
-      _c(
-        "button",
-        { staticClass: "qty_btn qtyminus", attrs: { type: "button" } },
-        [_vm._v("+")]
-      )
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", [
-      _c(
-        "button",
-        { staticClass: "qty_btn qtyplus", attrs: { type: "button" } },
-        [_vm._v("-")]
-      )
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", [
-      _c(
-        "button",
-        { staticClass: "qty_btn qtyminus", attrs: { type: "button" } },
-        [_vm._v("+")]
-      )
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", [
-      _c(
-        "button",
-        { staticClass: "qty_btn qtyplus", attrs: { type: "button" } },
-        [_vm._v("-")]
-      )
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
@@ -56917,19 +58801,19 @@ if (false) {
 }
 
 /***/ }),
-/* 104 */
+/* 117 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(105)
+  __webpack_require__(118)
 }
 var normalizeComponent = __webpack_require__(0)
 /* script */
-var __vue_script__ = __webpack_require__(107)
+var __vue_script__ = __webpack_require__(120)
 /* template */
-var __vue_template__ = __webpack_require__(108)
+var __vue_template__ = __webpack_require__(121)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -56968,13 +58852,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 105 */
+/* 118 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(106);
+var content = __webpack_require__(119);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -56994,7 +58878,7 @@ if(false) {
 }
 
 /***/ }),
-/* 106 */
+/* 119 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(3)(false);
@@ -57002,13 +58886,13 @@ exports = module.exports = __webpack_require__(3)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
 
 /***/ }),
-/* 107 */
+/* 120 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -57083,14 +58967,14 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
     data: function data() {
         return {
-            loading: false,
-            magicId: 99,
-            magic_type: {}
+            loading: false
         };
     },
 
     computed: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_0_vuex__["b" /* mapGetters */])({
-        magic_types: 'magic/magics'
+        magic_types: 'creation/magics',
+        magic: 'creation/magic',
+        magicId: 'creation/magicId'
     }), {
         select_class: function select_class() {
             return {
@@ -57099,15 +58983,12 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
                 'is-medium': true
             };
         },
-        change_magic_attribute: function change_magic_attribute() {
-            if (this.magic_types.length > 0) {
-                if (this.magicId !== 99) {
-                    console.log(this.magic_type);
-                    var label = this.magic_type.label.includes('tech') ? this.filter_lang('magic.resonance_rating') : this.filter_lang('magic.magic_rating');
-                    return this.magic_type.magic_attribute + ' ' + label;
-                }
-            } else {
-                return 0;
+        magic_id: {
+            get: function get() {
+                return this.$store.state.creation.magicId;
+            },
+            set: function set(value) {
+                this.$store.commit('creation/MAGIC_UPDATE_ID', value);
             }
         },
         filtering_magic_types: function filtering_magic_types() {
@@ -57120,16 +59001,6 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
                     }
                 }
                 return filtered_magic_types;
-            }
-        },
-        filter_number_of_skills: function filter_number_of_skills() {
-            if (this.magicId !== 99) {
-                return this.magic_type.number_of_skills + ' ' + this.filter_lang('magic.skills_avail') + ' rating ' + this.magic_type.skill_rating;
-            }
-        },
-        filter_number_free_spell: function filter_number_free_spell() {
-            if (this.magicId !== 99) {
-                return this.magic_type.number_free_spell + ' ' + this.filter_lang('magic.spells_avail');
             }
         }
     }),
@@ -57161,13 +59032,19 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
             }
         },
         setMagicType: function setMagicType() {
-            this.magic_type = this.magic_types.find(this.getMagicType);
+            console.log(this.magic);
+        },
+        translate_lang: function translate_lang(sentence, type) {
+            return this.filter_lang(type + '.' + sentence);
+        },
+        translate_label: function translate_label(label) {
+            return this.filter_lang(label);
         }
     }
 });
 
 /***/ }),
-/* 108 */
+/* 121 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -57193,8 +59070,8 @@ var render = function() {
                 {
                   name: "model",
                   rawName: "v-model",
-                  value: _vm.magicId,
-                  expression: "magicId"
+                  value: _vm.magic_id,
+                  expression: "magic_id"
                 }
               ],
               staticClass: "cancel_select",
@@ -57210,7 +59087,7 @@ var render = function() {
                         var val = "_value" in o ? o._value : o.value
                         return val
                       })
-                    _vm.magicId = $event.target.multiple
+                    _vm.magic_id = $event.target.multiple
                       ? $$selectedVal
                       : $$selectedVal[0]
                   },
@@ -57254,24 +59131,13 @@ var render = function() {
       _vm._v(" "),
       _c("div", { staticClass: "control" }, [
         _c("input", {
-          directives: [
-            {
-              name: "model",
-              rawName: "v-model",
-              value: _vm.change_magic_attribute,
-              expression: "change_magic_attribute"
-            }
-          ],
           staticClass: "input cancel_select",
           attrs: { type: "text", id: "magic_attr", disabled: "" },
-          domProps: { value: _vm.change_magic_attribute },
-          on: {
-            input: function($event) {
-              if ($event.target.composing) {
-                return
-              }
-              _vm.change_magic_attribute = $event.target.value
-            }
+          domProps: {
+            value:
+              _vm.magic.magic_attribute +
+              " " +
+              _vm.translate_lang(_vm.magic.label, "magic")
           }
         })
       ])
@@ -57284,24 +59150,15 @@ var render = function() {
       _vm._v(" "),
       _c("div", { staticClass: "control" }, [
         _c("input", {
-          directives: [
-            {
-              name: "model",
-              rawName: "v-model",
-              value: _vm.filter_number_of_skills,
-              expression: "filter_number_of_skills"
-            }
-          ],
           staticClass: "input cancel_select",
           attrs: { type: "text", id: "magic_avail_skills", disabled: "" },
-          domProps: { value: _vm.filter_number_of_skills },
-          on: {
-            input: function($event) {
-              if ($event.target.composing) {
-                return
-              }
-              _vm.filter_number_of_skills = $event.target.value
-            }
+          domProps: {
+            value:
+              _vm.magic.number_of_skills +
+              " " +
+              _vm.translate_label("magic.skills_avail") +
+              " rating " +
+              this.magic.skill_rating
           }
         })
       ])
@@ -57314,24 +59171,13 @@ var render = function() {
       _vm._v(" "),
       _c("div", { staticClass: "control" }, [
         _c("input", {
-          directives: [
-            {
-              name: "model",
-              rawName: "v-model",
-              value: _vm.filter_number_free_spell,
-              expression: "filter_number_free_spell"
-            }
-          ],
           staticClass: "input cancel_select",
           attrs: { type: "text", id: "number_spells", disabled: "" },
-          domProps: { value: _vm.filter_number_free_spell },
-          on: {
-            input: function($event) {
-              if ($event.target.composing) {
-                return
-              }
-              _vm.filter_number_free_spell = $event.target.value
-            }
+          domProps: {
+            value:
+              _vm.magic.number_free_spell +
+              " " +
+              _vm.translate_label("magic.spells_avail")
           }
         })
       ])
@@ -57342,7 +59188,7 @@ var render = function() {
         _c("h3", [
           _vm._v(
             "\n                " +
-              _vm._s(_vm._f("trans")("magic." + _vm.magic_type.label)) +
+              _vm._s(_vm._f("trans")("magic." + _vm.magic.label)) +
               "\n            "
           )
         ]),
@@ -57350,7 +59196,7 @@ var render = function() {
         _c("p", [
           _vm._v(
             "\n                " +
-              _vm._s(_vm._f("trans")("magic." + _vm.magic_type.description)) +
+              _vm._s(_vm._f("trans")("magic." + _vm.magic.description)) +
               "\n            "
           )
         ])
@@ -57378,19 +59224,19 @@ if (false) {
 }
 
 /***/ }),
-/* 109 */
+/* 122 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(110)
+  __webpack_require__(123)
 }
 var normalizeComponent = __webpack_require__(0)
 /* script */
-var __vue_script__ = __webpack_require__(112)
+var __vue_script__ = __webpack_require__(125)
 /* template */
-var __vue_template__ = __webpack_require__(113)
+var __vue_template__ = __webpack_require__(131)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -57429,13 +59275,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 110 */
+/* 123 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(111);
+var content = __webpack_require__(124);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -57455,7 +59301,7 @@ if(false) {
 }
 
 /***/ }),
-/* 111 */
+/* 124 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(3)(false);
@@ -57463,35 +59309,504 @@ exports = module.exports = __webpack_require__(3)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
 
 /***/ }),
-/* 112 */
+/* 125 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuex__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_skill_component__ = __webpack_require__(126);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_skill_component___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__components_skill_component__);
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
 //
 
+
+
+
 /* harmony default export */ __webpack_exports__["default"] = ({
-    name: "SkillComponent"
+    components: { skill: __WEBPACK_IMPORTED_MODULE_1__components_skill_component___default.a },
+    data: function data() {
+        return {
+            filter_skill: '',
+            filter_group: ''
+        };
+    },
+
+    computed: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_0_vuex__["b" /* mapGetters */])({
+        filterSkills: 'creation/filter_skills',
+        skills: 'creation/skills',
+        avail_skill: 'creation/remaining_skill_points',
+        avail_skill_group: 'creation/remaining_skill_group_points',
+        get_group_from_skill: 'creation/get_group_from_skill'
+    }), {
+        select_class: function select_class() {
+            return {
+                select: true,
+                'is-loading': this.loading,
+                'is-medium': true
+            };
+        },
+        filteredSkills: function filteredSkills() {
+            var payload = { group: this.filter_group, skill: this.filter_skill, translator: this.filter_lang };
+            var skills = this.filterSkills(payload);
+            return skills;
+        }
+    }),
+    methods: {
+        clear_filter: function clear_filter() {
+            this.filter_skill = '';
+            this.filter_group = '';
+        }
+    }
 });
 
 /***/ }),
-/* 113 */
+/* 126 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(127)
+}
+var normalizeComponent = __webpack_require__(0)
+/* script */
+var __vue_script__ = __webpack_require__(129)
+/* template */
+var __vue_template__ = __webpack_require__(130)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = "data-v-15da701f"
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/features/creationStep/components/skill_component.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-15da701f", Component.options)
+  } else {
+    hotAPI.reload("data-v-15da701f", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 127 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(128);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(4)("038c410c", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../../../../node_modules/css-loader/index.js!../../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-15da701f\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./skill_component.vue", function() {
+     var newContent = require("!!../../../../../../../node_modules/css-loader/index.js!../../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-15da701f\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./skill_component.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 128 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(3)(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 129 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuex__ = __webpack_require__(2);
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    props: { skill: Object },
+    computed: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_0_vuex__["b" /* mapGetters */])({
+        get_group_from_skill: 'creation/get_group_from_skill'
+    }), {
+        select_class: function select_class() {
+            return {
+                'white': this.skill.id % 2 === 0,
+                'skill': true
+            };
+        }
+    }),
+    methods: {
+        add: function add() {
+            var id = this.skill.id;
+            this.$store.commit('creation/SKILL_ADD', id - 1);
+        },
+        remove: function remove() {
+            var id = this.skill.id;
+            this.$store.commit('creation/SKILL_REMOVE', id - 1);
+        },
+        addToGroup: function addToGroup() {
+            var id = this.skill.id;
+            this.$store.commit('creation/SKILL_GROUP_ADD', id - 1);
+        },
+        removeFromGroup: function removeFromGroup() {
+            var id = this.skill.id;
+            this.$store.commit('creation/SKILL_GROUP_REMOVE', id - 1);
+        }
+    }
+});
+
+/***/ }),
+/* 130 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div")
+  return _c("div", { class: _vm.select_class }, [
+    _c("div", { staticClass: "name" }, [
+      _vm._v(
+        "\n        " + _vm._s(_vm._f("trans")(_vm.skill.skill_label)) + "\n    "
+      )
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "groups" }, [
+      _vm._v(
+        "\n        " +
+          _vm._s(_vm._f("trans")(_vm.get_group_from_skill(_vm.skill.id))) +
+          "\n    "
+      )
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "selectors" }, [
+      _c("div", [
+        _c("input", {
+          staticClass: "input",
+          attrs: { type: "text", id: "rating" },
+          domProps: { value: _vm.skill.skill_rating }
+        }),
+        _vm._v(" "),
+        _vm.skill.is_group === 0
+          ? _c("div", { staticClass: "btns" }, [
+              _c("div", [
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-md btn-success",
+                    attrs: { type: "button" },
+                    on: {
+                      click: function($event) {
+                        _vm.add()
+                      }
+                    }
+                  },
+                  [_vm._v("+")]
+                )
+              ]),
+              _vm._v(" "),
+              _c("div", [
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-md btn-danger",
+                    attrs: { type: "button" },
+                    on: {
+                      click: function($event) {
+                        _vm.remove()
+                      }
+                    }
+                  },
+                  [_vm._v("-")]
+                )
+              ])
+            ])
+          : _vm._e(),
+        _vm._v(" "),
+        _vm.skill.is_group === 1
+          ? _c("div", { staticClass: "btns" }, [
+              _c("div", [
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-md btn-success",
+                    attrs: { type: "button" },
+                    on: {
+                      click: function($event) {
+                        _vm.addToGroup()
+                      }
+                    }
+                  },
+                  [_vm._v("+")]
+                )
+              ]),
+              _vm._v(" "),
+              _c("div", [
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-md btn-danger",
+                    attrs: { type: "button" },
+                    on: {
+                      click: function($event) {
+                        _vm.removeFromGroup()
+                      }
+                    }
+                  },
+                  [_vm._v("-")]
+                )
+              ])
+            ])
+          : _vm._e()
+      ])
+    ])
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-15da701f", module.exports)
+  }
+}
+
+/***/ }),
+/* 131 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _c("h2", [_vm._v("Skills")]),
+    _vm._v(" "),
+    _c("hr"),
+    _vm._v(" "),
+    _c("div", { staticClass: "full-container" }, [
+      _c("div", { staticClass: "control has-icons-left" }, [
+        _c("div", { staticClass: "half" }, [
+          _c("label", { attrs: { for: "skill_name" } }, [
+            _vm._v(_vm._s(_vm._f("trans")("label.filter.default")))
+          ]),
+          _vm._v(" "),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.filter_skill,
+                expression: "filter_skill"
+              }
+            ],
+            attrs: {
+              type: "text",
+              id: "skill_name",
+              placeholder: _vm._f("trans")("label.filter.skill_name")
+            },
+            domProps: { value: _vm.filter_skill },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.filter_skill = $event.target.value
+              }
+            }
+          })
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "half" }, [
+          _c("label", { attrs: { for: "skill_group" } }, [
+            _vm._v(_vm._s(_vm._f("trans")("label.filter.default")))
+          ]),
+          _vm._v(" "),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.filter_group,
+                expression: "filter_group"
+              }
+            ],
+            attrs: {
+              type: "text",
+              id: "skill_group",
+              placeholder: _vm._f("trans")("label.filter.skill_group")
+            },
+            domProps: { value: _vm.filter_group },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.filter_group = $event.target.value
+              }
+            }
+          }),
+          _vm._v(" "),
+          _c(
+            "button",
+            {
+              staticClass: "btn",
+              staticStyle: { float: "right", margin: "10px 0" },
+              attrs: { title: "clear", type: "button" },
+              on: { click: _vm.clear_filter }
+            },
+            [_c("i", { staticClass: "fas fa-eraser" })]
+          )
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "control has-icons-left" }, [
+        _c("div", { staticClass: "half" }, [
+          _c("label", { attrs: { for: "skill_points" } }, [
+            _vm._v(_vm._s(_vm._f("trans")("label.filter.skill_point")))
+          ]),
+          _vm._v(" "),
+          _c("input", {
+            attrs: { type: "text", id: "skill_points", disabled: "" },
+            domProps: { value: _vm.avail_skill }
+          })
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "half" }, [
+          _c("label", { attrs: { for: "skill_group_points" } }, [
+            _vm._v(_vm._s(_vm._f("trans")("label.filter.skill_group_point")))
+          ]),
+          _vm._v(" "),
+          _c("input", {
+            attrs: { type: "text", id: "skill_group_points", disabled: "" },
+            domProps: { value: _vm.avail_skill_group }
+          })
+        ])
+      ])
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "full-container" }, [
+      _c(
+        "div",
+        { staticClass: "skills" },
+        _vm._l(_vm.filteredSkills, function(skill) {
+          return _c("skill", { key: skill.id, attrs: { skill: skill } })
+        })
+      )
+    ])
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -57504,15 +59819,15 @@ if (false) {
 }
 
 /***/ }),
-/* 114 */
+/* 132 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(0)
 /* script */
-var __vue_script__ = __webpack_require__(115)
+var __vue_script__ = __webpack_require__(133)
 /* template */
-var __vue_template__ = __webpack_require__(116)
+var __vue_template__ = __webpack_require__(134)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -57551,7 +59866,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 115 */
+/* 133 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -57624,7 +59939,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 116 */
+/* 134 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -57662,7 +59977,7 @@ if (false) {
 }
 
 /***/ }),
-/* 117 */
+/* 135 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -57803,6 +60118,23 @@ var render = function() {
             {
               name: "show",
               rawName: "v-show",
+              value: _vm.findZone(3),
+              expression: "findZone(3)"
+            }
+          ],
+          staticClass: "bigger-half"
+        },
+        [_c("skill", { attrs: { selector: _vm.getSelector("Skills") } })],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "div",
+        {
+          directives: [
+            {
+              name: "show",
+              rawName: "v-show",
               value: _vm.findZone(4),
               expression: "findZone(4)"
             }
@@ -57828,7 +60160,7 @@ if (false) {
 }
 
 /***/ }),
-/* 118 */
+/* 136 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -57905,13 +60237,19 @@ if (false) {
 }
 
 /***/ }),
-/* 119 */
+/* 137 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
 
 /***/ }),
-/* 120 */
+/* 138 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 139 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin

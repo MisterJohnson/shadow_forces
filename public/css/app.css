@@ -10970,6 +10970,10 @@ a.text-dark:focus {
   font-size: 5em;
 }
 
+#cssmenu {
+  font-family: "Nunito", Sans-Serif !important;
+}
+
 .container-fluid.information {
   background: #343434;
   margin: 0 auto;
@@ -11040,6 +11044,48 @@ a.text-dark:focus {
   color: #FFFFFF;
   width: 70%;
   margin: 100px auto 0;
+}
+
+.container-fluid .full-container .skills {
+  font-family: "Nunito", Sans-Serif !important;
+  font-weight: bold;
+}
+
+.container-fluid .full-container .skills .skill {
+  display: block;
+  background-color: slategrey;
+  border: #5a6673 1px solid;
+  color: #fff;
+  font-weight: bold;
+}
+
+.container-fluid .full-container .skills .skill div.name,
+.container-fluid .full-container .skills .skill div.groups,
+.container-fluid .full-container .skills .skill div.selectors {
+  width: 32%;
+  display: inline-block;
+  margin-left: 5px;
+}
+
+.container-fluid .full-container .skills .skill div.name,
+.container-fluid .full-container .skills .skill div.groups {
+  position: relative;
+  bottom: 10px;
+}
+
+.container-fluid .full-container .skills .skill div.selectors .btns {
+  display: inline-block;
+}
+
+.container-fluid .full-container .skills .skill div.selectors .btns button {
+  width: 36px;
+  height: 36px;
+}
+
+.container-fluid .full-container .skills .white {
+  background-color: white;
+  border: #e2e6e9 1px solid;
+  color: #000;
 }
 
 @media screen and (max-width: 500px) {
